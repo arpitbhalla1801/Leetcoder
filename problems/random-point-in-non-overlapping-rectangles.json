@@ -1,0 +1,5 @@
+{
+    "problemName": "random-point-in-non-overlapping-rectangles",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private final int[][] rects;\n  private final long[] prefix;\n  private final long total;\n  private final Random random = new Random();\n\n  public Solution(int[][] rects) {\n    this.rects = rects;\n    prefix = new long[rects.length];\n    long sum = 0;\n    for (int i = 0; i < rects.length; i++) {\n      sum += (long) (rects[i][2] - rects[i][0] + 1) * (rects[i][3] - rects[i][1] + 1);\n      prefix[i] = sum;\n    }\n    total = sum;\n  }\n\n  public int[] pick() {\n    long target = (long) (random.nextDouble() * total) + 1;\n    int lo = 0, hi = prefix.length - 1;\n    while (lo < hi) {\n      int mid = (lo + hi) >>> 1;\n      if (prefix[mid] < target) lo = mid + 1;\n      else hi = mid;\n    }\n    int[] r = rects[lo];\n    int width = r[2] - r[0] + 1;\n    long before = lo == 0 ? 0 : prefix[lo - 1];\n    long offset = target - before - 1;\n    return new int[] {r[0] + (int) (offset % width), r[1] + (int) (offset / width)};\n  }\n}\n"
+}

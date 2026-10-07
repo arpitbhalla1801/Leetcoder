@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-cost-for-cutting-cake-ii",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long minimumCost(int m, int n, int[] horizontalCut, int[] verticalCut) {\n    Integer[] h = new Integer[horizontalCut.length];\n    Integer[] v = new Integer[verticalCut.length];\n    for (int i = 0; i < h.length; i++) h[i] = horizontalCut[i];\n    for (int i = 0; i < v.length; i++) v[i] = verticalCut[i];\n    Arrays.sort(h, Collections.reverseOrder());\n    Arrays.sort(v, Collections.reverseOrder());\n    int horizontalPieces = 1, verticalPieces = 1, i = 0, j = 0;\n    long answer = 0;\n    while (i < h.length || j < v.length) {\n      if (j == v.length || (i < h.length && h[i] >= v[j])) {\n        answer += (long) h[i++] * verticalPieces;\n        horizontalPieces++;\n      } else {\n        answer += (long) v[j++] * horizontalPieces;\n        verticalPieces++;\n      }\n    }\n    return answer;\n  }\n}"
+}

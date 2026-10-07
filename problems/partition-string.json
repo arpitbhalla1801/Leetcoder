@@ -1,0 +1,5 @@
+{
+    "problemName": "partition-string",
+    "language": "java",
+    "code": "class Solution {\n  public List<String> partitionString(String s) {\n    java.util.HashSet<String> seen = new java.util.HashSet<>();\n    List<String> res = new ArrayList<>();\n    int start = 0;\n    for (int i = 0; i < s.length(); i++) {\n      String cur = s.substring(start, i + 1);\n      if (seen.add(cur)) {\n        res.add(cur);\n        start = i + 1;\n      }\n    }\n    return res;\n  }\n}"
+}

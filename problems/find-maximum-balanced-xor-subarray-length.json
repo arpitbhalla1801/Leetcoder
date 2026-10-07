@@ -1,0 +1,5 @@
+{
+    "problemName": "find-maximum-balanced-xor-subarray-length",
+    "language": "java",
+    "code": "class Solution {\n  public int maxBalancedSubarray(int[] nums) {\n    java.util.HashMap<Long, Integer> first = new java.util.HashMap<>();\n    int n = nums.length, xor = 0, diff = 0, best = 0;\n    first.put(0L << 18 | 131072, -1);\n    for (int i = 0; i < n; i++) {\n      xor ^= nums[i];\n      diff += (nums[i] & 1) == 0 ? 1 : -1;\n      long key = ((long) xor << 18) | (diff + 131072);\n      Integer prev = first.putIfAbsent(key, i);\n      if (prev != null) best = Math.max(best, i - prev);\n    }\n    return best;\n  }\n}"
+}

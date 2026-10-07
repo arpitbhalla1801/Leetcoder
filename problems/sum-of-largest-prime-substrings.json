@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-largest-prime-substrings",
+    "language": "java",
+    "code": "class Solution {\n  private static boolean isPrime(long x) {\n    if (x < 2) return false;\n    for (long d = 2; d * d <= x; d++) if (x % d == 0) return false;\n    return true;\n  }\n\n  public long sumOfLargestPrimes(String s) {\n    java.util.TreeSet<Long> primes = new java.util.TreeSet<>();\n    int n = s.length();\n    for (int i = 0; i < n; i++) {\n      long v = 0;\n      for (int j = i; j < n; j++) {\n        v = v * 10 + s.charAt(j) - '0';\n        if (isPrime(v)) primes.add(v);\n      }\n    }\n    long sum = 0;\n    for (int t = 0; t < 3 && !primes.isEmpty(); t++) sum += primes.pollLast();\n    return sum;\n  }\n}"
+}

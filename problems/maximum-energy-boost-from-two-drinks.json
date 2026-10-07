@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-energy-boost-from-two-drinks",
+    "language": "java",
+    "code": "class Solution {\n  public long maxEnergyBoost(int[] energyDrinkA, int[] energyDrinkB) {\n    long a = 0, b = 0, prevA = 0, prevB = 0;\n    for (int i = 0; i < energyDrinkA.length; i++) {\n      long na = Math.max(a, prevB) + energyDrinkA[i];\n      long nb = Math.max(b, prevA) + energyDrinkB[i];\n      prevA = a;\n      prevB = b;\n      a = na;\n      b = nb;\n    }\n    return Math.max(a, b);\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-intersecting-interval-pairs-ii",
+    "language": "java",
+    "code": "class Solution {\n  public long countIntersectingIntervals(int[][] intervals) {\n    int n = intervals.length;\n    long[] ends = new long[n];\n    for (int i = 0; i < n; i++) ends[i] = intervals[i][1];\n    java.util.Arrays.sort(ends);\n    long apart = 0;\n    for (int[] iv : intervals) {\n      int lo = 0, hi = n;\n      while (lo < hi) {\n        int mid = (lo + hi) >>> 1;\n        if (ends[mid] < iv[0]) lo = mid + 1;\n        else hi = mid;\n      }\n      apart += lo;\n    }\n    return (long) n * (n - 1) / 2 - apart;\n  }\n}"
+}

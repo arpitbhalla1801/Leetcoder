@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-sum-of-m-non-overlapping-subarrays-i",
+    "language": "java",
+    "code": "class Solution {\n  public long maximumSum(int[] nums, int m, int l, int r) {\n    int n = nums.length;\n    long NEG = Long.MIN_VALUE / 4;\n    long[] pre = new long[n + 1];\n    for (int i = 0; i < n; i++) pre[i + 1] = pre[i] + nums[i];\n    long[][] dp = new long[m + 1][n + 1];\n    for (int j = 1; j <= m; j++) java.util.Arrays.fill(dp[j], NEG);\n    long best = NEG;\n    for (int j = 1; j <= m; j++) {\n      int[] dq = new int[n + 2];\n      int head = 0, tail = 0;\n      for (int i = 1; i <= n; i++) {\n        int add = i - l;\n        if (add >= 0 && dp[j - 1][add] > NEG) {\n          long val = dp[j - 1][add] - pre[add];\n          while (tail > head && dp[j - 1][dq[tail - 1]] - pre[dq[tail - 1]] <= val) tail--;\n          dq[tail++] = add;\n        }\n        while (tail > head && dq[head] < i - r) head++;\n        long v = dp[j][i - 1];\n        if (tail > head) v = Math.max(v, pre[i] + dp[j - 1][dq[head]] - pre[dq[head]]);\n        dp[j][i] = v;\n      }\n      best = Math.max(best, dp[j][n]);\n    }\n    return best;\n  }\n}"
+}

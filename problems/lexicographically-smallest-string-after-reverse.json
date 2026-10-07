@@ -1,0 +1,5 @@
+{
+    "problemName": "lexicographically-smallest-string-after-reverse",
+    "language": "java",
+    "code": "class Solution {\n  public String lexSmallest(String s) {\n    int n = s.length();\n    String best = null;\n    for (int k = 1; k <= n; k++) {\n      String a = new StringBuilder(s.substring(0, k)).reverse() + s.substring(k);\n      String b = s.substring(0, n - k) + new StringBuilder(s.substring(n - k)).reverse();\n      if (best == null || a.compareTo(best) < 0) best = a;\n      if (b.compareTo(best) < 0) best = b;\n    }\n    return best;\n  }\n}"
+}

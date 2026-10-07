@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-element-sum-of-a-complete-subset-of-indices",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long maximumSum(List<Integer> nums) {\n    int n = nums.size();\n    Map<Integer, Long> sums = new HashMap<>();\n    long answer = 0;\n    for (int i = 1; i <= n; i++) {\n      int x = i, kernel = 1;\n      for (int p = 2; p * p <= x; p++) {\n        int parity = 0;\n        while (x % p == 0) {\n          x /= p;\n          parity ^= 1;\n        }\n        if (parity == 1) kernel *= p;\n      }\n      if (x > 1) kernel *= x;\n      long total = sums.getOrDefault(kernel, 0L) + nums.get(i - 1);\n      sums.put(kernel, total);\n      answer = Math.max(answer, total);\n    }\n    return answer;\n  }\n}\n"
+}

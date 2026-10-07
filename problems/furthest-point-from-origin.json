@@ -1,0 +1,5 @@
+{
+    "problemName": "furthest-point-from-origin",
+    "language": "java",
+    "code": "class Solution {\n  public int furthestDistanceFromOrigin(String moves) {\n    int balance = 0, wildcards = 0;\n    for (int i = 0; i < moves.length(); i++) {\n      char move = moves.charAt(i);\n      if (move == 'L') balance--;\n      else if (move == 'R') balance++;\n      else wildcards++;\n    }\n    return Math.abs(balance) + wildcards;\n  }\n}\n"
+}

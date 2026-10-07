@@ -1,0 +1,5 @@
+{
+    "problemName": "count-good-cyclic-rotations",
+    "language": "java",
+    "code": "class Solution {\n  public int countGoodRotations(int[] nums) {\n    int n = nums.length, h = n / 2;\n    long[] pre = new long[2 * n + 1];\n    for (int i = 0; i < 2 * n; i++) pre[i + 1] = pre[i] + nums[i % n];\n    long total = pre[n];\n    int count = 0;\n    for (int k = 0; k < n; k++) {\n      long first = pre[k + h] - pre[k];\n      if (2 * first > total) count++;\n    }\n    return count;\n  }\n}"
+}

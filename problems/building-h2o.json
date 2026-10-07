@@ -1,0 +1,5 @@
+{
+    "problemName": "building-h2o",
+    "language": "java",
+    "code": "class H2O {\n  public H2O() {}\n\n  private int hydrogen = 0;\n\n  public synchronized void hydrogen(Runnable releaseHydrogen) throws InterruptedException {\n    while (hydrogen == 2) wait();\n    hydrogen++;\n    releaseHydrogen.run();\n    if (hydrogen == 2) notifyAll();\n  }\n\n  public synchronized void oxygen(Runnable releaseOxygen) throws InterruptedException {\n    while (hydrogen < 2) wait();\n    releaseOxygen.run();\n    hydrogen = 0;\n    notifyAll();\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-maximum-number-of-fruits-collected",
+    "language": "java",
+    "code": "class Solution {\n  // best path of the child starting at (0, n-1), staying strictly above the diagonal\n  private static int upper(int[][] f, int n) {\n    int NEG = Integer.MIN_VALUE / 2;\n    int[] dp = new int[n + 2];\n    java.util.Arrays.fill(dp, NEG);\n    dp[n - 1] = f[0][n - 1];\n    for (int i = 1; i <= n - 2; i++) {\n      int[] nd = new int[n + 2];\n      java.util.Arrays.fill(nd, NEG);\n      for (int j = i + 1; j < n; j++) {\n        int best = Math.max(dp[j], Math.max(dp[j + 1], j - 1 > i - 1 ? dp[j - 1] : NEG));\n        if (best > NEG) nd[j] = best + f[i][j];\n      }\n      dp = nd;\n    }\n    return dp[n - 1];\n  }\n\n  public int maxCollectedFruits(int[][] fruits) {\n    int n = fruits.length, total = 0;\n    for (int i = 0; i < n; i++) total += fruits[i][i];\n    total += upper(fruits, n);\n    for (int i = 0; i < n; i++) {\n      for (int j = i + 1; j < n; j++) {\n        int tmp = fruits[i][j];\n        fruits[i][j] = fruits[j][i];\n        fruits[j][i] = tmp;\n      }\n    }\n    return total + upper(fruits, n);\n  }\n}"
+}

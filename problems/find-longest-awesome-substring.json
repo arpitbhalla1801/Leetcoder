@@ -1,0 +1,5 @@
+{
+    "problemName": "find-longest-awesome-substring",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int longestAwesome(String s) {\n    int[] first = new int[1 << 10];\n    Arrays.fill(first, Integer.MAX_VALUE);\n    first[0] = -1;\n    int mask = 0, ans = 0;\n    for (int i = 0; i < s.length(); i++) {\n      mask ^= 1 << (s.charAt(i) - '0');\n      if (first[mask] != Integer.MAX_VALUE) ans = Math.max(ans, i - first[mask]);\n      else first[mask] = i;\n      for (int b = 0; b < 10; b++) {\n        int m = mask ^ (1 << b);\n        if (first[m] != Integer.MAX_VALUE) ans = Math.max(ans, i - first[m]);\n      }\n    }\n    return ans;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "Find All Possible Stable Binary Arrays II",
+    "language": "java",
+    "code": "class Solution {\n  private static final int MOD = 1_000_000_007;\n\n  public int numberOfStableArrays(int zero, int one, int limit) {\n    long[][] endZero = new long[zero + 1][one + 1], endOne = new long[zero + 1][one + 1];\n    for (int z = 1; z <= zero && z <= limit; z++) endZero[z][0] = 1;\n    for (int o = 1; o <= one && o <= limit; o++) endOne[0][o] = 1;\n    for (int z = 1; z <= zero; z++)\n      for (int o = 1; o <= one; o++) {\n        endZero[z][o] = (endZero[z - 1][o] + endOne[z - 1][o]) % MOD;\n        if (z - limit - 1 >= 0)\n          endZero[z][o] = (endZero[z][o] - endOne[z - limit - 1][o] + MOD) % MOD;\n        endOne[z][o] = (endZero[z][o - 1] + endOne[z][o - 1]) % MOD;\n        if (o - limit - 1 >= 0)\n          endOne[z][o] = (endOne[z][o] - endZero[z][o - limit - 1] + MOD) % MOD;\n      }\n    return (int) ((endZero[zero][one] + endOne[zero][one]) % MOD);\n  }\n}"
+}

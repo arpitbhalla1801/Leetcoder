@@ -1,0 +1,5 @@
+{
+    "problemName": "count-substrings-that-satisfy-k-constraint-i",
+    "language": "java",
+    "code": "class Solution {\n  public int countKConstraintSubstrings(String s, int k) {\n    int count = 0;\n    for (int i = 0; i < s.length(); i++) {\n      int zeros = 0, ones = 0;\n      for (int j = i; j < s.length(); j++) {\n        if (s.charAt(j) == '0') zeros++;\n        else ones++;\n        if (zeros > k && ones > k) break; // longer substrings only get worse\n        count++;\n      }\n    }\n    return count;\n  }\n}"
+}

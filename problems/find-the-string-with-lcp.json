@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-string-with-lcp",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public String findTheString(int[][] lcp) {\n    int n = lcp.length;\n    char[] a = new char[n];\n    char c = 'a';\n    for (int i = 0; i < n; i++)\n      if (a[i] == 0) {\n        if (c > 'z') return \"\";\n        for (int j = 0; j < n; j++) if (lcp[i][j] > 0) a[j] = c;\n        c++;\n      }\n    for (int i = 0; i < n; i++)\n      for (int j = 0; j < n; j++) {\n        int k = 0;\n        while (i + k < n && j + k < n && a[i + k] == a[j + k]) k++;\n        if (k != lcp[i][j]) return \"\";\n      }\n    return new String(a);\n  }\n}\n"
+}

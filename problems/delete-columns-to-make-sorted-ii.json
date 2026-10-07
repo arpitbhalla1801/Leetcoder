@@ -1,0 +1,5 @@
+{
+    "problemName": "delete-columns-to-make-sorted-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int minDeletionSize(String[] strs) {\n    int n = strs.length, m = strs[0].length(), ans = 0;\n    boolean[] fixed = new boolean[n - 1];\n    for (int c = 0; c < m; c++) {\n      boolean bad = false;\n      for (int r = 0; r < n - 1; r++)\n        if (!fixed[r] && strs[r].charAt(c) > strs[r + 1].charAt(c)) {\n          bad = true;\n          break;\n        }\n      if (bad) {\n        ans++;\n        continue;\n      }\n      for (int r = 0; r < n - 1; r++)\n        if (strs[r].charAt(c) < strs[r + 1].charAt(c)) fixed[r] = true;\n    }\n    return ans;\n  }\n}\n"
+}

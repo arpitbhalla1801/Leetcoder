@@ -1,0 +1,5 @@
+{
+    "problemName": "design-neighbor-sum-service",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass NeighborSum {\n  private final int[][] grid;\n  private final Map<Integer, int[]> position = new HashMap<>();\n\n  public NeighborSum(int[][] grid) {\n    this.grid = grid;\n    for (int r = 0; r < grid.length; r++)\n      for (int c = 0; c < grid[0].length; c++) position.put(grid[r][c], new int[] {r, c});\n  }\n\n  public int adjacentSum(int value) {\n    int[] p = position.get(value), sum = {0};\n    int[][] d = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};\n    for (int[] x : d) {\n      int r = p[0] + x[0], c = p[1] + x[1];\n      if (r >= 0 && r < grid.length && c >= 0 && c < grid[0].length) sum[0] += grid[r][c];\n    }\n    return sum[0];\n  }\n\n  public int diagonalSum(int value) {\n    int[] p = position.get(value);\n    int result = 0;\n    int[][] d = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};\n    for (int[] x : d) {\n      int r = p[0] + x[0], c = p[1] + x[1];\n      if (r >= 0 && r < grid.length && c >= 0 && c < grid[0].length) result += grid[r][c];\n    }\n    return result;\n  }\n}"
+}

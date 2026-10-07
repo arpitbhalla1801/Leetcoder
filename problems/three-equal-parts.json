@@ -1,0 +1,5 @@
+{
+    "problemName": "three-equal-parts",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] threeEqualParts(int[] arr) {\n    int ones = 0;\n    for (int x : arr) ones += x;\n    if (ones == 0) return new int[] {0, arr.length - 1};\n    if (ones % 3 != 0) return new int[] {-1, -1};\n    int k = ones / 3, first = -1, second = -1, third = -1, seen = 0;\n    for (int i = 0; i < arr.length; i++)\n      if (arr[i] == 1) {\n        seen++;\n        if (seen == 1) first = i;\n        if (seen == k + 1) second = i;\n        if (seen == 2 * k + 1) third = i;\n      }\n    int len = arr.length - third;\n    if (first + len > second || second + len > third) return new int[] {-1, -1};\n    for (int i = 0; i < len; i++)\n      if (arr[first + i] != arr[second + i] || arr[first + i] != arr[third + i])\n        return new int[] {-1, -1};\n    return new int[] {first + len - 1, second + len};\n  }\n}\n"
+}

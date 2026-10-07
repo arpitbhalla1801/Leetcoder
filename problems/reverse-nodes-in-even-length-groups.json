@@ -1,0 +1,5 @@
+{
+    "problemName": "reverse-nodes-in-even-length-groups",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public ListNode reverseEvenLengthGroups(ListNode head) {\n    ListNode dummy = new ListNode(0, head), prev = dummy, cur = head;\n    int size = 1;\n    while (cur != null) {\n      ListNode end = cur;\n      int len = 0;\n      while (end != null && len < size) {\n        end = end.next;\n        len++;\n      }\n      if ((len & 1) == 0) {\n        ListNode p = end, node = cur;\n        for (int i = 0; i < len; i++) {\n          ListNode next = node.next;\n          node.next = p;\n          p = node;\n          node = next;\n        }\n        prev.next = p;\n        prev = cur;\n      } else {\n        for (int i = 0; i < len; i++) prev = prev.next;\n      }\n      cur = end;\n      size++;\n    }\n    return dummy.next;\n  }\n}\n"
+}

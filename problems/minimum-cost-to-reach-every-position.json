@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-cost-to-reach-every-position",
+    "language": "java",
+    "code": "class Solution {\n  public int[] minCosts(int[] cost) {\n    int[] ans = new int[cost.length];\n    int min = Integer.MAX_VALUE;\n    for (int i = 0; i < cost.length; i++) {\n      min = Math.min(min, cost[i]);\n      ans[i] = min;\n    }\n    return ans;\n  }\n}"
+}

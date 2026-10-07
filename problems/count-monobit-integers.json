@@ -1,0 +1,5 @@
+{
+    "problemName": "count-monobit-integers",
+    "language": "java",
+    "code": "class Solution {\n  public int countMonobit(int n) {\n    int count = 1; // zero\n    for (int k = 1; (1 << k) - 1 <= n; k++) count++;\n    return count;\n  }\n}"
+}

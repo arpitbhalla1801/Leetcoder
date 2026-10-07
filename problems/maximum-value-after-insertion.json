@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-value-after-insertion",
+    "language": "java",
+    "code": "class Solution {\n  public String maxValue(String n, int x) {\n    char d = (char) ('0' + x);\n    int start = n.charAt(0) == '-' ? 1 : 0;\n    if (start == 0) {\n      for (int i = 0; i < n.length(); i++)\n        if (n.charAt(i) < d) return n.substring(0, i) + d + n.substring(i);\n    } else {\n      for (int i = 1; i < n.length(); i++)\n        if (n.charAt(i) > d) return n.substring(0, i) + d + n.substring(i);\n    }\n    return n + d;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-bit-changes-to-make-two-integers-equal",
+    "language": "java",
+    "code": "class Solution {\n  public int minChanges(int n, int k) {\n    // bits can only be cleared: every set bit of k must already be set in n\n    if ((n & k) != k) return -1;\n    return Integer.bitCount(n ^ k);\n  }\n}"
+}

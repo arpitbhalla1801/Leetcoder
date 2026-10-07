@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-time-to-complete-all-deliveries",
+    "language": "java",
+    "code": "class Solution {\n  private static long gcd(long a, long b) {\n    while (b != 0) {\n      long t = a % b;\n      a = b;\n      b = t;\n    }\n    return a;\n  }\n\n  public long minimumTime(int[] d, int[] r) {\n    long lcm = (long) r[0] / gcd(r[0], r[1]) * r[1];\n    long lo = 1, hi = 100_000_000_000L;\n    while (lo < hi) {\n      long t = lo + (hi - lo) / 2;\n      long a = t - t / r[0], b = t - t / r[1], c = t - t / lcm;\n      if (d[0] <= a && d[1] <= b && (long) d[0] + d[1] <= c) hi = t;\n      else lo = t + 1;\n    }\n    return lo;\n  }\n}"
+}

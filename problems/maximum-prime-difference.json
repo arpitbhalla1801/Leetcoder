@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-prime-difference",
+    "language": "java",
+    "code": "class Solution {\n  public int maximumPrimeDifference(int[] nums) {\n    int first = -1, last = -1;\n    for (int i = 0; i < nums.length; i++) {\n      if (isPrime(nums[i])) {\n        if (first == -1) first = i;\n        last = i;\n      }\n    }\n    return last - first;\n  }\n\n  private boolean isPrime(int value) {\n    if (value < 2) return false;\n    for (int divisor = 2; divisor * divisor <= value; divisor++) {\n      if (value % divisor == 0) return false;\n    }\n    return true;\n  }\n}"
+}

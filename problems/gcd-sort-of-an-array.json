@@ -1,0 +1,5 @@
+{
+    "problemName": "gcd-sort-of-an-array",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public boolean gcdSort(int[] nums) {\n    int max = 100000;\n    DSU dsu = new DSU(max + 1);\n    for (int x : nums) for (int p : factors(x)) dsu.union(x, p);\n    int[] sorted = nums.clone();\n    Arrays.sort(sorted);\n    for (int i = 0; i < nums.length; i++)\n      if (dsu.find(nums[i]) != dsu.find(sorted[i])) return false;\n    return true;\n  }\n\n  private List<Integer> factors(int x) {\n    List<Integer> result = new ArrayList<>();\n    for (int p = 2; p * p <= x; p++)\n      if (x % p == 0) {\n        result.add(p);\n        while (x % p == 0) x /= p;\n      }\n    if (x > 1) result.add(x);\n    return result;\n  }\n\n  static class DSU {\n    int[] parent;\n\n    DSU(int n) {\n      parent = new int[n];\n      for (int i = 0; i < n; i++) parent[i] = i;\n    }\n\n    int find(int x) {\n      return parent[x] == x ? x : (parent[x] = find(parent[x]));\n    }\n\n    void union(int a, int b) {\n      a = find(a);\n      b = find(b);\n      if (a != b) parent[a] = b;\n    }\n  }\n}\n"
+}

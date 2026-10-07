@@ -1,0 +1,5 @@
+{
+    "problemName": "count-paths-that-can-form-a-palindrome-in-a-tree",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long countPalindromePaths(List<Integer> parent, String s) {\n    int n = parent.size();\n    int[] mask = new int[n];\n    ArrayList<Integer>[] children = new ArrayList[n];\n    for (int i = 0; i < n; i++) children[i] = new ArrayList<>();\n    for (int i = 1; i < n; i++) children[parent.get(i)].add(i);\n    int[] stack = new int[n];\n    int top = 0;\n    stack[top++] = 0;\n    while (top > 0) {\n      int u = stack[--top];\n      for (int v : children[u]) {\n        mask[v] = mask[u] ^ (1 << (s.charAt(v) - 'a'));\n        stack[top++] = v;\n      }\n    }\n    Map<Integer, Long> freq = new HashMap<>();\n    long ans = 0;\n    for (int x : mask) {\n      ans += freq.getOrDefault(x, 0L);\n      for (int b = 0; b < 26; b++) ans += freq.getOrDefault(x ^ (1 << b), 0L);\n      freq.put(x, freq.getOrDefault(x, 0L) + 1);\n    }\n    return ans;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-absolute-difference-between-two-values",
+    "language": "java",
+    "code": "class Solution {\n  public int minAbsoluteDifference(int[] nums) {\n    int best = Integer.MAX_VALUE;\n    for (int i = 0; i < nums.length; i++) {\n      if (nums[i] != 1) continue;\n      for (int j = 0; j < nums.length; j++) {\n        if (nums[j] == 2) best = Math.min(best, Math.abs(i - j));\n      }\n    }\n    return best == Integer.MAX_VALUE ? -1 : best;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "check-divisibility-by-digit-sum-and-product",
+    "language": "java",
+    "code": "class Solution {\n  public boolean checkDivisibility(int n) {\n    int sum = 0, product = 1;\n    for (int x = n; x > 0; x /= 10) {\n      sum += x % 10;\n      product *= x % 10;\n    }\n    return n % (sum + product) == 0;\n  }\n}"
+}

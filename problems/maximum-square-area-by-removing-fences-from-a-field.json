@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-square-area-by-removing-fences-from-a-field",
+    "language": "java",
+    "code": "class Solution {\n  private static final long MOD = 1_000_000_007L;\n\n  public int maximizeSquareArea(int m, int n, int[] hFences, int[] vFences) {\n    int[] h = withBounds(hFences, m), v = withBounds(vFences, n);\n    Set<Integer> widths = new HashSet<>();\n    for (int i = 0; i < h.length; i++) {\n      for (int j = i + 1; j < h.length; j++) widths.add(h[j] - h[i]);\n    }\n    int best = 0;\n    for (int i = 0; i < v.length; i++) {\n      for (int j = i + 1; j < v.length; j++) {\n        int width = v[j] - v[i];\n        if (width > best && widths.contains(width)) best = width;\n      }\n    }\n    return best == 0 ? -1 : (int) ((long) best * best % MOD);\n  }\n\n  private int[] withBounds(int[] fences, int bound) {\n    int[] result = Arrays.copyOf(fences, fences.length + 2);\n    result[fences.length] = 1;\n    result[fences.length + 1] = bound;\n    Arrays.sort(result);\n    return result;\n  }\n}"
+}

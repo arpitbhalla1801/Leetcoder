@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-number-of-operations-to-move-ones-to-the-end",
+    "language": "java",
+    "code": "class Solution {\n  public int maxOperations(String s) {\n    int ones = 0;\n    int operations = 0;\n    for (int i = 0; i < s.length(); i++) {\n      if (s.charAt(i) == '1') {\n        ones++;\n      } else if (i > 0 && s.charAt(i - 1) == '1') {\n        operations += ones;\n      }\n    }\n    return operations;\n  }\n}"
+}

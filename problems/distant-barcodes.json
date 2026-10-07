@@ -1,0 +1,5 @@
+{
+    "problemName": "distant-barcodes",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] rearrangeBarcodes(int[] barcodes) {\n    Map<Integer, Integer> frequencies = new HashMap<>();\n    for (int barcode : barcodes) frequencies.merge(barcode, 1, Integer::sum);\n    List<Integer> values = new ArrayList<>(frequencies.keySet());\n    values.sort((a, b) -> Integer.compare(frequencies.get(b), frequencies.get(a)));\n    int[] result = new int[barcodes.length];\n    int position = 0;\n    for (int value : values) {\n      for (int count = frequencies.get(value); count > 0; count--) {\n        if (position >= result.length) position = 1;\n        result[position] = value;\n        position += 2;\n      }\n    }\n    return result;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-make-array-elements-zero",
+    "language": "java",
+    "code": "class Solution {\n  public long minOperations(int[][] queries) {\n    long ans = 0;\n    for (int[] q : queries) {\n      long steps = 0;\n      long lo = 1;\n      for (int t = 1; lo <= q[1]; t++) {\n        long hi = lo * 4 - 1;\n        long a = Math.max(lo, q[0]), b = Math.min(hi, q[1]);\n        if (a <= b) steps += (b - a + 1) * t;\n        lo *= 4;\n      }\n      ans += (steps + 1) / 2;\n    }\n    return ans;\n  }\n}"
+}

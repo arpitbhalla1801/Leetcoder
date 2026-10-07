@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-deletion-cost-to-make-all-characters-equal",
+    "language": "java",
+    "code": "class Solution {\n  public long minCost(String s, int[] cost) {\n    long[] byChar = new long[26];\n    long total = 0, best = 0;\n    for (int i = 0; i < s.length(); i++) {\n      byChar[s.charAt(i) - 'a'] += cost[i];\n      total += cost[i];\n    }\n    for (long v : byChar) best = Math.max(best, v);\n    return total - best;\n  }\n}"
+}

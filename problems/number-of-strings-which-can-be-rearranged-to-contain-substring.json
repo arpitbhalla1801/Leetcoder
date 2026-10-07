@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-strings-which-can-be-rearranged-to-contain-substring",
+    "language": "java",
+    "code": "class Solution {\n  private static final long MOD = 1_000_000_007L;\n\n  public int stringCount(int n) {\n    // need at least one 'l', one 't' and two 'e': inclusion-exclusion over the three ways to fail\n    long all = power(26, n);\n    long noL = power(25, n), noT = power(25, n);\n    long fewE = power(25, n) + n * power(25, n - 1) % MOD; // zero or one 'e'\n    long noLT = power(24, n);\n    long noLFewE = power(24, n) + n * power(24, n - 1) % MOD;\n    long noTFewE = noLFewE;\n    long none = power(23, n) + n * power(23, n - 1) % MOD;\n    long bad = (noL + noT + fewE) % MOD;\n    long both = (noLT + noLFewE + noTFewE) % MOD;\n    long result = ((all - bad + both - none) % MOD + 2 * MOD) % MOD;\n    return (int) result;\n  }\n\n  private long power(long base, long exp) {\n    long result = 1;\n    base %= MOD;\n    while (exp > 0) {\n      if ((exp & 1) == 1) result = result * base % MOD;\n      base = base * base % MOD;\n      exp >>= 1;\n    }\n    return result;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "complete-binary-tree-inserter",
+    "language": "java",
+    "code": "class CBTInserter {\n  private final java.util.Queue<TreeNode> q = new java.util.ArrayDeque<>();\n  private TreeNode root;\n\n  public CBTInserter(TreeNode root) {\n    this.root = root;\n    java.util.Queue<TreeNode> all = new java.util.ArrayDeque<>();\n    all.add(root);\n    while (!all.isEmpty()) {\n      TreeNode n = all.poll();\n      if (n.left == null || n.right == null) q.add(n);\n      if (n.left != null) all.add(n.left);\n      if (n.right != null) all.add(n.right);\n    }\n  }\n\n  public int insert(int val) {\n    TreeNode p = q.peek(), n = new TreeNode(val);\n    if (p.left == null) p.left = n;\n    else {\n      p.right = n;\n      q.poll();\n    }\n    q.add(n);\n    return p.val;\n  }\n\n  public TreeNode get_root() {\n    return root;\n  }\n}\n"
+}

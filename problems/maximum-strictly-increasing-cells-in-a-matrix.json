@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-strictly-increasing-cells-in-a-matrix",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int maxIncreasingCells(int[][] mat) {\n    int m = mat.length, n = mat[0].length;\n    int[][] cells = new int[m * n][3];\n    int p = 0;\n    for (int i = 0; i < m; i++)\n      for (int j = 0; j < n; j++) {\n        cells[p++] = new int[] {mat[i][j], i, j};\n      }\n    Arrays.sort(cells, Comparator.comparingInt(a -> a[0]));\n    int[] row = new int[m], col = new int[n];\n    int ans = 0;\n    for (int i = 0; i < cells.length; ) {\n      int j = i;\n      while (j < cells.length && cells[j][0] == cells[i][0]) j++;\n      int[] best = new int[j - i];\n      for (int q = i; q < j; q++) best[q - i] = Math.max(row[cells[q][1]], col[cells[q][2]]) + 1;\n      for (int q = i; q < j; q++) {\n        int v = best[q - i];\n        row[cells[q][1]] = Math.max(row[cells[q][1]], v);\n        col[cells[q][2]] = Math.max(col[cells[q][2]], v);\n        ans = Math.max(ans, v);\n      }\n      i = j;\n    }\n    return ans;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-sum-of-device-ratings",
+    "language": "java",
+    "code": "class Solution {\n  public long maxRatings(int[][] units) {\n    int m = units.length;\n    long sumMin = 0, sumSecond = 0, minRating = Long.MAX_VALUE, minSecond = Long.MAX_VALUE;\n    for (int[] device : units) {\n      long min = Long.MAX_VALUE, second = Long.MAX_VALUE;\n      for (int u : device) {\n        if (u < min) {\n          second = min;\n          min = u;\n        } else if (u < second) second = u;\n      }\n      if (second == Long.MAX_VALUE) second = 0;\n      sumMin += min;\n      sumSecond += second;\n      minRating = Math.min(minRating, min);\n      minSecond = Math.min(minSecond, second);\n    }\n    if (m == 1) return sumMin;\n    return Math.max(sumMin, sumSecond - minSecond + minRating);\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "construct-the-minimum-bitwise-array-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int[] minBitwiseArray(List<Integer> nums) {\n    int[] ans = new int[nums.size()];\n    for (int i = 0; i < ans.length; i++) {\n      int num = nums.get(i);\n      int trailingOnes = Integer.numberOfTrailingZeros(~num);\n      // clear the highest bit of the trailing run of ones; an even number has no solution\n      ans[i] = trailingOnes == 0 ? -1 : num - (1 << (trailingOnes - 1));\n    }\n    return ans;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-cost-to-equalize-arrays-using-swaps",
+    "language": "java",
+    "code": "class Solution {\n  public int minCost(int[] nums1, int[] nums2) {\n    int MAX = 80_001;\n    int[] c1 = new int[MAX], total = new int[MAX];\n    for (int v : nums1) {\n      c1[v]++;\n      total[v]++;\n    }\n    for (int v : nums2) total[v]++;\n    int excess = 0;\n    for (int v = 0; v < MAX; v++) {\n      if (total[v] % 2 != 0) return -1;\n      excess += Math.max(0, c1[v] - total[v] / 2);\n    }\n    return excess;\n  }\n}"
+}

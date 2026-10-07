@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-sum-of-alternating-subsequence-with-distance-at-least-k",
+    "language": "java",
+    "code": "class Solution {\n  private static final int MAXV = 100_001;\n\n  private static void updateMax(long[] bit, int i, long v) {\n    for (; i <= MAXV; i += i & -i) bit[i] = Math.max(bit[i], v);\n  }\n\n  private static long queryMax(long[] bit, int i) {\n    long r = 0;\n    for (; i > 0; i -= i & -i) r = Math.max(r, bit[i]);\n    return r;\n  }\n\n  public long maxAlternatingSum(int[] nums, int k) {\n    int n = nums.length;\n    long[] downByValue = new long[MAXV + 1], upByValueReversed = new long[MAXV + 1];\n    long[] up = new long[n], down = new long[n];\n    long best = 0;\n    for (int i = 0; i < n; i++) {\n      int j = i - k;\n      if (j >= 0) {\n        updateMax(downByValue, nums[j], down[j]);\n        updateMax(upByValueReversed, MAXV - nums[j], up[j]);\n      }\n      up[i] = nums[i] + queryMax(downByValue, nums[i] - 1);\n      down[i] = nums[i] + queryMax(upByValueReversed, MAXV - nums[i] - 1);\n      best = Math.max(best, Math.max(up[i], down[i]));\n    }\n    return best;\n  }\n}"
+}

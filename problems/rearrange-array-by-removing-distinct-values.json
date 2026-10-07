@@ -1,0 +1,5 @@
+{
+    "problemName": "rearrange-array-by-removing-distinct-values",
+    "language": "java",
+    "code": "class Solution {\n  public int[] rearrangeArray(int[] nums) {\n    TreeMap<Integer, Integer> counts = new TreeMap<>();\n    for (int x : nums) counts.merge(x, 1, Integer::sum);\n    int[] ans = new int[nums.length];\n    int k = 0;\n    while (!counts.isEmpty()) {\n      Iterator<Map.Entry<Integer, Integer>> it = counts.entrySet().iterator();\n      while (it.hasNext()) {\n        Map.Entry<Integer, Integer> e = it.next();\n        ans[k++] = e.getKey();\n        if (e.getValue() == 1) it.remove();\n        else e.setValue(e.getValue() - 1);\n      }\n    }\n    return ans;\n  }\n}"
+}

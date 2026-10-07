@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-longest-substring-containing-vowels-in-even-counts",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int findTheLongestSubstring(String s) {\n    int[] first = new int[32];\n    Arrays.fill(first, -2);\n    first[0] = -1;\n    int mask = 0, answer = 0;\n    for (int i = 0; i < s.length(); i++) {\n      int bit = \"aeiou\".indexOf(s.charAt(i));\n      if (bit >= 0) mask ^= 1 << bit;\n      if (first[mask] == -2) first[mask] = i;\n      else answer = Math.max(answer, i - first[mask]);\n    }\n    return answer;\n  }\n}\n"
+}

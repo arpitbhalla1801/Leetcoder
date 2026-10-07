@@ -1,0 +1,5 @@
+{
+    "problemName": "construct-uniform-parity-array-ii",
+    "language": "java",
+    "code": "class Solution {\n  public boolean uniformArray(int[] nums1) {\n    int minOdd = Integer.MAX_VALUE;\n    for (int x : nums1) if (x % 2 == 1) minOdd = Math.min(minOdd, x);\n    if (minOdd == Integer.MAX_VALUE) return true; // already all even\n    // all-odd target: every even value needs a smaller odd value to subtract\n    for (int x : nums1) {\n      if (x % 2 == 0 && x < minOdd) return false;\n    }\n    return true;\n  }\n}"
+}

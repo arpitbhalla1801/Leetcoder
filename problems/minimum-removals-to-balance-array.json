@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-removals-to-balance-array",
+    "language": "java",
+    "code": "class Solution {\n  public int minRemoval(int[] nums, int k) {\n    int[] sorted = nums.clone();\n    Arrays.sort(sorted);\n    int best = 1, left = 0;\n    for (int right = 0; right < sorted.length; right++) {\n      while ((long) sorted[left] * k < sorted[right]) left++;\n      best = Math.max(best, right - left + 1);\n    }\n    return sorted.length - best;\n  }\n}"
+}

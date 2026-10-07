@@ -1,0 +1,5 @@
+{
+    "problemName": "partition-array-into-k-distinct-groups",
+    "language": "java",
+    "code": "class Solution {\n  public boolean partitionArray(int[] nums, int k) {\n    int n = nums.length;\n    if (n % k != 0) return false;\n    int groups = n / k;\n    int[] freq = new int[100001];\n    for (int x : nums) {\n      // a value can appear at most once per group\n      if (++freq[x] > groups) return false;\n    }\n    return true;\n  }\n}"
+}

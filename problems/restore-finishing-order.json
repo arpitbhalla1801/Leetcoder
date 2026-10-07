@@ -1,0 +1,5 @@
+{
+    "problemName": "restore-finishing-order",
+    "language": "java",
+    "code": "class Solution {\n  public int[] recoverOrder(int[] order, int[] friends) {\n    Set<Integer> set = new HashSet<>();\n    for (int f : friends) set.add(f);\n    int[] ans = new int[friends.length];\n    int k = 0;\n    for (int id : order) {\n      if (set.contains(id)) ans[k++] = id;\n    }\n    return ans;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-least-frequent-digit",
+    "language": "java",
+    "code": "class Solution {\n  public int getLeastFrequentDigit(int n) {\n    int[] freq = new int[10];\n    for (; n > 0; n /= 10) freq[n % 10]++;\n    int best = -1;\n    for (int d = 0; d < 10; d++) {\n      if (freq[d] > 0 && (best == -1 || freq[d] < freq[best])) best = d;\n    }\n    return best;\n  }\n}"
+}

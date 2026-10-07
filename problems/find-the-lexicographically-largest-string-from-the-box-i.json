@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-lexicographically-largest-string-from-the-box-i",
+    "language": "java",
+    "code": "class Solution {\n  public String answerString(String word, int numFriends) {\n    if (numFriends == 1) return word;\n    int n = word.length(), maxLen = n - numFriends + 1;\n    String best = \"\";\n    for (int i = 0; i < n; i++) {\n      String candidate = word.substring(i, Math.min(n, i + maxLen));\n      if (candidate.compareTo(best) > 0) best = candidate;\n    }\n    return best;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-removals-to-achieve-target-xor",
+    "language": "java",
+    "code": "class Solution {\n  public int minRemovals(int[] nums, int target) {\n    int size = 1 << 14;\n    int[] dp = new int[size];\n    java.util.Arrays.fill(dp, -1);\n    dp[0] = 0;\n    for (int x : nums) {\n      int[] nd = dp.clone();\n      for (int v = 0; v < size; v++) {\n        if (dp[v] >= 0) nd[v ^ x] = Math.max(nd[v ^ x], dp[v] + 1);\n      }\n      dp = nd;\n    }\n    return target < size && dp[target] >= 0 ? nums.length - dp[target] : -1;\n  }\n}"
+}

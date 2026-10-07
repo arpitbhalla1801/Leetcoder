@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-swaps-to-avoid-forbidden-values",
+    "language": "java",
+    "code": "class Solution {\n  public int minSwaps(int[] nums, int[] forbidden) {\n    int n = nums.length;\n    java.util.HashMap<Integer, Integer> numCount = new java.util.HashMap<>(),\n        forbCount = new java.util.HashMap<>(),\n        conflictCount = new java.util.HashMap<>();\n    int conflicts = 0;\n    for (int i = 0; i < n; i++) {\n      numCount.merge(nums[i], 1, Integer::sum);\n      forbCount.merge(forbidden[i], 1, Integer::sum);\n      if (nums[i] == forbidden[i]) {\n        conflicts++;\n        conflictCount.merge(nums[i], 1, Integer::sum);\n      }\n    }\n    for (java.util.Map.Entry<Integer, Integer> e : numCount.entrySet()) {\n      if (e.getValue() + forbCount.getOrDefault(e.getKey(), 0) > n) return -1;\n    }\n    int maxConflict = 0;\n    for (int c : conflictCount.values()) maxConflict = Math.max(maxConflict, c);\n    return Math.max((conflicts + 1) / 2, maxConflict);\n  }\n}"
+}

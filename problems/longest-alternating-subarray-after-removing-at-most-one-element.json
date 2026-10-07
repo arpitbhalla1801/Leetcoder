@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-alternating-subarray-after-removing-at-most-one-element",
+    "language": "java",
+    "code": "class Solution {\n  public int longestAlternating(int[] nums) {\n    int n = nums.length;\n    int[] ue = new int[n], de = new int[n], us = new int[n], ds = new int[n];\n    for (int i = 0; i < n; i++) {\n      ue[i] = i > 0 && nums[i - 1] < nums[i] ? de[i - 1] + 1 : 1;\n      de[i] = i > 0 && nums[i - 1] > nums[i] ? ue[i - 1] + 1 : 1;\n    }\n    for (int i = n - 1; i >= 0; i--) {\n      us[i] = i + 1 < n && nums[i] < nums[i + 1] ? ds[i + 1] + 1 : 1;\n      ds[i] = i + 1 < n && nums[i] > nums[i + 1] ? us[i + 1] + 1 : 1;\n    }\n    int best = 1;\n    for (int i = 0; i < n; i++) best = Math.max(best, Math.max(ue[i], de[i]));\n    for (int k = 1; k + 1 < n; k++) {\n      int x = nums[k - 1], y = nums[k + 1];\n      if (x < y) best = Math.max(best, de[k - 1] + ds[k + 1]);\n      else if (x > y) best = Math.max(best, ue[k - 1] + us[k + 1]);\n    }\n    return best;\n  }\n}"
+}

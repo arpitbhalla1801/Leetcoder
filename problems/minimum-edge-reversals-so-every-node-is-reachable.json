@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-edge-reversals-so-every-node-is-reachable",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private List<int[]>[] graph;\n  private int[] answer;\n\n  public int[] minEdgeReversals(int n, int[][] edges) {\n    graph = new ArrayList[n];\n    for (int i = 0; i < n; i++) graph[i] = new ArrayList<>();\n    for (int[] e : edges) {\n      graph[e[0]].add(new int[] {e[1], 0});\n      graph[e[1]].add(new int[] {e[0], 1});\n    }\n    answer = new int[n];\n    answer[0] = first(0, -1);\n    reroot(0, -1);\n    return answer;\n  }\n\n  private int first(int u, int parent) {\n    int total = 0;\n    for (int[] e : graph[u]) if (e[0] != parent) total += e[1] + first(e[0], u);\n    return total;\n  }\n\n  private void reroot(int u, int parent) {\n    for (int[] e : graph[u])\n      if (e[0] != parent) {\n        answer[e[0]] = answer[u] + (e[1] == 0 ? 1 : -1);\n        reroot(e[0], u);\n      }\n  }\n}\n"
+}

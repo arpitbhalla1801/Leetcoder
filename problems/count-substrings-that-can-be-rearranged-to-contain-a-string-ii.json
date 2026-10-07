@@ -1,0 +1,5 @@
+{
+    "problemName": "count-substrings-that-can-be-rearranged-to-contain-a-string-ii",
+    "language": "java",
+    "code": "class Solution {\n  public long validSubstringCount(String word1, String word2) {\n    int[] need = new int[26];\n    for (int i = 0; i < word2.length(); i++) need[word2.charAt(i) - 'a']++;\n    int miss = word2.length(), n = word1.length(), left = 0;\n    long ans = 0;\n    for (int r = 0; r < n; r++) {\n      if (need[word1.charAt(r) - 'a']-- > 0) miss--;\n      while (miss == 0) {\n        ans += n - r;\n        if (++need[word1.charAt(left++) - 'a'] > 0) miss++;\n      }\n    }\n    return ans;\n  }\n}"
+}

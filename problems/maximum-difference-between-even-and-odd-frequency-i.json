@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-difference-between-even-and-odd-frequency-i",
+    "language": "java",
+    "code": "class Solution {\n  public int maxDifference(String s) {\n    int[] freq = new int[26];\n    for (char c : s.toCharArray()) freq[c - 'a']++;\n    int maxOdd = 0, minEven = Integer.MAX_VALUE;\n    for (int f : freq) {\n      if (f == 0) continue;\n      if (f % 2 == 1) maxOdd = Math.max(maxOdd, f);\n      else minEven = Math.min(minEven, f);\n    }\n    return maxOdd - minEven;\n  }\n}"
+}

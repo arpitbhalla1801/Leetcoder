@@ -1,0 +1,5 @@
+{
+    "problemName": "add-minimum-number-of-rungs",
+    "language": "java",
+    "code": "class Solution {\n  public int addRungs(int[] rungs, int dist) {\n    int answer = 0, current = 0;\n    for (int rung : rungs) {\n      answer += (rung - current - 1) / dist;\n      current = rung;\n    }\n    return answer;\n  }\n}\n"
+}

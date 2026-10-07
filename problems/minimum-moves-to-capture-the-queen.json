@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-moves-to-capture-the-queen",
+    "language": "java",
+    "code": "class Solution {\n  public int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {\n    if (a == e && !(a == c && (b < d && d < f || b > d && d > f))) return 1;\n    if (b == f && !(b == d && (a < c && c < e || a > c && c > e))) return 1;\n    if (Math.abs(c - e) == Math.abs(d - f)\n        && !(Math.abs(a - e) == Math.abs(b - f)\n            && Math.abs(a - c) == Math.abs(b - d)\n            && ((a < c && c < e) || (a > c && c > e)))) return 1;\n    return 2;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "find-maximum-non-decreasing-array-length",
+    "language": "java",
+    "code": "class Solution {\n  public int findMaximumLength(int[] nums) {\n    int n = nums.length;\n    long[] prefix = new long[n + 1];\n    for (int i = 0; i < n; i++) prefix[i + 1] = prefix[i] + nums[i];\n    int[] best = new int[n + 1]; // most segments for the first i elements\n    long[] lastSum = new long[n + 1]; // smallest possible last segment sum for that count\n    int[] queue = new int[n + 2];\n    int head = 0, tail = 0;\n    queue[tail++] = 0;\n    for (int i = 1; i <= n; i++) {\n      // drop candidates that are dominated: the next one already fits under prefix[i]\n      while (tail - head >= 2 && prefix[queue[head + 1]] + lastSum[queue[head + 1]] <= prefix[i])\n        head++;\n      int j = queue[head];\n      best[i] = best[j] + 1;\n      lastSum[i] = prefix[i] - prefix[j];\n      while (tail > head\n          && prefix[queue[tail - 1]] + lastSum[queue[tail - 1]] >= prefix[i] + lastSum[i]) tail--;\n      queue[tail++] = i;\n    }\n    return best[n];\n  }\n}"
+}

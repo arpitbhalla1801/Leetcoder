@@ -1,0 +1,5 @@
+{
+    "problemName": "rearrange-string-to-avoid-character-pair",
+    "language": "java",
+    "code": "class Solution {\n  public String rearrangeString(String s, char x, char y) {\n    StringBuilder front = new StringBuilder(),\n        middle = new StringBuilder(),\n        back = new StringBuilder();\n    for (char c : s.toCharArray()) {\n      if (c == y) front.append(c);\n      else if (c == x) back.append(c);\n      else middle.append(c);\n    }\n    return front.append(middle).append(back).toString();\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "count-integers-appearing-in-a-single-block",
+    "language": "java",
+    "code": "class Solution {\n  public int countSpecialIntegers(int[] nums) {\n    int[] blocks = new int[101];\n    for (int i = 0; i < nums.length; i++) {\n      if (i == 0 || nums[i] != nums[i - 1]) blocks[nums[i]]++;\n    }\n    int count = 0;\n    for (int b : blocks) if (b == 1) count++;\n    return count;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "rank-teams-by-votes",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public String rankTeams(String[] votes) {\n    int n = votes[0].length();\n    int[][] counts = new int[26][n];\n    for (String vote : votes) for (int i = 0; i < n; i++) counts[vote.charAt(i) - 'A'][i]++;\n    Character[] teams = new Character[n];\n    for (int i = 0; i < n; i++) teams[i] = votes[0].charAt(i);\n    Arrays.sort(\n        teams,\n        (a, b) -> {\n          for (int i = 0; i < n; i++)\n            if (counts[b - 'A'][i] != counts[a - 'A'][i])\n              return counts[b - 'A'][i] - counts[a - 'A'][i];\n          return Character.compare(a, b);\n        });\n    StringBuilder result = new StringBuilder();\n    for (char team : teams) result.append(team);\n    return result.toString();\n  }\n}\n"
+}

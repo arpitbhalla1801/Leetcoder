@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-form-subset-sum-i",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(int[] nums, int sum) {\n    int INF = Integer.MAX_VALUE / 2;\n    int[] dp = new int[sum + 1];\n    java.util.Arrays.fill(dp, INF);\n    dp[0] = 0;\n    for (int x : nums) {\n      int[] bestCost = new int[sum + 1];\n      java.util.Arrays.fill(bestCost, INF);\n      // all multiplications come before divisions, so a value is either x * 2^c or floor(x / 2^c)\n      for (int c = 0; ((long) x << c) <= sum; c++) bestCost[x << c] = Math.min(bestCost[x << c], c);\n      for (int c = 1; (x >> c) > 0; c++)\n        if ((x >> c) <= sum) bestCost[x >> c] = Math.min(bestCost[x >> c], c);\n      int[] nd = dp.clone();\n      for (int val = 1; val <= sum; val++) {\n        if (bestCost[val] >= INF) continue;\n        for (int s = sum; s >= val; s--) {\n          if (dp[s - val] < INF) nd[s] = Math.min(nd[s], dp[s - val] + bestCost[val]);\n        }\n      }\n      dp = nd;\n    }\n    return dp[sum] >= INF ? -1 : dp[sum];\n  }\n}"
+}

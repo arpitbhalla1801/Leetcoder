@@ -1,0 +1,5 @@
+{
+    "problemName": "even-number-of-knight-moves",
+    "language": "java",
+    "code": "class Solution {\n  public boolean canReach(int[] start, int[] target) {\n    // every knight move flips the square colour, so an even number of moves keeps it\n    return (start[0] + start[1]) % 2 == (target[0] + target[1]) % 2;\n  }\n}"
+}

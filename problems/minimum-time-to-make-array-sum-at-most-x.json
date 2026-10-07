@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-time-to-make-array-sum-at-most-x",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumTime(List<Integer> nums1, List<Integer> nums2, int x) {\n    int n = nums1.size();\n    Integer[] order = new Integer[n];\n    long sum1 = 0, sum2 = 0;\n    for (int i = 0; i < n; i++) {\n      order[i] = i;\n      sum1 += nums1.get(i);\n      sum2 += nums2.get(i);\n    }\n    // reset the fastest-growing elements last: process in ascending order of growth\n    Arrays.sort(order, (a, b) -> Integer.compare(nums2.get(a), nums2.get(b)));\n    long[] saved = new long[n + 1]; // saved[j]: most we can remove using j resets\n    for (int idx : order) {\n      int a = nums1.get(idx), b = nums2.get(idx);\n      for (int j = n; j >= 1; j--) saved[j] = Math.max(saved[j], saved[j - 1] + a + (long) b * j);\n    }\n    for (int t = 0; t <= n; t++) {\n      if (sum1 + sum2 * t - saved[t] <= x) return t;\n    }\n    return -1;\n  }\n}"
+}

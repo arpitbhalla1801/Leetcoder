@@ -1,0 +1,5 @@
+{
+    "problemName": "best-time-to-buy-and-sell-stock-v",
+    "language": "java",
+    "code": "class Solution {\n  public long maximumProfit(int[] prices, int k) {\n    final long NEG = Long.MIN_VALUE / 4;\n    long[] free = new long[k + 1]; // best profit with j transactions finished and none open\n    long[] holdLong = new long[k + 1]; // j-th transaction open: bought, waiting to sell\n    long[] holdShort = new long[k + 1]; // j-th transaction open: sold short, waiting to buy back\n    Arrays.fill(holdLong, NEG);\n    Arrays.fill(holdShort, NEG);\n    for (int p : prices) {\n      // descending j so free[j - 1] still holds yesterday's value when a transaction opens\n      for (int j = k; j >= 1; j--) {\n        free[j] = Math.max(free[j], Math.max(holdLong[j] + p, holdShort[j] - p));\n        holdLong[j] = Math.max(holdLong[j], free[j - 1] - p);\n        holdShort[j] = Math.max(holdShort[j], free[j - 1] + p);\n      }\n    }\n    return free[k];\n  }\n}"
+}

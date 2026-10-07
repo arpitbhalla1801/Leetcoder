@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-the-number-of-partitions-after-operations",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  Map<Long, Integer> memo;\n  char[] a;\n  int k, n;\n\n  public int maxPartitionsAfterOperations(String s, int k) {\n    this.a = s.toCharArray();\n    this.k = k;\n    n = a.length;\n    memo = new HashMap<>();\n    return dfs(0, 0, 0) + 0;\n  }\n\n  int dfs(int i, int mask, int used) {\n    if (i == n) return mask == 0 ? 0 : 1;\n    long key = (((long) i << 27) | ((long) used << 26) | (mask & 0x3ffffffL));\n    Integer z = memo.get(key);\n    if (z != null) return z;\n    int ans = take(i, mask, used, a[i] - 'a', false);\n    if (used == 0) for (int c = 0; c < 26; c++) ans = Math.max(ans, take(i, mask, 1, c, true));\n    memo.put(key, ans);\n    return ans;\n  }\n\n  int take(int i, int mask, int used, int c, boolean changed) {\n    int bit = 1 << c;\n    if ((mask & bit) != 0) return dfs(i + 1, mask, used);\n    if (Integer.bitCount(mask) < k) return dfs(i + 1, mask | bit, used);\n    return 1 + dfs(i + 1, bit, used);\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "process-string-with-special-operations-ii",
+    "language": "java",
+    "code": "class Solution {\n  public char processStr(String s, long k) {\n    int n = s.length();\n    long[] len = new long[n + 1];\n    for (int i = 0; i < n; i++) {\n      char c = s.charAt(i);\n      if (c == '*') len[i + 1] = Math.max(0, len[i] - 1);\n      else if (c == '#') len[i + 1] = len[i] * 2;\n      else if (c == '%') len[i + 1] = len[i];\n      else len[i + 1] = len[i] + 1;\n    }\n    if (k >= len[n]) return '.';\n    for (int i = n - 1; i >= 0; i--) {\n      char c = s.charAt(i);\n      if (c == '#') {\n        if (k >= len[i]) k -= len[i];\n      } else if (c == '%') {\n        k = len[i] - 1 - k;\n      } else if (c != '*') {\n        if (k == len[i]) return c;\n      }\n    }\n    return '.';\n  }\n}"
+}

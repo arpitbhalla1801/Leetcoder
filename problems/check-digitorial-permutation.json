@@ -1,0 +1,5 @@
+{
+    "problemName": "check-digitorial-permutation",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isDigitorialPermutation(int n) {\n    char[] target = Integer.toString(n).toCharArray();\n    java.util.Arrays.sort(target);\n    for (int d : new int[] {1, 2, 145, 40585}) {\n      char[] c = Integer.toString(d).toCharArray();\n      java.util.Arrays.sort(c);\n      if (java.util.Arrays.equals(c, target)) return true;\n    }\n    return false;\n  }\n}"
+}

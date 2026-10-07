@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-integers-with-popcount-depth-equal-to-k-i",
+    "language": "java",
+    "code": "class Solution {\n  public long popcountDepth(long n, int k) {\n    if (k == 0) return 1;\n    int[] depth = new int[64];\n    for (int x = 2; x < 64; x++) depth[x] = depth[Integer.bitCount(x)] + 1;\n    long[][] c = new long[64][64];\n    for (int i = 0; i < 64; i++) {\n      c[i][0] = 1;\n      for (int j = 1; j <= i; j++) c[i][j] = c[i - 1][j - 1] + (j <= i - 1 ? c[i - 1][j] : 0);\n    }\n    long total = 0;\n    for (int p = 1; p < 64; p++) {\n      if (depth[p] != k - 1) continue;\n      // count of x in [1, n] with exactly p set bits\n      long count = 0;\n      int ones = 0;\n      for (int b = 62; b >= 0; b--) {\n        if ((n >> b & 1) == 0) continue;\n        if (p - ones >= 0 && b >= p - ones) count += c[b][p - ones];\n        ones++;\n      }\n      if (ones == p) count++;\n      total += count;\n    }\n    if (k == 1) total--;\n    return total;\n  }\n}"
+}

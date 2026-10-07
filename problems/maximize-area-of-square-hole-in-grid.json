@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-area-of-square-hole-in-grid",
+    "language": "java",
+    "code": "class Solution {\n  public int maximizeSquareHoleArea(int n, int m, int[] hBars, int[] vBars) {\n    int side = Math.min(longestRun(hBars), longestRun(vBars)) + 1;\n    return side * side;\n  }\n\n  // longest run of consecutive bar numbers (removing them merges the gaps)\n  private int longestRun(int[] bars) {\n    int[] sorted = bars.clone();\n    Arrays.sort(sorted);\n    int best = 1, run = 1;\n    for (int i = 1; i < sorted.length; i++) {\n      run = sorted[i] == sorted[i - 1] + 1 ? run + 1 : 1;\n      best = Math.max(best, run);\n    }\n    return best;\n  }\n}"
+}

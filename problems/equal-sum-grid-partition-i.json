@@ -1,0 +1,5 @@
+{
+    "problemName": "equal-sum-grid-partition-i",
+    "language": "java",
+    "code": "class Solution {\n  public boolean canPartitionGrid(int[][] grid) {\n    int m = grid.length, n = grid[0].length;\n    long[] rows = new long[m], cols = new long[n];\n    long total = 0;\n    for (int i = 0; i < m; i++) {\n      for (int j = 0; j < n; j++) {\n        rows[i] += grid[i][j];\n        cols[j] += grid[i][j];\n        total += grid[i][j];\n      }\n    }\n    if (total % 2 != 0) return false;\n    long prefix = 0;\n    for (int i = 0; i + 1 < m; i++) {\n      prefix += rows[i];\n      if (prefix * 2 == total) return true;\n    }\n    prefix = 0;\n    for (int j = 0; j + 1 < n; j++) {\n      prefix += cols[j];\n      if (prefix * 2 == total) return true;\n    }\n    return false;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "find-most-frequent-vowel-and-consonant",
+    "language": "java",
+    "code": "class Solution {\n  public int maxFreqSum(String s) {\n    int[] freq = new int[26];\n    for (char c : s.toCharArray()) freq[c - 'a']++;\n    int vowel = 0, consonant = 0;\n    for (int i = 0; i < 26; i++) {\n      if (\"aeiou\".indexOf('a' + i) >= 0) vowel = Math.max(vowel, freq[i]);\n      else consonant = Math.max(consonant, freq[i]);\n    }\n    return vowel + consonant;\n  }\n}"
+}

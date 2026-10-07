@@ -1,0 +1,5 @@
+{
+    "problemName": "multi-source-flood-fill",
+    "language": "java",
+    "code": "class Solution {\n  public int[][] colorGrid(int n, int m, int[][] sources) {\n    int[][] grid = new int[n][m];\n    int[] frontier = new int[n * m], next = new int[n * m];\n    int fs = 0;\n    for (int[] s : sources) {\n      grid[s[0]][s[1]] = s[2];\n      frontier[fs++] = s[0] * m + s[1];\n    }\n    int[][] tmp = new int[n][m];\n    int[] dx = {1, -1, 0, 0}, dy = {0, 0, 1, -1};\n    while (fs > 0) {\n      int ns = 0;\n      for (int t = 0; t < fs; t++) {\n        int x = frontier[t] / m, y = frontier[t] % m;\n        for (int d = 0; d < 4; d++) {\n          int a = x + dx[d], b = y + dy[d];\n          if (a < 0 || b < 0 || a >= n || b >= m || grid[a][b] != 0) continue;\n          if (tmp[a][b] == 0) next[ns++] = a * m + b;\n          tmp[a][b] = Math.max(tmp[a][b], grid[x][y]);\n        }\n      }\n      for (int t = 0; t < ns; t++) {\n        int x = next[t] / m, y = next[t] % m;\n        grid[x][y] = tmp[x][y];\n      }\n      int[] swap = frontier;\n      frontier = next;\n      next = swap;\n      fs = ns;\n    }\n    return grid;\n  }\n}"
+}

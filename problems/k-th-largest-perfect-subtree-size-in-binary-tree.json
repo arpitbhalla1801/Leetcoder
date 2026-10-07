@@ -1,0 +1,5 @@
+{
+    "problemName": "k-th-largest-perfect-subtree-size-in-binary-tree",
+    "language": "java",
+    "code": "class Solution {\n  private final int[] cnt = new int[32];\n\n  private int height(TreeNode node) {\n    if (node == null) return 0;\n    int l = height(node.left), r = height(node.right);\n    if (l < 0 || l != r) return -1;\n    cnt[l + 1]++;\n    return l + 1;\n  }\n\n  public int kthLargestPerfectSubtree(TreeNode root, int k) {\n    height(root);\n    for (int h = 31; h >= 1; h--) {\n      k -= cnt[h];\n      if (k <= 0) return (1 << h) - 1;\n    }\n    return -1;\n  }\n}"
+}

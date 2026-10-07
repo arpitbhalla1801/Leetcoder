@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-form-subsequence-with-target-sum",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minOperations(List<Integer> nums, int target) {\n    long sum = 0;\n    int[] counts = new int[31];\n    for (int value : nums) {\n      sum += value;\n      counts[Integer.numberOfTrailingZeros(value)]++;\n    }\n    if (sum < target) return -1;\n    int operations = 0;\n    for (int bit = 0; bit < 31; bit++) {\n      if (((target >>> bit) & 1) != 0) {\n        if (counts[bit] > 0) {\n          counts[bit]--;\n        } else {\n          int next = bit + 1;\n          while (next < 31 && counts[next] == 0) next++;\n          while (next > bit) {\n            counts[next]--;\n            counts[next - 1] += 2;\n            operations++;\n            next--;\n          }\n          counts[bit]--;\n        }\n      }\n      if (bit + 1 < 31) counts[bit + 1] += counts[bit] / 2;\n    }\n    return operations;\n  }\n}\n"
+}

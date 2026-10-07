@@ -1,0 +1,5 @@
+{
+    "problemName": "smallest-number-with-all-set-bits",
+    "language": "java",
+    "code": "class Solution {\n  public int smallestNumber(int n) {\n    int x = 1;\n    while (x < n) x = x * 2 + 1;\n    return x;\n  }\n}"
+}

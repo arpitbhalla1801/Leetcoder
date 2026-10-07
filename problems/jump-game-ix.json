@@ -1,0 +1,5 @@
+{
+    "problemName": "jump-game-ix",
+    "language": "java",
+    "code": "class Solution {\n  public int[] maxValue(int[] nums) {\n    int n = nums.length;\n    int[] prefixMax = new int[n];\n    prefixMax[0] = nums[0];\n    for (int i = 1; i < n; i++) prefixMax[i] = Math.max(prefixMax[i - 1], nums[i]);\n    int[] ans = new int[n];\n    ans[n - 1] = prefixMax[n - 1];\n    int suffixMin = nums[n - 1];\n    for (int i = n - 2; i >= 0; i--) {\n      // the left part can reach the right part iff its maximum exceeds the right part's minimum\n      ans[i] = prefixMax[i] > suffixMin ? ans[i + 1] : prefixMax[i];\n      suffixMin = Math.min(suffixMin, nums[i]);\n    }\n    return ans;\n  }\n}"
+}

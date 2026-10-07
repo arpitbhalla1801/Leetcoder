@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-primes-between-number-and-its-reverse",
+    "language": "java",
+    "code": "class Solution {\n  public int sumOfPrimesInRange(int n) {\n    int r = Integer.parseInt(new StringBuilder(Integer.toString(n)).reverse().toString());\n    int lo = Math.min(n, r), hi = Math.max(n, r), sum = 0;\n    for (int x = Math.max(2, lo); x <= hi; x++) {\n      boolean prime = true;\n      for (int d = 2; d * d <= x; d++) {\n        if (x % d == 0) {\n          prime = false;\n          break;\n        }\n      }\n      if (prime) sum += x;\n    }\n    return sum;\n  }\n}"
+}

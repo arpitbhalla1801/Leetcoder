@@ -1,0 +1,5 @@
+{
+    "problemName": "distinct-points-reachable-after-substring-removal",
+    "language": "java",
+    "code": "class Solution {\n  public int distinctPoints(String s, int k) {\n    int n = s.length();\n    int[] px = new int[n + 1], py = new int[n + 1];\n    for (int i = 0; i < n; i++) {\n      char c = s.charAt(i);\n      px[i + 1] = px[i] + (c == 'R' ? 1 : c == 'L' ? -1 : 0);\n      py[i + 1] = py[i] + (c == 'U' ? 1 : c == 'D' ? -1 : 0);\n    }\n    java.util.HashSet<Long> seen = new java.util.HashSet<>();\n    for (int i = 0; i + k <= n; i++) {\n      long x = px[n] - (px[i + k] - px[i]), y = py[n] - (py[i + k] - py[i]);\n      seen.add((x + 200_000) * 1_000_000L + (y + 200_000));\n    }\n    return seen.size();\n  }\n}"
+}

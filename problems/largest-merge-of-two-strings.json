@@ -1,0 +1,5 @@
+{
+    "problemName": "largest-merge-of-two-strings",
+    "language": "java",
+    "code": "class Solution {\n  public String largestMerge(String word1, String word2) {\n    StringBuilder out = new StringBuilder(word1.length() + word2.length());\n    int i = 0, j = 0;\n    while (i < word1.length() || j < word2.length()) {\n      if (j == word2.length()\n          || (i < word1.length() && word1.substring(i).compareTo(word2.substring(j)) > 0))\n        out.append(word1.charAt(i++));\n      else out.append(word2.charAt(j++));\n    }\n    return out.toString();\n  }\n}\n"
+}

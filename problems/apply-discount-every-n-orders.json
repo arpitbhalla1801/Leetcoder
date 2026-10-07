@@ -1,0 +1,5 @@
+{
+    "problemName": "apply-discount-every-n-orders",
+    "language": "java",
+    "code": "class Cashier {\n  private final int n, discount;\n  private final int[] price = new int[201];\n  private int count;\n\n  public Cashier(int n, int discount, int[] products, int[] prices) {\n    this.n = n;\n    this.discount = discount;\n    for (int i = 0; i < products.length; i++) price[products[i]] = prices[i];\n  }\n\n  public double getBill(int[] product, int[] amount) {\n    long sum = 0;\n    for (int i = 0; i < product.length; i++) sum += (long) price[product[i]] * amount[i];\n    if (++count % n == 0) return sum * (100 - discount) / 100.0;\n    return sum;\n  }\n}"
+}

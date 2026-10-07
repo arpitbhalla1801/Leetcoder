@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-value-of-function-in-a-ball-passing-game",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long getMaxFunctionValue(List<Integer> receiver, long k) {\n    int n = receiver.size();\n    int log = 1;\n    while ((1L << log) <= k) log++;\n    int[][] jump = new int[log][n];\n    long[][] sum = new long[log][n];\n    for (int i = 0; i < n; i++) {\n      jump[0][i] = receiver.get(i);\n      sum[0][i] = receiver.get(i);\n    }\n    for (int p = 1; p < log; p++) {\n      for (int i = 0; i < n; i++) {\n        int middle = jump[p - 1][i];\n        jump[p][i] = jump[p - 1][middle];\n        sum[p][i] = sum[p - 1][i] + sum[p - 1][middle];\n      }\n    }\n    long answer = 0;\n    for (int start = 0; start < n; start++) {\n      long total = start;\n      int current = start;\n      long steps = k;\n      for (int p = 0; steps > 0; p++, steps >>= 1) {\n        if ((steps & 1) != 0) {\n          total += sum[p][current];\n          current = jump[p][current];\n        }\n      }\n      answer = Math.max(answer, total);\n    }\n    return answer;\n  }\n}\n"
+}

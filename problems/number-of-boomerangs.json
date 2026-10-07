@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-boomerangs",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int numberOfBoomerangs(int[][] points) {\n    int answer = 0;\n    for (int i = 0; i < points.length; i++) {\n      Map<Long, Integer> counts = new HashMap<>();\n      for (int j = 0; j < points.length; j++)\n        if (i != j) {\n          long dx = points[i][0] - points[j][0], dy = points[i][1] - points[j][1];\n          long d = dx * dx + dy * dy;\n          int count = counts.getOrDefault(d, 0);\n          answer += 2 * count;\n          counts.put(d, count + 1);\n        }\n    }\n    return answer;\n  }\n}\n"
+}

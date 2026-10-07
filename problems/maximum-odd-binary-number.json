@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-odd-binary-number",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public String maximumOddBinaryNumber(String s) {\n    int ones = 0;\n    for (int i = 0; i < s.length(); i++) if (s.charAt(i) == '1') ones++;\n    char[] result = new char[s.length()];\n    Arrays.fill(result, '0');\n    result[s.length() - 1] = '1';\n    for (int i = 0; i < ones - 1; i++) result[i] = '1';\n    return new String(result);\n  }\n}\n"
+}

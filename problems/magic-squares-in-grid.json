@@ -1,0 +1,5 @@
+{
+    "problemName": "magic-squares-in-grid",
+    "language": "java",
+    "code": "class Solution {\n  public int numMagicSquaresInside(int[][] grid) {\n    int ans = 0;\n    for (int r = 0; r + 2 < grid.length; r++)\n      for (int c = 0; c + 2 < grid[0].length; c++) {\n        boolean[] seen = new boolean[10];\n        boolean ok = true;\n        for (int i = r; i < r + 3 && ok; i++)\n          for (int j = c; j < c + 3; j++) {\n            int v = grid[i][j];\n            if (v < 1 || v > 9 || seen[v]) {\n              ok = false;\n              break;\n            }\n            seen[v] = true;\n          }\n        if (!ok) continue;\n        int sum = 15;\n        for (int i = 0; i < 3; i++)\n          if (grid[r + i][c] + grid[r + i][c + 1] + grid[r + i][c + 2] != sum) ok = false;\n        for (int j = 0; j < 3; j++)\n          if (grid[r][c + j] + grid[r + 1][c + j] + grid[r + 2][c + j] != sum) ok = false;\n        if (grid[r][c] + grid[r + 1][c + 1] + grid[r + 2][c + 2] != sum\n            || grid[r][c + 2] + grid[r + 1][c + 1] + grid[r + 2][c] != sum) ok = false;\n        if (ok) ans++;\n      }\n    return ans;\n  }\n}\n"
+}

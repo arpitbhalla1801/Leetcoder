@@ -1,0 +1,5 @@
+{
+    "problemName": "inverse-coin-change",
+    "language": "java",
+    "code": "class Solution {\n  public List<Integer> findCoins(int[] numWays) {\n    int n = numWays.length;\n    long[] dp = new long[n + 1];\n    dp[0] = 1;\n    List<Integer> coins = new ArrayList<>();\n    for (int i = 1; i <= n; i++) {\n      long diff = numWays[i - 1] - dp[i];\n      if (diff == 0) continue;\n      if (diff != 1) return new ArrayList<>();\n      coins.add(i);\n      for (int s = i; s <= n; s++) dp[s] += dp[s - i];\n    }\n    return coins;\n  }\n}"
+}

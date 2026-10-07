@@ -1,0 +1,5 @@
+{
+    "problemName": "lexicographically-smallest-string-after-operations-with-constraint",
+    "language": "java",
+    "code": "class Solution {\n  public String getSmallestString(String s, int k) {\n    char[] c = s.toCharArray();\n    for (int i = 0; i < c.length && k > 0; i++) {\n      int toA = Math.min(c[i] - 'a', 26 - (c[i] - 'a'));\n      if (toA <= k) {\n        k -= toA;\n        c[i] = 'a';\n      } else {\n        c[i] -= k; // not enough budget to reach 'a': step down as far as possible\n        k = 0;\n      }\n    }\n    return new String(c);\n  }\n}"
+}

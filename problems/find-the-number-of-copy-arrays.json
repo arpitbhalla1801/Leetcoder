@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-number-of-copy-arrays",
+    "language": "java",
+    "code": "class Solution {\n  public int countArrays(int[] original, int[][] bounds) {\n    long lo = Long.MIN_VALUE, hi = Long.MAX_VALUE;\n    for (int i = 0; i < original.length; i++) {\n      long diff = (long) original[i] - original[0];\n      lo = Math.max(lo, bounds[i][0] - diff);\n      hi = Math.min(hi, bounds[i][1] - diff);\n    }\n    return (int) Math.max(0, hi - lo + 1);\n  }\n}"
+}

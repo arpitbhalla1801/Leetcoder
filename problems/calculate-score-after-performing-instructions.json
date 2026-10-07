@@ -1,0 +1,5 @@
+{
+    "problemName": "calculate-score-after-performing-instructions",
+    "language": "java",
+    "code": "class Solution {\n  public long calculateScore(String[] instructions, int[] values) {\n    int n = instructions.length, i = 0;\n    boolean[] seen = new boolean[n];\n    long score = 0;\n    while (i >= 0 && i < n && !seen[i]) {\n      seen[i] = true;\n      if (instructions[i].charAt(0) == 'a') {\n        score += values[i];\n        i++;\n      } else {\n        i += values[i];\n      }\n    }\n    return score;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "find-all-possible-stable-binary-arrays-i",
+    "language": "java",
+    "code": "class Solution {\n  public int numberOfStableArrays(int zero, int one, int limit) {\n    final long MOD = 1_000_000_007L;\n    // endZero[i][j] / endOne[i][j]: stable arrays with i zeros and j ones ending in 0 / 1\n    long[][] endZero = new long[zero + 1][one + 1], endOne = new long[zero + 1][one + 1];\n    for (int i = 1; i <= Math.min(zero, limit); i++) endZero[i][0] = 1;\n    for (int j = 1; j <= Math.min(one, limit); j++) endOne[0][j] = 1;\n    for (int i = 1; i <= zero; i++) {\n      for (int j = 1; j <= one; j++) {\n        long zeros = endZero[i - 1][j] + endOne[i - 1][j];\n        if (i > limit) zeros -= endOne[i - limit - 1][j];\n        endZero[i][j] = ((zeros % MOD) + MOD) % MOD;\n        long ones = endOne[i][j - 1] + endZero[i][j - 1];\n        if (j > limit) ones -= endZero[i][j - limit - 1];\n        endOne[i][j] = ((ones % MOD) + MOD) % MOD;\n      }\n    }\n    return (int) ((endZero[zero][one] + endOne[zero][one]) % MOD);\n  }\n}"
+}

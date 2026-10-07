@@ -1,0 +1,5 @@
+{
+    "problemName": "assign-elements-to-groups-with-constraints",
+    "language": "java",
+    "code": "class Solution {\n  public int[] assignElements(int[] groups, int[] elements) {\n    int max = 0;\n    for (int g : groups) max = Math.max(max, g);\n    int[] first = new int[max + 1];\n    java.util.Arrays.fill(first, -1);\n    boolean[] seen = new boolean[max + 1];\n    for (int j = 0; j < elements.length; j++) {\n      int e = elements[j];\n      if (e > max || seen[e]) continue;\n      seen[e] = true;\n      for (int m = e; m <= max; m += e) if (first[m] < 0) first[m] = j;\n    }\n    int[] ans = new int[groups.length];\n    for (int i = 0; i < groups.length; i++) ans[i] = first[groups[i]];\n    return ans;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-values-at-indices-with-k-set-bits",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int sumIndicesWithKSetBits(List<Integer> nums, int k) {\n    int sum = 0;\n    for (int i = 0; i < nums.size(); i++) if (Integer.bitCount(i) == k) sum += nums.get(i);\n    return sum;\n  }\n}\n"
+}

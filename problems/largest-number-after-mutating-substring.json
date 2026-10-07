@@ -1,0 +1,5 @@
+{
+    "problemName": "largest-number-after-mutating-substring",
+    "language": "java",
+    "code": "class Solution {\n  public String maximumNumber(String num, int[] change) {\n    char[] a = num.toCharArray();\n    boolean started = false;\n    for (int i = 0; i < a.length; i++) {\n      int d = a[i] - '0', nd = change[d];\n      if (nd > d) {\n        a[i] = (char) ('0' + nd);\n        started = true;\n      } else if (started && nd < d) break;\n    }\n    return new String(a);\n  }\n}\n"
+}

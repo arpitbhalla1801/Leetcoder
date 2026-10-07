@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-subarray-divisible-by-k-with-at-most-one-negation-i",
+    "language": "java",
+    "code": "class Solution {\n  public int longestSubarray(int[] nums, int k) {\n    int n = nums.length, best = 0;\n    for (int l = 0; l < n; l++) {\n      long sum = 0;\n      java.util.HashSet<Integer> doubles = new java.util.HashSet<>();\n      for (int r = l; r < n; r++) {\n        sum += nums[r];\n        doubles.add((int) (((2L * nums[r]) % k + k) % k));\n        int rem = (int) (((sum % k) + k) % k);\n        if (rem == 0 || doubles.contains(rem)) best = Math.max(best, r - l + 1);\n      }\n    }\n    return best;\n  }\n}"
+}

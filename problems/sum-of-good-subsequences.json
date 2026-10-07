@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-good-subsequences",
+    "language": "java",
+    "code": "class Solution {\n  public int sumOfGoodSubsequences(int[] nums) {\n    final long MOD = 1_000_000_007L;\n    int max = 0;\n    for (int v : nums) max = Math.max(max, v);\n    long[] cnt = new long[max + 3], sum = new long[max + 3];\n    long ans = 0;\n    for (int v : nums) {\n      int i = v + 1;\n      long c = (1 + cnt[i - 1] + cnt[i + 1]) % MOD;\n      long s = (v * c + sum[i - 1] + sum[i + 1]) % MOD;\n      cnt[i] = (cnt[i] + c) % MOD;\n      sum[i] = (sum[i] + s) % MOD;\n      ans = (ans + s) % MOD;\n    }\n    return (int) ans;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "points-that-intersect-with-cars",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int numberOfPoints(List<List<Integer>> nums) {\n    int[] difference = new int[102];\n    for (List<Integer> car : nums) {\n      difference[car.get(0)]++;\n      difference[car.get(1) + 1]--;\n    }\n    int answer = 0, active = 0;\n    for (int point = 1; point <= 100; point++) {\n      active += difference[point];\n      if (active > 0) answer++;\n    }\n    return answer;\n  }\n}\n"
+}

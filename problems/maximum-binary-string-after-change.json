@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-binary-string-after-change",
+    "language": "java",
+    "code": "class Solution {\n  public String maximumBinaryString(String binary) {\n    int zeros = 0, firstZero = -1;\n    for (int i = 0; i < binary.length(); i++) {\n      if (binary.charAt(i) == '0') {\n        zeros++;\n        if (firstZero < 0) firstZero = i;\n      }\n    }\n    if (zeros <= 1) return binary;\n    char[] result = new char[binary.length()];\n    java.util.Arrays.fill(result, '1');\n    result[firstZero + zeros - 1] = '0';\n    return new String(result);\n  }\n}\n"
+}

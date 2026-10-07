@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-area-of-longest-diagonal-rectangle",
+    "language": "java",
+    "code": "class Solution {\n  public int areaOfMaxDiagonal(int[][] d) {\n    long best = -1;\n    int ans = 0;\n    for (int[] x : d) {\n      long q = (long) x[0] * x[0] + (long) x[1] * x[1];\n      int ar = x[0] * x[1];\n      if (q > best || q == best && ar > ans) {\n        best = q;\n        ans = ar;\n      }\n    }\n    return ans;\n  }\n}"
+}

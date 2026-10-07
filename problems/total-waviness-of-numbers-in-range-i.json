@@ -1,0 +1,5 @@
+{
+    "problemName": "total-waviness-of-numbers-in-range-i",
+    "language": "java",
+    "code": "class Solution {\n  public int totalWaviness(int num1, int num2) {\n    int total = 0;\n    for (int x = num1; x <= num2; x++) {\n      String s = String.valueOf(x);\n      for (int i = 1; i + 1 < s.length(); i++) {\n        char a = s.charAt(i - 1), b = s.charAt(i), c = s.charAt(i + 1);\n        if ((b > a && b > c) || (b < a && b < c)) total++;\n      }\n    }\n    return total;\n  }\n}"
+}

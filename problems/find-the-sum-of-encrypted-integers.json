@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-sum-of-encrypted-integers",
+    "language": "java",
+    "code": "class Solution {\n  public int sumOfEncryptedInt(int[] nums) {\n    int s = 0;\n    for (int x : nums) {\n      int m = 0, d = 0;\n      while (x > 0) {\n        m = Math.max(m, x % 10);\n        x /= 10;\n        d++;\n      }\n      int v = 0;\n      while (d-- > 0) v = v * 10 + m;\n      s += v;\n    }\n    return s;\n  }\n}"
+}

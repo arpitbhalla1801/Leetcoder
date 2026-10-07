@@ -1,0 +1,5 @@
+{
+    "problemName": "smallest-k-length-subsequence-with-occurrences-of-a-letter",
+    "language": "java",
+    "code": "class Solution {\n  public String smallestSubsequence(String s, int k, char letter, int repetition) {\n    int n = s.length(), lettersLeft = 0;\n    for (int i = 0; i < n; i++) if (s.charAt(i) == letter) lettersLeft++;\n    char[] stack = new char[n];\n    int size = 0, lettersInStack = 0;\n    for (int i = 0; i < n; i++) {\n      char c = s.charAt(i);\n      while (size > 0 && stack[size - 1] > c && size + n - i - 1 >= k) {\n        if (stack[size - 1] == letter) {\n          if (lettersInStack + lettersLeft - 1 < repetition) break;\n          lettersInStack--;\n        }\n        size--;\n      }\n      if (size < k) {\n        if (c == letter) {\n          stack[size++] = c;\n          lettersInStack++;\n        } else if (k - size > Math.max(0, repetition - lettersInStack)) {\n          stack[size++] = c;\n        }\n      }\n      if (c == letter) lettersLeft--;\n    }\n    return new String(stack, 0, size);\n  }\n}"
+}

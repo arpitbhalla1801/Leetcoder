@@ -1,0 +1,5 @@
+{
+    "problemName": "preimage-size-of-factorial-zeroes-function",
+    "language": "java",
+    "code": "class Solution {\n  public int preimageSizeFZF(int k) {\n    // the count is 5 if some x! has exactly k trailing zeros, otherwise 0\n    return (int) (firstWithAtLeast(k + 1L) - firstWithAtLeast(k));\n  }\n\n  private long firstWithAtLeast(long zeros) {\n    long lo = 0, hi = 5 * (zeros + 1);\n    while (lo < hi) {\n      long mid = (lo + hi) >>> 1;\n      if (trailingZeros(mid) >= zeros) hi = mid;\n      else lo = mid + 1;\n    }\n    return lo;\n  }\n\n  private long trailingZeros(long x) {\n    long count = 0;\n    for (; x > 0; x /= 5) count += x / 5;\n    return count;\n  }\n}"
+}

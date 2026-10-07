@@ -1,0 +1,5 @@
+{
+    "problemName": "lexicographically-maximum-mex-array",
+    "language": "java",
+    "code": "class Solution {\n  public int[] maximumMEX(int[] nums) {\n    int n = nums.length;\n    int[] sufMex = new int[n + 1];\n    boolean[] seen = new boolean[n + 2];\n    int mex = 0;\n    for (int i = n - 1; i >= 0; i--) {\n      if (nums[i] <= n) seen[nums[i]] = true;\n      while (seen[mex]) mex++;\n      sufMex[i] = mex;\n    }\n    int[] stamp = new int[n + 2];\n    java.util.Arrays.fill(stamp, -1);\n    List<Integer> res = new ArrayList<>();\n    int start = 0, round = 0;\n    while (start < n) {\n      int target = sufMex[start], covered = 0, j = start;\n      if (target == 0) {\n        res.add(0);\n        start++;\n        continue;\n      }\n      for (; j < n; j++) {\n        int v = nums[j];\n        if (v < target && stamp[v] != round) {\n          stamp[v] = round;\n          covered++;\n        }\n        if (covered == target) break;\n      }\n      res.add(target);\n      start = j + 1;\n      round++;\n    }\n    int[] ans = new int[res.size()];\n    for (int i = 0; i < ans.length; i++) ans[i] = res.get(i);\n    return ans;\n  }\n}"
+}

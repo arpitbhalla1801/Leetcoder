@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-unique-xor-triplets-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int uniqueXorTriplets(int[] nums) {\n    final int SIZE = 2048;\n    boolean[] present = new boolean[SIZE];\n    for (int x : nums) present[x] = true;\n    int[] values = new int[nums.length];\n    int count = 0;\n    for (int v = 0; v < SIZE; v++) if (present[v]) values[count++] = v;\n    boolean[] pairs = new boolean[SIZE]; // xor of two elements (the same element may repeat)\n    for (int i = 0; i < count; i++) {\n      for (int j = i; j < count; j++) pairs[values[i] ^ values[j]] = true;\n    }\n    boolean[] triples = new boolean[SIZE];\n    for (int p = 0; p < SIZE; p++) {\n      if (!pairs[p]) continue;\n      for (int i = 0; i < count; i++) triples[p ^ values[i]] = true;\n    }\n    int result = 0;\n    for (boolean t : triples) if (t) result++;\n    return result;\n  }\n}"
+}

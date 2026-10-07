@@ -1,0 +1,5 @@
+{
+    "problemName": "find-number-of-ways-to-reach-the-k-th-stair",
+    "language": "java",
+    "code": "class Solution {\n  public int waysToReachStair(int k) {\n    long answer = 0;\n    for (int jumps = 0; jumps <= 31; jumps++) {\n      long down = (1L << jumps) - k;\n      if (down < 0 || down > jumps + 1) continue;\n      answer += combination(jumps + 1, (int) down);\n    }\n    return (int) answer;\n  }\n\n  private long combination(int n, int r) {\n    r = Math.min(r, n - r);\n    long result = 1;\n    for (int i = 1; i <= r; i++) result = result * (n - r + i) / i;\n    return result;\n  }\n}"
+}

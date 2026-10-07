@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-bitwise-or-from-grid",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumOR(int[][] grid) {\n    int allowed = (1 << 17) - 1;\n    for (int bit = 16; bit >= 0; bit--) {\n      int candidate = allowed & ~(1 << bit);\n      boolean ok = true;\n      for (int[] row : grid) {\n        boolean found = false;\n        for (int x : row) {\n          if ((x & ~candidate) == 0) {\n            found = true;\n            break;\n          }\n        }\n        if (!found) {\n          ok = false;\n          break;\n        }\n      }\n      if (ok) allowed = candidate;\n    }\n    return allowed;\n  }\n}"
+}

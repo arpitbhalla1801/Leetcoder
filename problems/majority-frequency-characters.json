@@ -1,0 +1,5 @@
+{
+    "problemName": "majority-frequency-characters",
+    "language": "java",
+    "code": "class Solution {\n  public String majorityFrequencyGroup(String s) {\n    int[] freq = new int[26];\n    for (char c : s.toCharArray()) freq[c - 'a']++;\n    int[] groupSize = new int[s.length() + 1];\n    for (int f : freq) if (f > 0) groupSize[f]++;\n    int best = 0;\n    for (int k = 1; k <= s.length(); k++) {\n      if (groupSize[k] >= groupSize[best]) best = k;\n    }\n    StringBuilder sb = new StringBuilder();\n    for (int i = 0; i < 26; i++) if (freq[i] == best) sb.append((char) ('a' + i));\n    return sb.toString();\n  }\n}"
+}

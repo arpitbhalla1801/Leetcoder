@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-valid-pair-sum",
+    "language": "java",
+    "code": "class Solution {\n  public int maxValidPairSum(int[] nums, int k) {\n    int best = 0, prefixMax = 0;\n    for (int j = k; j < nums.length; j++) {\n      prefixMax = Math.max(prefixMax, nums[j - k]);\n      best = Math.max(best, prefixMax + nums[j]);\n    }\n    return best;\n  }\n}"
+}

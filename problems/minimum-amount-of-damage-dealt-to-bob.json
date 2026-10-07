@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-amount-of-damage-dealt-to-bob",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long minDamage(int power, int[] damage, int[] health) {\n    Integer[] order = new Integer[damage.length];\n    for (int i = 0; i < order.length; i++) order[i] = i;\n    Arrays.sort(\n        order,\n        (a, b) -> {\n          long left = (long) damage[a] * ((health[b] + power - 1L) / power);\n          long right = (long) damage[b] * ((health[a] + power - 1L) / power);\n          return Long.compare(right, left);\n        });\n    long answer = 0, elapsed = 0;\n    for (int i : order) {\n      long hits = (health[i] + power - 1L) / power;\n      elapsed += hits;\n      answer += elapsed * damage[i];\n    }\n    return answer;\n  }\n}"
+}

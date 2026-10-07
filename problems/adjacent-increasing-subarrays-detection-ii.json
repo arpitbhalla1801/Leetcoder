@@ -1,0 +1,5 @@
+{
+    "problemName": "adjacent-increasing-subarrays-detection-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int maxIncreasingSubarrays(List<Integer> nums) {\n    int best = 0, prev = 0, cur = 1;\n    for (int i = 1; i <= nums.size(); i++) {\n      if (i < nums.size() && nums.get(i) > nums.get(i - 1)) {\n        cur++;\n        continue;\n      }\n      // a strictly increasing run ended: split it in half, or pair it with the previous run\n      best = Math.max(best, Math.max(cur / 2, Math.min(prev, cur)));\n      prev = cur;\n      cur = 1;\n    }\n    return best;\n  }\n}"
+}

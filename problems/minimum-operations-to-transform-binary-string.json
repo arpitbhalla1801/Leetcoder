@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-transform-binary-string",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(String s1, String s2) {\n    int n = s1.length();\n    long needClear = 0, needSet = 0, edges = 0;\n    boolean[] covered = new boolean[n];\n    for (int i = 0; i < n; i++) {\n      if (s1.charAt(i) == '0' && s2.charAt(i) == '1') needSet++;\n      if (s1.charAt(i) == '1' && s2.charAt(i) == '0') needClear++;\n    }\n    for (int i = 0; i < n; i++) {\n      if (s1.charAt(i) == '1' && s2.charAt(i) == '0' && !covered[i]) {\n        if (n == 1) return -1;\n        edges++;\n        covered[i] = true;\n        if (i + 1 < n) covered[i + 1] = true;\n        else covered[i - 1] = true;\n      }\n    }\n    return (int) (3 * edges + needSet - needClear);\n  }\n}"
+}

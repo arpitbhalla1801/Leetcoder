@@ -1,0 +1,5 @@
+{
+    "problemName": "minimize-the-maximum-waiting-time-at-synchronized-traffic-lights",
+    "language": "java",
+    "code": "class Solution {\n  public int minPenalty(int period, int[] lights, int[] arrivalTime) {\n    int green = 0;\n    for (int l : lights) green = Math.max(green, l);\n    int worst = 0;\n    for (int t : arrivalTime) {\n      int r = t % period;\n      if (r >= green) worst = Math.max(worst, period - r);\n    }\n    return worst;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-maximum-length-of-a-good-subsequence-i",
+    "language": "java",
+    "code": "class Solution {\n  public int maximumLength(int[] nums, int k) {\n    int n = nums.length, answer = 1;\n    int[][] dp = new int[n][k + 1];\n    for (int i = 0; i < n; i++) {\n      for (int changes = 0; changes <= k; changes++) {\n        dp[i][changes] = 1;\n        for (int j = 0; j < i; j++) {\n          int extra = nums[i] == nums[j] ? 0 : 1;\n          if (extra <= changes)\n            dp[i][changes] = Math.max(dp[i][changes], dp[j][changes - extra] + 1);\n        }\n        answer = Math.max(answer, dp[i][changes]);\n      }\n    }\n    return answer;\n  }\n}"
+}

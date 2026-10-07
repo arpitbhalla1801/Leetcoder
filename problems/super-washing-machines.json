@@ -1,0 +1,5 @@
+{
+    "problemName": "super-washing-machines",
+    "language": "java",
+    "code": "class Solution {\n  public int findMinMoves(int[] machines) {\n    long total = 0;\n    for (int x : machines) total += x;\n    if (total % machines.length != 0) return -1;\n    long target = total / machines.length, balance = 0;\n    long answer = 0;\n    for (int x : machines) {\n      long delta = x - target;\n      balance += delta;\n      answer = Math.max(answer, Math.max(Math.abs(balance), delta));\n    }\n    return (int) answer;\n  }\n}\n"
+}

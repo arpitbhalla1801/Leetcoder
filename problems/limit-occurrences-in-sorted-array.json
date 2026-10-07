@@ -1,0 +1,5 @@
+{
+    "problemName": "limit-occurrences-in-sorted-array",
+    "language": "java",
+    "code": "class Solution {\n  public int[] limitOccurrences(int[] nums, int k) {\n    int w = 0;\n    for (int x : nums) {\n      if (w < k || nums[w - k] != x) nums[w++] = x;\n    }\n    return Arrays.copyOf(nums, w);\n  }\n}"
+}

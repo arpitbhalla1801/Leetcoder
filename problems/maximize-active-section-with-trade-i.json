@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-active-section-with-trade-i",
+    "language": "java",
+    "code": "class Solution {\n  public int maxActiveSectionsAfterTrade(String s) {\n    int ones = 0, best = 0, prevZeros = 0;\n    boolean sawOnesBetween = false;\n    int i = 0, n = s.length();\n    while (i < n) {\n      int j = i;\n      while (j < n && s.charAt(j) == s.charAt(i)) j++;\n      if (s.charAt(i) == '1') {\n        ones += j - i;\n        if (prevZeros > 0) sawOnesBetween = true;\n      } else {\n        int len = j - i;\n        // trade: a block of ones between two zero blocks becomes zeros, then the merged zeros turn\n        // to ones\n        if (prevZeros > 0 && sawOnesBetween) best = Math.max(best, prevZeros + len);\n        prevZeros = len;\n        sawOnesBetween = false;\n      }\n      i = j;\n    }\n    return ones + best;\n  }\n}"
+}

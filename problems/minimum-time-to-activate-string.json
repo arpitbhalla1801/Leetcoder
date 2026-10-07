@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-time-to-activate-string",
+    "language": "java",
+    "code": "class Solution {\n  public int minTime(String s, int[] order, int k) {\n    int n = s.length();\n    int[] when = new int[n];\n    for (int t = 0; t < n; t++) when[order[t]] = t;\n    long total = (long) n * (n + 1) / 2;\n    if (total < k) return -1;\n    int lo = 0, hi = n - 1;\n    while (lo < hi) {\n      int mid = (lo + hi) >>> 1;\n      long bad = 0, run = 0;\n      for (int i = 0; i < n; i++) {\n        if (when[i] <= mid) {\n          bad += run * (run + 1) / 2;\n          run = 0;\n        } else run++;\n      }\n      bad += run * (run + 1) / 2;\n      if (total - bad >= k) hi = mid;\n      else lo = mid + 1;\n    }\n    long bad = 0, run = 0;\n    for (int i = 0; i < n; i++) {\n      if (when[i] <= lo) {\n        bad += run * (run + 1) / 2;\n        run = 0;\n      } else run++;\n    }\n    bad += run * (run + 1) / 2;\n    return total - bad >= k ? lo : -1;\n  }\n}"
+}

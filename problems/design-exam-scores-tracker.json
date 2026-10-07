@@ -1,0 +1,5 @@
+{
+    "problemName": "design-exam-scores-tracker",
+    "language": "java",
+    "code": "class ExamTracker {\n  private final int[] times = new int[100_001];\n  private final long[] prefix = new long[100_002];\n  private int size;\n\n  public ExamTracker() {}\n\n  public void record(int time, int score) {\n    times[size] = time;\n    prefix[size + 1] = prefix[size] + score;\n    size++;\n  }\n\n  private int lowerBound(int x) {\n    int lo = 0, hi = size;\n    while (lo < hi) {\n      int mid = (lo + hi) >>> 1;\n      if (times[mid] < x) lo = mid + 1;\n      else hi = mid;\n    }\n    return lo;\n  }\n\n  public long totalScore(int startTime, int endTime) {\n    return prefix[lowerBound(endTime + 1)] - prefix[lowerBound(startTime)];\n  }\n}"
+}

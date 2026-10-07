@@ -1,0 +1,5 @@
+{
+    "problemName": "binary-prefix-divisible-by-5",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<Boolean> prefixesDivBy5(int[] nums) {\n    List<Boolean> result = new ArrayList<>(nums.length);\n    int remainder = 0;\n    for (int bit : nums) {\n      remainder = (remainder * 2 + bit) % 5;\n      result.add(remainder == 0);\n    }\n    return result;\n  }\n}\n"
+}

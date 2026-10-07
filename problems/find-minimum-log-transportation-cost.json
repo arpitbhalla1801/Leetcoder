@@ -1,0 +1,5 @@
+{
+    "problemName": "find-minimum-log-transportation-cost",
+    "language": "java",
+    "code": "class Solution {\n  public long minCuttingCost(int n, int m, int k) {\n    return cost(n, k) + cost(m, k);\n  }\n\n  // cutting a log of length x > k into k and x - k\n  private long cost(long x, long k) {\n    return x > k ? k * (x - k) : 0;\n  }\n}"
+}

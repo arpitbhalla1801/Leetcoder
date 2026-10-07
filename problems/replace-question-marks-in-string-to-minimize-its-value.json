@@ -1,0 +1,5 @@
+{
+    "problemName": "replace-question-marks-in-string-to-minimize-its-value",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public String minimizeStringValue(String s) {\n    char[] a = s.toCharArray();\n    int[] cnt = new int[26];\n    for (char c : a) if (c != '?') cnt[c - 'a']++;\n    List<Integer> pos = new ArrayList<>(), pick = new ArrayList<>();\n    for (int i = 0; i < a.length; i++)\n      if (a[i] == '?') {\n        int z = 0;\n        for (int j = 1; j < 26; j++) if (cnt[j] < cnt[z]) z = j;\n        cnt[z]++;\n        pos.add(i);\n        pick.add(z);\n      }\n    Collections.sort(pick);\n    for (int i = 0; i < pos.size(); i++) a[pos.get(i)] = (char) ('a' + pick.get(i));\n    return new String(a);\n  }\n}"
+}

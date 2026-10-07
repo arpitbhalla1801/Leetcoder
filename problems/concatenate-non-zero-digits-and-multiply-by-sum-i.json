@@ -1,0 +1,5 @@
+{
+    "problemName": "concatenate-non-zero-digits-and-multiply-by-sum-i",
+    "language": "java",
+    "code": "class Solution {\n  public long sumAndMultiply(int n) {\n    long x = 0, sum = 0;\n    for (char c : String.valueOf(n).toCharArray()) {\n      int d = c - '0';\n      if (d != 0) {\n        x = x * 10 + d;\n        sum += d;\n      }\n    }\n    return x * sum;\n  }\n}"
+}

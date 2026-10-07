@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-total-from-optimal-activation-order",
+    "language": "java",
+    "code": "class Solution {\n  public long maxTotal(int[] value, int[] limit) {\n    int n = value.length;\n    java.util.PriorityQueue<Integer>[] heaps = new java.util.PriorityQueue[n + 1];\n    long total = 0;\n    for (int i = 0; i < n; i++) {\n      int l = limit[i];\n      if (heaps[l] == null) heaps[l] = new java.util.PriorityQueue<>();\n      heaps[l].add(value[i]);\n      total += value[i];\n      if (heaps[l].size() > l) total -= heaps[l].poll();\n    }\n    return total;\n  }\n}"
+}

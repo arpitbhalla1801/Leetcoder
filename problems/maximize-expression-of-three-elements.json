@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-expression-of-three-elements",
+    "language": "java",
+    "code": "class Solution {\n  public int maximizeExpressionOfThree(int[] nums) {\n    int[] s = nums.clone();\n    Arrays.sort(s);\n    return s[s.length - 1] + s[s.length - 2] - s[0];\n  }\n}"
+}

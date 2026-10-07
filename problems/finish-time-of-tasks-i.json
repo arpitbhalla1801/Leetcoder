@@ -1,0 +1,5 @@
+{
+    "problemName": "finish-time-of-tasks-i",
+    "language": "java",
+    "code": "class Solution {\n  public long finishTime(int n, int[][] edges, int[] baseTime) {\n    int[] head = new int[n], next = new int[n - 1], to = new int[n - 1];\n    java.util.Arrays.fill(head, -1);\n    for (int i = 0; i < n - 1; i++) {\n      to[i] = edges[i][1];\n      next[i] = head[edges[i][0]];\n      head[edges[i][0]] = i;\n    }\n    int[] order = new int[n];\n    int qh = 0, qt = 0;\n    order[qt++] = 0;\n    while (qh < qt) {\n      int u = order[qh++];\n      for (int e = head[u]; e >= 0; e = next[e]) order[qt++] = to[e];\n    }\n    long[] finish = new long[n];\n    for (int idx = n - 1; idx >= 0; idx--) {\n      int u = order[idx];\n      if (head[u] < 0) {\n        finish[u] = baseTime[u];\n        continue;\n      }\n      long earliest = Long.MAX_VALUE, latest = Long.MIN_VALUE;\n      for (int e = head[u]; e >= 0; e = next[e]) {\n        earliest = Math.min(earliest, finish[to[e]]);\n        latest = Math.max(latest, finish[to[e]]);\n      }\n      finish[u] = latest + (latest - earliest) + baseTime[u];\n    }\n    return finish[0];\n  }\n}"
+}

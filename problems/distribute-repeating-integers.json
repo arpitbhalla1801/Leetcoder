@@ -1,0 +1,5 @@
+{
+    "problemName": "distribute-repeating-integers",
+    "language": "java",
+    "code": "class Solution {\n  public boolean canDistribute(int[] nums, int[] quantity) {\n    Map<Integer, Integer> freq = new HashMap<>();\n    for (int x : nums) freq.merge(x, 1, Integer::sum);\n    int m = quantity.length, full = (1 << m) - 1;\n    int[] need = new int[1 << m]; // total demand of each set of customers\n    for (int mask = 1; mask <= full; mask++) {\n      int low = Integer.numberOfTrailingZeros(mask);\n      need[mask] = need[mask & (mask - 1)] + quantity[low];\n    }\n    boolean[] served =\n        new boolean[1 << m]; // customers in the mask are satisfied by the values so far\n    served[0] = true;\n    for (int count : freq.values()) {\n      boolean[] next = served.clone();\n      for (int mask = 0; mask <= full; mask++) {\n        if (!served[mask]) continue;\n        int rest = full ^ mask;\n        for (int sub = rest; sub > 0; sub = (sub - 1) & rest) {\n          if (need[sub] <= count) next[mask | sub] = true;\n        }\n      }\n      served = next;\n      if (served[full]) return true;\n    }\n    return served[full];\n  }\n}"
+}

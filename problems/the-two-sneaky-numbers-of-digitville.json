@@ -1,0 +1,5 @@
+{
+    "problemName": "the-two-sneaky-numbers-of-digitville",
+    "language": "java",
+    "code": "class Solution {\n  public int[] getSneakyNumbers(int[] nums) {\n    int[] seen = new int[nums.length];\n    int[] ans = new int[2];\n    int k = 0;\n    for (int x : nums) {\n      if (++seen[x] == 2) ans[k++] = x;\n    }\n    return ans;\n  }\n}"
+}

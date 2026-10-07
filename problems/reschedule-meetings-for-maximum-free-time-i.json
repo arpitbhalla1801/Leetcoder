@@ -1,0 +1,5 @@
+{
+    "problemName": "reschedule-meetings-for-maximum-free-time-i",
+    "language": "java",
+    "code": "class Solution {\n  public int maxFreeTime(int eventTime, int k, int[] startTime, int[] endTime) {\n    int n = startTime.length;\n    long[] gaps = new long[n + 1];\n    gaps[0] = startTime[0];\n    for (int i = 1; i < n; i++) gaps[i] = startTime[i] - endTime[i - 1];\n    gaps[n] = eventTime - endTime[n - 1];\n    // moving k meetings merges k + 1 consecutive gaps\n    long window = 0, best = 0;\n    for (int i = 0; i <= n; i++) {\n      window += gaps[i];\n      if (i > k) window -= gaps[i - k - 1];\n      best = Math.max(best, window);\n    }\n    return (int) best;\n  }\n}"
+}

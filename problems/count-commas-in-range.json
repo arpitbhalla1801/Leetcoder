@@ -1,0 +1,5 @@
+{
+    "problemName": "count-commas-in-range",
+    "language": "java",
+    "code": "class Solution {\n  public int countCommas(int n) {\n    int total = 0;\n    for (long low = 1000; low <= n; low *= 1000) {\n      total += n - low + 1;\n    }\n    return total;\n  }\n}"
+}

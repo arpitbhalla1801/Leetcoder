@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-total-cost-to-make-arrays-unequal",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long minimumTotalCost(int[] nums1, int[] nums2) {\n    long cost = 0;\n    int same = 0, dominant = -1, dominantCount = 0;\n    Map<Integer, Integer> frequency = new HashMap<>();\n    for (int i = 0; i < nums1.length; i++)\n      if (nums1[i] == nums2[i]) {\n        cost += i;\n        same++;\n        int count = frequency.merge(nums1[i], 1, Integer::sum);\n        if (count > dominantCount) {\n          dominantCount = count;\n          dominant = nums1[i];\n        }\n      }\n    int needed = Math.max(0, 2 * dominantCount - same);\n    if (needed == 0) return cost;\n    for (int i = 0; i < nums1.length && needed > 0; i++) {\n      if (nums1[i] != nums2[i] && nums1[i] != dominant && nums2[i] != dominant) {\n        cost += i;\n        needed--;\n      }\n    }\n    return needed == 0 ? cost : -1;\n  }\n}\n"
+}

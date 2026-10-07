@@ -1,0 +1,5 @@
+{
+    "problemName": "count-caesar-cipher-pairs",
+    "language": "java",
+    "code": "class Solution {\n  public long countPairs(String[] words) {\n    java.util.HashMap<String, Integer> groups = new java.util.HashMap<>();\n    long total = 0;\n    for (String w : words) {\n      char[] key = new char[w.length()];\n      int shift = w.charAt(0) - 'a';\n      for (int i = 0; i < key.length; i++)\n        key[i] = (char) ('a' + (w.charAt(i) - 'a' - shift + 26) % 26);\n      String k = new String(key);\n      int c = groups.getOrDefault(k, 0);\n      total += c;\n      groups.put(k, c + 1);\n    }\n    return total;\n  }\n}"
+}

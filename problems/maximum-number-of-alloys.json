@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-number-of-alloys",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int maxNumberOfAlloys(\n      int n,\n      int k,\n      int budget,\n      List<List<Integer>> composition,\n      List<Integer> stock,\n      List<Integer> cost) {\n    long answer = 0;\n    for (List<Integer> recipe : composition) {\n      long lo = 0, hi = 2_000_000_001L;\n      while (lo < hi) {\n        long mid = (lo + hi + 1) / 2, spent = 0;\n        for (int i = 0; i < n; i++) {\n          long need = mid * recipe.get(i) - stock.get(i);\n          if (need > 0) {\n            spent += need * cost.get(i);\n            if (spent > budget) break;\n          }\n        }\n        if (spent <= budget) lo = mid;\n        else hi = mid - 1;\n      }\n      answer = Math.max(answer, lo);\n    }\n    return (int) answer;\n  }\n}\n"
+}

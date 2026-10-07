@@ -1,0 +1,5 @@
+{
+    "problemName": "count-almost-equal-pairs-i",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int countPairs(int[] nums) {\n    Map<Integer, Integer> seen = new HashMap<>();\n    int answer = 0;\n    for (int value : nums) {\n      for (int candidate : variants(value, 1)) answer += seen.getOrDefault(candidate, 0);\n      seen.merge(value, 1, Integer::sum);\n    }\n    return answer;\n  }\n\n  private Set<Integer> variants(int value, int swaps) {\n    char[] digits = Integer.toString(value).toCharArray();\n    Set<Integer> result = new HashSet<>();\n    result.add(value);\n    for (int i = 0; i < digits.length; i++)\n      for (int j = i + 1; j < digits.length; j++) {\n        char t = digits[i];\n        digits[i] = digits[j];\n        digits[j] = t;\n        result.add(Integer.parseInt(new String(digits)));\n        digits[j] = digits[i];\n        digits[i] = t;\n      }\n    return result;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "final-element-after-subarray-deletions",
+    "language": "java",
+    "code": "class Solution {\n  public int finalElement(int[] nums) {\n    return Math.max(nums[0], nums[nums.length - 1]);\n  }\n}"
+}

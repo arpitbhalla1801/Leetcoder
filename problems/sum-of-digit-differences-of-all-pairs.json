@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-digit-differences-of-all-pairs",
+    "language": "java",
+    "code": "class Solution {\n  public long sumDigitDifferences(int[] nums) {\n    int n = nums.length, digits = String.valueOf(nums[0]).length();\n    long total = 0;\n    for (int position = 0; position < digits; position++) {\n      int[] count = new int[10];\n      for (int i = 0; i < n; i++) {\n        count[nums[i] % 10]++;\n        nums[i] /= 10;\n      }\n      // pairs that differ here: all pairs minus the pairs that share the digit\n      long same = 0;\n      for (int c : count) same += (long) c * (c - 1) / 2;\n      total += (long) n * (n - 1) / 2 - same;\n    }\n    return total;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "count-number-of-special-subsequences",
+    "language": "java",
+    "code": "class Solution {\n  public int countSpecialSubsequences(int[] nums) {\n    final long MOD = 1_000_000_007L;\n    long[] dp = new long[3];\n    for (int x : nums) {\n      if (x == 0) dp[0] = (2 * dp[0] + 1) % MOD;\n      else if (x == 1) dp[1] = (2 * dp[1] + dp[0]) % MOD;\n      else dp[2] = (2 * dp[2] + dp[1]) % MOD;\n    }\n    return (int) dp[2];\n  }\n}\n"
+}

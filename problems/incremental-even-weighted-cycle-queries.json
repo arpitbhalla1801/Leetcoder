@@ -1,0 +1,5 @@
+{
+    "problemName": "incremental-even-weighted-cycle-queries",
+    "language": "java",
+    "code": "class Solution {\n  private int[] parent, parity;\n\n  private int find(int x) {\n    if (parent[x] == x) return x;\n    int root = find(parent[x]);\n    parity[x] ^= parity[parent[x]];\n    parent[x] = root;\n    return root;\n  }\n\n  public int numberOfEdgesAdded(int n, int[][] edges) {\n    parent = new int[n];\n    parity = new int[n];\n    for (int i = 0; i < n; i++) parent[i] = i;\n    int added = 0;\n    for (int[] e : edges) {\n      int a = find(e[0]), b = find(e[1]);\n      if (a != b) {\n        parent[a] = b;\n        parity[a] = parity[e[0]] ^ parity[e[1]] ^ e[2];\n        added++;\n      } else if ((parity[e[0]] ^ parity[e[1]]) == e[2]) {\n        added++;\n      }\n    }\n    return added;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-frequency-of-an-element-after-performing-operations-ii",
+    "language": "java",
+    "code": "class Solution {\n  private static int lower(int[] a, long x) {\n    int lo = 0, hi = a.length;\n    while (lo < hi) {\n      int mid = (lo + hi) >>> 1;\n      if (a[mid] < x) lo = mid + 1;\n      else hi = mid;\n    }\n    return lo;\n  }\n\n  public int maxFrequency(int[] nums, int k, int numOperations) {\n    java.util.Arrays.sort(nums);\n    int n = nums.length, ans = 0;\n    for (int i = 0; i < n; ) {\n      int j = i;\n      while (j < n && nums[j] == nums[i]) j++;\n      int eq = j - i;\n      int c = lower(nums, (long) nums[i] + k + 1) - lower(nums, (long) nums[i] - k);\n      ans = Math.max(ans, eq + Math.min(numOperations, c - eq));\n      i = j;\n    }\n    for (int l = 0, r = 0; r < n; r++) {\n      while ((long) nums[r] - nums[l] > 2L * k) l++;\n      ans = Math.max(ans, Math.min(numOperations, r - l + 1));\n    }\n    return ans;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "partition-array-to-minimize-xor",
+    "language": "java",
+    "code": "class Solution {\n  public int minXor(int[] nums, int k) {\n    int n = nums.length;\n    int[] pre = new int[n + 1];\n    for (int i = 0; i < n; i++) pre[i + 1] = pre[i] ^ nums[i];\n    int INF = Integer.MAX_VALUE;\n    int[] prev = new int[n + 1];\n    for (int i = 1; i <= n; i++) prev[i] = pre[i];\n    for (int j = 2; j <= k; j++) {\n      int[] cur = new int[n + 1];\n      java.util.Arrays.fill(cur, INF);\n      for (int i = j; i <= n; i++) {\n        for (int t = j - 1; t < i; t++) {\n          int v = Math.max(prev[t], pre[i] ^ pre[t]);\n          if (v < cur[i]) cur[i] = v;\n        }\n      }\n      prev = cur;\n    }\n    return prev[n];\n  }\n}"
+}

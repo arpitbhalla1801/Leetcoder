@@ -1,0 +1,5 @@
+{
+    "problemName": "Minimum Changes to Make K Semi-palindromes",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minimumChanges(String s, int k) {\n    int n = s.length(), INF = 1 << 29;\n    int[][] cost = new int[n][n];\n    for (int l = 1; l <= n; l++)\n      for (int i = 0; i + l <= n; i++) {\n        int j = i + l - 1, best = INF;\n        for (int d = 1; d < l; d++)\n          if (l % d == 0) {\n            int c = 0;\n            for (int a = i; a < i + d; a++)\n              for (int x = a, y = a + l - d; x < y; x += d, y -= d)\n                if (s.charAt(x) != s.charAt(y)) c++;\n            best = Math.min(best, c);\n          }\n        cost[i][j] = best;\n      }\n    int[][] dp = new int[k + 1][n + 1];\n    for (int[] a : dp) Arrays.fill(a, INF);\n    dp[0][0] = 0;\n    for (int p = 1; p <= k; p++)\n      for (int i = p; i <= n; i++)\n        for (int q = p - 1; q < i; q++)\n          dp[p][i] = Math.min(dp[p][i], dp[p - 1][q] + cost[q][i - 1]);\n    return dp[k][n];\n  }\n}\n"
+}

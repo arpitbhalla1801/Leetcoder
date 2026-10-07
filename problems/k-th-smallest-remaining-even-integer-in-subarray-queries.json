@@ -1,0 +1,5 @@
+{
+    "problemName": "k-th-smallest-remaining-even-integer-in-subarray-queries",
+    "language": "java",
+    "code": "class Solution {\n  public int[] kthRemainingInteger(int[] nums, int[][] queries) {\n    int n = nums.length;\n    int[] evenCount = new int[n + 1];\n    for (int i = 0; i < n; i++) evenCount[i + 1] = evenCount[i] + (nums[i] % 2 == 0 ? 1 : 0);\n    int m = evenCount[n];\n    long[] g = new long[m];\n    int p = 0;\n    for (int i = 0; i < n; i++) if (nums[i] % 2 == 0) g[p] = nums[i] / 2 - p++;\n    int[] ans = new int[queries.length];\n    for (int qi = 0; qi < queries.length; qi++) {\n      int a = evenCount[queries[qi][0]], b = evenCount[queries[qi][1] + 1];\n      long k = queries[qi][2];\n      long threshold = k - a + 1;\n      int lo = a, hi = b;\n      while (lo < hi) {\n        int mid = (lo + hi) >>> 1;\n        if (g[mid] < threshold) lo = mid + 1;\n        else hi = mid;\n      }\n      ans[qi] = (int) (2 * (k + (lo - a)));\n    }\n    return ans;\n  }\n}"
+}

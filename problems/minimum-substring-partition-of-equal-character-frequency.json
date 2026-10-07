@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-substring-partition-of-equal-character-frequency",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minimumSubstringsInPartition(String s) {\n    int n = s.length();\n    int[] dp = new int[n + 1];\n    Arrays.fill(dp, n + 1);\n    dp[0] = 0;\n    for (int end = 1; end <= n; end++) {\n      int[] count = new int[26];\n      int min = Integer.MAX_VALUE, max = 0;\n      for (int start = end - 1; start >= 0; start--) {\n        int f = ++count[s.charAt(start) - 'a'];\n        max = Math.max(max, f);\n        min = Integer.MAX_VALUE;\n        for (int c : count) if (c > 0) min = Math.min(min, c);\n        if (min == max) dp[end] = Math.min(dp[end], dp[start] + 1);\n      }\n    }\n    return dp[n];\n  }\n}"
+}

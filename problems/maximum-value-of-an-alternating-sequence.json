@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-value-of-an-alternating-sequence",
+    "language": "java",
+    "code": "class Solution {\n  public long maximumValue(int n, int s, int m) {\n    if (n == 1) return s;\n    return (long) s + (long) (n / 2) * (m - 1) + 1;\n  }\n}"
+}

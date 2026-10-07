@@ -1,0 +1,5 @@
+{
+    "problemName": "generate-tag-for-video-caption",
+    "language": "java",
+    "code": "class Solution {\n  public String generateTag(String caption) {\n    StringBuilder sb = new StringBuilder(\"#\");\n    for (String word : caption.split(\" \")) {\n      if (word.isEmpty()) continue;\n      String lower = word.toLowerCase();\n      if (sb.length() > 1) lower = Character.toUpperCase(lower.charAt(0)) + lower.substring(1);\n      sb.append(lower);\n    }\n    return sb.length() > 100 ? sb.substring(0, 100) : sb.toString();\n  }\n}"
+}

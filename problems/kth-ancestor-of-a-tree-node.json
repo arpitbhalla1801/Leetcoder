@@ -1,0 +1,5 @@
+{
+    "problemName": "kth-ancestor-of-a-tree-node",
+    "language": "java",
+    "code": "class TreeAncestor {\n  private final int[][] up;\n\n  public TreeAncestor(int n, int[] parent) {\n    int log = 1;\n    while ((1L << log) <= n) log++;\n    up = new int[log][n];\n    up[0] = parent.clone();\n    for (int j = 1; j < log; j++)\n      for (int i = 0; i < n; i++) {\n        int middle = up[j - 1][i];\n        up[j][i] = middle == -1 ? -1 : up[j - 1][middle];\n      }\n  }\n\n  public int getKthAncestor(int node, int k) {\n    for (int bit = 0; bit < up.length && k > 0 && node != -1; bit++, k >>= 1)\n      if ((k & 1) != 0) node = up[bit][node];\n    return k == 0 ? node : -1;\n  }\n}\n"
+}

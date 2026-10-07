@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-xor-for-each-query",
+    "language": "java",
+    "code": "class Solution {\n  public int[] getMaximumXor(int[] nums, int maximumBit) {\n    int xor = 0;\n    for (int x : nums) xor ^= x;\n    int mask = (1 << maximumBit) - 1;\n    int[] result = new int[nums.length];\n    for (int i = 0; i < nums.length; i++) {\n      result[i] = xor ^ mask;\n      xor ^= nums[nums.length - 1 - i];\n    }\n    return result;\n  }\n}\n"
+}

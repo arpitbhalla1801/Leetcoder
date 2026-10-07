@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-score-from-removing-substrings",
+    "language": "java",
+    "code": "class Solution {\n  public int maximumGain(String s, int x, int y) {\n    int[] score = {0};\n    if (x >= y) {\n      String rest = removePairs(s, 'a', 'b', x, score);\n      removePairs(rest, 'b', 'a', y, score);\n    } else {\n      String rest = removePairs(s, 'b', 'a', y, score);\n      removePairs(rest, 'a', 'b', x, score);\n    }\n    return score[0];\n  }\n\n  private String removePairs(String s, char first, char second, int value, int[] score) {\n    StringBuilder stack = new StringBuilder();\n    for (int i = 0; i < s.length(); i++) {\n      char c = s.charAt(i);\n      if (c == second && stack.length() > 0 && stack.charAt(stack.length() - 1) == first) {\n        stack.deleteCharAt(stack.length() - 1);\n        score[0] += value;\n      } else stack.append(c);\n    }\n    return stack.toString();\n  }\n}\n"
+}

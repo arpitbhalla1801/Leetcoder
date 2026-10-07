@@ -1,0 +1,5 @@
+{
+    "problemName": "consecutive-numbers-sum",
+    "language": "java",
+    "code": "class Solution {\n  public int consecutiveNumbersSum(int n) {\n    int count = 0;\n    for (int length = 1; (long) length * (length + 1) / 2 <= n; length++) {\n      long remainder = n - (long) length * (length - 1) / 2;\n      if (remainder % length == 0) count++;\n    }\n    return count;\n  }\n}\n"
+}

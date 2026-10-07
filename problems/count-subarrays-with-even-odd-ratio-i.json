@@ -1,0 +1,5 @@
+{
+    "problemName": "count-subarrays-with-even-odd-ratio-i",
+    "language": "java",
+    "code": "class Solution {\n  public int countRatioSubarrays(int[] nums, int a, int b) {\n    int n = nums.length, count = 0;\n    for (int l = 0; l < n; l++) {\n      int even = 0, odd = 0;\n      for (int r = l; r < n; r++) {\n        if (nums[r] % 2 == 0) even++;\n        else odd++;\n        if (odd > 0 && (long) even * b <= (long) a * odd) count++;\n      }\n    }\n    return count;\n  }\n}"
+}

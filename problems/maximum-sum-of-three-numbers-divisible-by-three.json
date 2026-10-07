@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-sum-of-three-numbers-divisible-by-three",
+    "language": "java",
+    "code": "class Solution {\n  public int maximumSum(int[] nums) {\n    int[][] top = new int[3][3];\n    for (int x : nums) {\n      int[] t = top[x % 3];\n      if (x > t[0]) {\n        t[2] = t[1];\n        t[1] = t[0];\n        t[0] = x;\n      } else if (x > t[1]) {\n        t[2] = t[1];\n        t[1] = x;\n      } else if (x > t[2]) t[2] = x;\n    }\n    int best = 0;\n    for (int r = 0; r < 3; r++)\n      if (top[r][2] > 0) best = Math.max(best, top[r][0] + top[r][1] + top[r][2]);\n    if (top[0][0] > 0 && top[1][0] > 0 && top[2][0] > 0)\n      best = Math.max(best, top[0][0] + top[1][0] + top[2][0]);\n    return best;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "zero-array-transformation-iii",
+    "language": "java",
+    "code": "class Solution {\n  public int maxRemoval(int[] nums, int[][] queries) {\n    int n = nums.length;\n    List<List<Integer>> startingAt = new ArrayList<>();\n    for (int i = 0; i < n; i++) startingAt.add(new ArrayList<>());\n    for (int[] q : queries) startingAt.get(q[0]).add(q[1]);\n    PriorityQueue<Integer> ends =\n        new PriorityQueue<>(Collections.reverseOrder()); // available queries by right end\n    int[] expire = new int[n + 1];\n    int active = 0, used = 0;\n    for (int i = 0; i < n; i++) {\n      active -= expire[i];\n      ends.addAll(startingAt.get(i));\n      while (active < nums[i]) {\n        // greedily spend the available query that reaches furthest\n        if (ends.isEmpty() || ends.peek() < i) return -1;\n        int end = ends.poll();\n        active++;\n        used++;\n        expire[end + 1]++;\n      }\n    }\n    return queries.length - used;\n  }\n}"
+}

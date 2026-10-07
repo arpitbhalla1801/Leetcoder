@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-equalize-array",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(int[] nums) {\n    for (int x : nums) {\n      if (x != nums[0]) return 1; // AND the whole array once\n    }\n    return 0;\n  }\n}"
+}

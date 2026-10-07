@@ -1,0 +1,5 @@
+{
+    "problemName": "best-time-to-buy-and-sell-stock-using-strategy",
+    "language": "java",
+    "code": "class Solution {\n  public long maxProfit(int[] prices, int[] strategy, int k) {\n    int n = prices.length, half = k / 2;\n    long[] priceSum = new long[n + 1], profitSum = new long[n + 1];\n    for (int i = 0; i < n; i++) {\n      priceSum[i + 1] = priceSum[i] + prices[i];\n      profitSum[i + 1] = profitSum[i] + (long) strategy[i] * prices[i];\n    }\n    long bestGain = 0;\n    for (int i = 0; i + k <= n; i++) {\n      // the window turns into: half holds (0) followed by half sells (+price)\n      long after = priceSum[i + k] - priceSum[i + half];\n      long before = profitSum[i + k] - profitSum[i];\n      bestGain = Math.max(bestGain, after - before);\n    }\n    return profitSum[n] + bestGain;\n  }\n}"
+}

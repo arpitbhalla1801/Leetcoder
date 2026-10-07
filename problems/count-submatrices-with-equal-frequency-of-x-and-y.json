@@ -1,0 +1,5 @@
+{
+    "problemName": "count-submatrices-with-equal-frequency-of-x-and-y",
+    "language": "java",
+    "code": "class Solution {\n  public int numberOfSubmatrices(char[][] grid) {\n    int rows = grid.length, cols = grid[0].length;\n    int[] x = new int[cols];\n    int[] y = new int[cols];\n    int answer = 0;\n    for (int r = 0; r < rows; r++) {\n      int rowX = 0, rowY = 0;\n      for (int c = 0; c < cols; c++) {\n        if (grid[r][c] == 'X') rowX++;\n        else if (grid[r][c] == 'Y') rowY++;\n        x[c] += rowX;\n        y[c] += rowY;\n        if (x[c] == y[c] && x[c] > 0) answer++;\n      }\n    }\n    return answer;\n  }\n}"
+}

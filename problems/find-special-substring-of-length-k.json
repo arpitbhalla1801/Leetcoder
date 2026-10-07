@@ -1,0 +1,5 @@
+{
+    "problemName": "find-special-substring-of-length-k",
+    "language": "java",
+    "code": "class Solution {\n  public boolean hasSpecialSubstring(String s, int k) {\n    int i = 0, n = s.length();\n    while (i < n) {\n      int j = i;\n      while (j < n && s.charAt(j) == s.charAt(i)) j++;\n      if (j - i == k) return true; // a maximal run of exactly k equal characters\n      i = j;\n    }\n    return false;\n  }\n}"
+}

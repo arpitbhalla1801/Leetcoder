@@ -1,0 +1,5 @@
+{
+    "problemName": "largest-prime-from-consecutive-prime-sum",
+    "language": "java",
+    "code": "class Solution {\n  public int largestPrime(int n) {\n    boolean[] composite = new boolean[n + 1];\n    for (int i = 2; (long) i * i <= n; i++)\n      if (!composite[i]) for (int j = i * i; j <= n; j += i) composite[j] = true;\n    long sum = 0;\n    int best = 0;\n    for (int p = 2; p <= n; p++) {\n      if (composite[p]) continue;\n      sum += p;\n      if (sum > n) break;\n      if (!composite[(int) sum]) best = (int) sum;\n    }\n    return best;\n  }\n}"
+}

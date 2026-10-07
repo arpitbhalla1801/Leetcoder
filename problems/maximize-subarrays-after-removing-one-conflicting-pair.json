@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-subarrays-after-removing-one-conflicting-pair",
+    "language": "java",
+    "code": "class Solution {\n  public long maxSubarrays(int n, int[][] conflictingPairs) {\n    int p = conflictingPairs.length;\n    int[] head = new int[n + 1], next = new int[p];\n    java.util.Arrays.fill(head, -1);\n    for (int i = 0; i < p; i++) {\n      int b = Math.max(conflictingPairs[i][0], conflictingPairs[i][1]);\n      next[i] = head[b];\n      head[b] = i;\n    }\n    long[] gain = new long[p];\n    long base = 0;\n    int max1 = 0, max2 = 0, id1 = -1;\n    for (int r = 1; r <= n; r++) {\n      for (int e = head[r]; e >= 0; e = next[e]) {\n        int a = Math.min(conflictingPairs[e][0], conflictingPairs[e][1]);\n        if (a > max1) {\n          max2 = max1;\n          max1 = a;\n          id1 = e;\n        } else if (a > max2) {\n          max2 = a;\n        }\n      }\n      base += r - max1;\n      if (id1 >= 0) gain[id1] += max1 - max2;\n    }\n    long best = 0;\n    for (long g : gain) best = Math.max(best, g);\n    return base + best;\n  }\n}"
+}

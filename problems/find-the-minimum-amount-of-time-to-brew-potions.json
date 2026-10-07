@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-minimum-amount-of-time-to-brew-potions",
+    "language": "java",
+    "code": "class Solution {\n  public long minTime(int[] skill, int[] mana) {\n    int n = skill.length, m = mana.length;\n    long[] prefix = new long[n + 1];\n    for (int i = 0; i < n; i++) prefix[i + 1] = prefix[i] + skill[i];\n    // start time of potion j: every wizard must be free when the potion reaches them\n    long start = 0;\n    for (int j = 1; j < m; j++) {\n      long best = Long.MIN_VALUE;\n      for (int i = 0; i < n; i++) {\n        best = Math.max(best, mana[j - 1] * prefix[i + 1] - mana[j] * prefix[i]);\n      }\n      start += best;\n    }\n    return start + mana[m - 1] * prefix[n];\n  }\n}"
+}

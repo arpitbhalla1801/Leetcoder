@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-strictly-increasing-subsequence-with-non-zero-bitwise-and",
+    "language": "java",
+    "code": "class Solution {\n  public int longestSubsequence(int[] nums) {\n    int best = 0;\n    int[] tails = new int[nums.length];\n    for (int bit = 0; bit < 31; bit++) {\n      int len = 0;\n      for (int x : nums) {\n        if ((x >> bit & 1) == 0) continue;\n        int lo = 0, hi = len;\n        while (lo < hi) {\n          int mid = (lo + hi) >>> 1;\n          if (tails[mid] < x) lo = mid + 1;\n          else hi = mid;\n        }\n        tails[lo] = x;\n        if (lo == len) len++;\n      }\n      best = Math.max(best, len);\n    }\n    return best;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-subarray-with-equal-products",
+    "language": "java",
+    "code": "class Solution {\n  public int maxLength(int[] nums) {\n    int best = 0;\n    for (int i = 0; i < nums.length; i++) {\n      java.math.BigInteger prod = java.math.BigInteger.ONE;\n      int g = 0, l = 1;\n      for (int j = i; j < nums.length; j++) {\n        prod = prod.multiply(java.math.BigInteger.valueOf(nums[j]));\n        g = gcd(g, nums[j]);\n        l = l / gcd(l, nums[j]) * nums[j];\n        if (prod.equals(java.math.BigInteger.valueOf((long) g * l)))\n          best = Math.max(best, j - i + 1);\n      }\n    }\n    return best;\n  }\n\n  private int gcd(int a, int b) {\n    return b == 0 ? a : gcd(b, a % b);\n  }\n}"
+}

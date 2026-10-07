@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-smallest-balanced-index",
+    "language": "java",
+    "code": "class Solution {\n  public int smallestBalancedIndex(int[] nums) {\n    int n = nums.length;\n    long CAP = 1_000_000_000_000_000L;\n    long[] suffix = new long[n + 1];\n    suffix[n] = 1;\n    for (int i = n - 1; i >= 0; i--)\n      suffix[i] = suffix[i + 1] > CAP / nums[i] ? CAP : Math.min(CAP, suffix[i + 1] * nums[i]);\n    long left = 0;\n    for (int i = 0; i < n; i++) {\n      if (left == suffix[i + 1] && suffix[i + 1] < CAP) return i;\n      left += nums[i];\n    }\n    return -1;\n  }\n}"
+}

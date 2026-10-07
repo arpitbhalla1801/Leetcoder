@@ -1,0 +1,5 @@
+{
+    "problemName": "paint-house-iv",
+    "language": "java",
+    "code": "class Solution {\n  public long minCost(int n, int[][] cost) {\n    long INF = Long.MAX_VALUE / 4;\n    long[][] dp = new long[3][3];\n    for (int a = 0; a < 3; a++)\n      for (int b = 0; b < 3; b++) dp[a][b] = a == b ? INF : cost[0][a] + cost[n - 1][b];\n    for (int i = 1; i < n / 2; i++) {\n      long[][] nd = new long[3][3];\n      for (int c = 0; c < 3; c++) {\n        for (int d = 0; d < 3; d++) {\n          nd[c][d] = INF;\n          if (c == d) continue;\n          long best = INF;\n          for (int a = 0; a < 3; a++) {\n            if (a == c) continue;\n            for (int b = 0; b < 3; b++) {\n              if (b != d) best = Math.min(best, dp[a][b]);\n            }\n          }\n          nd[c][d] = best + cost[i][c] + cost[n - 1 - i][d];\n        }\n      }\n      dp = nd;\n    }\n    long ans = INF;\n    for (long[] row : dp) for (long v : row) ans = Math.min(ans, v);\n    return ans;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-pair-strength-using-gcd",
+    "language": "java",
+    "code": "class Solution {\n  public long maxPairStrength(int[] nums) {\n    long best = 0;\n    for (int i = 0; i < nums.length; i++) {\n      for (int j = i + 1; j < nums.length; j++) {\n        int g = gcd(nums[i], nums[j]);\n        best = Math.max(best, (long) (nums[i] / g) * (nums[j] / g));\n      }\n    }\n    return best;\n  }\n\n  private int gcd(int a, int b) {\n    return b == 0 ? a : gcd(b, a % b);\n  }\n}"
+}

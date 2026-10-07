@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-reach-target-array",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(int[] nums, int[] target) {\n    boolean[] seen = new boolean[100_001];\n    int count = 0;\n    for (int i = 0; i < nums.length; i++) {\n      if (nums[i] != target[i] && !seen[nums[i]]) {\n        seen[nums[i]] = true;\n        count++;\n      }\n    }\n    return count;\n  }\n}"
+}

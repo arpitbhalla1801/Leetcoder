@@ -1,0 +1,5 @@
+{
+    "problemName": "check-balanced-string",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isBalanced(String num) {\n    int diff = 0;\n    for (int i = 0; i < num.length(); i++) {\n      int d = num.charAt(i) - '0';\n      diff += i % 2 == 0 ? d : -d;\n    }\n    return diff == 0;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "make-the-xor-of-all-segments-equal-to-zero",
+    "language": "java",
+    "code": "class Solution {\n  public int minChanges(int[] nums, int k) {\n    final int M = 1024, INF = 1_000_000_000;\n    int[] dp = new int[M];\n    java.util.Arrays.fill(dp, INF);\n    dp[0] = 0;\n    for (int start = 0; start < k; start++) {\n      int[] freq = new int[M];\n      int size = 0;\n      for (int i = start; i < nums.length; i += k) {\n        freq[nums[i]]++;\n        size++;\n      }\n      int best = INF;\n      for (int x : dp) best = Math.min(best, x);\n      int[] next = new int[M];\n      java.util.Arrays.fill(next, best + size);\n      for (int x = 0; x < M; x++)\n        if (dp[x] < INF)\n          for (int v = 0; v < M; v++)\n            if (freq[v] > 0) next[x ^ v] = Math.min(next[x ^ v], dp[x] + size - freq[v]);\n      dp = next;\n    }\n    return dp[0];\n  }\n}\n"
+}

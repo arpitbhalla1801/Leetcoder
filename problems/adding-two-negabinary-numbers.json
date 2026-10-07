@@ -1,0 +1,5 @@
+{
+    "problemName": "adding-two-negabinary-numbers",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] addNegabinary(int[] arr1, int[] arr2) {\n    List<Integer> digits = new ArrayList<>();\n    int i = arr1.length - 1, j = arr2.length - 1, carry = 0;\n    while (i >= 0 || j >= 0 || carry != 0) {\n      int sum = carry + (i >= 0 ? arr1[i--] : 0) + (j >= 0 ? arr2[j--] : 0);\n      digits.add(sum & 1);\n      carry = -(sum >> 1);\n    }\n    while (digits.size() > 1 && digits.get(digits.size() - 1) == 0)\n      digits.remove(digits.size() - 1);\n    int[] result = new int[digits.size()];\n    for (int index = 0; index < result.length; index++)\n      result[index] = digits.get(result.length - 1 - index);\n    return result;\n  }\n}\n"
+}

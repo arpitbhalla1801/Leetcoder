@@ -1,0 +1,5 @@
+{
+    "problemName": "count-non-decreasing-arrays-with-given-digit-sums",
+    "language": "java",
+    "code": "class Solution {\n  public int countArrays(int[] digitSum) {\n    final long MOD = 1_000_000_007L;\n    int V = 5001;\n    int[] ds = new int[V];\n    for (int v = 0; v < V; v++) {\n      int s = 0;\n      for (int t = v; t > 0; t /= 10) s += t % 10;\n      ds[v] = s;\n    }\n    long[] dp = new long[V];\n    for (int v = 0; v < V; v++) dp[v] = ds[v] == digitSum[0] ? 1 : 0;\n    for (int i = 1; i < digitSum.length; i++) {\n      long[] nd = new long[V];\n      long prefix = 0;\n      for (int v = 0; v < V; v++) {\n        prefix = (prefix + dp[v]) % MOD;\n        if (ds[v] == digitSum[i]) nd[v] = prefix;\n      }\n      dp = nd;\n    }\n    long ans = 0;\n    for (long v : dp) ans += v;\n    return (int) (ans % MOD);\n  }\n}"
+}

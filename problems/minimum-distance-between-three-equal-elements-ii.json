@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-distance-between-three-equal-elements-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumDistance(int[] nums) {\n    Map<Integer, List<Integer>> positions = new HashMap<>();\n    for (int i = 0; i < nums.length; i++) {\n      positions.computeIfAbsent(nums[i], v -> new ArrayList<>()).add(i);\n    }\n    int best = Integer.MAX_VALUE;\n    for (List<Integer> p : positions.values()) {\n      // for sorted i < j < k the distance is 2 * (k - i); consecutive triples are optimal\n      for (int t = 0; t + 2 < p.size(); t++) best = Math.min(best, 2 * (p.get(t + 2) - p.get(t)));\n    }\n    return best == Integer.MAX_VALUE ? -1 : best;\n  }\n}"
+}

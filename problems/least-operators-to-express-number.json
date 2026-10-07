@@ -1,0 +1,5 @@
+{
+    "problemName": "least-operators-to-express-number",
+    "language": "java",
+    "code": "class Solution {\n  public int leastOpsExpressTarget(int x, int target) {\n    // digit DP in base x: pos = cost if the current digit is built upwards, neg = if it borrows\n    // from the next\n    long pos = 0, neg = 0;\n    long scale = 1; // x^k\n    int k = 0;\n    while (target > 0) {\n      int digit = target % x;\n      target /= x;\n      if (k == 0) {\n        pos = digit * 2L; // digit copies of x/x\n        neg = (x - digit) * 2L;\n      } else {\n        long nextPos = Math.min(digit * k + pos, (digit + 1) * k + neg);\n        long nextNeg = Math.min((x - digit) * k + pos, (x - digit - 1) * k + neg);\n        pos = nextPos;\n        neg = nextNeg;\n      }\n      k++;\n    }\n    return (int) Math.min(pos, k + neg) - 1;\n  }\n}"
+}

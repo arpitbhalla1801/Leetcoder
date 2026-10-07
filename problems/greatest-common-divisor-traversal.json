@@ -1,0 +1,5 @@
+{
+    "problemName": "greatest-common-divisor-traversal",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public boolean canTraverseAllPairs(int[] nums) {\n    int n = nums.length;\n    if (n == 1) return true;\n    DSU d = new DSU(n);\n    Map<Integer, Integer> owner = new HashMap<>();\n    for (int i = 0; i < n; i++) {\n      int x = nums[i];\n      for (int p = 2; p * p <= x; p++)\n        if (x % p == 0) {\n          Integer j = owner.putIfAbsent(p, i);\n          if (j != null) d.union(i, j);\n          while (x % p == 0) x /= p;\n        }\n      if (x > 1) {\n        Integer j = owner.putIfAbsent(x, i);\n        if (j != null) d.union(i, j);\n      }\n    }\n    int root = d.find(0);\n    for (int i = 1; i < n; i++) if (d.find(i) != root) return false;\n    return true;\n  }\n\n  static class DSU {\n    int[] p;\n\n    DSU(int n) {\n      p = new int[n];\n      for (int i = 0; i < n; i++) p[i] = i;\n    }\n\n    int find(int x) {\n      return p[x] == x ? x : (p[x] = find(p[x]));\n    }\n\n    void union(int a, int b) {\n      p[find(a)] = find(b);\n    }\n  }\n}\n"
+}

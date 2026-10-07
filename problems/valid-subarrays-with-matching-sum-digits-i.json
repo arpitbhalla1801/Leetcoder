@@ -1,0 +1,5 @@
+{
+    "problemName": "valid-subarrays-with-matching-sum-digits-i",
+    "language": "java",
+    "code": "class Solution {\n  public int countValidSubarrays(int[] nums, int x) {\n    int n = nums.length, count = 0;\n    for (int l = 0; l < n; l++) {\n      long sum = 0;\n      for (int r = l; r < n; r++) {\n        sum += nums[r];\n        if (sum % 10 != x) continue;\n        long first = sum;\n        while (first >= 10) first /= 10;\n        if (first == x) count++;\n      }\n    }\n    return count;\n  }\n}"
+}

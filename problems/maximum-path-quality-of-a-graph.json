@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-path-quality-of-a-graph",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  int ans;\n  List<int[]>[] g;\n  int[] val;\n\n  public int maximalPathQuality(int[] values, int[][] edges, int maxTime) {\n    val = values;\n    g = new List[values.length];\n    for (int i = 0; i < g.length; i++) g[i] = new ArrayList<>();\n    for (int[] e : edges) {\n      g[e[0]].add(new int[] {e[1], e[2]});\n      g[e[1]].add(new int[] {e[0], e[2]});\n    }\n    boolean[] seen = new boolean[values.length];\n    seen[0] = true;\n    dfs(0, maxTime, values[0], seen);\n    return ans;\n  }\n\n  void dfs(int u, int time, int score, boolean[] seen) {\n    if (u == 0) ans = Math.max(ans, score);\n    for (int[] e : g[u])\n      if (e[1] <= time) {\n        boolean first = !seen[e[0]];\n        seen[e[0]] = true;\n        dfs(e[0], time - e[1], score + (first ? val[e[0]] : 0), seen);\n        if (first) seen[e[0]] = false;\n      }\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-obstacle-removal-to-reach-corner",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minimumObstacles(int[][] grid) {\n    int m = grid.length, n = grid[0].length;\n    int[][] d = new int[m][n];\n    for (int[] x : d) Arrays.fill(x, Integer.MAX_VALUE);\n    Deque<int[]> q = new ArrayDeque<>();\n    d[0][0] = 0;\n    q.add(new int[] {0, 0});\n    int[][] ds = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};\n    while (!q.isEmpty()) {\n      int[] u = q.poll();\n      int r = u[0], c = u[1];\n      for (int[] z : ds) {\n        int x = r + z[0], y = c + z[1];\n        if (x >= 0 && x < m && y >= 0 && y < n && d[x][y] > d[r][c] + grid[x][y]) {\n          d[x][y] = d[r][c] + grid[x][y];\n          if (grid[x][y] == 0) q.addFirst(new int[] {x, y});\n          else q.addLast(new int[] {x, y});\n        }\n      }\n    }\n    return d[m - 1][n - 1];\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "score-validator",
+    "language": "java",
+    "code": "class Solution {\n  public int[] scoreValidator(String[] events) {\n    int score = 0, counter = 0;\n    for (String e : events) {\n      if (e.equals(\"W\")) counter++;\n      else if (e.equals(\"WD\") || e.equals(\"NB\")) score++;\n      else score += Integer.parseInt(e);\n      if (counter == 10) break;\n    }\n    return new int[] {score, counter};\n  }\n}"
+}

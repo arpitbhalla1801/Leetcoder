@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-subsequence-with-non-zero-bitwise-xor",
+    "language": "java",
+    "code": "class Solution {\n  public int longestSubsequence(int[] nums) {\n    int xor = 0;\n    boolean allZero = true;\n    for (int x : nums) {\n      xor ^= x;\n      if (x != 0) allZero = false;\n    }\n    if (allZero) return 0;\n    return xor != 0 ? nums.length : nums.length - 1;\n  }\n}"
+}

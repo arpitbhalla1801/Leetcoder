@@ -1,0 +1,5 @@
+{
+    "problemName": "find-indices-of-stable-mountains",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<Integer> stableMountains(int[] height, int threshold) {\n    List<Integer> answer = new ArrayList<>();\n    for (int i = 1; i < height.length; i++) if (height[i - 1] > threshold) answer.add(i);\n    return answer;\n  }\n}"
+}

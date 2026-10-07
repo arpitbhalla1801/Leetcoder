@@ -1,0 +1,5 @@
+{
+    "problemName": "count-number-of-trapezoids-i",
+    "language": "java",
+    "code": "class Solution {\n  public int countTrapezoids(int[][] points) {\n    final long MOD = 1_000_000_007L;\n    Map<Integer, Long> perRow = new HashMap<>();\n    for (int[] p : points) perRow.merge(p[1], 1L, Long::sum);\n    long sum = 0, squares = 0;\n    for (long c : perRow.values()) {\n      long pairs = (c * (c - 1) / 2) % MOD; // horizontal segments available in this row\n      sum = (sum + pairs) % MOD;\n      squares = (squares + pairs * pairs) % MOD;\n    }\n    long inverseTwo = (MOD + 1) / 2;\n    // choose two segments from two different rows\n    return (int) ((sum * sum % MOD - squares + MOD) % MOD * inverseTwo % MOD);\n  }\n}"
+}

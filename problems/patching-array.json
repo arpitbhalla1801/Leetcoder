@@ -1,0 +1,5 @@
+{
+    "problemName": "patching-array",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minPatches(int[] nums, int n) {\n    long reach = 0;\n    int i = 0, patches = 0;\n    while (reach < n) {\n      if (i < nums.length && nums[i] <= reach + 1) reach += nums[i++];\n      else {\n        reach += reach + 1;\n        patches++;\n      }\n    }\n    return patches;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "compute-decimal-representation",
+    "language": "java",
+    "code": "class Solution {\n  public int[] decimalRepresentation(int n) {\n    List<Integer> parts = new ArrayList<>();\n    for (int place = 1; n > 0; n /= 10, place *= 10) {\n      if (n % 10 != 0) parts.add((n % 10) * place);\n    }\n    Collections.reverse(parts);\n    int[] ans = new int[parts.size()];\n    for (int i = 0; i < ans.length; i++) ans[i] = parts.get(i);\n    return ans;\n  }\n}"
+}

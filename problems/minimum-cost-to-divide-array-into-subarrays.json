@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-cost-to-divide-array-into-subarrays",
+    "language": "java",
+    "code": "class Solution {\n  public long minimumCost(int[] nums, int[] cost, int k) {\n    int n = nums.length;\n    long[] P = new long[n + 1], C = new long[n + 1];\n    for (int i = 0; i < n; i++) {\n      P[i + 1] = P[i] + nums[i];\n      C[i + 1] = C[i] + cost[i];\n    }\n    long INF = Long.MAX_VALUE / 4;\n    long[] dp = new long[n + 1];\n    java.util.Arrays.fill(dp, INF);\n    dp[0] = 0;\n    for (int r = 1; r <= n; r++) {\n      for (int l = 0; l < r; l++) {\n        long v = dp[l] + P[r] * (C[r] - C[l]) + (long) k * (C[n] - C[l]);\n        if (v < dp[r]) dp[r] = v;\n      }\n    }\n    return dp[n];\n  }\n}"
+}

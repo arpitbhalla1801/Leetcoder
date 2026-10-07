@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-minimum-area-to-cover-all-ones-i",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumArea(int[][] grid) {\n    int top = grid.length, left = grid[0].length, bottom = -1, right = -1;\n    for (int r = 0; r < grid.length; r++)\n      for (int c = 0; c < grid[0].length; c++)\n        if (grid[r][c] == 1) {\n          top = Math.min(top, r);\n          bottom = Math.max(bottom, r);\n          left = Math.min(left, c);\n          right = Math.max(right, c);\n        }\n    return bottom < 0 ? 0 : (bottom - top + 1) * (right - left + 1);\n  }\n}"
+}

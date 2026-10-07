@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-non-zero-product-of-the-array-elements",
+    "language": "java",
+    "code": "class Solution {\n  private static final long MOD = 1_000_000_007L;\n\n  public int minNonZeroProduct(int p) {\n    long max = (1L << p) - 1;\n    long exponent = (1L << (p - 1)) - 1;\n    return (int) (max % MOD * power(max - 1, exponent) % MOD);\n  }\n\n  private long power(long base, long exponent) {\n    long result = 1;\n    while (exponent > 0) {\n      if ((exponent & 1) != 0) result = result * base % MOD;\n      base = base * base % MOD;\n      exponent >>= 1;\n    }\n    return result;\n  }\n}\n"
+}

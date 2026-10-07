@@ -1,0 +1,5 @@
+{
+    "problemName": "last-remaining-integer-after-alternating-deletion-operations",
+    "language": "java",
+    "code": "class Solution {\n  public long lastInteger(long n) {\n    long first = 1, step = 1, m = n;\n    boolean fromLeft = true;\n    while (m > 1) {\n      if (!fromLeft && m % 2 == 0) first += step;\n      m = (m + 1) / 2;\n      step *= 2;\n      fromLeft = !fromLeft;\n    }\n    return first;\n  }\n}"
+}

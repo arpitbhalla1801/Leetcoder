@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-moves-to-reach-target-in-grid",
+    "language": "java",
+    "code": "class Solution {\n  private static final long INF = Long.MAX_VALUE / 4;\n  private int sx, sy;\n\n  private long solve(long x, long y) {\n    long steps = 0;\n    while (true) {\n      if (x == sx && y == sy) return steps;\n      if (x < sx || y < sy) return INF;\n      if (x == y) {\n        return 1 + Math.min(solve(0, y), solve(x, 0)) + steps;\n      }\n      if (x > y) {\n        if (x >= 2 * y) {\n          if (x % 2 != 0) return INF;\n          x /= 2;\n        } else {\n          x -= y;\n        }\n      } else {\n        if (y >= 2 * x) {\n          if (y % 2 != 0) return INF;\n          y /= 2;\n        } else {\n          y -= x;\n        }\n      }\n      steps++;\n    }\n  }\n\n  public int minMoves(int sx, int sy, int tx, int ty) {\n    this.sx = sx;\n    this.sy = sy;\n    long res = solve(tx, ty);\n    return res >= INF ? -1 : (int) res;\n  }\n}"
+}

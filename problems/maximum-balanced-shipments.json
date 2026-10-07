@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-balanced-shipments",
+    "language": "java",
+    "code": "class Solution {\n  public int maxBalancedShipments(int[] weight) {\n    int shipments = 0, max = 0;\n    for (int w : weight) {\n      if (w < max) {\n        shipments++; // close a shipment as early as possible\n        max = 0;\n      } else {\n        max = w;\n      }\n    }\n    return shipments;\n  }\n}"
+}

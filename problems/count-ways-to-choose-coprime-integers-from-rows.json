@@ -1,0 +1,5 @@
+{
+    "problemName": "count-ways-to-choose-coprime-integers-from-rows",
+    "language": "java",
+    "code": "class Solution {\n  public int countCoprime(int[][] mat) {\n    final long MOD = 1_000_000_007L;\n    int G = 151;\n    int[][] gcd = new int[G][G];\n    for (int i = 0; i < G; i++) {\n      for (int j = 0; j < G; j++) {\n        int a = i, b = j;\n        while (b != 0) {\n          int t = a % b;\n          a = b;\n          b = t;\n        }\n        gcd[i][j] = a;\n      }\n    }\n    long[] dp = new long[G];\n    for (int x : mat[0]) dp[x]++;\n    for (int r = 1; r < mat.length; r++) {\n      long[] nd = new long[G];\n      for (int g = 1; g < G; g++) {\n        if (dp[g] == 0) continue;\n        for (int x : mat[r]) nd[gcd[g][x]] = (nd[gcd[g][x]] + dp[g]) % MOD;\n      }\n      dp = nd;\n    }\n    return (int) (dp[1] % MOD);\n  }\n}"
+}

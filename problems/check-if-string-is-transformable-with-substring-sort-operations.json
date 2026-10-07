@@ -1,0 +1,5 @@
+{
+    "problemName": "check-if-string-is-transformable-with-substring-sort-operations",
+    "code": "import java.util.*;\n\nclass Solution {\n  public boolean isTransformable(String s, String t) {\n    List<Deque<Integer>> positions = new ArrayList<>();\n    for (int d = 0; d < 10; d++) positions.add(new ArrayDeque<>());\n    for (int i = 0; i < s.length(); i++) positions.get(s.charAt(i) - '0').add(i);\n    for (int i = 0; i < t.length(); i++) {\n      int digit = t.charAt(i) - '0';\n      if (positions.get(digit).isEmpty()) return false;\n      int index = positions.get(digit).peek();\n      for (int smaller = 0; smaller < digit; smaller++) {\n        if (!positions.get(smaller).isEmpty() && positions.get(smaller).peek() < index)\n          return false;\n      }\n      positions.get(digit).poll();\n    }\n    return true;\n  }\n}\n",
+    "language": "java"
+}

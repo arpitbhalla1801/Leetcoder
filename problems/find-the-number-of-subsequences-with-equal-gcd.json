@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-number-of-subsequences-with-equal-gcd",
+    "language": "java",
+    "code": "class Solution {\n  public int subsequencePairCount(int[] nums) {\n    final int MOD = 1_000_000_007;\n    int max = 0;\n    for (int v : nums) max = Math.max(max, v);\n    int m = max + 1;\n    int[][] gcd = new int[m][m];\n    for (int i = 0; i < m; i++) {\n      for (int j = 0; j < m; j++) {\n        int a = i, b = j;\n        while (b != 0) {\n          int t = a % b;\n          a = b;\n          b = t;\n        }\n        gcd[i][j] = a;\n      }\n    }\n    int[][] dp = new int[m][m];\n    dp[0][0] = 1;\n    for (int x : nums) {\n      int[][] nd = new int[m][m];\n      for (int a = 0; a < m; a++) {\n        for (int b = 0; b < m; b++) {\n          int v = dp[a][b];\n          if (v == 0) continue;\n          nd[a][b] = (nd[a][b] + v) % MOD;\n          int ga = gcd[a][x], gb = gcd[b][x];\n          nd[ga][b] = (nd[ga][b] + v) % MOD;\n          nd[a][gb] = (nd[a][gb] + v) % MOD;\n        }\n      }\n      dp = nd;\n    }\n    long ans = 0;\n    for (int g = 1; g < m; g++) ans += dp[g][g];\n    return (int) (ans % MOD);\n  }\n}"
+}

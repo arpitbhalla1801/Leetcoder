@@ -1,0 +1,5 @@
+{
+    "problemName": "cyclically-shift-rows-and-columns",
+    "language": "java",
+    "code": "class Solution {\n  public int[][] cyclicShift(int n, int[][] grid, int[] rowShift, int[] colShift) {\n    int[][] rows = new int[n][n];\n    for (int i = 0; i < n; i++) {\n      for (int j = 0; j < n; j++) rows[i][(j - rowShift[i] + n) % n] = grid[i][j];\n    }\n    int[][] result = new int[n][n];\n    for (int j = 0; j < n; j++) {\n      for (int i = 0; i < n; i++) result[(i - colShift[j] + n) % n][j] = rows[i][j];\n    }\n    return result;\n  }\n}"
+}

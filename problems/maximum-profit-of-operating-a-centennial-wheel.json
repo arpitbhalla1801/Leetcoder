@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-profit-of-operating-a-centennial-wheel",
+    "code": "class Solution {\n  public int minOperationsMaxProfit(int[] customers, int boardingCost, int runningCost) {\n    int waiting = 0, rotations = 0, boarded = 0, bestProfit = 0, bestRotation = -1;\n    int i = 0;\n    while (i < customers.length || waiting > 0) {\n      if (i < customers.length) waiting += customers[i++];\n      int onBoard = Math.min(4, waiting);\n      waiting -= onBoard;\n      boarded += onBoard;\n      rotations++;\n      int profit = boarded * boardingCost - rotations * runningCost;\n      if (profit > bestProfit) {\n        bestProfit = profit;\n        bestRotation = rotations;\n      }\n    }\n    return bestRotation;\n  }\n}\n",
+    "language": "java"
+}

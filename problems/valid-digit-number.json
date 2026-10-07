@@ -1,0 +1,5 @@
+{
+    "problemName": "valid-digit-number",
+    "language": "java",
+    "code": "class Solution {\n  public boolean validDigit(int n, int x) {\n    String s = String.valueOf(n);\n    char d = (char) ('0' + x);\n    return s.indexOf(d) >= 0 && s.charAt(0) != d;\n  }\n}"
+}

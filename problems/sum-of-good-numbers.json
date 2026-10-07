@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-good-numbers",
+    "language": "java",
+    "code": "class Solution {\n  public int sumOfGoodNumbers(int[] nums, int k) {\n    int n = nums.length, sum = 0;\n    for (int i = 0; i < n; i++) {\n      boolean good = (i - k < 0 || nums[i] > nums[i - k]) && (i + k >= n || nums[i] > nums[i + k]);\n      if (good) sum += nums[i];\n    }\n    return sum;\n  }\n}"
+}

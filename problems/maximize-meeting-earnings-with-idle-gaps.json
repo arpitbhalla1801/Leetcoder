@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-meeting-earnings-with-idle-gaps",
+    "language": "java",
+    "code": "class Solution {\n  public long maxEarnings(int[][] meetings) {\n    int n = meetings.length;\n    int[][] sorted = meetings.clone();\n    java.util.Arrays.sort(sorted, (a, b) -> Integer.compare(a[0], b[0]));\n    java.util.PriorityQueue<long[]> pending =\n        new java.util.PriorityQueue<>((a, b) -> Long.compare(a[0], b[0]));\n    long NEG = Long.MIN_VALUE / 4, bestKey = NEG, answer = Long.MIN_VALUE;\n    for (int[] m : sorted) {\n      while (!pending.isEmpty() && pending.peek()[0] <= m[0])\n        bestKey = Math.max(bestKey, pending.poll()[1]);\n      long best = 0;\n      if (bestKey > NEG) best = Math.max(0, bestKey + m[0]);\n      long dp = m[2] + best;\n      answer = Math.max(answer, dp);\n      pending.add(new long[] {m[1], dp - m[1]});\n    }\n    return answer;\n  }\n}"
+}

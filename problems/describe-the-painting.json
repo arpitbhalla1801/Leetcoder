@@ -1,0 +1,5 @@
+{
+    "problemName": "describe-the-painting",
+    "language": "java",
+    "code": "class Solution {\n  public java.util.List<java.util.List<Long>> splitPainting(int[][] segments) {\n    java.util.TreeMap<Integer, Long> diff = new java.util.TreeMap<>();\n    for (int[] s : segments) {\n      diff.put(s[0], diff.getOrDefault(s[0], 0L) + s[2]);\n      diff.put(s[1], diff.getOrDefault(s[1], 0L) - s[2]);\n    }\n    java.util.List<java.util.List<Long>> ans = new java.util.ArrayList<>();\n    long color = 0;\n    Integer prev = null;\n    for (java.util.Map.Entry<Integer, Long> e : diff.entrySet()) {\n      if (prev != null && color != 0)\n        ans.add(java.util.Arrays.asList((long) prev, (long) e.getKey(), color));\n      color += e.getValue();\n      prev = e.getKey();\n    }\n    return ans;\n  }\n}\n"
+}

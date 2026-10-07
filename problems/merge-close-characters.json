@@ -1,0 +1,5 @@
+{
+    "problemName": "merge-close-characters",
+    "language": "java",
+    "code": "class Solution {\n  public String mergeCharacters(String s, int k) {\n    StringBuilder sb = new StringBuilder(s);\n    boolean changed = true;\n    while (changed) {\n      changed = false;\n      outer:\n      for (int i = 0; i < sb.length(); i++) {\n        for (int j = i + 1; j < sb.length() && j - i <= k; j++) {\n          if (sb.charAt(i) == sb.charAt(j)) {\n            sb.deleteCharAt(j);\n            changed = true;\n            break outer;\n          }\n        }\n      }\n    }\n    return sb.toString();\n  }\n}"
+}

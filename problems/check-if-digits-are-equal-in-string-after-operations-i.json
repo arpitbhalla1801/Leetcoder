@@ -1,0 +1,5 @@
+{
+    "problemName": "check-if-digits-are-equal-in-string-after-operations-i",
+    "language": "java",
+    "code": "class Solution {\n  public boolean hasSameDigits(String s) {\n    int[] d = new int[s.length()];\n    for (int i = 0; i < d.length; i++) d[i] = s.charAt(i) - '0';\n    for (int len = d.length; len > 2; len--) {\n      for (int i = 0; i + 1 < len; i++) d[i] = (d[i] + d[i + 1]) % 10;\n    }\n    return d[0] == d[1];\n  }\n}"
+}

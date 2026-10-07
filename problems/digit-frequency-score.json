@@ -1,0 +1,5 @@
+{
+    "problemName": "digit-frequency-score",
+    "language": "java",
+    "code": "class Solution {\n  public int digitFrequencyScore(int n) {\n    // sum of d * freq(d) over distinct digits equals the plain digit sum\n    int sum = 0;\n    for (; n > 0; n /= 10) sum += n % 10;\n    return sum;\n  }\n}"
+}

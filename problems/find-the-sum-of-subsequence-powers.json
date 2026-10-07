@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-sum-of-subsequence-powers",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int sumOfPowers(int[] nums, int k) {\n    Arrays.sort(nums);\n    final int MOD = 1_000_000_007;\n    TreeSet<Integer> gaps = new TreeSet<>();\n    for (int i = 0; i < nums.length; i++)\n      for (int j = i + 1; j < nums.length; j++) gaps.add(nums[j] - nums[i]);\n    long answer = 0;\n    int previous = 0;\n    for (int gap : gaps) {\n      answer = (answer + (long) (gap - previous) * countAtLeastGap(nums, k, gap, MOD)) % MOD;\n      previous = gap;\n    }\n    return (int) answer;\n  }\n\n  private long countAtLeastGap(int[] nums, int k, int gap, int mod) {\n    int n = nums.length;\n    long[][] prefix = new long[k + 1][n + 1];\n    for (int i = 0; i < n; i++) {\n      int firstAllowed = 0;\n      while (firstAllowed < i && nums[firstAllowed] <= nums[i] - gap) firstAllowed++;\n      for (int size = 1; size <= k; size++) {\n        long ways = size == 1 ? 1 : prefix[size - 1][firstAllowed];\n        prefix[size][i + 1] = (prefix[size][i] + ways) % mod;\n      }\n    }\n    return prefix[k][n];\n  }\n}"
+}

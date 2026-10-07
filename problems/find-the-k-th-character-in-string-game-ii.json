@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-k-th-character-in-string-game-ii",
+    "language": "java",
+    "code": "class Solution {\n  public char kthCharacter(long k, int[] operations) {\n    long idx = k - 1;\n    int shift = 0;\n    for (int i = Math.min(operations.length, 62) - 1; i >= 0; i--) {\n      if (idx >= (1L << i)) {\n        idx -= 1L << i;\n        shift += operations[i];\n      }\n    }\n    return (char) ('a' + shift % 26);\n  }\n}"
+}

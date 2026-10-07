@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-alternating-subarray-sum-with-one-deletion",
+    "language": "java",
+    "code": "class Solution {\n  public long maxAlternatingSum(int[] nums) {\n    long NEG = Long.MIN_VALUE / 4;\n    long[][] dp = {{NEG, NEG}, {NEG, NEG}};\n    long best = Long.MIN_VALUE;\n    for (int x : nums) {\n      long[][] nd = {{NEG, NEG}, {NEG, NEG}};\n      nd[1][0] = Math.max(nd[1][0], x);\n      for (int par = 0; par < 2; par++) {\n        for (int del = 0; del < 2; del++) {\n          long cur = dp[par][del];\n          if (cur == NEG) continue;\n          long ext = cur + (par == 0 ? x : -x);\n          nd[1 - par][del] = Math.max(nd[1 - par][del], ext);\n          if (del == 0) nd[par][1] = Math.max(nd[par][1], cur);\n        }\n      }\n      dp = nd;\n      for (int par = 0; par < 2; par++)\n        for (int del = 0; del < 2; del++) best = Math.max(best, dp[par][del]);\n    }\n    return best;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "aggregate-two-time-series",
+    "language": "java",
+    "code": "class Solution {\n  public List<List<Integer>> aggregateTimeSeries(int[][] series1, int[][] series2) {\n    List<List<Integer>> res = new ArrayList<>();\n    int i = 0, j = 0, n = series1.length, m = series2.length;\n    while (i < n || j < m) {\n      int t;\n      if (i < n && j < m) t = Math.min(series1[i][0], series2[j][0]);\n      else if (i < n) t = series1[i][0];\n      else t = series2[j][0];\n      while (i < n && series1[i][0] < t) i++;\n      while (j < m && series2[j][0] < t) j++;\n      long v1 = i < n ? series1[i][1] : 0, v2 = j < m ? series2[j][1] : 0;\n      res.add(java.util.Arrays.asList(t, (int) (v1 + v2)));\n      if (i < n && series1[i][0] == t) i++;\n      if (j < m && series2[j][0] == t) j++;\n    }\n    return res;\n  }\n}"
+}

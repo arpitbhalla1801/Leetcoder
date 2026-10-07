@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-prefix-removal-to-make-array-strictly-increasing",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumPrefixLength(int[] nums) {\n    int i = nums.length - 1;\n    while (i > 0 && nums[i - 1] < nums[i]) i--;\n    return i;\n  }\n}"
+}

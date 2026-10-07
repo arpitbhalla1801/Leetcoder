@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-prefix-connected-groups",
+    "language": "java",
+    "code": "class Solution {\n  public int prefixConnected(String[] words, int k) {\n    java.util.HashMap<String, Integer> count = new java.util.HashMap<>();\n    for (String w : words) if (w.length() >= k) count.merge(w.substring(0, k), 1, Integer::sum);\n    int groups = 0;\n    for (int c : count.values()) if (c >= 2) groups++;\n    return groups;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-transform-array",
+    "language": "java",
+    "code": "class Solution {\n  public long minOperations(int[] nums1, int[] nums2) {\n    int n = nums1.length;\n    long base = 0, extra = Long.MAX_VALUE;\n    long t = nums2[n];\n    for (int i = 0; i < n; i++) {\n      long a = nums1[i], b = nums2[i];\n      base += Math.abs(a - b);\n      long lo = Math.min(a, b), hi = Math.max(a, b);\n      long cost = t >= lo && t <= hi ? 0 : Math.min(Math.abs(a - t), Math.abs(b - t));\n      extra = Math.min(extra, cost);\n    }\n    return base + 1 + extra;\n  }\n}"
+}

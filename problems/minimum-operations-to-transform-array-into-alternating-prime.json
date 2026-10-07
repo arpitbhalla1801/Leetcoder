@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-transform-array-into-alternating-prime",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(int[] nums) {\n    int MAX = 200_100;\n    boolean[] composite = new boolean[MAX];\n    composite[0] = composite[1] = true;\n    for (int i = 2; (long) i * i < MAX; i++)\n      if (!composite[i]) for (int j = i * i; j < MAX; j += i) composite[j] = true;\n    int ops = 0;\n    for (int i = 0; i < nums.length; i++) {\n      int x = nums[i];\n      if (i % 2 == 0)\n        while (composite[x]) {\n          x++;\n          ops++;\n        }\n      else\n        while (!composite[x]) {\n          x++;\n          ops++;\n        }\n    }\n    return ops;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-reverse-operations",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] minReverseOperations(int n, int p, int[] banned, int k) {\n    boolean[] ban = new boolean[n];\n    for (int x : banned) ban[x] = true;\n    TreeSet<Integer>[] s = new TreeSet[2];\n    for (int i = 0; i < 2; i++) s[i] = new TreeSet<>();\n    for (int i = 0; i < n; i++) if (!ban[i] && i != p) s[i & 1].add(i);\n    int[] d = new int[n];\n    Arrays.fill(d, -1);\n    d[p] = 0;\n    ArrayDeque<Integer> q = new ArrayDeque<>();\n    q.add(p);\n    while (!q.isEmpty()) {\n      int x = q.remove();\n      int lo = Math.max(0, x - k + 1), hi = Math.min(x, n - k);\n      int l = 2 * lo + k - 1 - x, r = 2 * hi + k - 1 - x;\n      TreeSet<Integer> t = s[(k - 1 - x) & 1];\n      for (Integer y = t.ceiling(l); y != null && y <= r; ) {\n        t.remove(y);\n        d[y] = d[x] + 1;\n        q.add(y);\n        y = t.ceiling(y);\n      }\n    }\n    return d;\n  }\n}\n"
+}

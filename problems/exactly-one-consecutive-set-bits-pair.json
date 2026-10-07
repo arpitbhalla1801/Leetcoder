@@ -1,0 +1,5 @@
+{
+    "problemName": "exactly-one-consecutive-set-bits-pair",
+    "language": "java",
+    "code": "class Solution {\n  public boolean consecutiveSetBits(int n) {\n    return Integer.bitCount(n & (n >> 1)) == 1;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "reverse-words-with-same-vowel-count",
+    "language": "java",
+    "code": "class Solution {\n  private static int vowels(String w) {\n    int c = 0;\n    for (int i = 0; i < w.length(); i++) if (\"aeiou\".indexOf(w.charAt(i)) >= 0) c++;\n    return c;\n  }\n\n  public String reverseWords(String s) {\n    String[] words = s.split(\" \");\n    int target = vowels(words[0]);\n    StringBuilder sb = new StringBuilder(words[0]);\n    for (int i = 1; i < words.length; i++) {\n      sb.append(' ');\n      if (vowels(words[i]) == target) sb.append(new StringBuilder(words[i]).reverse());\n      else sb.append(words[i]);\n    }\n    return sb.toString();\n  }\n}"
+}

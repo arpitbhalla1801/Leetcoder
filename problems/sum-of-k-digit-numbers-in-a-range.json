@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-k-digit-numbers-in-a-range",
+    "language": "java",
+    "code": "class Solution {\n  private static final long MOD = 1_000_000_007L;\n\n  private static long pow(long b, long e) {\n    long r = 1;\n    for (b %= MOD; e > 0; e >>= 1) {\n      if ((e & 1) == 1) r = r * b % MOD;\n      b = b * b % MOD;\n    }\n    return r;\n  }\n\n  public int sumOfNumbers(int l, int r, int k) {\n    long count = r - l + 1, digitSum = (long) (l + r) * count / 2;\n    long repunit = (pow(10, k) - 1 + MOD) % MOD * pow(9, MOD - 2) % MOD;\n    return (int) (digitSum % MOD * pow(count, k - 1) % MOD * repunit % MOD);\n  }\n}"
+}

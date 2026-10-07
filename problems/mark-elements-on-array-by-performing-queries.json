@@ -1,0 +1,5 @@
+{
+    "problemName": "mark-elements-on-array-by-performing-queries",
+    "language": "java",
+    "code": "class Solution {\n  public long[] unmarkedSumArray(int[] nums, int[][] queries) {\n    int n = nums.length;\n    long sum = 0;\n    Integer[] order = new Integer[n];\n    for (int i = 0; i < n; i++) {\n      sum += nums[i];\n      order[i] = i;\n    }\n    Arrays.sort(\n        order,\n        (a, b) -> nums[a] != nums[b] ? Integer.compare(nums[a], nums[b]) : Integer.compare(a, b));\n    boolean[] marked = new boolean[n];\n    long[] answer = new long[queries.length];\n    int next = 0; // first position in `order` that may still be unmarked\n    for (int q = 0; q < queries.length; q++) {\n      int index = queries[q][0], k = queries[q][1];\n      if (!marked[index]) {\n        marked[index] = true;\n        sum -= nums[index];\n      }\n      while (k > 0 && next < n) {\n        int i = order[next++];\n        if (marked[i]) continue; // already marked elements do not count towards k\n        marked[i] = true;\n        sum -= nums[i];\n        k--;\n      }\n      answer[q] = sum;\n    }\n    return answer;\n  }\n}"
+}

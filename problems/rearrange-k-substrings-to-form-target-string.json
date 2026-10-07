@@ -1,0 +1,5 @@
+{
+    "problemName": "rearrange-k-substrings-to-form-target-string",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isPossibleToRearrange(String s, String t, int k) {\n    int len = s.length() / k;\n    java.util.HashMap<String, Integer> cnt = new java.util.HashMap<>();\n    for (int i = 0; i < s.length(); i += len) cnt.merge(s.substring(i, i + len), 1, Integer::sum);\n    for (int i = 0; i < t.length(); i += len) {\n      if (cnt.merge(t.substring(i, i + len), -1, Integer::sum) < 0) return false;\n    }\n    return true;\n  }\n}"
+}

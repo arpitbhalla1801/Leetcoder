@@ -1,0 +1,5 @@
+{
+    "problemName": "widest-possible-fence",
+    "language": "java",
+    "code": "class Solution {\n  public int maximumWidth(int[] planks) {\n    java.util.TreeMap<Integer, Integer> cnt = new java.util.TreeMap<>();\n    for (int p : planks) cnt.merge(p, 1, Integer::sum);\n    int[] vals = new int[cnt.size()], counts = new int[cnt.size()];\n    int idx = 0;\n    for (java.util.Map.Entry<Integer, Integer> e : cnt.entrySet()) {\n      vals[idx] = e.getKey();\n      counts[idx++] = e.getValue();\n    }\n    java.util.HashMap<Long, Long> pairs = new java.util.HashMap<>();\n    for (int a = 0; a < vals.length; a++) {\n      for (int b = a; b < vals.length; b++) {\n        long add = a == b ? counts[a] / 2 : Math.min(counts[a], counts[b]);\n        if (add > 0) pairs.merge((long) vals[a] + vals[b], add, Long::sum);\n      }\n    }\n    long best = 1;\n    for (java.util.Map.Entry<Long, Long> e : pairs.entrySet()) {\n      long h = e.getKey();\n      long total = e.getValue() + (h <= Integer.MAX_VALUE ? cnt.getOrDefault((int) h, 0) : 0);\n      best = Math.max(best, total);\n    }\n    for (int c : counts) best = Math.max(best, c);\n    return (int) best;\n  }\n}"
+}

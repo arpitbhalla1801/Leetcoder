@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-equalize-binary-string",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(String s, int k) {\n    int n = s.length(), zeros = 0;\n    for (int i = 0; i < n; i++) if (s.charAt(i) == '0') zeros++;\n    if (zeros == 0) return 0;\n    int ones = n - zeros;\n    for (long t = 1; t <= 2L * n + 5; t++) {\n      long total = t * k;\n      if (total < zeros || (total - zeros) % 2 != 0) continue;\n      long zeroCap = zeros * (t % 2 == 1 ? t : t - 1);\n      long oneCap = ones * (t % 2 == 0 ? t : t - 1);\n      if (zeroCap + oneCap >= total) return (int) t;\n    }\n    return -1;\n  }\n}"
+}

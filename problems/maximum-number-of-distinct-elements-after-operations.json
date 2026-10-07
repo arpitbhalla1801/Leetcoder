@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-number-of-distinct-elements-after-operations",
+    "language": "java",
+    "code": "class Solution {\n  public int maxDistinctElements(int[] nums, int k) {\n    int[] sorted = nums.clone();\n    Arrays.sort(sorted);\n    long prev = Long.MIN_VALUE / 2;\n    int count = 0;\n    for (int x : sorted) {\n      // smallest value this element can take that is still above the previous choice\n      long candidate = Math.max(prev + 1, (long) x - k);\n      if (candidate <= (long) x + k) {\n        count++;\n        prev = candidate;\n      }\n    }\n    return count;\n  }\n}"
+}

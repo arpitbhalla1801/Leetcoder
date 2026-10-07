@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-students-taking-exam",
+    "language": "java",
+    "code": "class Solution {\n  public int maxStudents(char[][] seats) {\n    int m = seats.length, n = seats[0].length, full = 1 << n;\n    int[] dp = new int[full], nd = new int[full];\n    java.util.Arrays.fill(dp, -1);\n    dp[0] = 0;\n    for (int i = 0; i < m; i++) {\n      int avail = 0;\n      for (int j = 0; j < n; j++) if (seats[i][j] == '.') avail |= 1 << j;\n      java.util.Arrays.fill(nd, -1);\n      for (int cur = avail; ; cur = (cur - 1) & avail) {\n        if ((cur & (cur << 1)) == 0) {\n          int best = -1;\n          for (int prev = 0; prev < full; prev++) {\n            if (dp[prev] >= 0\n                && (cur & (prev << 1)) == 0\n                && (cur & (prev >> 1)) == 0\n                && dp[prev] > best) best = dp[prev];\n          }\n          if (best >= 0) nd[cur] = best + Integer.bitCount(cur);\n        }\n        if (cur == 0) break;\n      }\n      int[] t = dp;\n      dp = nd;\n      nd = t;\n    }\n    int ans = 0;\n    for (int v : dp) ans = Math.max(ans, v);\n    return ans;\n  }\n}"
+}

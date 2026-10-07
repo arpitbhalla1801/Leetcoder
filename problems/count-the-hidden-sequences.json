@@ -1,0 +1,5 @@
+{
+    "problemName": "count-the-hidden-sequences",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int numberOfArrays(int[] differences, int lower, int upper) {\n    long min = 0, max = 0, cur = 0;\n    for (int d : differences) {\n      cur += d;\n      min = Math.min(min, cur);\n      max = Math.max(max, cur);\n    }\n    long count = (long) upper - lower - (max - min) + 1;\n    return count > 0 ? (int) count : 0;\n  }\n}\n"
+}

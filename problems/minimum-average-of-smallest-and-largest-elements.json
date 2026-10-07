@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-average-of-smallest-and-largest-elements",
+    "language": "java",
+    "code": "class Solution {\n  public double minimumAverage(int[] nums) {\n    java.util.Arrays.sort(nums);\n    double answer = Double.MAX_VALUE;\n    for (int i = 0, j = nums.length - 1; i < j; i++, j--)\n      answer = Math.min(answer, (nums[i] + nums[j]) / 2.0);\n    return answer;\n  }\n}"
+}

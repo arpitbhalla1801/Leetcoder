@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-difference-between-even-and-odd-frequency-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int maxDifference(String s, int k) {\n    int n = s.length();\n    int[][] pre = new int[5][n + 1];\n    for (int c = 0; c < 5; c++)\n      for (int i = 0; i < n; i++) pre[c][i + 1] = pre[c][i] + (s.charAt(i) - '0' == c ? 1 : 0);\n    int INF = Integer.MAX_VALUE / 2, ans = -INF;\n    for (int a = 0; a < 5; a++) {\n      for (int b = 0; b < 5; b++) {\n        if (a == b) continue;\n        int[][] best = new int[2][2];\n        for (int[] row : best) java.util.Arrays.fill(row, INF);\n        int lp = 0;\n        for (int r = 1; r <= n; r++) {\n          while (lp <= r - k && pre[b][r] - pre[b][lp] >= 2) {\n            int pa = pre[a][lp], pb = pre[b][lp];\n            best[pa & 1][pb & 1] = Math.min(best[pa & 1][pb & 1], pa - pb);\n            lp++;\n          }\n          int cand = best[(pre[a][r] & 1) ^ 1][pre[b][r] & 1];\n          if (cand < INF) ans = Math.max(ans, pre[a][r] - pre[b][r] - cand);\n        }\n      }\n    }\n    return ans;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "compare-strings-by-frequency-of-the-smallest-character",
+    "language": "java",
+    "code": "class Solution {\n  public int[] numSmallerByFrequency(String[] queries, String[] words) {\n    int[] frequencies = new int[11];\n    for (String word : words) frequencies[f(word)]++;\n    for (int i = 9; i >= 1; i--) frequencies[i] += frequencies[i + 1];\n    int[] answer = new int[queries.length];\n    for (int i = 0; i < queries.length; i++) answer[i] = frequencies[f(queries[i]) + 1];\n    return answer;\n  }\n\n  private int f(String s) {\n    int[] count = new int[26];\n    for (int i = 0; i < s.length(); i++) count[s.charAt(i) - 'a']++;\n    for (int value : count) if (value != 0) return value;\n    return 0;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "sort-matrix-by-diagonals",
+    "language": "java",
+    "code": "class Solution {\n  public int[][] sortMatrix(int[][] grid) {\n    int n = grid.length;\n    for (int d = -(n - 1); d <= n - 1; d++) { // d = row - col\n      List<Integer> values = new ArrayList<>();\n      for (int i = Math.max(d, 0); i < n && i - d < n; i++) values.add(grid[i][i - d]);\n      Collections.sort(values);\n      if (d >= 0) Collections.reverse(values); // bottom-left (and main) diagonals: non-increasing\n      int k = 0;\n      for (int i = Math.max(d, 0); i < n && i - d < n; i++) grid[i][i - d] = values.get(k++);\n    }\n    return grid;\n  }\n}"
+}

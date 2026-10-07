@@ -1,0 +1,5 @@
+{
+    "problemName": "filter-restaurants-by-vegan-friendly-price-and-distance",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<Integer> filterRestaurants(\n      int[][] restaurants, int veganFriendly, int maxPrice, int maxDistance) {\n    List<int[]> selected = new ArrayList<>();\n    for (int[] restaurant : restaurants)\n      if (restaurant[2] >= veganFriendly\n          && restaurant[3] <= maxPrice\n          && restaurant[4] <= maxDistance) selected.add(restaurant);\n    selected.sort(\n        (a, b) -> a[1] != b[1] ? Integer.compare(b[1], a[1]) : Integer.compare(b[0], a[0]));\n    List<Integer> result = new ArrayList<>();\n    for (int[] restaurant : selected) result.add(restaurant[0]);\n    return result;\n  }\n}\n"
+}

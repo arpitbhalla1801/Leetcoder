@@ -1,0 +1,5 @@
+{
+    "problemName": "smallest-absent-positive-greater-than-average",
+    "language": "java",
+    "code": "class Solution {\n  public int smallestAbsent(int[] nums) {\n    int sum = 0;\n    Set<Integer> present = new HashSet<>();\n    for (int x : nums) {\n      sum += x;\n      present.add(x);\n    }\n    int x = Math.max(1, Math.floorDiv(sum, nums.length) + 1);\n    while (present.contains(x)) x++;\n    return x;\n  }\n}"
+}

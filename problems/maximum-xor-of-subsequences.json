@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-xor-of-subsequences",
+    "language": "java",
+    "code": "class Solution {\n  public int maxXorSubsequences(int[] nums) {\n    int[] basis = new int[31];\n    for (int x : nums) {\n      for (int b = 30; b >= 0 && x != 0; b--) {\n        if ((x >> b & 1) == 0) continue;\n        if (basis[b] == 0) {\n          basis[b] = x;\n          break;\n        }\n        x ^= basis[b];\n      }\n    }\n    int best = 0;\n    for (int b = 30; b >= 0; b--) if ((best ^ basis[b]) > best) best ^= basis[b];\n    return best;\n  }\n}"
+}

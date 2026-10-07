@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-longest-equal-subarray",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int longestEqualSubarray(List<Integer> nums, int k) {\n    Map<Integer, Integer> counts = new HashMap<>();\n    int left = 0, bestFrequency = 0, answer = 0;\n    for (int right = 0; right < nums.size(); right++) {\n      int value = nums.get(right);\n      int frequency = counts.merge(value, 1, Integer::sum);\n      bestFrequency = Math.max(bestFrequency, frequency);\n      while (right - left + 1 - bestFrequency > k) {\n        counts.merge(nums.get(left++), -1, Integer::sum);\n      }\n      answer = Math.max(answer, bestFrequency);\n    }\n    return answer;\n  }\n}\n"
+}

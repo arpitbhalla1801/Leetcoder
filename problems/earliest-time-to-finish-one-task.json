@@ -1,0 +1,5 @@
+{
+    "problemName": "earliest-time-to-finish-one-task",
+    "language": "java",
+    "code": "class Solution {\n  public int earliestTime(int[][] tasks) {\n    int best = Integer.MAX_VALUE;\n    for (int[] t : tasks) best = Math.min(best, t[0] + t[1]);\n    return best;\n  }\n}"
+}

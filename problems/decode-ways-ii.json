@@ -1,0 +1,5 @@
+{
+    "problemName": "decode-ways-ii",
+    "language": "java",
+    "code": "class Solution {\n  private static final long MOD = 1_000_000_007L;\n\n  public int numDecodings(String s) {\n    long prev2 = 1, prev1 = ways1(s.charAt(0));\n    for (int i = 1; i < s.length(); i++) {\n      long current =\n          (ways1(s.charAt(i)) * prev1 + ways2(s.charAt(i - 1), s.charAt(i)) * prev2) % MOD;\n      prev2 = prev1;\n      prev1 = current;\n    }\n    return (int) prev1;\n  }\n\n  private long ways1(char c) {\n    return c == '*' ? 9 : c == '0' ? 0 : 1;\n  }\n\n  private long ways2(char a, char b) {\n    if (a == '*' && b == '*') return 15;\n    if (a == '*') return b <= '6' ? 2 : 1;\n    if (b == '*') return a == '1' ? 9 : a == '2' ? 6 : 0;\n    int value = (a - '0') * 10 + b - '0';\n    return value >= 10 && value <= 26 ? 1 : 0;\n  }\n}\n"
+}

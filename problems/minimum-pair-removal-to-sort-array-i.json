@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-pair-removal-to-sort-array-i",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumPairRemoval(int[] nums) {\n    List<Integer> list = new ArrayList<>();\n    for (int x : nums) list.add(x);\n    int ops = 0;\n    while (!sorted(list)) {\n      int idx = 0, min = Integer.MAX_VALUE;\n      for (int i = 0; i + 1 < list.size(); i++) {\n        int s = list.get(i) + list.get(i + 1);\n        if (s < min) {\n          min = s;\n          idx = i;\n        }\n      }\n      list.set(idx, min);\n      list.remove(idx + 1);\n      ops++;\n    }\n    return ops;\n  }\n\n  private boolean sorted(List<Integer> list) {\n    for (int i = 1; i < list.size(); i++) {\n      if (list.get(i) < list.get(i - 1)) return false;\n    }\n    return true;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "remove-methods-from-project",
+    "language": "java",
+    "code": "class Solution {\n  public List<Integer> remainingMethods(int n, int k, int[][] invocations) {\n    List<List<Integer>> graph = new ArrayList<>();\n    for (int i = 0; i < n; i++) graph.add(new ArrayList<>());\n    for (int[] e : invocations) graph.get(e[0]).add(e[1]);\n    boolean[] suspicious = new boolean[n];\n    Deque<Integer> stack = new ArrayDeque<>();\n    stack.push(k);\n    suspicious[k] = true;\n    while (!stack.isEmpty()) {\n      for (int next : graph.get(stack.pop())) {\n        if (!suspicious[next]) {\n          suspicious[next] = true;\n          stack.push(next);\n        }\n      }\n    }\n    boolean removable = true;\n    for (int[] e : invocations) {\n      if (!suspicious[e[0]] && suspicious[e[1]]) removable = false;\n    }\n    List<Integer> remaining = new ArrayList<>();\n    for (int i = 0; i < n; i++) {\n      if (!removable || !suspicious[i]) remaining.add(i);\n    }\n    return remaining;\n  }\n}"
+}

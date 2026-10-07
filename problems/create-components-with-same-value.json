@@ -1,0 +1,5 @@
+{
+    "problemName": "create-components-with-same-value",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  List<Integer>[] g;\n  int target, cuts;\n\n  public int componentValue(int[] nums, int[][] edges) {\n    int n = nums.length;\n    g = new ArrayList[n];\n    for (int i = 0; i < n; i++) g[i] = new ArrayList<>();\n    for (int[] e : edges) {\n      g[e[0]].add(e[1]);\n      g[e[1]].add(e[0]);\n    }\n    int sum = 0;\n    for (int x : nums) sum += x;\n    for (int parts = n; parts >= 1; parts--)\n      if (sum % parts == 0) {\n        target = sum / parts;\n        cuts = 0;\n        if (dfs(0, -1, nums) == 0) return parts - 1;\n      }\n    return 0;\n  }\n\n  int dfs(int u, int p, int[] a) {\n    int s = a[u];\n    for (int v : g[u])\n      if (v != p) {\n        int x = dfs(v, u, a);\n        if (x < 0) return -1;\n        s += x;\n      }\n    if (s == target) {\n      cuts++;\n      return 0;\n    }\n    return s > target ? -1 : s;\n  }\n}\n"
+}

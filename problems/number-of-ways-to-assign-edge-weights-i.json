@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-ways-to-assign-edge-weights-i",
+    "language": "java",
+    "code": "class Solution {\n  public int assignEdgeWeights(int[][] edges) {\n    final long MOD = 1_000_000_007L;\n    int n = edges.length + 1;\n    List<List<Integer>> graph = new ArrayList<>();\n    for (int i = 0; i <= n; i++) graph.add(new ArrayList<>());\n    for (int[] e : edges) {\n      graph.get(e[0]).add(e[1]);\n      graph.get(e[1]).add(e[0]);\n    }\n    int[] depth = new int[n + 1];\n    Arrays.fill(depth, -1);\n    depth[1] = 0;\n    Deque<Integer> queue = new ArrayDeque<>();\n    queue.add(1);\n    int maxDepth = 0;\n    while (!queue.isEmpty()) {\n      int u = queue.poll();\n      for (int v : graph.get(u)) {\n        if (depth[v] < 0) {\n          depth[v] = depth[u] + 1;\n          maxDepth = Math.max(maxDepth, depth[v]);\n          queue.add(v);\n        }\n      }\n    }\n    // half of the 2^d assignments on a path of d edges have an odd sum\n    long ways = 1;\n    for (int i = 1; i < maxDepth; i++) ways = ways * 2 % MOD;\n    return (int) ways;\n  }\n}"
+}

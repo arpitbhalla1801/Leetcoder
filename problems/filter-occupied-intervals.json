@@ -1,0 +1,5 @@
+{
+    "problemName": "filter-occupied-intervals",
+    "language": "java",
+    "code": "class Solution {\n  public List<List<Integer>> filterOccupiedIntervals(\n      int[][] occupiedIntervals, int freeStart, int freeEnd) {\n    int[][] sorted = occupiedIntervals.clone();\n    java.util.Arrays.sort(sorted, (a, b) -> Integer.compare(a[0], b[0]));\n    List<int[]> merged = new ArrayList<>();\n    for (int[] iv : sorted) {\n      if (!merged.isEmpty() && iv[0] <= (long) merged.get(merged.size() - 1)[1] + 1) {\n        int[] last = merged.get(merged.size() - 1);\n        last[1] = Math.max(last[1], iv[1]);\n      } else merged.add(new int[] {iv[0], iv[1]});\n    }\n    List<List<Integer>> res = new ArrayList<>();\n    for (int[] iv : merged) {\n      if (iv[1] < freeStart || iv[0] > freeEnd) {\n        res.add(java.util.Arrays.asList(iv[0], iv[1]));\n        continue;\n      }\n      if (iv[0] < freeStart) res.add(java.util.Arrays.asList(iv[0], freeStart - 1));\n      if (iv[1] > freeEnd) res.add(java.util.Arrays.asList(freeEnd + 1, iv[1]));\n    }\n    return res;\n  }\n}"
+}

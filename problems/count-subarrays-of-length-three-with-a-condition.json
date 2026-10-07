@@ -1,0 +1,5 @@
+{
+    "problemName": "count-subarrays-of-length-three-with-a-condition",
+    "language": "java",
+    "code": "class Solution {\n  public int countSubarrays(int[] nums) {\n    int count = 0;\n    for (int i = 0; i + 2 < nums.length; i++) {\n      if ((nums[i] + nums[i + 2]) * 2 == nums[i + 1]) count++;\n    }\n    return count;\n  }\n}"
+}

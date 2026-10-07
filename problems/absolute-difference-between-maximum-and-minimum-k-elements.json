@@ -1,0 +1,5 @@
+{
+    "problemName": "absolute-difference-between-maximum-and-minimum-k-elements",
+    "language": "java",
+    "code": "class Solution {\n  public int absDifference(int[] nums, int k) {\n    int[] sorted = nums.clone();\n    Arrays.sort(sorted);\n    int diff = 0;\n    for (int i = 0; i < k; i++) diff += sorted[sorted.length - 1 - i] - sorted[i];\n    return Math.abs(diff);\n  }\n}"
+}

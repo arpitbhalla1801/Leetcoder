@@ -1,0 +1,5 @@
+{
+    "problemName": "Minimum Array End",
+    "language": "java",
+    "code": "class Solution {\n  public long minEnd(int n, int x) {\n    long result = x, value = n - 1L;\n    for (int bit = 0; value > 0; bit++) {\n      if (((x >> bit) & 1) == 0) {\n        if ((value & 1) != 0) result |= 1L << bit;\n        value >>= 1;\n      }\n    }\n    return result;\n  }\n}"
+}

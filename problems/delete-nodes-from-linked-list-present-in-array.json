@@ -1,0 +1,5 @@
+{
+    "problemName": "delete-nodes-from-linked-list-present-in-array",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public ListNode modifiedList(int[] nums, ListNode head) {\n    Set<Integer> removed = new HashSet<>();\n    for (int value : nums) removed.add(value);\n    ListNode dummy = new ListNode(0, head);\n    ListNode previous = dummy;\n    while (previous.next != null) {\n      if (removed.contains(previous.next.val)) previous.next = previous.next.next;\n      else previous = previous.next;\n    }\n    return dummy.next;\n  }\n}"
+}

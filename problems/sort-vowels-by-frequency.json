@@ -1,0 +1,5 @@
+{
+    "problemName": "sort-vowels-by-frequency",
+    "language": "java",
+    "code": "class Solution {\n  public String sortVowels(String s) {\n    int[] freq = new int[5], firstSeen = new int[5];\n    java.util.Arrays.fill(firstSeen, Integer.MAX_VALUE);\n    String vowels = \"aeiou\";\n    for (int i = 0; i < s.length(); i++) {\n      int v = vowels.indexOf(s.charAt(i));\n      if (v < 0) continue;\n      freq[v]++;\n      firstSeen[v] = Math.min(firstSeen[v], i);\n    }\n    Integer[] order = {0, 1, 2, 3, 4};\n    java.util.Arrays.sort(\n        order,\n        (a, b) ->\n            freq[a] != freq[b]\n                ? Integer.compare(freq[b], freq[a])\n                : Integer.compare(firstSeen[a], firstSeen[b]));\n    StringBuilder sorted = new StringBuilder();\n    for (int v : order) for (int c = 0; c < freq[v]; c++) sorted.append(vowels.charAt(v));\n    StringBuilder sb = new StringBuilder();\n    int p = 0;\n    for (int i = 0; i < s.length(); i++) {\n      if (vowels.indexOf(s.charAt(i)) >= 0) sb.append(sorted.charAt(p++));\n      else sb.append(s.charAt(i));\n    }\n    return sb.toString();\n  }\n}"
+}

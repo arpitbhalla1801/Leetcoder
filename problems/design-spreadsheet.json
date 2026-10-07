@@ -1,0 +1,5 @@
+{
+    "problemName": "design-spreadsheet",
+    "language": "java",
+    "code": "class Spreadsheet {\n  private final int[][] cells;\n\n  public Spreadsheet(int rows) {\n    cells = new int[26][rows + 1];\n  }\n\n  public void setCell(String cell, int value) {\n    cells[cell.charAt(0) - 'A'][Integer.parseInt(cell.substring(1))] = value;\n  }\n\n  public void resetCell(String cell) {\n    setCell(cell, 0);\n  }\n\n  public int getValue(String formula) {\n    int plus = formula.indexOf('+');\n    return operand(formula.substring(1, plus)) + operand(formula.substring(plus + 1));\n  }\n\n  private int operand(String token) {\n    if (Character.isLetter(token.charAt(0))) {\n      return cells[token.charAt(0) - 'A'][Integer.parseInt(token.substring(1))];\n    }\n    return Integer.parseInt(token);\n  }\n}\n\n/**\n * Your Spreadsheet object will be instantiated and called as such: Spreadsheet obj = new\n * Spreadsheet(rows); obj.setCell(cell,value); obj.resetCell(cell); int param_3 =\n * obj.getValue(formula);\n */"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-total-price-after-applying-discounts",
+    "language": "java",
+    "code": "class Solution {\n  public double minPrice(int[] prices, int[] discounts) {\n    int[] p = prices.clone(), d = discounts.clone();\n    Arrays.sort(p);\n    Arrays.sort(d);\n    double total = 0;\n    for (int x : p) total += x;\n    // biggest discount on the biggest price\n    for (int i = 0; i < Math.min(p.length, d.length); i++) {\n      int price = p[p.length - 1 - i], discount = d[d.length - 1 - i];\n      total -= price * discount / 100.0;\n    }\n    return total;\n  }\n}"
+}

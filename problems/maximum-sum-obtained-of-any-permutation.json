@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-sum-obtained-of-any-permutation",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int maxSumRangeQuery(int[] nums, int[][] requests) {\n    final long MOD = 1_000_000_007L;\n    int[] diff = new int[nums.length + 1];\n    for (int[] request : requests) {\n      diff[request[0]]++;\n      diff[request[1] + 1]--;\n    }\n    int[] frequency = new int[nums.length];\n    int active = 0;\n    for (int i = 0; i < nums.length; i++) {\n      active += diff[i];\n      frequency[i] = active;\n    }\n    Arrays.sort(nums);\n    Arrays.sort(frequency);\n    long result = 0;\n    for (int i = 0; i < nums.length; i++) result = (result + (long) nums[i] * frequency[i]) % MOD;\n    return (int) result;\n  }\n}\n",
+    "language": "java"
+}

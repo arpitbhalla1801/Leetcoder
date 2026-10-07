@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-maximum-length-of-valid-subsequence-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int maximumLength(int[] nums, int k) {\n    int[][] dp = new int[k][k];\n    boolean[] seen = new boolean[k];\n    int answer = 1;\n    for (int value : nums) {\n      int r = value % k;\n      for (int p = 0; p < k; p++) {\n        int q = (p + r) % k;\n        if (!seen[p]) continue;\n        int candidate = dp[p][q] == 0 ? 2 : dp[p][q] + 1;\n        if (candidate > dp[r][q]) dp[r][q] = candidate;\n        answer = Math.max(answer, dp[r][q]);\n      }\n      seen[r] = true;\n    }\n    return answer;\n  }\n}"
+}

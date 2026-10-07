@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-rotations-to-dial-a-number-i",
+    "language": "java",
+    "code": "class Solution {\n  public int minRotations(String s) {\n    int pos = 0, total = 0;\n    for (char c : s.toCharArray()) {\n      int d = Math.abs(c - '0' - pos);\n      total += Math.min(d, 10 - d);\n      pos = c - '0';\n    }\n    return total;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "html-entity-parser",
+    "language": "java",
+    "code": "class Solution {\n  public String entityParser(String text) {\n    java.util.Map<String, String> entities = new java.util.HashMap<>();\n    entities.put(\"&quot;\", \"\\\"\");\n    entities.put(\"&apos;\", \"'\");\n    entities.put(\"&amp;\", \"&\");\n    entities.put(\"&gt;\", \">\");\n    entities.put(\"&lt;\", \"<\");\n    entities.put(\"&frasl;\", \"/\");\n    StringBuilder out = new StringBuilder();\n    for (int i = 0; i < text.length(); ) {\n      if (text.charAt(i) == '&') {\n        int end = text.indexOf(';', i + 1);\n        if (end != -1) {\n          String entity = text.substring(i, end + 1);\n          String replacement = entities.get(entity);\n          if (replacement != null) {\n            out.append(replacement);\n            i = end + 1;\n            continue;\n          }\n        }\n      }\n      out.append(text.charAt(i++));\n    }\n    return out.toString();\n  }\n}\n"
+}

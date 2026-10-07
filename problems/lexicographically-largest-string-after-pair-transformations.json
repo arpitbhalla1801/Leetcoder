@@ -1,0 +1,5 @@
+{
+    "problemName": "lexicographically-largest-string-after-pair-transformations",
+    "language": "java",
+    "code": "class Solution {\n  public String[] largestString(int[] nums) {\n    String[] res = new String[nums.length];\n    for (int i = 0; i < nums.length; i++) {\n      long x = nums[i];\n      StringBuilder sb = new StringBuilder();\n      long zs = x >> 25;\n      for (long t = 0; t < zs; t++) sb.append('z');\n      long rem = x & ((1L << 25) - 1);\n      for (int b = 24; b >= 0; b--) if ((rem >> b & 1) != 0) sb.append((char) ('a' + b));\n      res[i] = sb.toString();\n    }\n    return res;\n  }\n}"
+}

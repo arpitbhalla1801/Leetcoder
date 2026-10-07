@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-ways-to-rearrange-sticks-with-k-sticks-visible",
+    "language": "java",
+    "code": "class Solution {\n  public int rearrangeSticks(int n, int k) {\n    long[][] dp = new long[n + 1][k + 1];\n    dp[0][0] = 1;\n    final long M = 1_000_000_007L;\n    for (int i = 1; i <= n; i++)\n      for (int j = 1; j <= Math.min(i, k); j++)\n        dp[i][j] = (dp[i - 1][j - 1] + (i - 1) * dp[i - 1][j]) % M;\n    return (int) dp[n][k];\n  }\n}\n"
+}

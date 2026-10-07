@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-positive-sum-subarray",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumSumSubarray(List<Integer> nums, int l, int r) {\n    int best = Integer.MAX_VALUE;\n    for (int i = 0; i < nums.size(); i++) {\n      int sum = 0;\n      for (int j = i; j < nums.size() && j - i + 1 <= r; j++) {\n        sum += nums.get(j);\n        if (j - i + 1 >= l && sum > 0) best = Math.min(best, sum);\n      }\n    }\n    return best == Integer.MAX_VALUE ? -1 : best;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "house-robber-v",
+    "language": "java",
+    "code": "class Solution {\n  public long rob(int[] nums, int[] colors) {\n    long skip = 0, take = 0;\n    for (int i = 0; i < nums.length; i++) {\n      long newSkip = Math.max(skip, take);\n      long newTake = (i > 0 && colors[i] == colors[i - 1] ? skip : Math.max(skip, take)) + nums[i];\n      skip = newSkip;\n      take = newTake;\n    }\n    return Math.max(skip, take);\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "check-if-grid-can-be-cut-into-sections",
+    "language": "java",
+    "code": "class Solution {\n  public boolean checkValidCuts(int n, int[][] rectangles) {\n    return groups(rectangles, 0, 2) >= 3 || groups(rectangles, 1, 3) >= 3;\n  }\n\n  // number of groups of rectangles that cannot be separated by a cut along one axis\n  private int groups(int[][] rectangles, int startIdx, int endIdx) {\n    int[][] sorted = rectangles.clone();\n    Arrays.sort(sorted, (a, b) -> Integer.compare(a[startIdx], b[startIdx]));\n    int groups = 0;\n    long reach = -1;\n    for (int[] r : sorted) {\n      if (r[startIdx] >= reach) groups++;\n      reach = Math.max(reach, r[endIdx]);\n    }\n    return groups;\n  }\n}"
+}

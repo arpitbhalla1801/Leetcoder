@@ -1,0 +1,5 @@
+{
+    "problemName": "elevator-requests-iii",
+    "language": "java",
+    "code": "class Solution {\n  public long elevatorRequests(int n, int start, int[][] requests) {\n    int m = requests.length;\n    long INF = Long.MAX_VALUE / 4;\n    long[][] dp = new long[1 << m][m];\n    for (long[] row : dp) java.util.Arrays.fill(row, INF);\n    for (int j = 0; j < m; j++)\n      dp[1 << j][j] = Math.max((long) Math.abs(start - requests[j][1]), requests[j][0]);\n    long best = INF;\n    for (int mask = 1; mask < (1 << m); mask++) {\n      for (int last = 0; last < m; last++) {\n        long cur = dp[mask][last];\n        if (cur >= INF) continue;\n        if (mask == (1 << m) - 1) best = Math.min(best, cur);\n        for (int j = 0; j < m; j++) {\n          if ((mask >> j & 1) != 0) continue;\n          long t = Math.max(cur + Math.abs(requests[last][1] - requests[j][1]), requests[j][0]);\n          int nm = mask | 1 << j;\n          if (t < dp[nm][j]) dp[nm][j] = t;\n        }\n      }\n    }\n    return best;\n  }\n}"
+}

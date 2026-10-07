@@ -1,0 +1,5 @@
+{
+    "problemName": "lexicographically-smallest-beautiful-string",
+    "language": "java",
+    "code": "class Solution {\n  public String smallestBeautifulString(String s, int k) {\n    char[] a = s.toCharArray();\n    int n = a.length;\n    for (int i = n - 1; i >= 0; i--) {\n      for (char c = (char) (a[i] + 1); c < 'a' + k; c++) {\n        if (i >= 1 && c == a[i - 1]) continue;\n        if (i >= 2 && c == a[i - 2]) continue;\n        a[i] = c;\n        // k >= 4, so one of 'a'..'c' always differs from the previous two letters\n        for (int j = i + 1; j < n; j++) {\n          char d = 'a';\n          while ((j >= 1 && d == a[j - 1]) || (j >= 2 && d == a[j - 2])) d++;\n          a[j] = d;\n        }\n        return new String(a);\n      }\n    }\n    return \"\";\n  }\n}"
+}

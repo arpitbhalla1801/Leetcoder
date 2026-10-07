@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-minimum-number-of-fibonacci-numbers-whose-sum-is-k",
+    "language": "java",
+    "code": "class Solution {\n  public int findMinFibonacciNumbers(int k) {\n    java.util.List<Integer> fib = new java.util.ArrayList<>();\n    fib.add(1);\n    fib.add(1);\n    while (fib.get(fib.size() - 1) < k) {\n      int n = fib.size();\n      fib.add(fib.get(n - 1) + fib.get(n - 2));\n    }\n    int count = 0;\n    for (int i = fib.size() - 1; i >= 0 && k > 0; i--) {\n      if (fib.get(i) <= k) {\n        k -= fib.get(i);\n        count++;\n      }\n    }\n    return count;\n  }\n}\n"
+}

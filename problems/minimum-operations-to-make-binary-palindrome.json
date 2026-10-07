@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-make-binary-palindrome",
+    "language": "java",
+    "code": "class Solution {\n  public int[] minOperations(int[] nums) {\n    List<Integer> pals = new ArrayList<>();\n    for (int x = 0; x < 16384; x++) {\n      String b = Integer.toBinaryString(x);\n      if (new StringBuilder(b).reverse().toString().equals(b)) pals.add(x);\n    }\n    int[] ans = new int[nums.length];\n    for (int i = 0; i < nums.length; i++) {\n      int best = Integer.MAX_VALUE;\n      for (int p : pals) best = Math.min(best, Math.abs(p - nums[i]));\n      ans[i] = best;\n    }\n    return ans;\n  }\n}"
+}

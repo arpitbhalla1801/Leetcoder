@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-product-of-three-elements-after-one-replacement",
+    "language": "java",
+    "code": "class Solution {\n  public long maxProduct(int[] nums) {\n    int n = nums.length;\n    Integer[] idx = new Integer[n];\n    for (int i = 0; i < n; i++) idx[i] = i;\n    java.util.Arrays.sort(idx, (a, b) -> Integer.compare(nums[a], nums[b]));\n    java.util.TreeSet<Integer> pick = new java.util.TreeSet<>();\n    for (int i = 0; i < Math.min(4, n); i++) {\n      pick.add(idx[i]);\n      pick.add(idx[n - 1 - i]);\n    }\n    Integer[] cand = pick.toArray(new Integer[0]);\n    long maxPair = Long.MIN_VALUE, minPair = Long.MAX_VALUE;\n    for (int i = 0; i < cand.length; i++) {\n      for (int j = i + 1; j < cand.length; j++) {\n        long p = (long) nums[cand[i]] * nums[cand[j]];\n        maxPair = Math.max(maxPair, p);\n        minPair = Math.min(minPair, p);\n      }\n    }\n    return 100_000L * Math.max(maxPair, -minPair);\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-pairs-of-interchangeable-rectangles",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long interchangeableRectangles(int[][] rectangles) {\n    Map<Long, Long> m = new HashMap<>();\n    long ans = 0;\n    for (int[] r : rectangles) {\n      int g = gcd(r[0], r[1]);\n      long k = ((long) (r[0] / g) << 32) | (r[1] / g & 0xffffffffL);\n      long c = m.getOrDefault(k, 0L);\n      ans += c;\n      m.put(k, c + 1);\n    }\n    return ans;\n  }\n\n  private int gcd(int a, int b) {\n    while (b != 0) {\n      int t = a % b;\n      a = b;\n      b = t;\n    }\n    return a;\n  }\n}\n"
+}

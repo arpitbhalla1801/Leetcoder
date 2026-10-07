@@ -1,0 +1,5 @@
+{
+    "problemName": "fruits-into-baskets-iii",
+    "language": "java",
+    "code": "class Solution {\n  private int[] tree;\n  private int size;\n\n  public int numOfUnplacedFruits(int[] fruits, int[] baskets) {\n    int n = baskets.length;\n    size = 1;\n    while (size < n) size <<= 1;\n    tree = new int[2 * size]; // max capacity over each segment\n    for (int i = 0; i < n; i++) tree[size + i] = baskets[i];\n    for (int i = size - 1; i >= 1; i--) tree[i] = Math.max(tree[2 * i], tree[2 * i + 1]);\n    int unplaced = 0;\n    for (int fruit : fruits) {\n      if (tree[1] < fruit) {\n        unplaced++;\n        continue;\n      }\n      int node = 1;\n      while (node < size) node = tree[2 * node] >= fruit ? 2 * node : 2 * node + 1; // leftmost fit\n      tree[node] = 0;\n      for (node >>= 1; node >= 1; node >>= 1)\n        tree[node] = Math.max(tree[2 * node], tree[2 * node + 1]);\n    }\n    return unplaced;\n  }\n}"
+}

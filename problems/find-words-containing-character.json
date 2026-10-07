@@ -1,0 +1,5 @@
+{
+    "problemName": "find-words-containing-character",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<Integer> findWordsContaining(String[] words, char x) {\n    List<Integer> answer = new ArrayList<>();\n    for (int i = 0; i < words.length; i++) if (words[i].indexOf(x) >= 0) answer.add(i);\n    return answer;\n  }\n}"
+}

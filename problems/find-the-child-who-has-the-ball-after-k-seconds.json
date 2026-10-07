@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-child-who-has-the-ball-after-k-seconds",
+    "language": "java",
+    "code": "class Solution {\n  public int numberOfChild(int n, int k) {\n    int cycle = 2 * (n - 1);\n    int position = k % cycle;\n    return Math.min(position, cycle - position);\n  }\n}"
+}

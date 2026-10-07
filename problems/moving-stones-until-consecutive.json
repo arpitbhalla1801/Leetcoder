@@ -1,0 +1,5 @@
+{
+    "problemName": "moving-stones-until-consecutive",
+    "language": "java",
+    "code": "class Solution {\n  public int[] numMovesStones(int a, int b, int c) {\n    int x = Math.min(a, Math.min(b, c)), z = Math.max(a, Math.max(b, c)), y = a + b + c - x - z;\n    int max = z - x - 2;\n    int min;\n    if (z - x == 2) min = 0; // already consecutive\n    else if (y - x <= 2 || z - y <= 2) min = 1; // one stone can slot in next to another\n    else min = 2;\n    return new int[] {min, max};\n  }\n}"
+}

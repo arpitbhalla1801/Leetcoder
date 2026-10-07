@@ -1,0 +1,5 @@
+{
+    "problemName": "snake-in-matrix",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int finalPositionOfSnake(int n, List<String> commands) {\n    int r = 0, c = 0;\n    for (String command : commands) {\n      if (command.equals(\"UP\")) r--;\n      else if (command.equals(\"DOWN\")) r++;\n      else if (command.equals(\"LEFT\")) c--;\n      else c++;\n    }\n    return r * n + c;\n  }\n}"
+}

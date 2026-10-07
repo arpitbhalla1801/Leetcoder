@@ -1,0 +1,5 @@
+{
+    "problemName": "count-rotations-with-exactly-k-equal-adjacent-pairs",
+    "language": "java",
+    "code": "class Solution {\n  public int countRotations(String s, int k) {\n    int n = s.length(), count = 0;\n    for (int r = 0; r < n; r++) {\n      String rotated = s.substring(r) + s.substring(0, r);\n      int score = 0;\n      for (int i = 0; i + 1 < n; i++) {\n        if (rotated.charAt(i) == rotated.charAt(i + 1)) score++;\n      }\n      if (score == k) count++;\n    }\n    return count;\n  }\n}"
+}

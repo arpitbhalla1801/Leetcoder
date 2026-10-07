@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-rectangles-to-cover-points",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minRectanglesToCoverPoints(int[][] points, int w) {\n    Arrays.sort(points, (a, b) -> Integer.compare(a[0], b[0]));\n    int rectangles = 0;\n    int coveredThrough = Integer.MIN_VALUE;\n    for (int[] point : points) {\n      if (point[0] > coveredThrough) {\n        rectangles++;\n        coveredThrough = point[0] + w;\n      }\n    }\n    return rectangles;\n  }\n}"
+}

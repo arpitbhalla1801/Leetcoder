@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-absolute-distance-between-mirror-pairs",
+    "language": "java",
+    "code": "class Solution {\n  public int minMirrorPairDistance(int[] nums) {\n    Map<Long, Integer> lastIndexOfReverse = new HashMap<>();\n    int best = Integer.MAX_VALUE;\n    for (int j = 0; j < nums.length; j++) {\n      Integer i = lastIndexOfReverse.get((long) nums[j]);\n      if (i != null) best = Math.min(best, j - i);\n      lastIndexOfReverse.put(reverse(nums[j]), j);\n    }\n    return best == Integer.MAX_VALUE ? -1 : best;\n  }\n\n  private long reverse(long x) {\n    long r = 0;\n    for (; x > 0; x /= 10) r = r * 10 + x % 10;\n    return r;\n  }\n}"
+}

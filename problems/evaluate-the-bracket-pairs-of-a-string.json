@@ -1,0 +1,5 @@
+{
+    "problemName": "evaluate-the-bracket-pairs-of-a-string",
+    "language": "java",
+    "code": "class Solution {\n  public String evaluate(String s, java.util.List<java.util.List<String>> knowledge) {\n    java.util.Map<String, String> map = new java.util.HashMap<>();\n    for (java.util.List<String> pair : knowledge) map.put(pair.get(0), pair.get(1));\n    StringBuilder out = new StringBuilder();\n    for (int i = 0; i < s.length(); ) {\n      if (s.charAt(i) != '(') {\n        out.append(s.charAt(i++));\n        continue;\n      }\n      int j = s.indexOf(')', i);\n      String key = s.substring(i + 1, j);\n      out.append(map.getOrDefault(key, \"?\"));\n      i = j + 1;\n    }\n    return out.toString();\n  }\n}\n"
+}

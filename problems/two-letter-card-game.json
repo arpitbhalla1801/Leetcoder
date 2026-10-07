@@ -1,0 +1,5 @@
+{
+    "problemName": "two-letter-card-game",
+    "language": "java",
+    "code": "class Solution {\n  private static int pairs(int[] c, int w) {\n    int a = 0, m = 0;\n    for (int v : c) {\n      a += v;\n      m = Math.max(m, v);\n    }\n    return Math.min(Math.min((a + w) / 2, a + w - m), a);\n  }\n\n  public int score(String[] cards, char x) {\n    int[] first = new int[26], second = new int[26];\n    int both = 0;\n    for (String s : cards) {\n      boolean f = s.charAt(0) == x, g = s.charAt(1) == x;\n      if (f && g) both++;\n      else if (f) first[s.charAt(1) - 'a']++;\n      else if (g) second[s.charAt(0) - 'a']++;\n    }\n    int best = 0;\n    for (int w = 0; w <= both; w++)\n      best = Math.max(best, pairs(first, w) + pairs(second, both - w));\n    return best;\n  }\n}"
+}

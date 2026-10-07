@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-count-of-numbers-which-are-not-special",
+    "language": "java",
+    "code": "class Solution {\n  public int nonSpecialCount(int l, int r) {\n    int limit = (int) Math.sqrt(r);\n    boolean[] composite = new boolean[limit + 1];\n    int special = 0;\n    for (int p = 2; p <= limit; p++) {\n      if (!composite[p]) {\n        long square = (long) p * p;\n        if (square >= l && square <= r) special++;\n        if ((long) p * p <= limit) {\n          for (int multiple = p * p; multiple <= limit; multiple += p) {\n            composite[multiple] = true;\n          }\n        }\n      }\n    }\n    return (r - l + 1) - special;\n  }\n}"
+}

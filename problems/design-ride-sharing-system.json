@@ -1,0 +1,5 @@
+{
+    "problemName": "design-ride-sharing-system",
+    "language": "java",
+    "code": "class RideSharingSystem {\n  private final java.util.ArrayDeque<Integer> riders = new java.util.ArrayDeque<>();\n  private final java.util.ArrayDeque<Integer> drivers = new java.util.ArrayDeque<>();\n  private final java.util.HashSet<Integer> waiting = new java.util.HashSet<>();\n\n  public RideSharingSystem() {}\n\n  public void addRider(int riderId) {\n    riders.add(riderId);\n    waiting.add(riderId);\n  }\n\n  public void addDriver(int driverId) {\n    drivers.add(driverId);\n  }\n\n  public int[] matchDriverWithRider() {\n    while (!riders.isEmpty() && !waiting.contains(riders.peek())) riders.poll();\n    if (riders.isEmpty() || drivers.isEmpty()) return new int[] {-1, -1};\n    int rider = riders.poll();\n    waiting.remove(rider);\n    return new int[] {drivers.poll(), rider};\n  }\n\n  public void cancelRider(int riderId) {\n    waiting.remove(riderId);\n  }\n}"
+}

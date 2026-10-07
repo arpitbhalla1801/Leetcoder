@@ -1,0 +1,5 @@
+{
+    "problemName": "transform-array-using-pair-operations",
+    "language": "java",
+    "code": "class Solution {\n  public boolean canTransform(int[] source, int[] target) {\n    long a = 0, b = 0;\n    for (int v : source) a += v;\n    for (int v : target) b += v;\n    return a == b;\n  }\n}"
+}

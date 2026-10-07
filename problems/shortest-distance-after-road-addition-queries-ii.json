@@ -1,0 +1,5 @@
+{
+    "problemName": "shortest-distance-after-road-addition-queries-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int[] shortestDistanceAfterQueries(int n, int[][] queries) {\n    int[] next = new int[n]; // next[i]: where the shortest route moves on from city i\n    for (int i = 0; i < n; i++) next[i] = i + 1;\n    int distance = n - 1;\n    int[] answer = new int[queries.length];\n    for (int q = 0; q < queries.length; q++) {\n      int u = queries[q][0], v = queries[q][1];\n      if (next[u] < v) {\n        // roads never cross, so every city strictly between u and v on the route is skipped\n        int city = next[u];\n        while (city < v) {\n          int after = next[city];\n          next[city] = v;\n          city = after;\n          distance--;\n        }\n        next[u] = v;\n      }\n      answer[q] = distance;\n    }\n    return answer;\n  }\n}"
+}

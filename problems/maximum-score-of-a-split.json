@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-score-of-a-split",
+    "language": "java",
+    "code": "class Solution {\n  public long maximumScore(int[] nums) {\n    int n = nums.length;\n    long[] suffixMin = new long[n + 1];\n    suffixMin[n] = Long.MAX_VALUE;\n    for (int i = n - 1; i >= 0; i--) suffixMin[i] = Math.min(suffixMin[i + 1], nums[i]);\n    long prefix = 0, best = Long.MIN_VALUE;\n    for (int i = 0; i + 1 < n; i++) {\n      prefix += nums[i];\n      best = Math.max(best, prefix - suffixMin[i + 1]);\n    }\n    return best;\n  }\n}"
+}

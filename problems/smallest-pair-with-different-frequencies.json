@@ -1,0 +1,5 @@
+{
+    "problemName": "smallest-pair-with-different-frequencies",
+    "language": "java",
+    "code": "class Solution {\n  public int[] minDistinctFreqPair(int[] nums) {\n    int[] freq = new int[101];\n    for (int x : nums) freq[x]++;\n    for (int x = 1; x <= 100; x++) {\n      if (freq[x] == 0) continue;\n      for (int y = x + 1; y <= 100; y++) {\n        if (freq[y] != 0 && freq[y] != freq[x]) return new int[] {x, y};\n      }\n    }\n    return new int[] {-1, -1};\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "count-elements-with-at-least-k-greater-values",
+    "language": "java",
+    "code": "class Solution {\n  public int countElements(int[] nums, int k) {\n    int n = nums.length;\n    int[] a = nums.clone();\n    java.util.Arrays.sort(a);\n    int count = 0;\n    for (int i = 0; i < n; ) {\n      int j = i;\n      while (j < n && a[j] == a[i]) j++;\n      if (n - j >= k) count += j - i;\n      i = j;\n    }\n    return count;\n  }\n}"
+}

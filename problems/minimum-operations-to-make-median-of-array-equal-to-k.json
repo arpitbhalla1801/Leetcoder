@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-make-median-of-array-equal-to-k",
+    "language": "java",
+    "code": "class Solution {\n  public long minOperationsToMakeMedianK(int[] nums, int k) {\n    int[] sorted = nums.clone();\n    Arrays.sort(sorted);\n    int n = sorted.length, median = n / 2;\n    long operations = 0;\n    if (sorted[median] < k) {\n      for (int i = median; i < n && sorted[i] < k; i++) operations += k - sorted[i];\n    } else {\n      for (int i = median; i >= 0 && sorted[i] > k; i--) operations += sorted[i] - k;\n    }\n    return operations;\n  }\n}"
+}

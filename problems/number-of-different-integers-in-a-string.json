@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-different-integers-in-a-string",
+    "language": "java",
+    "code": "class Solution {\n  public int numDifferentIntegers(String word) {\n    java.util.Set<String> seen = new java.util.HashSet<>();\n    int i = 0;\n    while (i < word.length()) {\n      if (!Character.isDigit(word.charAt(i))) {\n        i++;\n        continue;\n      }\n      int j = i;\n      while (j < word.length() && Character.isDigit(word.charAt(j))) j++;\n      int p = i;\n      while (p < j - 1 && word.charAt(p) == '0') p++;\n      seen.add(word.substring(p, j));\n      i = j;\n    }\n    return seen.size();\n  }\n}\n"
+}

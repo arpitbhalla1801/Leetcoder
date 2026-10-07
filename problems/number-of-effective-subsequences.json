@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-effective-subsequences",
+    "language": "java",
+    "code": "class Solution {\n  public int countEffective(int[] nums) {\n    final long MOD = 1_000_000_007L;\n    int n = nums.length, BITS = 20, size = 1 << BITS;\n    int total = 0;\n    int[] f = new int[size];\n    for (int x : nums) {\n      total |= x;\n      f[x]++;\n    }\n    for (int b = 0; b < BITS; b++)\n      for (int mask = 0; mask < size; mask++)\n        if ((mask >> b & 1) != 0) f[mask] += f[mask ^ (1 << b)];\n    long[] pow2 = new long[n + 1];\n    pow2[0] = 1;\n    for (int i = 1; i <= n; i++) pow2[i] = pow2[i - 1] * 2 % MOD;\n    long ans = 0;\n    for (int sub = total; sub > 0; sub = (sub - 1) & total) {\n      int comp = (size - 1) ^ sub;\n      long term = pow2[f[comp]];\n      if (Integer.bitCount(sub) % 2 == 1) ans += term;\n      else ans -= term;\n    }\n    return (int) (((ans % MOD) + MOD) % MOD);\n  }\n}"
+}

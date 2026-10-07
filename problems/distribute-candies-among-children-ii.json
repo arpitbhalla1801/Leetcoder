@@ -1,0 +1,5 @@
+{
+    "problemName": "distribute-candies-among-children-ii",
+    "language": "java",
+    "code": "class Solution {\n  public long distributeCandies(int n, int limit) {\n    long answer = 0;\n    for (int excluded = 0; excluded <= 3; excluded++) {\n      long ways = chooseTwo(n - excluded * (limit + 1));\n      answer += (excluded % 2 == 0 ? 1 : -1) * binomial(3, excluded) * ways;\n    }\n    return answer;\n  }\n\n  private long chooseTwo(long sum) {\n    return sum < 0 ? 0 : (sum + 1) * (sum + 2) / 2;\n  }\n\n  private long binomial(int n, int k) {\n    if (k == 0 || k == n) return 1;\n    if (k == 1 || k == n - 1) return n;\n    return 3;\n  }\n}"
+}

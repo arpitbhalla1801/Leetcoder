@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-number-game",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] numberGame(int[] nums) {\n    Arrays.sort(nums);\n    for (int i = 0; i < nums.length; i += 2) {\n      int temp = nums[i];\n      nums[i] = nums[i + 1];\n      nums[i + 1] = temp;\n    }\n    return nums;\n  }\n}"
+}

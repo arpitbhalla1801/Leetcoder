@@ -1,0 +1,5 @@
+{
+    "problemName": "hexadecimal-and-hexatrigesimal-conversion",
+    "language": "java",
+    "code": "class Solution {\n  public String concatHex36(int n) {\n    long square = (long) n * n;\n    return Long.toString(square, 16).toUpperCase() + Long.toString(square * n, 36).toUpperCase();\n  }\n}"
+}

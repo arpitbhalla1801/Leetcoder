@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-elements-with-frequency-divisible-by-k",
+    "language": "java",
+    "code": "class Solution {\n  public int sumDivisibleByK(int[] nums, int k) {\n    int[] freq = new int[101];\n    for (int x : nums) freq[x]++;\n    int sum = 0;\n    for (int v = 1; v <= 100; v++) {\n      if (freq[v] % k == 0) sum += v * freq[v];\n    }\n    return sum;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "eat-pizzas",
+    "language": "java",
+    "code": "class Solution {\n  public long maxWeight(int[] pizzas) {\n    java.util.Arrays.sort(pizzas);\n    int days = pizzas.length / 4, hi = pizzas.length - 1;\n    long total = 0;\n    for (int d = 1; d <= days; d++) {\n      if ((d & 1) == 1) {\n        total += pizzas[hi];\n        hi--;\n      } else {\n        total += pizzas[hi - 1];\n        hi -= 2;\n      }\n    }\n    return total;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "mirror-distance-of-an-integer",
+    "language": "java",
+    "code": "class Solution {\n  public int mirrorDistance(int n) {\n    long reversed = 0;\n    for (int x = n; x > 0; x /= 10) reversed = reversed * 10 + x % 10;\n    return (int) Math.abs(n - reversed);\n  }\n}"
+}

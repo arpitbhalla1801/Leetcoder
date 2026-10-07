@@ -1,0 +1,5 @@
+{
+    "problemName": "count-good-strings",
+    "language": "java",
+    "code": "class Solution {\n  private static final long MOD = 1_000_000_007L;\n\n  // returns {F(n), F(n + 1)}\n  private static long[] fib(long n) {\n    if (n == 0) return new long[] {0, 1};\n    long[] half = fib(n >> 1);\n    long a = half[0], b = half[1];\n    long c = a * ((2 * b % MOD - a + MOD) % MOD) % MOD;\n    long d = (a * a + b * b) % MOD;\n    return (n & 1) == 0 ? new long[] {c, d} : new long[] {d, (c + d) % MOD};\n  }\n\n  public int countGoodStrings(long n) {\n    return (int) (2 * fib(n)[0] % MOD);\n  }\n}"
+}

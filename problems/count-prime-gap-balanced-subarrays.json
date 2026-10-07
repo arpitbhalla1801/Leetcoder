@@ -1,0 +1,5 @@
+{
+    "problemName": "count-prime-gap-balanced-subarrays",
+    "language": "java",
+    "code": "class Solution {\n  public int primeSubarray(int[] nums, int k) {\n    int n = nums.length, MAXV = 50_000;\n    boolean[] composite = new boolean[MAXV + 1];\n    composite[0] = composite[1] = true;\n    for (int i = 2; i * i <= MAXV; i++)\n      if (!composite[i]) for (int j = i * i; j <= MAXV; j += i) composite[j] = true;\n    int[] maxDq = new int[n], minDq = new int[n];\n    int mh = 0, mt = 0, nh = 0, nt = 0;\n    int left = 0, last1 = -1, last2 = -1;\n    long ans = 0;\n    for (int r = 0; r < n; r++) {\n      if (!composite[nums[r]]) {\n        while (mt > mh && nums[maxDq[mt - 1]] <= nums[r]) mt--;\n        maxDq[mt++] = r;\n        while (nt > nh && nums[minDq[nt - 1]] >= nums[r]) nt--;\n        minDq[nt++] = r;\n        last2 = last1;\n        last1 = r;\n      }\n      while (mt > mh && nums[maxDq[mh]] - nums[minDq[nh]] > k) {\n        left++;\n        while (mt > mh && maxDq[mh] < left) mh++;\n        while (nt > nh && minDq[nh] < left) nh++;\n      }\n      if (last2 >= left) ans += last2 - left + 1;\n    }\n    return (int) ans;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "count-shadow-pairs-i",
+    "language": "java",
+    "code": "class Solution {\n  public long shadowPairs(int[] nums) {\n    int n = nums.length;\n    int[] nextSmaller = new int[n], stack = new int[n];\n    int sp = 0;\n    for (int i = n - 1; i >= 0; i--) {\n      while (sp > 0 && nums[stack[sp - 1]] >= nums[i]) sp--;\n      nextSmaller[i] = sp == 0 ? n : stack[sp - 1];\n      stack[sp++] = i;\n    }\n    java.util.HashMap<Integer, List<Integer>> positions = new java.util.HashMap<>();\n    for (int i = 0; i < n; i++) positions.computeIfAbsent(nums[i], k -> new ArrayList<>()).add(i);\n    long total = 0;\n    for (int i = 0; i < n; i++) {\n      int end = nextSmaller[i];\n      long span = end - i - 1;\n      List<Integer> p = positions.get(nums[i]);\n      int lo = java.util.Collections.binarySearch(p, i);\n      int hi = 0;\n      int l = lo + 1, r = p.size();\n      while (l < r) {\n        int mid = (l + r) >>> 1;\n        if (p.get(mid) < end) l = mid + 1;\n        else r = mid;\n      }\n      hi = l;\n      total += span - (hi - lo - 1);\n    }\n    return total;\n  }\n}"
+}

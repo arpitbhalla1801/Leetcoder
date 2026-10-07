@@ -1,0 +1,5 @@
+{
+    "problemName": "vowel-consonant-score",
+    "language": "java",
+    "code": "class Solution {\n  public int vowelConsonantScore(String s) {\n    int v = 0, c = 0;\n    for (char ch : s.toCharArray()) {\n      if (ch < 'a' || ch > 'z') continue;\n      if (\"aeiou\".indexOf(ch) >= 0) v++;\n      else c++;\n    }\n    return c > 0 ? v / c : 0;\n  }\n}"
+}

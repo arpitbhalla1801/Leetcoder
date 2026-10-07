@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-median-of-the-uniqueness-array",
+    "language": "java",
+    "code": "class Solution {\n  public int medianOfUniquenessArray(int[] nums) {\n    int n = nums.length, max = 0;\n    for (int x : nums) max = Math.max(max, x);\n    boolean[] present = new boolean[max + 1];\n    int distinct = 0;\n    for (int x : nums) {\n      if (!present[x]) {\n        present[x] = true;\n        distinct++;\n      }\n    }\n    long total = (long) n * (n + 1) / 2, need = (total + 1) / 2;\n    int lo = 1, hi = distinct;\n    while (lo < hi) {\n      int mid = (lo + hi) >>> 1;\n      if (atMost(nums, max, mid) >= need) hi = mid;\n      else lo = mid + 1;\n    }\n    return lo;\n  }\n\n  // subarrays with at most k distinct values\n  private long atMost(int[] nums, int max, int k) {\n    int[] freq = new int[max + 1];\n    int left = 0, distinct = 0;\n    long count = 0;\n    for (int right = 0; right < nums.length; right++) {\n      if (freq[nums[right]]++ == 0) distinct++;\n      while (distinct > k) {\n        if (--freq[nums[left++]] == 0) distinct--;\n      }\n      count += right - left + 1;\n    }\n    return count;\n  }\n}"
+}

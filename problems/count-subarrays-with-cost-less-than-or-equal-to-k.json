@@ -1,0 +1,5 @@
+{
+    "problemName": "count-subarrays-with-cost-less-than-or-equal-to-k",
+    "language": "java",
+    "code": "class Solution {\n  public long countSubarrays(int[] nums, long k) {\n    int n = nums.length;\n    int[] maxDq = new int[n], minDq = new int[n];\n    int mh = 0, mt = 0, nh = 0, nt = 0, left = 0;\n    long total = 0;\n    for (int r = 0; r < n; r++) {\n      while (mt > mh && nums[maxDq[mt - 1]] <= nums[r]) mt--;\n      maxDq[mt++] = r;\n      while (nt > nh && nums[minDq[nt - 1]] >= nums[r]) nt--;\n      minDq[nt++] = r;\n      while ((long) (nums[maxDq[mh]] - nums[minDq[nh]]) * (r - left + 1) > k) {\n        left++;\n        if (maxDq[mh] < left) mh++;\n        if (minDq[nh] < left) nh++;\n      }\n      total += r - left + 1;\n    }\n    return total;\n  }\n}"
+}

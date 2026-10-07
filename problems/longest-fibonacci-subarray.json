@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-fibonacci-subarray",
+    "language": "java",
+    "code": "class Solution {\n  public int longestSubarray(int[] nums) {\n    int best = 2, run = 2;\n    for (int i = 2; i < nums.length; i++) {\n      if ((long) nums[i - 1] + nums[i - 2] == nums[i]) run++;\n      else run = 2;\n      best = Math.max(best, run);\n    }\n    return best;\n  }\n}"
+}

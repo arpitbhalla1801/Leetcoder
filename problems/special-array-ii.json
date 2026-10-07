@@ -1,0 +1,5 @@
+{
+    "problemName": "special-array-ii",
+    "language": "java",
+    "code": "class Solution {\n  public boolean[] isArraySpecial(int[] nums, int[][] queries) {\n    int n = nums.length;\n    int[] bad = new int[n];\n    for (int i = 1; i < n; i++) bad[i] = bad[i - 1] + ((nums[i] & 1) == (nums[i - 1] & 1) ? 1 : 0);\n    boolean[] answer = new boolean[queries.length];\n    for (int i = 0; i < queries.length; i++) {\n      int left = queries[i][0], right = queries[i][1];\n      answer[i] = bad[right] == bad[left];\n    }\n    return answer;\n  }\n}"
+}

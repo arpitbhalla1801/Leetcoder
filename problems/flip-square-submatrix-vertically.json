@@ -1,0 +1,5 @@
+{
+    "problemName": "flip-square-submatrix-vertically",
+    "language": "java",
+    "code": "class Solution {\n  public int[][] reverseSubmatrix(int[][] grid, int x, int y, int k) {\n    for (int top = x, bottom = x + k - 1; top < bottom; top++, bottom--) {\n      for (int c = y; c < y + k; c++) {\n        int t = grid[top][c];\n        grid[top][c] = grid[bottom][c];\n        grid[bottom][c] = t;\n      }\n    }\n    return grid;\n  }\n}"
+}

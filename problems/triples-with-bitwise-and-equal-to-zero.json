@@ -1,0 +1,5 @@
+{
+    "problemName": "triples-with-bitwise-and-equal-to-zero",
+    "language": "java",
+    "code": "class Solution {\n  public int countTriplets(int[] nums) {\n    int[] cnt = new int[1 << 16];\n    for (int a : nums) for (int b : nums) cnt[a & b]++;\n    int ans = 0;\n    for (int v : nums) for (int m = 0; m < (1 << 16); m++) if ((v & m) == 0) ans += cnt[m];\n    return ans;\n  }\n}\n"
+}

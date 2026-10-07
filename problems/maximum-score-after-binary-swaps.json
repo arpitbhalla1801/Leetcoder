@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-score-after-binary-swaps",
+    "language": "java",
+    "code": "class Solution {\n  public long maximumScore(int[] nums, String s) {\n    java.util.PriorityQueue<Integer> heap =\n        new java.util.PriorityQueue<>(java.util.Collections.reverseOrder());\n    long score = 0;\n    for (int i = 0; i < nums.length; i++) {\n      heap.add(nums[i]);\n      if (s.charAt(i) == '1') score += heap.poll();\n    }\n    return score;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "existence-of-a-substring-in-a-string-and-its-reverse",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isSubstringPresent(String s) {\n    boolean[][] seen = new boolean[26][26];\n    for (int i = 1; i < s.length(); i++) {\n      int a = s.charAt(i - 1) - 'a';\n      int b = s.charAt(i) - 'a';\n      seen[a][b] = true;\n    }\n    for (int a = 0; a < 26; a++) {\n      for (int b = 0; b < 26; b++) {\n        if (seen[a][b] && seen[b][a]) return true;\n      }\n    }\n    return false;\n  }\n}"
+}

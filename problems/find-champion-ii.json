@@ -1,0 +1,5 @@
+{
+    "problemName": "find-champion-ii",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int findChampion(int n, int[][] edges) {\n    int[] indegree = new int[n];\n    for (int[] edge : edges) indegree[edge[1]]++;\n    int champion = -1;\n    for (int i = 0; i < n; i++)\n      if (indegree[i] == 0) {\n        if (champion != -1) return -1;\n        champion = i;\n      }\n    return champion;\n  }\n}"
+}

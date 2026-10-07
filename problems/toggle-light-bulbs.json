@@ -1,0 +1,5 @@
+{
+    "problemName": "toggle-light-bulbs",
+    "language": "java",
+    "code": "class Solution {\n  public List<Integer> toggleLightBulbs(List<Integer> bulbs) {\n    boolean[] on = new boolean[101];\n    for (int b : bulbs) on[b] = !on[b];\n    List<Integer> ans = new ArrayList<>();\n    for (int i = 1; i <= 100; i++) if (on[i]) ans.add(i);\n    return ans;\n  }\n}"
+}

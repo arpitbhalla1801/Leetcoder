@@ -1,0 +1,5 @@
+{
+    "problemName": "gcd-of-odd-and-even-sums",
+    "language": "java",
+    "code": "class Solution {\n  public int gcdOfOddEvenSums(int n) {\n    // sumOdd = n^2, sumEven = n(n+1), gcd(n^2, n(n+1)) = n * gcd(n, n+1) = n\n    return n;\n  }\n}"
+}

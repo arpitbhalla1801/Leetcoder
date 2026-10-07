@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-size-subarray-in-infinite-array",
+    "language": "java",
+    "code": "class Solution {\n  public int minSizeSubarray(int[] nums, int target) {\n    long total = 0;\n    for (int x : nums) total += x;\n    long cycles = target / total, rem = target % total;\n    int n = nums.length, best = Integer.MAX_VALUE;\n    long sum = 0;\n    int left = 0;\n    for (int right = 0; right < 2 * n; right++) {\n      sum += nums[right % n];\n      while (sum > rem && left <= right) sum -= nums[left++ % n];\n      if (sum == rem) best = Math.min(best, right - left + 1);\n    }\n    if (rem == 0) return (int) (cycles * n);\n    return best == Integer.MAX_VALUE ? -1 : (int) (cycles * n + best);\n  }\n}\n"
+}

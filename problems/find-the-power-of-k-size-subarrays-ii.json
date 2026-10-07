@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-power-of-k-size-subarrays-ii",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] resultsArray(int[] nums, int k) {\n    int n = nums.length;\n    int[] ans = new int[n - k + 1];\n    Arrays.fill(ans, -1);\n    int run = 1;\n    for (int i = 0; i < n; i++) {\n      if (i > 0 && nums[i] == nums[i - 1] + 1) run++;\n      else run = 1;\n      if (i >= k - 1 && run >= k) ans[i - k + 1] = nums[i];\n    }\n    return ans;\n  }\n}"
+}

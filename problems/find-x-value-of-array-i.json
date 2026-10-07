@@ -1,0 +1,5 @@
+{
+    "problemName": "find-x-value-of-array-i",
+    "language": "java",
+    "code": "class Solution {\n  public long[] resultArray(int[] nums, int k) {\n    long[] result = new long[k];\n    long[] ending = new long[k]; // subarrays ending at the current index, by product remainder\n    for (int a : nums) {\n      long[] next = new long[k];\n      int r = a % k;\n      for (int x = 0; x < k; x++) next[x * r % k] += ending[x];\n      next[r]++;\n      for (int x = 0; x < k; x++) result[x] += next[x];\n      ending = next;\n    }\n    return result;\n  }\n}"
+}

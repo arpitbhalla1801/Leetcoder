@@ -1,0 +1,5 @@
+{
+    "problemName": "split-two-strings-to-make-palindrome",
+    "code": "class Solution {\n  public boolean checkPalindromeFormation(String a, String b) {\n    return canSplit(a, b) || canSplit(b, a);\n  }\n\n  private boolean canSplit(String left, String right) {\n    int i = 0, j = left.length() - 1;\n    while (i < j && left.charAt(i) == right.charAt(j)) {\n      i++;\n      j--;\n    }\n    return isPalindrome(left, i, j) || isPalindrome(right, i, j);\n  }\n\n  private boolean isPalindrome(String value, int i, int j) {\n    while (i < j) if (value.charAt(i++) != value.charAt(j--)) return false;\n    return true;\n  }\n}\n",
+    "language": "java"
+}

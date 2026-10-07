@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-number-of-subsequences-after-one-inserting",
+    "language": "java",
+    "code": "class Solution {\n  public long numOfSubsequences(String s) {\n    int n = s.length();\n    long l = 0, lc = 0, lct = 0;\n    for (int i = 0; i < n; i++) {\n      char c = s.charAt(i);\n      if (c == 'L') l++;\n      else if (c == 'C') lc += l;\n      else if (c == 'T') lct += lc;\n    }\n    long t = 0, ct = 0;\n    for (int i = n - 1; i >= 0; i--) {\n      char c = s.charAt(i);\n      if (c == 'T') t++;\n      else if (c == 'C') ct += t;\n    }\n    long gain = Math.max(ct, lc);\n    long prefixL = 0, suffixT = t;\n    for (int i = 0; i < n; i++) {\n      gain = Math.max(gain, prefixL * suffixT);\n      char c = s.charAt(i);\n      if (c == 'T') suffixT--;\n      else if (c == 'L') prefixL++;\n    }\n    return lct + gain;\n  }\n}"
+}

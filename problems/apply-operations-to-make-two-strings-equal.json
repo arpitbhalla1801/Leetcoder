@@ -1,0 +1,5 @@
+{
+    "problemName": "apply-operations-to-make-two-strings-equal",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minOperations(String s1, String s2, int x) {\n    List<Integer> mismatch = new ArrayList<>();\n    for (int i = 0; i < s1.length(); i++) if (s1.charAt(i) != s2.charAt(i)) mismatch.add(i);\n    int m = mismatch.size();\n    if ((m & 1) != 0) return -1;\n    long[] dp = new long[m + 1];\n    Arrays.fill(dp, Long.MAX_VALUE / 4);\n    dp[0] = 0;\n    if (m > 0) dp[1] = x;\n    for (int i = 0; i + 1 < m; i++) {\n      dp[i + 2] =\n          Math.min(\n              dp[i + 2], dp[i] + Math.min(2L * x, 2L * (mismatch.get(i + 1) - mismatch.get(i))));\n      dp[i + 2] = Math.min(dp[i + 2], dp[i + 1] + x);\n    }\n    return (int) (dp[m] / 2);\n  }\n}\n"
+}

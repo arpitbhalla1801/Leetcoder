@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-make-array-sum-divisible-by-k",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(int[] nums, int k) {\n    int sum = 0;\n    for (int x : nums) sum += x;\n    return sum % k;\n  }\n}"
+}

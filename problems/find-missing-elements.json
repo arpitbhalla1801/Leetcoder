@@ -1,0 +1,5 @@
+{
+    "problemName": "find-missing-elements",
+    "language": "java",
+    "code": "class Solution {\n  public List<Integer> findMissingElements(int[] nums) {\n    int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;\n    boolean[] present = new boolean[101];\n    for (int x : nums) {\n      present[x] = true;\n      min = Math.min(min, x);\n      max = Math.max(max, x);\n    }\n    List<Integer> missing = new ArrayList<>();\n    for (int v = min; v <= max; v++) {\n      if (!present[v]) missing.add(v);\n    }\n    return missing;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-cost-to-equalize-array",
+    "language": "java",
+    "code": "class Solution {\n  public int minCostToEqualizeArray(int[] nums, int cost1, int cost2) {\n    final long MOD = 1_000_000_007L;\n    int n = nums.length;\n    long max = 0, min = Long.MAX_VALUE, sum = 0;\n    for (int x : nums) {\n      max = Math.max(max, x);\n      min = Math.min(min, x);\n      sum += x;\n    }\n    if (n == 1) return 0;\n    // pairing two increments only helps when it beats two single increments\n    if (cost2 >= 2L * cost1) return (int) (((n * max - sum) * cost1) % MOD);\n    long best = Long.MAX_VALUE;\n    for (long target = max; target <= 2 * max; target++) {\n      long total = n * target - sum; // increments needed in all\n      long biggest = target - min; // increments the smallest element needs\n      long pairs = Math.min(total / 2, total - biggest);\n      best = Math.min(best, pairs * cost2 + (total - 2 * pairs) * cost1);\n    }\n    return (int) (best % MOD);\n  }\n}"
+}

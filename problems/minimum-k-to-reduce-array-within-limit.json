@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-k-to-reduce-array-within-limit",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumK(int[] nums) {\n    int lo = 1, hi = 100000;\n    while (lo < hi) {\n      int mid = (lo + hi) >>> 1;\n      long operations = 0;\n      for (int x : nums) operations += (x + mid - 1) / mid;\n      if (operations <= (long) mid * mid) hi = mid;\n      else lo = mid + 1;\n    }\n    return lo;\n  }\n}"
+}

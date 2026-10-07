@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-most-common-response",
+    "language": "java",
+    "code": "class Solution {\n  public String findCommonResponse(List<List<String>> responses) {\n    java.util.Map<String, Integer> count = new java.util.HashMap<>();\n    for (List<String> day : responses) {\n      for (String s : new java.util.HashSet<>(day)) count.merge(s, 1, Integer::sum);\n    }\n    String best = null;\n    int bestCount = 0;\n    for (java.util.Map.Entry<String, Integer> e : count.entrySet()) {\n      if (e.getValue() > bestCount\n          || (e.getValue() == bestCount && e.getKey().compareTo(best) < 0)) {\n        best = e.getKey();\n        bestCount = e.getValue();\n      }\n    }\n    return best;\n  }\n}"
+}

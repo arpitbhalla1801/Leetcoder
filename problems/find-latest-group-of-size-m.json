@@ -1,0 +1,5 @@
+{
+    "problemName": "find-latest-group-of-size-m",
+    "language": "java",
+    "code": "class Solution {\n  public int findLatestStep(int[] arr, int m) {\n    int n = arr.length;\n    int[] len = new int[n + 2];\n    int groups = 0, ans = -1;\n    for (int step = 0; step < n; step++) {\n      int x = arr[step], left = len[x - 1], right = len[x + 1];\n      if (left == m) groups--;\n      if (right == m) groups--;\n      len[x] = left + right + 1;\n      len[x - left] = len[x + right] = len[x];\n      if (len[x] == m) groups++;\n      if (groups > 0) ans = step + 1;\n    }\n    return ans;\n  }\n}\n"
+}

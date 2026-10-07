@@ -1,0 +1,5 @@
+{
+    "problemName": "report-spam-message",
+    "language": "java",
+    "code": "class Solution {\n  public boolean reportSpam(String[] message, String[] bannedWords) {\n    Set<String> banned = new HashSet<>(Arrays.asList(bannedWords));\n    int hits = 0;\n    for (String word : message) {\n      if (banned.contains(word) && ++hits == 2) return true;\n    }\n    return false;\n  }\n}"
+}

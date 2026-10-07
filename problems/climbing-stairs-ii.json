@@ -1,0 +1,5 @@
+{
+    "problemName": "climbing-stairs-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int climbStairs(int n, int[] costs) {\n    long INF = Long.MAX_VALUE / 4;\n    long[] dp = new long[n + 1];\n    java.util.Arrays.fill(dp, INF);\n    dp[0] = 0;\n    for (int j = 1; j <= n; j++) {\n      for (int d = 1; d <= 3 && d <= j; d++) {\n        dp[j] = Math.min(dp[j], dp[j - d] + costs[j - 1] + (long) d * d);\n      }\n    }\n    return (int) dp[n];\n  }\n}"
+}

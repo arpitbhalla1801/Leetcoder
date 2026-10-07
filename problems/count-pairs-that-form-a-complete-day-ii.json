@@ -1,0 +1,5 @@
+{
+    "problemName": "count-pairs-that-form-a-complete-day-ii",
+    "language": "java",
+    "code": "class Solution {\n  public long countCompleteDayPairs(int[] hours) {\n    long[] count = new long[24];\n    long answer = 0;\n    for (int hour : hours) {\n      int r = hour % 24;\n      answer += count[(24 - r) % 24];\n      count[r]++;\n    }\n    return answer;\n  }\n}"
+}

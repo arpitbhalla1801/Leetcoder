@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-points-after-enemy-battles",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long maximumPoints(int[] enemyEnergies, int currentEnergy) {\n    int min = Integer.MAX_VALUE;\n    long total = currentEnergy;\n    for (int energy : enemyEnergies) {\n      min = Math.min(min, energy);\n      total += energy;\n    }\n    if (currentEnergy < min) return 0;\n    return (total - min) / min;\n  }\n}"
+}

@@ -1,5 +1,5 @@
 {
     "problemName": "count-square-sum-triples",
     "language": "java",
-    "code": "class Solution {\n    public int countTriples(int n) {\n        int answer = 0;\n        int k = n * n;\n        for (int i = 1; i < n; i++) {\n            int t = i * i;\n            for (int j = 1; j < n; j++) {\n                int p = j * j;\n                int sum = t + p;\n                if(sum > k){\n                    continue;\n                }\n                if(Math.sqrt(sum) - (long)Math.sqrt(sum) == 0){\n                    answer++;\n                }\n            }\n        }\n        return answer;\n    }\n}"
+    "code": "class Solution {\n  public int countTriples(int n) {\n    int count = 0;\n    for (int a = 1; a <= n; a++) {\n      for (int b = a + 1; b <= n; b++) {\n        int sum = a * a + b * b;\n        int c = (int) Math.sqrt(sum);\n        if (c <= n && c * c == sum) count += 2; // (a, b, c) and (b, a, c)\n      }\n    }\n    return count;\n  }\n}"
 }

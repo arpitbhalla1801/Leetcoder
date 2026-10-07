@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-the-minimum-game-score",
+    "language": "java",
+    "code": "class Solution {\n  public long maxScore(int[] points, int m) {\n    long lo = 0, hi = 2_000_000_000_000_000L;\n    while (lo < hi) {\n      long mid = lo + (hi - lo + 1) / 2;\n      if (feasible(points, m, mid)) lo = mid;\n      else hi = mid - 1;\n    }\n    return lo;\n  }\n\n  private static boolean feasible(int[] points, long m, long x) {\n    int n = points.length;\n    long moves = 0, carry = 0;\n    for (int i = 0; i < n; i++) {\n      long need = (x + points[i] - 1) / points[i];\n      if (i == n - 1 && carry >= need) break;\n      moves++;\n      long extra = Math.max(0, need - carry - 1);\n      moves += 2 * extra;\n      carry = extra;\n      if (moves > m) return false;\n    }\n    return moves <= m;\n  }\n}"
+}

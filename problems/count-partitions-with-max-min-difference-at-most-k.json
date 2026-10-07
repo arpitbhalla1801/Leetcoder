@@ -1,0 +1,5 @@
+{
+    "problemName": "count-partitions-with-max-min-difference-at-most-k",
+    "language": "java",
+    "code": "class Solution {\n  public int countPartitions(int[] nums, int k) {\n    final int MOD = 1_000_000_007;\n    int n = nums.length;\n    int[] dp = new int[n + 1];\n    long[] prefix = new long[n + 2]; // prefix[i] = dp[0] + ... + dp[i - 1]\n    dp[0] = 1;\n    prefix[1] = 1;\n    int[] maxQ = new int[n], minQ = new int[n];\n    int maxHead = 0, maxTail = 0, minHead = 0, minTail = 0, left = 0;\n    for (int i = 0; i < n; i++) {\n      while (maxTail > maxHead && nums[maxQ[maxTail - 1]] <= nums[i]) maxTail--;\n      maxQ[maxTail++] = i;\n      while (minTail > minHead && nums[minQ[minTail - 1]] >= nums[i]) minTail--;\n      minQ[minTail++] = i;\n      while (nums[maxQ[maxHead]] - nums[minQ[minHead]] > k) {\n        left++;\n        if (maxQ[maxHead] < left) maxHead++;\n        if (minQ[minHead] < left) minHead++;\n      }\n      // the last segment is nums[j..i] for every j in [left, i]\n      dp[i + 1] = (int) ((prefix[i + 1] - prefix[left] + MOD) % MOD);\n      prefix[i + 2] = (prefix[i + 1] + dp[i + 1]) % MOD;\n    }\n    return dp[n];\n  }\n}"
+}

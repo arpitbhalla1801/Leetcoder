@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-first-player-to-win-k-games-in-a-row",
+    "language": "java",
+    "code": "class Solution {\n  public int findWinningPlayer(int[] skills, int k) {\n    // the queue rotates, so the current champion only ever meets each later player once\n    int champion = 0, wins = 0;\n    for (int i = 1; i < skills.length && wins < k; i++) {\n      if (skills[champion] > skills[i]) {\n        wins++;\n      } else {\n        champion = i;\n        wins = 1;\n      }\n    }\n    return champion;\n  }\n}"
+}

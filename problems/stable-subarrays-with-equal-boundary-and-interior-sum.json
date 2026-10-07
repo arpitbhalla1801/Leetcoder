@@ -1,0 +1,5 @@
+{
+    "problemName": "stable-subarrays-with-equal-boundary-and-interior-sum",
+    "language": "java",
+    "code": "class Solution {\n  public long countStableSubarrays(int[] capacity) {\n    int n = capacity.length;\n    long[] pre = new long[n + 1];\n    for (int i = 0; i < n; i++) pre[i + 1] = pre[i] + capacity[i];\n    java.util.HashMap<Integer, java.util.HashMap<Long, Integer>> seen = new java.util.HashMap<>();\n    long total = 0;\n    for (int r = 2; r < n; r++) {\n      int l = r - 2;\n      seen.computeIfAbsent(capacity[l], k -> new java.util.HashMap<>())\n          .merge(pre[l + 1], 1, Integer::sum);\n      java.util.HashMap<Long, Integer> byPre = seen.get(capacity[r]);\n      if (byPre != null) total += byPre.getOrDefault(pre[r] - capacity[r], 0);\n    }\n    return total;\n  }\n}"
+}

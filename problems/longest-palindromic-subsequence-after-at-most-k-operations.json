@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-palindromic-subsequence-after-at-most-k-operations",
+    "language": "java",
+    "code": "class Solution {\n  public int longestPalindromicSubsequence(String s, int k) {\n    int n = s.length();\n    int[][] next = new int[n][k + 1], cur = new int[n][k + 1];\n    for (int i = n - 1; i >= 0; i--) {\n      for (int j = i; j < n; j++) {\n        for (int t = 0; t <= k; t++) {\n          if (i == j) {\n            cur[j][t] = 1;\n            continue;\n          }\n          int best = Math.max(next[j][t], cur[j - 1][t]);\n          int diff = Math.abs(s.charAt(i) - s.charAt(j));\n          int cost = Math.min(diff, 26 - diff);\n          if (cost <= t) {\n            int inner = i + 1 <= j - 1 ? next[j - 1][t - cost] : 0;\n            best = Math.max(best, 2 + inner);\n          }\n          cur[j][t] = best;\n        }\n      }\n      int[][] tmp = next;\n      next = cur;\n      cur = tmp;\n    }\n    return next[n - 1][k];\n  }\n}"
+}

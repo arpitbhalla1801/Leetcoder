@@ -1,0 +1,5 @@
+{
+    "problemName": "count-indices-with-opposite-parity",
+    "language": "java",
+    "code": "class Solution {\n  public int[] countOppositeParity(int[] nums) {\n    int n = nums.length;\n    int[] ans = new int[n];\n    int[] seen = new int[2]; // parity counts to the right\n    for (int i = n - 1; i >= 0; i--) {\n      ans[i] = seen[1 - nums[i] % 2];\n      seen[nums[i] % 2]++;\n    }\n    return ans;\n  }\n}"
+}

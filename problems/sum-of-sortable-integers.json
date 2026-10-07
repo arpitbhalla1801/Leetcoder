@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-sortable-integers",
+    "language": "java",
+    "code": "class Solution {\n  public int sortableIntegers(int[] nums) {\n    int n = nums.length, total = 0;\n    for (int k = 1; k <= n; k++) {\n      if (n % k != 0) continue;\n      boolean ok = true;\n      int prevMax = Integer.MIN_VALUE;\n      for (int start = 0; start < n && ok; start += k) {\n        int descents = 0, mn = Integer.MAX_VALUE, mx = Integer.MIN_VALUE;\n        for (int j = 0; j < k; j++) {\n          int cur = nums[start + j], next = nums[start + (j + 1) % k];\n          if (cur > next) descents++;\n          mn = Math.min(mn, cur);\n          mx = Math.max(mx, cur);\n        }\n        if (descents > 1 || mn < prevMax) ok = false;\n        prevMax = mx;\n      }\n      if (ok) total += k;\n    }\n    return total;\n  }\n}"
+}

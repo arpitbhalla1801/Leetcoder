@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-manhattan-distance-after-all-moves",
+    "language": "java",
+    "code": "class Solution {\n  public int maxDistance(String moves) {\n    int x = 0, y = 0, blanks = 0;\n    for (int i = 0; i < moves.length(); i++) {\n      switch (moves.charAt(i)) {\n        case 'U':\n          y++;\n          break;\n        case 'D':\n          y--;\n          break;\n        case 'L':\n          x--;\n          break;\n        case 'R':\n          x++;\n          break;\n        default:\n          blanks++;\n      }\n    }\n    return Math.abs(x) + Math.abs(y) + blanks;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-transform-string",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(String s) {\n    // every letter must travel forward to 'a'; shared steps merge, so the furthest letter decides\n    int best = 0;\n    for (int i = 0; i < s.length(); i++) {\n      int c = s.charAt(i) - 'a';\n      if (c != 0) best = Math.max(best, 26 - c);\n    }\n    return best;\n  }\n}"
+}

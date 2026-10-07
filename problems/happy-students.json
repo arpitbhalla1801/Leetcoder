@@ -1,0 +1,5 @@
+{
+    "problemName": "happy-students",
+    "language": "java",
+    "code": "class Solution {\n  public int countWays(List<Integer> nums) {\n    int n = nums.size();\n    int[] cnt = new int[n + 1];\n    for (int x : nums) cnt[x]++;\n    int ways = 0, less = 0;\n    for (int k = 0; k <= n; k++) {\n      if (less == k && cnt[k] == 0) ways++;\n      less += cnt[k];\n    }\n    return ways;\n  }\n}"
+}

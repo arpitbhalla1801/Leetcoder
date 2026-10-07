@@ -1,0 +1,5 @@
+{
+    "problemName": "reverse-string-prefix",
+    "language": "java",
+    "code": "class Solution {\n  public String reversePrefix(String s, int k) {\n    return new StringBuilder(s.substring(0, k)).reverse().append(s.substring(k)).toString();\n  }\n}"
+}

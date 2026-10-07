@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-sum-of-squares-of-digits",
+    "language": "java",
+    "code": "class Solution {\n  public String maxSumOfSquares(int num, int sum) {\n    int nines = sum / 9, rem = sum % 9;\n    if (nines + (rem > 0 ? 1 : 0) > num) return \"\";\n    StringBuilder sb = new StringBuilder();\n    for (int i = 0; i < nines; i++) sb.append('9');\n    if (rem > 0) sb.append((char) ('0' + rem));\n    while (sb.length() < num) sb.append('0');\n    return sb.toString();\n  }\n}"
+}

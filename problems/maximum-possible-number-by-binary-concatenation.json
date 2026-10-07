@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-possible-number-by-binary-concatenation",
+    "language": "java",
+    "code": "class Solution {\n  public int maxGoodNumber(int[] nums) {\n    String[] s = new String[3];\n    for (int i = 0; i < 3; i++) s[i] = Integer.toBinaryString(nums[i]);\n    java.util.Arrays.sort(s, (a, b) -> (b + a).compareTo(a + b));\n    return Integer.parseInt(s[0] + s[1] + s[2], 2);\n  }\n}"
+}

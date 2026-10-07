@@ -1,0 +1,5 @@
+{
+    "problemName": "last-substring-in-lexicographical-order",
+    "language": "java",
+    "code": "class Solution {\n  public String lastSubstring(String s) {\n    int i = 0, j = 1, k = 0, n = s.length();\n    while (j + k < n) {\n      char a = s.charAt(i + k), b = s.charAt(j + k);\n      if (a == b) {\n        k++;\n        continue;\n      }\n      if (a < b) i = i + k + 1;\n      else j = j + k + 1;\n      if (i == j) j++;\n      k = 0;\n    }\n    return s.substring(i);\n  }\n}\n"
+}

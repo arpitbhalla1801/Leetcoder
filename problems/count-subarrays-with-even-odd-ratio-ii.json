@@ -1,0 +1,5 @@
+{
+    "problemName": "count-subarrays-with-even-odd-ratio-ii",
+    "language": "java",
+    "code": "class Solution {\n  public long countRatioSubarrays(int[] nums, int a, int b) {\n    int n = nums.length;\n    long[] prefix = new long[n + 1];\n    for (int i = 0; i < n; i++) prefix[i + 1] = prefix[i] + (nums[i] % 2 == 0 ? b : -(long) a);\n    long[] sorted = prefix.clone();\n    java.util.Arrays.sort(sorted);\n    int m = 0;\n    for (int i = 0; i <= n; i++) if (i == 0 || sorted[i] != sorted[i - 1]) sorted[m++] = sorted[i];\n    long[] bit = new long[m + 2];\n    long total = 0;\n    for (int i = 0; i <= n; i++) {\n      int rank = java.util.Arrays.binarySearch(sorted, 0, m, prefix[i]) + 1;\n      // earlier prefixes with value >= current: prefix[i] - earlier <= 0\n      long ge = i - query(bit, rank - 1);\n      total += ge;\n      for (int p = rank; p <= m; p += p & -p) bit[p]++;\n    }\n    return total;\n  }\n\n  private static long query(long[] bit, int i) {\n    long s = 0;\n    for (; i > 0; i -= i & -i) s += bit[i];\n    return s;\n  }\n}"
+}

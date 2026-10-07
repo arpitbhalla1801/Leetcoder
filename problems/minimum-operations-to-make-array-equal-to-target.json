@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-make-array-equal-to-target",
+    "language": "java",
+    "code": "class Solution {\n  public long minimumOperations(int[] nums, int[] target) {\n    long answer = 0;\n    long previous = 0;\n    for (int i = 0; i < nums.length; i++) {\n      long current = (long) target[i] - nums[i];\n      if ((current >= 0) != (previous >= 0)) {\n        answer += Math.abs(current);\n      } else {\n        answer += Math.max(0L, Math.abs(current) - Math.abs(previous));\n      }\n      previous = current;\n    }\n    return answer;\n  }\n}"
+}

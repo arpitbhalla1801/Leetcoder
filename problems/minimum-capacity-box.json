@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-capacity-box",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumIndex(int[] capacity, int itemSize) {\n    int best = -1;\n    for (int i = 0; i < capacity.length; i++) {\n      if (capacity[i] >= itemSize && (best == -1 || capacity[i] < capacity[best])) best = i;\n    }\n    return best;\n  }\n}"
+}

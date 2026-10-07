@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-integers-with-maximum-digit-range",
+    "language": "java",
+    "code": "class Solution {\n  public int maxDigitRange(int[] nums) {\n    int bestRange = -1, sum = 0;\n    for (int x : nums) {\n      int max = 0, min = 9;\n      for (int y = x; y > 0; y /= 10) {\n        max = Math.max(max, y % 10);\n        min = Math.min(min, y % 10);\n      }\n      int range = max - min;\n      if (range > bestRange) {\n        bestRange = range;\n        sum = x;\n      } else if (range == bestRange) {\n        sum += x;\n      }\n    }\n    return sum;\n  }\n}"
+}

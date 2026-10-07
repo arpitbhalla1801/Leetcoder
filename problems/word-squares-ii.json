@@ -1,0 +1,5 @@
+{
+    "problemName": "word-squares-ii",
+    "language": "java",
+    "code": "class Solution {\n  public List<List<String>> wordSquares(String[] words) {\n    String[] w = words.clone();\n    java.util.Arrays.sort(w);\n    List<List<String>> res = new ArrayList<>();\n    int n = w.length;\n    for (int a = 0; a < n; a++) {\n      for (int b = 0; b < n; b++) {\n        if (b == a || w[a].charAt(0) != w[b].charAt(0)) continue;\n        for (int c = 0; c < n; c++) {\n          if (c == a || c == b || w[a].charAt(3) != w[c].charAt(0)) continue;\n          for (int d = 0; d < n; d++) {\n            if (d == a || d == b || d == c) continue;\n            if (w[d].charAt(0) == w[b].charAt(3) && w[d].charAt(3) == w[c].charAt(3)) {\n              res.add(java.util.Arrays.asList(w[a], w[b], w[c], w[d]));\n            }\n          }\n        }\n      }\n    }\n    return res;\n  }\n}"
+}

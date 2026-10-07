@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-initial-strength-to-defeat-all-monsters",
+    "language": "java",
+    "code": "class Solution {\n  public long minInitialStrength(int[] monsters, int[][] boosts) {\n    int n = monsters.length;\n    long[] diff = new long[n + 1];\n    for (int[] b : boosts) {\n      diff[b[0]] += b[2];\n      diff[b[1] + 1] -= b[2];\n    }\n    long[] bonus = new long[n];\n    long run = 0;\n    for (int i = 0; i < n; i++) {\n      run += diff[i];\n      bonus[i] = run;\n    }\n    long required = 0;\n    for (int i = n - 1; i >= 0; i--) {\n      long need = Math.max(0, monsters[i] - bonus[i]);\n      long carry = required > 0 ? required + monsters[i] : 0;\n      required = Math.max(need, carry);\n    }\n    return required;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "check-good-integer",
+    "language": "java",
+    "code": "class Solution {\n  public boolean checkGoodInteger(int n) {\n    int digitSum = 0, squareSum = 0;\n    for (; n > 0; n /= 10) {\n      int d = n % 10;\n      digitSum += d;\n      squareSum += d * d;\n    }\n    return squareSum - digitSum >= 50;\n  }\n}"
+}

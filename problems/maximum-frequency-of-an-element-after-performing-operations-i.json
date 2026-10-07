@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-frequency-of-an-element-after-performing-operations-i",
+    "language": "java",
+    "code": "class Solution {\n  public int maxFrequency(int[] nums, int k, int numOperations) {\n    int max = 0;\n    for (int x : nums) max = Math.max(max, x);\n    int limit = max + k + 1;\n    int[] prefix = new int[limit + 2]; // prefix[v + 1] = number of elements <= v\n    int[] count = new int[limit + 1];\n    for (int x : nums) count[x]++;\n    for (int v = 0; v <= limit; v++) prefix[v + 1] = prefix[v] + count[v];\n    int best = 0;\n    for (int v = 0; v <= limit; v++) {\n      int lo = Math.max(0, v - k), hi = Math.min(limit, v + k);\n      int inRange = prefix[hi + 1] - prefix[lo];\n      best = Math.max(best, count[v] + Math.min(numOperations, inRange - count[v]));\n    }\n    return best;\n  }\n}"
+}

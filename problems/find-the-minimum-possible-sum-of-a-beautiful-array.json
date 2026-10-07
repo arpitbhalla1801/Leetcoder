@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-minimum-possible-sum-of-a-beautiful-array",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumPossibleSum(int n, int target) {\n    final long MOD = 1_000_000_007L;\n    // take 1..m (no two of them sum to target), then continue from target upwards\n    long m = Math.min(n, target / 2);\n    long rest = n - m;\n    long sum = m * (m + 1) / 2 + rest * target + rest * (rest - 1) / 2;\n    return (int) (sum % MOD);\n  }\n}"
+}

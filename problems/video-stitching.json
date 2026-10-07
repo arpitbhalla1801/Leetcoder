@@ -1,0 +1,5 @@
+{
+    "problemName": "video-stitching",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int videoStitching(int[][] clips, int time) {\n    Arrays.sort(\n        clips, (a, b) -> a[0] != b[0] ? Integer.compare(a[0], b[0]) : Integer.compare(b[1], a[1]));\n    int used = 0, currentEnd = 0, nextEnd = 0, index = 0;\n    while (currentEnd < time) {\n      while (index < clips.length && clips[index][0] <= currentEnd) {\n        nextEnd = Math.max(nextEnd, clips[index][1]);\n        index++;\n      }\n      if (nextEnd == currentEnd) return -1;\n      used++;\n      currentEnd = nextEnd;\n    }\n    return used;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-total-distance-traveled",
+    "language": "java",
+    "code": "class Solution {\n  public long minimumTotalDistance(List<Integer> robot, int[][] factory) {\n    List<Integer> robots = new ArrayList<>(robot);\n    Collections.sort(robots);\n    int[][] factories = factory.clone();\n    Arrays.sort(factories, (a, b) -> Integer.compare(a[0], b[0]));\n    int n = robots.size();\n    final long INF = Long.MAX_VALUE / 4;\n    // dp[i]: cheapest way to repair the first i robots using the factories processed so far\n    long[] dp = new long[n + 1];\n    Arrays.fill(dp, INF);\n    dp[0] = 0;\n    for (int[] f : factories) {\n      long[] next = dp.clone();\n      for (int i = 1; i <= n; i++) {\n        long cost = 0;\n        for (int j = 1; j <= Math.min(f[1], i); j++) {\n          cost += Math.abs((long) robots.get(i - j) - f[0]);\n          if (dp[i - j] < INF) next[i] = Math.min(next[i], dp[i - j] + cost);\n        }\n      }\n      dp = next;\n    }\n    return dp[n];\n  }\n}"
+}

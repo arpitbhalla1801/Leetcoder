@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-bishop-moves-to-reach-target",
+    "language": "java",
+    "code": "class Solution {\n  public int minBishopMoves(int[] source, int[] target) {\n    int dr = Math.abs(source[0] - target[0]), dc = Math.abs(source[1] - target[1]);\n    if ((dr + dc) % 2 != 0) return -1;\n    return dr == dc ? 1 : 2;\n  }\n}"
+}

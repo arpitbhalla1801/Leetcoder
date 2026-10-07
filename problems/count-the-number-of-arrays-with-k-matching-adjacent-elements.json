@@ -1,0 +1,5 @@
+{
+    "problemName": "count-the-number-of-arrays-with-k-matching-adjacent-elements",
+    "language": "java",
+    "code": "class Solution {\n  private static final long MOD = 1_000_000_007L;\n\n  private static long pow(long b, long e) {\n    long r = 1;\n    for (b %= MOD; e > 0; e >>= 1) {\n      if ((e & 1) == 1) r = r * b % MOD;\n      b = b * b % MOD;\n    }\n    return r;\n  }\n\n  public int countGoodArrays(int n, int m, int k) {\n    long num = 1, den = 1;\n    for (int i = 1; i <= k; i++) {\n      num = num * (n - i) % MOD;\n      den = den * i % MOD;\n    }\n    long comb = num * pow(den, MOD - 2) % MOD;\n    return (int) (m % MOD * comb % MOD * pow(m - 1, n - 1 - k) % MOD);\n  }\n}"
+}

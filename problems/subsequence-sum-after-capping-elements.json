@@ -1,0 +1,5 @@
+{
+    "problemName": "subsequence-sum-after-capping-elements",
+    "language": "java",
+    "code": "class Solution {\n  public boolean[] subsequenceSumAfterCapping(int[] nums, int k) {\n    int n = nums.length;\n    int[] count = new int[n + 2];\n    for (int v : nums) count[v]++;\n    boolean[] dp = new boolean[k + 1];\n    dp[0] = true;\n    boolean[] ans = new boolean[n];\n    int below = 0;\n    for (int x = 1; x <= n; x++) {\n      int atLeast = n - below;\n      for (int t = 0; t <= atLeast && (long) t * x <= k; t++) {\n        if (dp[k - t * x]) {\n          ans[x - 1] = true;\n          break;\n        }\n      }\n      for (int c = 0; c < count[x]; c++) {\n        for (int s = k; s >= x; s--) if (dp[s - x]) dp[s] = true;\n      }\n      below += count[x];\n    }\n    return ans;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "next-greater-numerically-balanced-number",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int nextBeautifulNumber(int n) {\n    for (int x = n + 1; ; x++) {\n      int[] c = new int[10];\n      int y = x;\n      while (y > 0) {\n        c[y % 10]++;\n        y /= 10;\n      }\n      boolean ok = true;\n      for (int i = 0; i < 10; i++)\n        if (c[i] != 0 && c[i] != i) {\n          ok = false;\n          break;\n        }\n      if (ok) return x;\n    }\n  }\n}\n"
+}

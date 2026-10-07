@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-frequency-after-subarray-operation",
+    "language": "java",
+    "code": "class Solution {\n  public int maxFrequency(int[] nums, int k) {\n    int base = 0;\n    for (int x : nums) if (x == k) base++;\n    int bestGain = 0;\n    for (int v = 1; v <= 50; v++) {\n      if (v == k) continue;\n      int cur = 0;\n      for (int x : nums) {\n        cur = Math.max(cur, 0) + (x == v ? 1 : x == k ? -1 : 0);\n        if (cur > bestGain) bestGain = cur;\n      }\n    }\n    return base + bestGain;\n  }\n}"
+}

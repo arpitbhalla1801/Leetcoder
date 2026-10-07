@@ -1,0 +1,5 @@
+{
+    "problemName": "shortest-subarray-with-or-at-least-k-i",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumSubarrayLength(int[] nums, int k) {\n    int[] bits = new int[31];\n    int left = 0, answer = Integer.MAX_VALUE;\n    for (int right = 0; right < nums.length; right++) {\n      add(bits, nums[right], 1);\n      while (left <= right && value(bits) >= k) {\n        answer = Math.min(answer, right - left + 1);\n        add(bits, nums[left++], -1);\n      }\n    }\n    return answer == Integer.MAX_VALUE ? -1 : answer;\n  }\n\n  private void add(int[] bits, int value, int delta) {\n    for (int b = 0; b < 31; b++) if ((value & (1 << b)) != 0) bits[b] += delta;\n  }\n\n  private int value(int[] bits) {\n    int result = 0;\n    for (int b = 0; b < 31; b++) if (bits[b] > 0) result |= 1 << b;\n    return result;\n  }\n}"
+}

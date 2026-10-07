@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-cost-to-make-array-equalindromic",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long minimumCost(int[] nums) {\n    Arrays.sort(nums);\n    String text = Long.toString(nums[nums.length / 2]);\n    int half = (text.length() + 1) / 2;\n    long prefix = Long.parseLong(text.substring(0, half));\n    ArrayList<Long> candidates = new ArrayList<>();\n    for (long p : new long[] {prefix - 1, prefix, prefix + 1}) {\n      if (p <= 0) continue;\n      String first = Long.toString(p);\n      String tail = new StringBuilder(first.substring(0, text.length() / 2)).reverse().toString();\n      candidates.add(Long.parseLong(first + tail));\n    }\n    candidates.add((long) Math.pow(10, text.length() - 1) - 1);\n    candidates.add((long) Math.pow(10, text.length()) + 1);\n    long answer = Long.MAX_VALUE;\n    for (long palindrome : candidates) {\n      long cost = 0;\n      for (int value : nums) cost += Math.abs((long) value - palindrome);\n      answer = Math.min(answer, cost);\n    }\n    return answer;\n  }\n}"
+}

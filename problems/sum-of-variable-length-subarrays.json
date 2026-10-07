@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-variable-length-subarrays",
+    "language": "java",
+    "code": "class Solution {\n  public int subarraySum(int[] nums) {\n    int total = 0;\n    for (int i = 0; i < nums.length; i++) {\n      for (int j = Math.max(0, i - nums[i]); j <= i; j++) total += nums[j];\n    }\n    return total;\n  }\n}"
+}

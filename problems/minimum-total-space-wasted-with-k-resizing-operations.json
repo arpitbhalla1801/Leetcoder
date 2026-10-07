@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-total-space-wasted-with-k-resizing-operations",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minSpaceWastedKResizing(int[] nums, int k) {\n    int n = nums.length, INF = Integer.MAX_VALUE / 4;\n    int[][] dp = new int[k + 2][n + 1];\n    for (int[] row : dp) Arrays.fill(row, INF);\n    dp[0][0] = 0;\n    for (int groups = 1; groups <= k + 1; groups++) {\n      for (int end = groups; end <= n; end++) {\n        int max = 0, sum = 0;\n        for (int start = end; start >= groups; start--) {\n          max = Math.max(max, nums[start - 1]);\n          sum += nums[start - 1];\n          dp[groups][end] =\n              Math.min(dp[groups][end], dp[groups - 1][start - 1] + max * (end - start + 1) - sum);\n        }\n      }\n    }\n    return dp[k + 1][n];\n  }\n}\n"
+}

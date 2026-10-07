@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-occurrence-of-first-almost-equal-substring",
+    "language": "java",
+    "code": "class Solution {\n  private static int[] zf(char[] s) {\n    int[] z = new int[s.length];\n    for (int i = 1, l = 0, r = 0; i < s.length; i++) {\n      if (i < r) z[i] = Math.min(r - i, z[i - l]);\n      while (i + z[i] < s.length && s[z[i]] == s[i + z[i]]) z[i]++;\n      if (i + z[i] > r) {\n        l = i;\n        r = i + z[i];\n      }\n    }\n    return z;\n  }\n\n  public int minStartingIndex(String s, String pattern) {\n    int n = s.length(), m = pattern.length();\n    char[] a = new char[m + 1 + n], b = new char[m + 1 + n];\n    for (int i = 0; i < m; i++) {\n      a[i] = pattern.charAt(i);\n      b[i] = pattern.charAt(m - 1 - i);\n    }\n    a[m] = b[m] = '{';\n    for (int i = 0; i < n; i++) {\n      a[m + 1 + i] = s.charAt(i);\n      b[m + 1 + i] = s.charAt(n - 1 - i);\n    }\n    int[] pre = zf(a), suf = zf(b);\n    for (int i = 0; i + m <= n; i++) {\n      if (pre[m + 1 + i] + suf[m + 1 + n - i - m] >= m - 1) return i;\n    }\n    return -1;\n  }\n}"
+}

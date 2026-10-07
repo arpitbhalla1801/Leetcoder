@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-element-after-replacement-with-digit-sum",
+    "language": "java",
+    "code": "class Solution {\n  public int minElement(int[] nums) {\n    int best = Integer.MAX_VALUE;\n    for (int x : nums) {\n      int sum = 0;\n      for (; x > 0; x /= 10) sum += x % 10;\n      best = Math.min(best, sum);\n    }\n    return best;\n  }\n}"
+}

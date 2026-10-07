@@ -1,0 +1,5 @@
+{
+    "problemName": "count-subarrays-with-majority-element-ii",
+    "language": "java",
+    "code": "class Solution {\n  public long countMajoritySubarrays(int[] nums, int target) {\n    int n = nums.length;\n    long[] bit = new long[2 * n + 3];\n    int offset = n + 1;\n    long total = 0;\n    int sum = 0;\n    for (int i = offset; i < bit.length; i += i & -i) bit[i]++;\n    for (int x : nums) {\n      sum += x == target ? 1 : -1;\n      // count previous prefix sums strictly smaller than the current one\n      long smaller = 0;\n      for (int i = sum + offset - 1; i > 0; i -= i & -i) smaller += bit[i];\n      total += smaller;\n      for (int i = sum + offset; i < bit.length; i += i & -i) bit[i]++;\n    }\n    return total;\n  }\n}"
+}

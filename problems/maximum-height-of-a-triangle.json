@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-height-of-a-triangle",
+    "language": "java",
+    "code": "class Solution {\n  private int build(int first, int second) {\n    int level = 1, usedFirst = 0, usedSecond = 0;\n    while (true) {\n      if ((level & 1) == 1) {\n        if (usedFirst + level > first) break;\n        usedFirst += level;\n      } else {\n        if (usedSecond + level > second) break;\n        usedSecond += level;\n      }\n      level++;\n    }\n    return level - 1;\n  }\n\n  public int maxHeightOfTriangle(int red, int blue) {\n    return Math.max(build(red, blue), build(blue, red));\n  }\n}"
+}

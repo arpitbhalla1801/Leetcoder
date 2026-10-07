@@ -1,0 +1,5 @@
+{
+    "problemName": "smallest-all-ones-multiple",
+    "language": "java",
+    "code": "class Solution {\n  public int minAllOneMultiple(int k) {\n    int rem = 0;\n    for (int len = 1; len <= k; len++) {\n      rem = (rem * 10 + 1) % k;\n      if (rem == 0) return len;\n    }\n    return -1;\n  }\n}"
+}

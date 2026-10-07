@@ -1,0 +1,5 @@
+{
+    "problemName": "count-of-interesting-subarrays",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long countInterestingSubarrays(List<Integer> nums, int modulo, int k) {\n    Map<Integer, Long> counts = new HashMap<>();\n    counts.put(0, 1L);\n    long answer = 0, prefix = 0;\n    for (int value : nums) {\n      if (value % modulo == k) prefix++;\n      int current = (int) (prefix % modulo);\n      int needed = (current - k + modulo) % modulo;\n      answer += counts.getOrDefault(needed, 0L);\n      counts.put(current, counts.getOrDefault(current, 0L) + 1);\n    }\n    return answer;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-array-sum",
+    "language": "java",
+    "code": "class Solution {\n  public int minArraySum(int[] nums, int k, int op1, int op2) {\n    int INF = Integer.MAX_VALUE / 2;\n    int[][] dp = new int[op1 + 1][op2 + 1];\n    for (int[] row : dp) java.util.Arrays.fill(row, INF);\n    dp[0][0] = 0;\n    for (int x : nums) {\n      int half = (x + 1) / 2, sub = x >= k ? x - k : INF, both = INF;\n      if (x >= k) both = Math.min(both, (x - k + 1) / 2);\n      if (half >= k) both = Math.min(both, half - k);\n      for (int a = op1; a >= 0; a--) {\n        for (int b = op2; b >= 0; b--) {\n          int v = dp[a][b] + x;\n          if (a > 0) v = Math.min(v, dp[a - 1][b] + half);\n          if (b > 0 && sub < INF) v = Math.min(v, dp[a][b - 1] + sub);\n          if (a > 0 && b > 0 && both < INF) v = Math.min(v, dp[a - 1][b - 1] + both);\n          dp[a][b] = Math.min(v, INF);\n        }\n      }\n    }\n    int ans = INF;\n    for (int[] row : dp) for (int v : row) ans = Math.min(ans, v);\n    return ans;\n  }\n}"
+}

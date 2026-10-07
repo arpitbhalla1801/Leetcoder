@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-median-sum-of-subsequences-of-size-3",
+    "language": "java",
+    "code": "class Solution {\n  public long maximumMedianSum(int[] nums) {\n    Arrays.sort(nums);\n    long sum = 0;\n    // each step takes the two largest values and the smallest; the median is the second largest\n    for (int i = nums.length - 2, steps = nums.length / 3; steps > 0; steps--, i -= 2)\n      sum += nums[i];\n    return sum;\n  }\n}"
+}

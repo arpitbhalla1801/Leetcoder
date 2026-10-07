@@ -1,0 +1,5 @@
+{
+    "problemName": "building-boxes",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumBoxes(int n) {\n    int layer = 0;\n    long used = 0;\n    while (used + (long) (layer + 1) * (layer + 2) / 2 <= n) {\n      layer++;\n      used += (long) layer * (layer + 1) / 2;\n    }\n    int base = layer * (layer + 1) / 2;\n    int extra = 0;\n    while (used < n) {\n      extra++;\n      used += extra;\n    }\n    return base + extra;\n  }\n}\n"
+}

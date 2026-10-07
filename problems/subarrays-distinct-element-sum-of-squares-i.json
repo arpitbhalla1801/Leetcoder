@@ -1,0 +1,5 @@
+{
+    "problemName": "subarrays-distinct-element-sum-of-squares-i",
+    "language": "java",
+    "code": "class Solution {\n  public int sumCounts(List<Integer> nums) {\n    int n = nums.size(), total = 0;\n    for (int i = 0; i < n; i++) {\n      Set<Integer> distinct = new HashSet<>();\n      for (int j = i; j < n; j++) {\n        distinct.add(nums.get(j));\n        total += distinct.size() * distinct.size();\n      }\n    }\n    return total;\n  }\n}"
+}

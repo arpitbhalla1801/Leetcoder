@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-subarrays-with-and-value-of-k",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long countSubarrays(int[] nums, int k) {\n    Map<Integer, Long> previous = new HashMap<>();\n    long answer = 0;\n    for (int value : nums) {\n      Map<Integer, Long> current = new HashMap<>();\n      current.merge(value, 1L, Long::sum);\n      for (Map.Entry<Integer, Long> e : previous.entrySet())\n        current.merge(e.getKey() & value, e.getValue(), Long::sum);\n      answer += current.getOrDefault(k, 0L);\n      previous = current;\n    }\n    return answer;\n  }\n}"
+}

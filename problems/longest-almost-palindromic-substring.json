@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-almost-palindromic-substring",
+    "language": "java",
+    "code": "class Solution {\n  private int left, right;\n\n  // expands while the ends match; leaves the first mismatching pair in left / right\n  private void expand(String s, int l, int r) {\n    while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {\n      l--;\n      r++;\n    }\n    left = l;\n    right = r;\n  }\n\n  public int almostPalindromic(String s) {\n    int n = s.length(), best = 1;\n    for (int center = 0; center < 2 * n - 1; center++) {\n      int l = center / 2, r = l + center % 2;\n      expand(s, l, r);\n      int a = left, b = right;\n      best = Math.max(best, b - a - 1);\n      if (a >= 0) {\n        expand(s, a - 1, b);\n        best = Math.max(best, right - left - 1);\n      }\n      if (b < n) {\n        expand(s, a, b + 1);\n        best = Math.max(best, right - left - 1);\n      }\n    }\n    return best;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "check-if-word-equals-summation-of-two-words",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isSumEqual(String firstWord, String secondWord, String targetWord) {\n    return value(firstWord) + value(secondWord) == value(targetWord);\n  }\n\n  private int value(String s) {\n    int v = 0;\n    for (int i = 0; i < s.length(); i++) v = v * 10 + s.charAt(i) - 'a';\n    return v;\n  }\n}\n"
+}

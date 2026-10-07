@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-largest-almost-missing-integer",
+    "language": "java",
+    "code": "class Solution {\n  public int largestInteger(int[] nums, int k) {\n    int best = -1;\n    for (int x = 0; x <= 50; x++) {\n      int windows = 0;\n      for (int i = 0; i + k <= nums.length; i++) {\n        for (int j = i; j < i + k; j++) {\n          if (nums[j] == x) {\n            windows++;\n            break;\n          }\n        }\n      }\n      if (windows == 1) best = x;\n    }\n    return best;\n  }\n}"
+}

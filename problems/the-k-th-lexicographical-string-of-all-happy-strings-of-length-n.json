@@ -1,0 +1,5 @@
+{
+    "problemName": "the-k-th-lexicographical-string-of-all-happy-strings-of-length-n",
+    "language": "java",
+    "code": "class Solution {\n  private int rank;\n  private String answer = \"\";\n\n  public String getHappyString(int n, int k) {\n    rank = k;\n    build(new StringBuilder(), n);\n    return answer;\n  }\n\n  private void build(StringBuilder current, int n) {\n    if (!answer.isEmpty()) return;\n    if (current.length() == n) {\n      if (--rank == 0) answer = current.toString();\n      return;\n    }\n    for (char c = 'a'; c <= 'c'; c++) {\n      if (current.length() > 0 && current.charAt(current.length() - 1) == c) continue;\n      current.append(c);\n      build(current, n);\n      current.deleteCharAt(current.length() - 1);\n    }\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-ways-to-divide-a-long-corridor",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int numberOfWays(String corridor) {\n    final long MOD = 1000000007L;\n    long ans = 1;\n    int seats = 0, plants = 0;\n    for (int i = 0; i < corridor.length(); i++) {\n      if (corridor.charAt(i) == 'S') {\n        seats++;\n        if (seats > 2 && seats % 2 == 1) {\n          ans = ans * (plants + 1) % MOD;\n          plants = 0;\n        }\n      } else if (seats >= 2 && seats % 2 == 0) plants++;\n    }\n    return seats > 0 && seats % 2 == 0 ? (int) ans : 0;\n  }\n}\n"
+}

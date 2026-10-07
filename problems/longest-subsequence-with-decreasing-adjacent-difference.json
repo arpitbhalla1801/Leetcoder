@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-subsequence-with-decreasing-adjacent-difference",
+    "language": "java",
+    "code": "class Solution {\n  public int longestSubsequence(int[] nums) {\n    int V = 301;\n    int[][] exact = new int[V][V + 1], suf = new int[V][V + 1];\n    boolean[] seen = new boolean[V];\n    int ans = 1;\n    int[] cand = new int[V];\n    for (int x : nums) {\n      for (int y = 1; y < V; y++) {\n        cand[y] = 0;\n        if (!seen[y]) continue;\n        int d = Math.abs(x - y);\n        cand[y] = Math.max(suf[y][d], 1) + 1;\n      }\n      for (int y = 1; y < V; y++) {\n        if (cand[y] == 0) continue;\n        int d = Math.abs(x - y);\n        if (cand[y] > exact[x][d]) exact[x][d] = cand[y];\n        if (cand[y] > ans) ans = cand[y];\n      }\n      seen[x] = true;\n      for (int d = V - 1; d >= 0; d--) suf[x][d] = Math.max(suf[x][d + 1], exact[x][d]);\n    }\n    return ans;\n  }\n}"
+}

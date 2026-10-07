@@ -1,0 +1,5 @@
+{
+    "problemName": "count-valid-word-occurrences",
+    "language": "java",
+    "code": "class Solution {\n  public int[] countWordOccurrences(String[] chunks, String[] queries) {\n    StringBuilder sb = new StringBuilder();\n    for (String c : chunks) sb.append(c);\n    String s = sb.toString();\n    int n = s.length();\n    java.util.HashMap<String, Integer> count = new java.util.HashMap<>();\n    int i = 0;\n    while (i < n) {\n      if (!isWordChar(s, i)) {\n        i++;\n        continue;\n      }\n      int j = i;\n      while (j < n && isWordChar(s, j)) j++;\n      count.merge(s.substring(i, j), 1, Integer::sum);\n      i = j;\n    }\n    int[] ans = new int[queries.length];\n    for (int q = 0; q < queries.length; q++) ans[q] = count.getOrDefault(queries[q], 0);\n    return ans;\n  }\n\n  private static boolean isWordChar(String s, int i) {\n    char c = s.charAt(i);\n    if (c >= 'a' && c <= 'z') return true;\n    return c == '-'\n        && i > 0\n        && i + 1 < s.length()\n        && Character.isLowerCase(s.charAt(i - 1))\n        && Character.isLowerCase(s.charAt(i + 1));\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-product-of-first-and-last-elements-of-a-subsequence",
+    "language": "java",
+    "code": "class Solution {\n  public long maximumProduct(int[] nums, int m) {\n    long best = Long.MIN_VALUE;\n    long mn = Long.MAX_VALUE, mx = Long.MIN_VALUE;\n    for (int j = m - 1; j < nums.length; j++) {\n      int i = j - m + 1;\n      mn = Math.min(mn, nums[i]);\n      mx = Math.max(mx, nums[i]);\n      best = Math.max(best, Math.max(nums[j] * mn, nums[j] * mx));\n    }\n    return best;\n  }\n}"
+}

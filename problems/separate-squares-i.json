@@ -1,0 +1,5 @@
+{
+    "problemName": "separate-squares-i",
+    "language": "java",
+    "code": "class Solution {\n  public double separateSquares(int[][] squares) {\n    double total = 0, lo = Double.MAX_VALUE, hi = 0;\n    for (int[] s : squares) {\n      total += (double) s[2] * s[2];\n      lo = Math.min(lo, s[1]);\n      hi = Math.max(hi, (double) s[1] + s[2]);\n    }\n    for (int iter = 0; iter < 100; iter++) {\n      double mid = (lo + hi) / 2;\n      if (areaBelow(squares, mid) * 2 >= total) hi = mid;\n      else lo = mid;\n    }\n    return hi;\n  }\n\n  private double areaBelow(int[][] squares, double y) {\n    double area = 0;\n    for (int[] s : squares) {\n      double height = Math.min(Math.max(y - s[1], 0), s[2]);\n      area += height * s[2];\n    }\n    return area;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "largest-multiple-of-three",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public String largestMultipleOfThree(int[] digits) {\n    int[] count = new int[10];\n    int sum = 0;\n    for (int d : digits) {\n      count[d]++;\n      sum += d;\n    }\n    int remove = sum % 3;\n    if (remove != 0 && !removeOne(count, remove)) {\n      if (!removeOne(count, 3 - remove) || !removeOne(count, 3 - remove)) return \"\";\n    }\n    StringBuilder result = new StringBuilder();\n    for (int d = 9; d >= 0; d--) for (int i = 0; i < count[d]; i++) result.append(d);\n    return result.length() == 0 ? \"\" : result.charAt(0) == '0' ? \"0\" : result.toString();\n  }\n\n  private boolean removeOne(int[] count, int remainder) {\n    for (int d = remainder == 1 ? 1 : 2; d <= 9; d += 3)\n      if (count[d] > 0) {\n        count[d]--;\n        return true;\n      }\n    return false;\n  }\n}\n"
+}

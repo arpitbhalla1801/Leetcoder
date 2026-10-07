@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-and-minimum-sums-of-at-most-size-k-subsequences",
+    "language": "java",
+    "code": "class Solution {\n  private static final long MOD = 1_000_000_007L;\n\n  private static long pow(long b, long e) {\n    long r = 1;\n    for (b %= MOD; e > 0; e >>= 1) {\n      if ((e & 1) == 1) r = r * b % MOD;\n      b = b * b % MOD;\n    }\n    return r;\n  }\n\n  public int minMaxSums(int[] nums, int k) {\n    int n = nums.length;\n    java.util.Arrays.sort(nums);\n    long[] f = new long[n + 1], inv = new long[n + 1];\n    f[0] = 1;\n    for (int i = 1; i <= n; i++) f[i] = f[i - 1] * i % MOD;\n    inv[n] = pow(f[n], MOD - 2);\n    for (int i = n; i > 0; i--) inv[i - 1] = inv[i] * i % MOD;\n    long ans = 0;\n    for (int i = 0; i < n; i++) {\n      long ways = 0;\n      for (int j = 0; j < k; j++) {\n        ways += comb(f, inv, i, j) + comb(f, inv, n - 1 - i, j);\n      }\n      ans = (ans + nums[i] % MOD * (ways % MOD)) % MOD;\n    }\n    return (int) ans;\n  }\n\n  private static long comb(long[] f, long[] inv, int a, int b) {\n    if (b > a) return 0;\n    return f[a] * inv[b] % MOD * inv[a - b] % MOD;\n  }\n}"
+}

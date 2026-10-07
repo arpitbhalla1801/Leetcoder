@@ -1,0 +1,5 @@
+{
+    "problemName": "super-palindromes",
+    "language": "java",
+    "code": "class Solution {\n  public int superpalindromesInRange(String left, String right) {\n    long lo = Long.parseLong(left), hi = Long.parseLong(right);\n    int ans = 0;\n    for (int p = 1; p < 100000; p++) {\n      String s = String.valueOf(p);\n      String rev = new StringBuilder(s).reverse().toString();\n      for (String t : new String[] {s + rev, s + rev.substring(1)}) {\n        long x = Long.parseLong(t);\n        if (x > 10000000L) continue;\n        long square = x * x;\n        if (square >= lo && square <= hi && isPal(square)) ans++;\n      }\n    }\n    return ans;\n  }\n\n  private boolean isPal(long x) {\n    String s = Long.toString(x);\n    return s.equals(new StringBuilder(s).reverse().toString());\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-increment-operations-to-make-array-beautiful",
+    "language": "java",
+    "code": "class Solution {\n  public long minIncrementOperations(int[] nums, int k) {\n    // cost[i]: raise nums[i] to k; dp[i]: cheapest plan whose latest big element is i\n    long previous1 = 0, previous2 = 0, previous3 = 0;\n    for (int x : nums) {\n      long current = Math.max(0, k - x) + Math.min(previous1, Math.min(previous2, previous3));\n      previous3 = previous2;\n      previous2 = previous1;\n      previous1 = current;\n    }\n    return Math.min(previous1, Math.min(previous2, previous3));\n  }\n}"
+}

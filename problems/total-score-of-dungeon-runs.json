@@ -1,0 +1,5 @@
+{
+    "problemName": "total-score-of-dungeon-runs",
+    "language": "java",
+    "code": "class Solution {\n  public long totalScore(int hp, int[] damage, int[] requirement) {\n    int n = damage.length;\n    long[] pre = new long[n + 1];\n    for (int i = 0; i < n; i++) pre[i + 1] = pre[i] + damage[i];\n    long total = 0;\n    for (int i = 1; i <= n; i++) {\n      long need = pre[i] + requirement[i - 1] - hp;\n      // count m in [0, i - 1] with pre[m] >= need\n      int lo = 0, hi = i;\n      while (lo < hi) {\n        int mid = (lo + hi) >>> 1;\n        if (pre[mid] >= need) hi = mid;\n        else lo = mid + 1;\n      }\n      total += i - lo;\n    }\n    return total;\n  }\n}"
+}

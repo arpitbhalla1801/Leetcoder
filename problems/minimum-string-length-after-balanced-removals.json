@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-string-length-after-balanced-removals",
+    "language": "java",
+    "code": "class Solution {\n  public int minLengthAfterRemovals(String s) {\n    int diff = 0;\n    for (int i = 0; i < s.length(); i++) diff += s.charAt(i) == 'a' ? 1 : -1;\n    return Math.abs(diff);\n  }\n}"
+}

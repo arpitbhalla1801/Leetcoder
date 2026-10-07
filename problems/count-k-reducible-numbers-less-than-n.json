@@ -1,0 +1,5 @@
+{
+    "problemName": "count-k-reducible-numbers-less-than-n",
+    "language": "java",
+    "code": "class Solution {\n  public int countKReducibleNumbers(String s, int k) {\n    final int MOD = 1_000_000_007;\n    int n = s.length();\n    int[] steps = new int[n + 2];\n    for (int x = 2; x <= n + 1; x++) steps[x] = steps[Integer.bitCount(x)] + 1;\n    int[][] c = new int[n + 1][n + 1];\n    for (int i = 0; i <= n; i++) {\n      c[i][0] = 1;\n      for (int j = 1; j <= i; j++)\n        c[i][j] = (c[i - 1][j - 1] + (j <= i - 1 ? c[i - 1][j] : 0)) % MOD;\n    }\n    long ans = 0;\n    int ones = 0;\n    for (int i = 0; i < n; i++) {\n      if (s.charAt(i) != '1') continue;\n      int rem = n - i - 1;\n      for (int p = Math.max(1, ones); p <= ones + rem; p++) {\n        if (steps[p] + 1 <= k) ans += c[rem][p - ones];\n      }\n      ones++;\n    }\n    return (int) (ans % MOD);\n  }\n}"
+}

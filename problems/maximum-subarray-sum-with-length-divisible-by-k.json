@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-subarray-sum-with-length-divisible-by-k",
+    "language": "java",
+    "code": "class Solution {\n  public long maxSubarraySum(int[] nums, int k) {\n    long[] minPrefix = new long[k];\n    Arrays.fill(minPrefix, Long.MAX_VALUE);\n    long best = Long.MIN_VALUE, prefix = 0;\n    minPrefix[0] = 0;\n    for (int j = 1; j <= nums.length; j++) {\n      prefix += nums[j - 1];\n      int r = j % k;\n      // a subarray whose length is a multiple of k starts at a prefix with the same residue\n      if (minPrefix[r] != Long.MAX_VALUE) best = Math.max(best, prefix - minPrefix[r]);\n      minPrefix[r] = Math.min(minPrefix[r], prefix);\n    }\n    return best;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-number-of-items-from-sale-i",
+    "language": "java",
+    "code": "class Solution {\n  public int maximumSaleItems(int[][] items, int budget) {\n    int n = items.length, MAXF = 1501;\n    int[] cnt = new int[MAXF];\n    int minPrice = Integer.MAX_VALUE;\n    for (int[] it : items) {\n      cnt[it[0]]++;\n      minPrice = Math.min(minPrice, it[1]);\n    }\n    int[] dp = new int[budget + 1];\n    for (int[] it : items) {\n      int free = -1;\n      for (int m = it[0]; m < MAXF; m += it[0]) free += cnt[m];\n      int cost = it[1], value = 1 + free;\n      for (int w = budget; w >= cost; w--) dp[w] = Math.max(dp[w], dp[w - cost] + value);\n    }\n    int best = 0;\n    for (int w = 0; w <= budget; w++) best = Math.max(best, dp[w] + (budget - w) / minPrice);\n    return best;\n  }\n}"
+}

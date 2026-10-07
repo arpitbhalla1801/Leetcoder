@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-ysum-by-picking-a-triplet-of-distinct-xvalues",
+    "language": "java",
+    "code": "class Solution {\n  public int maxSumDistinctTriplet(int[] x, int[] y) {\n    java.util.Map<Integer, Integer> best = new java.util.HashMap<>();\n    for (int i = 0; i < x.length; i++) best.merge(x[i], y[i], Math::max);\n    if (best.size() < 3) return -1;\n    int a = 0, b = 0, c = 0;\n    for (int v : best.values()) {\n      if (v > a) {\n        c = b;\n        b = a;\n        a = v;\n      } else if (v > b) {\n        c = b;\n        b = v;\n      } else if (v > c) c = v;\n    }\n    return a + b + c;\n  }\n}"
+}

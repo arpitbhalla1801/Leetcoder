@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-number-of-operations-to-make-elements-in-array-distinct",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumOperations(int[] nums) {\n    Set<Integer> seen = new HashSet<>();\n    int i = nums.length - 1;\n    while (i >= 0 && seen.add(nums[i])) i--;\n    // elements 0..i must be removed, three at a time\n    return (i + 3) / 3;\n  }\n}"
+}

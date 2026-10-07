@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-difference-by-remapping-a-digit",
+    "language": "java",
+    "code": "class Solution {\n  public int minMaxDifference(int num) {\n    String value = Integer.toString(num);\n    char replaceMax = 0;\n    for (int i = 0; i < value.length(); i++)\n      if (value.charAt(i) != '9') {\n        replaceMax = value.charAt(i);\n        break;\n      }\n    char replaceMin = value.charAt(0);\n    long maximum = Long.parseLong(value.replace(replaceMax, '9'));\n    long minimum = Long.parseLong(value.replace(replaceMin, '0'));\n    return (int) (maximum - minimum);\n  }\n}\n"
+}

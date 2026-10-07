@@ -1,0 +1,5 @@
+{
+    "problemName": "decode-the-slanted-ciphertext",
+    "language": "java",
+    "code": "class Solution {\n  public String decodeCiphertext(String encodedText, int rows) {\n    int cols = encodedText.length() / rows;\n    StringBuilder out = new StringBuilder();\n    // read every diagonal that starts in the top row, going down and to the right\n    for (int start = 0; start < cols; start++) {\n      for (int r = 0; r < rows && start + r < cols; r++) {\n        out.append(encodedText.charAt(r * cols + start + r));\n      }\n    }\n    int end = out.length();\n    while (end > 0 && out.charAt(end - 1) == ' ') end--;\n    return out.substring(0, end);\n  }\n}"
+}

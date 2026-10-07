@@ -1,0 +1,5 @@
+{
+    "problemName": "print-zero-even-odd",
+    "language": "java",
+    "code": "class ZeroEvenOdd {\n  private final int n;\n  private int state = 0; // 0: zero, 1: odd, 2: even\n\n  public ZeroEvenOdd(int n) {\n    this.n = n;\n  }\n\n  public synchronized void zero(java.util.function.IntConsumer printNumber)\n      throws InterruptedException {\n    for (int i = 1; i <= n; i++) {\n      while (state != 0) wait();\n      printNumber.accept(0);\n      state = (i & 1) == 1 ? 1 : 2;\n      notifyAll();\n    }\n  }\n\n  public synchronized void even(java.util.function.IntConsumer printNumber)\n      throws InterruptedException {\n    for (int i = 2; i <= n; i += 2) {\n      while (state != 2) wait();\n      printNumber.accept(i);\n      state = 0;\n      notifyAll();\n    }\n  }\n\n  public synchronized void odd(java.util.function.IntConsumer printNumber)\n      throws InterruptedException {\n    for (int i = 1; i <= n; i += 2) {\n      while (state != 1) wait();\n      printNumber.accept(i);\n      state = 0;\n      notifyAll();\n    }\n  }\n}\n"
+}

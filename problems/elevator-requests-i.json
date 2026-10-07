@@ -1,0 +1,5 @@
+{
+    "problemName": "elevator-requests-i",
+    "language": "java",
+    "code": "class Solution {\n  public int elevatorRequests(int n, int[] requests) {\n    int time = 0, floor = 0;\n    for (int r : requests) {\n      time += Math.abs(r - floor);\n      floor = r;\n    }\n    return time;\n  }\n}"
+}

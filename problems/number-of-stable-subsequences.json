@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-stable-subsequences",
+    "language": "java",
+    "code": "class Solution {\n  public int countStableSubsequences(int[] nums) {\n    final long MOD = 1_000_000_007L;\n    long[][] dp = new long[2][3];\n    for (int x : nums) {\n      int p = x & 1;\n      long one = (1 + dp[1 - p][1] + dp[1 - p][2]) % MOD;\n      long two = dp[p][1];\n      dp[p][1] = (dp[p][1] + one) % MOD;\n      dp[p][2] = (dp[p][2] + two) % MOD;\n    }\n    return (int) ((dp[0][1] + dp[0][2] + dp[1][1] + dp[1][2]) % MOD);\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-zigzag-arrays-i",
+    "language": "java",
+    "code": "class Solution {\n  public int zigZagArrays(int n, int l, int r) {\n    final long MOD = 1_000_000_007L;\n    int K = r - l + 1;\n    long[] up = new long[K];\n    for (int v = 0; v < K; v++) up[v] = v;\n    for (int len = 3; len <= n; len++) {\n      // newUp[v] = sum of up[w] for w > K - 1 - v\n      long[] suffix = new long[K + 1];\n      for (int w = K - 1; w >= 0; w--) suffix[w] = (suffix[w + 1] + up[w]) % MOD;\n      long[] next = new long[K];\n      for (int v = 0; v < K; v++) next[v] = suffix[K - v];\n      up = next;\n    }\n    long sum = 0;\n    for (long v : up) sum += v;\n    return (int) (sum % MOD * 2 % MOD);\n  }\n}"
+}

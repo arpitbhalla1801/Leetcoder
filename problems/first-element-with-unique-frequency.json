@@ -1,0 +1,5 @@
+{
+    "problemName": "first-element-with-unique-frequency",
+    "language": "java",
+    "code": "class Solution {\n  public int firstUniqueFreq(int[] nums) {\n    int[] freq = new int[100001];\n    for (int x : nums) freq[x]++;\n    int[] freqCount = new int[nums.length + 1];\n    for (int f : freq) if (f > 0) freqCount[f]++;\n    for (int x : nums) {\n      if (freqCount[freq[x]] == 1) return x;\n    }\n    return -1;\n  }\n}"
+}

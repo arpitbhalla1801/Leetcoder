@@ -1,0 +1,5 @@
+{
+    "problemName": "shopping-offers",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private List<Integer> prices;\n  private List<List<Integer>> specials;\n  private Map<String, Integer> memo;\n\n  public int shoppingOffers(List<Integer> price, List<List<Integer>> special, List<Integer> needs) {\n    prices = price;\n    specials = special;\n    memo = new HashMap<>();\n    return dfs(needs);\n  }\n\n  private int dfs(List<Integer> needs) {\n    String key = needs.toString();\n    if (memo.containsKey(key)) return memo.get(key);\n    int best = 0;\n    for (int i = 0; i < needs.size(); i++) best += needs.get(i) * prices.get(i);\n    for (List<Integer> offer : specials) {\n      List<Integer> next = new ArrayList<>(needs);\n      boolean usable = true;\n      for (int i = 0; i < needs.size(); i++) {\n        if (offer.get(i) > next.get(i)) {\n          usable = false;\n          break;\n        }\n        next.set(i, next.get(i) - offer.get(i));\n      }\n      if (usable) best = Math.min(best, offer.get(needs.size()) + dfs(next));\n    }\n    memo.put(key, best);\n    return best;\n  }\n}\n"
+}

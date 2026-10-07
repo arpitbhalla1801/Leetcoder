@@ -1,0 +1,5 @@
+{
+    "problemName": "largest-integer-with-given-digit-sum",
+    "language": "java",
+    "code": "class Solution {\n  public int largestInteger(int n, int s) {\n    int result = 0;\n    for (int i = 0; i < n; i++) {\n      int d = Math.min(9, s);\n      result = result * 10 + d;\n      s -= d;\n    }\n    return s > 0 ? -1 : result;\n  }\n}"
+}

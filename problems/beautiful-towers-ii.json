@@ -1,0 +1,5 @@
+{
+    "problemName": "beautiful-towers-ii",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long maximumSumOfHeights(List<Integer> maxHeights) {\n    int n = maxHeights.size();\n    long[] left = new long[n], right = new long[n];\n    Deque<Integer> st = new ArrayDeque<>();\n    for (int i = 0; i < n; i++) {\n      while (!st.isEmpty() && maxHeights.get(st.peek()) > maxHeights.get(i)) st.pop();\n      int p = st.isEmpty() ? -1 : st.peek();\n      left[i] = (p < 0 ? 0 : left[p]) + (long) (i - p) * maxHeights.get(i);\n      st.push(i);\n    }\n    st.clear();\n    for (int i = n - 1; i >= 0; i--) {\n      while (!st.isEmpty() && maxHeights.get(st.peek()) > maxHeights.get(i)) st.pop();\n      int p = st.isEmpty() ? n : st.peek();\n      right[i] = (p == n ? 0 : right[p]) + (long) (p - i) * maxHeights.get(i);\n      st.push(i);\n    }\n    long ans = 0;\n    for (int i = 0; i < n; i++) ans = Math.max(ans, left[i] + right[i] - maxHeights.get(i));\n    return ans;\n  }\n}\n"
+}

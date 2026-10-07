@@ -1,0 +1,5 @@
+{
+    "problemName": "integers-with-multiple-sum-of-two-cubes",
+    "language": "java",
+    "code": "class Solution {\n  public List<Integer> findGoodIntegers(int n) {\n    java.util.HashMap<Long, Integer> count = new java.util.HashMap<>();\n    for (long a = 1; a * a * a <= n; a++) {\n      for (long b = a; a * a * a + b * b * b <= n; b++)\n        count.merge(a * a * a + b * b * b, 1, Integer::sum);\n    }\n    List<Integer> res = new ArrayList<>();\n    for (java.util.Map.Entry<Long, Integer> e : count.entrySet())\n      if (e.getValue() >= 2) res.add((int) (long) e.getKey());\n    java.util.Collections.sort(res);\n    return res;\n  }\n}"
+}

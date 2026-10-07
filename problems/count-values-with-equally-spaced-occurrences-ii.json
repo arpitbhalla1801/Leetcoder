@@ -1,0 +1,5 @@
+{
+    "problemName": "count-values-with-equally-spaced-occurrences-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int countSpecialIntegers(int[] nums) {\n    java.util.HashMap<Integer, List<Integer>> positions = new java.util.HashMap<>();\n    for (int i = 0; i < nums.length; i++)\n      positions.computeIfAbsent(nums[i], k -> new ArrayList<>()).add(i);\n    int count = 0;\n    for (List<Integer> p : positions.values()) {\n      if (p.size() < 3) continue;\n      int step = p.get(1) - p.get(0);\n      boolean ok = true;\n      for (int i = 2; i < p.size() && ok; i++) if (p.get(i) - p.get(i - 1) != step) ok = false;\n      if (ok) count++;\n    }\n    return count;\n  }\n}"
+}

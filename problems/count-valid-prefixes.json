@@ -1,0 +1,5 @@
+{
+    "problemName": "count-valid-prefixes",
+    "language": "java",
+    "code": "class Solution {\n  public int countValidPrefixes(String s) {\n    int zeros = 0, ones = 0, count = 0;\n    for (char c : s.toCharArray()) {\n      if (c == '0') zeros++;\n      else ones++;\n      if (Math.abs(zeros - ones) <= 1) count++;\n    }\n    return count;\n  }\n}"
+}

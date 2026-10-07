@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-unique-subarray-sum-after-deletion",
+    "language": "java",
+    "code": "class Solution {\n  public int maxSum(int[] nums) {\n    Set<Integer> positives = new HashSet<>();\n    int max = Integer.MIN_VALUE;\n    for (int x : nums) {\n      max = Math.max(max, x);\n      if (x > 0) positives.add(x);\n    }\n    if (positives.isEmpty()) return max;\n    int sum = 0;\n    for (int x : positives) sum += x;\n    return sum;\n  }\n}"
+}

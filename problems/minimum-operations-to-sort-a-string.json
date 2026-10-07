@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-sort-a-string",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(String s) {\n    int n = s.length();\n    boolean sorted = true;\n    char min = 'z', max = 'a';\n    for (int i = 0; i < n; i++) {\n      char c = s.charAt(i);\n      if (i > 0 && c < s.charAt(i - 1)) sorted = false;\n      min = (char) Math.min(min, c);\n      max = (char) Math.max(max, c);\n    }\n    if (sorted) return 0;\n    if (n == 2) return -1;\n    if (s.charAt(0) == min || s.charAt(n - 1) == max) return 1;\n    // two operations fail only when the first char is strictly the largest and the last strictly\n    // the smallest\n    char firstChar = s.charAt(0), lastChar = s.charAt(n - 1);\n    boolean firstStrictMax = true, lastStrictMin = true;\n    for (int i = 1; i < n; i++) if (s.charAt(i) >= firstChar) firstStrictMax = false;\n    for (int i = 0; i + 1 < n; i++) if (s.charAt(i) <= lastChar) lastStrictMin = false;\n    return firstStrictMax && lastStrictMin ? 3 : 2;\n  }\n}"
+}

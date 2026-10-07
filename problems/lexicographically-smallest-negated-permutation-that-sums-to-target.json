@@ -1,0 +1,5 @@
+{
+    "problemName": "lexicographically-smallest-negated-permutation-that-sums-to-target",
+    "language": "java",
+    "code": "class Solution {\n  public int[] lexSmallestNegatedPerm(int n, long target) {\n    long total = (long) n * (n + 1) / 2;\n    long diff = total - target;\n    if (diff < 0 || diff % 2 != 0 || diff / 2 > total) return new int[0];\n    long remaining = diff / 2;\n    boolean[] negate = new boolean[n + 1];\n    for (int v = n; v >= 1 && remaining > 0; v--) {\n      long lower = (long) (v - 1) * v / 2;\n      if (remaining >= v && remaining - v <= lower) {\n        negate[v] = true;\n        remaining -= v;\n      }\n    }\n    if (remaining != 0) return new int[0];\n    int[] res = new int[n];\n    int p = 0;\n    for (int v = n; v >= 1; v--) if (negate[v]) res[p++] = -v;\n    for (int v = 1; v <= n; v++) if (!negate[v]) res[p++] = v;\n    return res;\n  }\n}"
+}

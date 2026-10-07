@@ -1,0 +1,5 @@
+{
+    "problemName": "angles-of-a-triangle",
+    "language": "java",
+    "code": "class Solution {\n  public double[] internalAngles(int[] sides) {\n    int a = sides[0], b = sides[1], c = sides[2];\n    if (a + b <= c || a + c <= b || b + c <= a) return new double[0];\n    double[] angles = {\n      Math.toDegrees(Math.acos((double) (b * b + c * c - a * a) / (2.0 * b * c))),\n      Math.toDegrees(Math.acos((double) (a * a + c * c - b * b) / (2.0 * a * c))),\n      Math.toDegrees(Math.acos((double) (a * a + b * b - c * c) / (2.0 * a * b)))\n    };\n    java.util.Arrays.sort(angles);\n    return angles;\n  }\n}"
+}

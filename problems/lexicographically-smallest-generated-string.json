@@ -1,0 +1,5 @@
+{
+    "problemName": "lexicographically-smallest-generated-string",
+    "language": "java",
+    "code": "class Solution {\n  public String generateString(String str1, String str2) {\n    int n = str1.length(), m = str2.length(), len = n + m - 1;\n    char[] w = new char[len];\n    boolean[] fixed = new boolean[len];\n    for (int i = 0; i < n; i++) {\n      if (str1.charAt(i) != 'T') continue;\n      for (int j = 0; j < m; j++) {\n        char c = str2.charAt(j);\n        if (fixed[i + j] && w[i + j] != c) return \"\";\n        w[i + j] = c;\n        fixed[i + j] = true;\n      }\n    }\n    for (int i = 0; i < len; i++) if (!fixed[i]) w[i] = 'a';\n    for (int i = 0; i < n; i++) {\n      if (str1.charAt(i) != 'F') continue;\n      boolean equal = true;\n      for (int j = 0; j < m && equal; j++) if (w[i + j] != str2.charAt(j)) equal = false;\n      if (!equal) continue;\n      int p = -1;\n      for (int j = m - 1; j >= 0; j--) {\n        if (!fixed[i + j]) {\n          p = i + j;\n          break;\n        }\n      }\n      if (p < 0) return \"\";\n      w[p] = 'b';\n      fixed[p] = true;\n    }\n    return new String(w);\n  }\n}"
+}

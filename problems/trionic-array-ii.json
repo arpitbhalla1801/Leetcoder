@@ -1,0 +1,5 @@
+{
+    "problemName": "trionic-array-ii",
+    "language": "java",
+    "code": "class Solution {\n  public long maxSumTrionic(int[] nums) {\n    long NEG = Long.MIN_VALUE / 4;\n    long s1 = NEG, s2 = NEG, s3 = NEG, best = NEG;\n    for (int i = 1; i < nums.length; i++) {\n      long n1 = NEG, n2 = NEG, n3 = NEG;\n      if (nums[i - 1] < nums[i]) {\n        n1 = nums[i] + Math.max((long) nums[i - 1], s1);\n        long prev = Math.max(s2, s3);\n        if (prev > NEG) n3 = nums[i] + prev;\n      } else if (nums[i - 1] > nums[i]) {\n        long prev = Math.max(s1, s2);\n        if (prev > NEG) n2 = nums[i] + prev;\n      }\n      s1 = n1;\n      s2 = n2;\n      s3 = n3;\n      best = Math.max(best, s3);\n    }\n    return best;\n  }\n}"
+}

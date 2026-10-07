@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-sum-of-the-power-of-all-subsequences",
+    "language": "java",
+    "code": "class Solution {\n  public int sumOfPower(int[] nums, int k) {\n    final int MOD = 1_000_000_007;\n    long[][] dp = new long[k + 1][nums.length + 1];\n    dp[0][0] = 1;\n    for (int value : nums) {\n      for (int sum = k; sum >= 0; sum--) {\n        for (int count = nums.length - 1; count >= 0; count--) {\n          if (sum + value <= k) {\n            dp[sum + value][count + 1] = (dp[sum + value][count + 1] + dp[sum][count]) % MOD;\n          }\n        }\n      }\n    }\n    long answer = 0, multiplier = 1;\n    for (int count = nums.length; count >= 0; count--) {\n      answer = (answer + dp[k][count] * multiplier) % MOD;\n      multiplier = multiplier * 2 % MOD;\n    }\n    return (int) answer;\n  }\n}"
+}

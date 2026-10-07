@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-lexicographically-smallest-valid-sequence",
+    "language": "java",
+    "code": "class Solution {\n  public int[] validSequence(String word1, String word2) {\n    int n = word1.length(), m = word2.length();\n    // suffixMatched[i]: longest suffix of word2 that is a subsequence of word1[i..]\n    int[] suffixMatched = new int[n + 1];\n    for (int i = n - 1; i >= 0; i--) {\n      suffixMatched[i] = suffixMatched[i + 1];\n      if (suffixMatched[i] < m && word1.charAt(i) == word2.charAt(m - 1 - suffixMatched[i]))\n        suffixMatched[i]++;\n    }\n    int[] ans = new int[m];\n    int j = 0;\n    boolean usedChange = false;\n    for (int i = 0; i < n && j < m; i++) {\n      if (word1.charAt(i) == word2.charAt(j)) {\n        ans[j++] = i;\n      } else if (!usedChange && suffixMatched[i + 1] >= m - j - 1) {\n        // spend the single change here: the rest must then match exactly\n        usedChange = true;\n        ans[j++] = i;\n      }\n    }\n    return j == m ? ans : new int[0];\n  }\n}"
+}

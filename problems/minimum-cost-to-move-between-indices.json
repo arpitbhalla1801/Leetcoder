@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-cost-to-move-between-indices",
+    "language": "java",
+    "code": "class Solution {\n  public int[] minCost(int[] nums, int[][] queries) {\n    int n = nums.length;\n    long[] right = new long[n], left = new long[n];\n    for (int i = 0; i + 1 < n; i++) {\n      long diff = (long) nums[i + 1] - nums[i];\n      int closest = i == 0 ? 1 : (nums[i + 1] - nums[i] < nums[i] - nums[i - 1] ? i + 1 : i - 1);\n      right[i + 1] = right[i] + (closest == i + 1 ? 1 : diff);\n    }\n    for (int i = n - 1; i >= 1; i--) {\n      long diff = (long) nums[i] - nums[i - 1];\n      int closest =\n          i == n - 1 ? n - 2 : (nums[i + 1] - nums[i] < nums[i] - nums[i - 1] ? i + 1 : i - 1);\n      left[i - 1] = left[i] + (closest == i - 1 ? 1 : diff);\n    }\n    int[] ans = new int[queries.length];\n    for (int q = 0; q < queries.length; q++) {\n      int l = queries[q][0], r = queries[q][1];\n      ans[q] = (int) (l <= r ? right[r] - right[l] : left[r] - left[l]);\n    }\n    return ans;\n  }\n}"
+}

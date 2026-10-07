@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-cost-for-cutting-cake-i",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumCost(int m, int n, int[] horizontalCut, int[] verticalCut) {\n    int[] h = horizontalCut.clone(), v = verticalCut.clone();\n    Arrays.sort(h);\n    Arrays.sort(v);\n    int i = h.length - 1, j = v.length - 1, horizontalPieces = 1, verticalPieces = 1;\n    long total = 0;\n    // always take the most expensive remaining cut: it should cross as few pieces as possible\n    while (i >= 0 || j >= 0) {\n      if (j < 0 || (i >= 0 && h[i] >= v[j])) {\n        total += (long) h[i--] * verticalPieces;\n        horizontalPieces++;\n      } else {\n        total += (long) v[j--] * horizontalPieces;\n        verticalPieces++;\n      }\n    }\n    return (int) total;\n  }\n}"
+}

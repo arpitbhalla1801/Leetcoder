@@ -1,0 +1,5 @@
+{
+    "problemName": "closest-equal-element-queries",
+    "language": "java",
+    "code": "class Solution {\n  public List<Integer> solveQueries(int[] nums, int[] queries) {\n    int n = nums.length;\n    Map<Integer, List<Integer>> positions = new HashMap<>();\n    for (int i = 0; i < n; i++) positions.computeIfAbsent(nums[i], v -> new ArrayList<>()).add(i);\n    int[] nearest = new int[n];\n    Arrays.fill(nearest, -1);\n    for (List<Integer> p : positions.values()) {\n      int s = p.size();\n      if (s < 2) continue;\n      for (int t = 0; t < s; t++) {\n        int i = p.get(t);\n        nearest[i] =\n            Math.min(circular(i, p.get((t + 1) % s), n), circular(i, p.get((t - 1 + s) % s), n));\n      }\n    }\n    List<Integer> ans = new ArrayList<>();\n    for (int q : queries) ans.add(nearest[q]);\n    return ans;\n  }\n\n  private int circular(int a, int b, int n) {\n    int d = Math.abs(a - b);\n    return Math.min(d, n - d);\n  }\n}"
+}

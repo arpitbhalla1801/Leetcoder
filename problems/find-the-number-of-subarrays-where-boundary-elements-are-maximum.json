@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-number-of-subarrays-where-boundary-elements-are-maximum",
+    "language": "java",
+    "code": "class Solution {\n  public long numberOfSubarrays(int[] nums) {\n    Deque<long[]> stack =\n        new ArrayDeque<>(); // {value, how many times it appears with nothing larger in between}\n    long answer = 0;\n    for (int value : nums) {\n      while (!stack.isEmpty() && stack.peek()[0] < value) stack.pop();\n      if (!stack.isEmpty() && stack.peek()[0] == value) {\n        answer += stack.peek()[1] + 1; // pair with each earlier copy, plus the single element\n        stack.peek()[1]++;\n      } else {\n        stack.push(new long[] {value, 1});\n        answer++;\n      }\n    }\n    return answer;\n  }\n}"
+}

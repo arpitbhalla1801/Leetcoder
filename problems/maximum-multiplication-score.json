@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-multiplication-score",
+    "language": "java",
+    "code": "class Solution {\n  public long maxScore(int[] a, int[] b) {\n    long NEG = Long.MIN_VALUE / 2;\n    long[] dp = {0, NEG, NEG, NEG, NEG};\n    for (int x : b) {\n      for (int j = 3; j >= 0; j--) {\n        long v = dp[j] + (long) a[j] * x;\n        if (v > dp[j + 1]) dp[j + 1] = v;\n      }\n    }\n    return dp[4];\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-days-to-score-exactly-n-points",
+    "language": "java",
+    "code": "class Solution {\n  public int minDays(int n) {\n    int INF = Integer.MAX_VALUE / 2;\n    int[] dp = new int[n + 1];\n    java.util.Arrays.fill(dp, INF);\n    dp[0] = -1;\n    for (int s = 1; s <= n; s++) {\n      for (int len = 1; len * (len + 1) / 2 <= s; len++) {\n        int prev = dp[s - len * (len + 1) / 2];\n        if (prev < INF) dp[s] = Math.min(dp[s], prev + len + 1);\n      }\n    }\n    return dp[n];\n  }\n}"
+}

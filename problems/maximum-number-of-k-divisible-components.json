@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-number-of-k-divisible-components",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private List<Integer>[] g;\n  private int k, count;\n  private int[] values;\n\n  private long dfs(int u, int parent) {\n    long sum = values[u];\n    for (int v : g[u]) if (v != parent) sum += dfs(v, u);\n    if (sum % k == 0) {\n      count++;\n      return 0;\n    }\n    return sum % k;\n  }\n\n  public int maxKDivisibleComponents(int n, int[][] edges, int[] values, int k) {\n    this.k = k;\n    this.values = values;\n    count = 0;\n    g = new List[n];\n    for (int i = 0; i < n; i++) g[i] = new ArrayList<>();\n    for (int[] e : edges) {\n      g[e[0]].add(e[1]);\n      g[e[1]].add(e[0]);\n    }\n    dfs(0, -1);\n    return count;\n  }\n}\n"
+}

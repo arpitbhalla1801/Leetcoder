@@ -1,0 +1,5 @@
+{
+    "problemName": "merge-adjacent-equal-elements",
+    "language": "java",
+    "code": "class Solution {\n  public List<Long> mergeAdjacent(int[] nums) {\n    long[] stack = new long[nums.length];\n    int top = 0;\n    for (int x : nums) {\n      long cur = x;\n      // a merged value may now equal its left neighbour, so keep merging\n      while (top > 0 && stack[top - 1] == cur) cur += stack[--top];\n      stack[top++] = cur;\n    }\n    List<Long> result = new ArrayList<>(top);\n    for (int i = 0; i < top; i++) result.add(stack[i]);\n    return result;\n  }\n}"
+}

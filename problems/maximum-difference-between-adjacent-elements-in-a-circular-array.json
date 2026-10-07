@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-difference-between-adjacent-elements-in-a-circular-array",
+    "language": "java",
+    "code": "class Solution {\n  public int maxAdjacentDistance(int[] nums) {\n    int n = nums.length, best = 0;\n    for (int i = 0; i < n; i++) {\n      best = Math.max(best, Math.abs(nums[i] - nums[(i + 1) % n]));\n    }\n    return best;\n  }\n}"
+}

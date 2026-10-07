@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-centered-subarrays",
+    "language": "java",
+    "code": "class Solution {\n  public int centeredSubarrays(int[] nums) {\n    int n = nums.length, count = 0;\n    for (int l = 0; l < n; l++) {\n      java.util.HashSet<Long> seen = new java.util.HashSet<>();\n      long sum = 0;\n      for (int r = l; r < n; r++) {\n        sum += nums[r];\n        seen.add((long) nums[r]);\n        if (seen.contains(sum)) count++;\n      }\n    }\n    return count;\n  }\n}"
+}

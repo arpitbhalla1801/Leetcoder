@@ -1,0 +1,5 @@
+{
+    "problemName": "fraction-addition-and-subtraction",
+    "language": "java",
+    "code": "class Solution {\n  public String fractionAddition(String expression) {\n    long numerator = 0, denominator = 1;\n    int i = 0;\n    while (i < expression.length()) {\n      int sign = 1;\n      if (expression.charAt(i) == '+' || expression.charAt(i) == '-')\n        sign = expression.charAt(i++) == '+' ? 1 : -1;\n      int slash = expression.indexOf('/', i), end = slash + 1;\n      while (end < expression.length() && Character.isDigit(expression.charAt(end))) end++;\n      long num = sign * Long.parseLong(expression.substring(i, slash));\n      long den = Long.parseLong(expression.substring(slash + 1, end));\n      numerator = numerator * den + num * denominator;\n      denominator *= den;\n      long g = gcd(Math.abs(numerator), denominator);\n      numerator /= g;\n      denominator /= g;\n      i = end;\n    }\n    return numerator + \"/\" + denominator;\n  }\n\n  private long gcd(long a, long b) {\n    while (b != 0) {\n      long t = a % b;\n      a = b;\n      b = t;\n    }\n    return a;\n  }\n}\n"
+}

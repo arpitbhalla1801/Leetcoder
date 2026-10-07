@@ -1,0 +1,5 @@
+{
+    "problemName": "find-minimum-cost-to-remove-array-elements",
+    "language": "java",
+    "code": "class Solution {\n  public int minCost(int[] nums) {\n    int n = nums.length;\n    int[][] dp = new int[n + 1][n + 3];\n    for (int i = n; i >= 1; i--) {\n      for (int j = 0; j < i; j++) {\n        if (i >= n - 1) {\n          int mx = nums[j];\n          for (int t = i; t < n; t++) mx = Math.max(mx, nums[t]);\n          dp[j][i] = mx;\n        } else {\n          int a = Math.max(nums[j], nums[i]) + dp[i + 1][i + 2];\n          int b = Math.max(nums[j], nums[i + 1]) + dp[i][i + 2];\n          int c = Math.max(nums[i], nums[i + 1]) + dp[j][i + 2];\n          dp[j][i] = Math.min(a, Math.min(b, c));\n        }\n      }\n    }\n    return dp[0][1];\n  }\n}"
+}

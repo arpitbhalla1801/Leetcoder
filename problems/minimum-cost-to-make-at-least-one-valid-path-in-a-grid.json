@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-cost-to-make-at-least-one-valid-path-in-a-grid",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minCost(int[][] grid) {\n    int m = grid.length, n = grid[0].length;\n    int[][] dist = new int[m][n];\n    for (int[] row : dist) Arrays.fill(row, Integer.MAX_VALUE);\n    Deque<int[]> deque = new ArrayDeque<>();\n    dist[0][0] = 0;\n    deque.addFirst(new int[] {0, 0});\n    int[] dr = {0, 0, 1, -1}, dc = {1, -1, 0, 0};\n    while (!deque.isEmpty()) {\n      int[] cell = deque.removeFirst();\n      int r = cell[0], c = cell[1];\n      for (int k = 0; k < 4; k++) {\n        int nr = r + dr[k], nc = c + dc[k];\n        if (nr < 0 || nr >= m || nc < 0 || nc >= n) continue;\n        int cost = dist[r][c] + (grid[r][c] == k + 1 ? 0 : 1);\n        if (cost < dist[nr][nc]) {\n          dist[nr][nc] = cost;\n          if (grid[r][c] == k + 1) deque.addFirst(new int[] {nr, nc});\n          else deque.addLast(new int[] {nr, nc});\n        }\n      }\n    }\n    return dist[m - 1][n - 1];\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "logical-or-of-two-binary-grids-represented-as-quad-trees",
+    "language": "java",
+    "code": "class Solution {\n  public Node intersect(Node quadTree1, Node quadTree2) {\n    if (quadTree1.isLeaf) return quadTree1.val ? quadTree1 : quadTree2;\n    if (quadTree2.isLeaf) return quadTree2.val ? quadTree2 : quadTree1;\n    Node tl = intersect(quadTree1.topLeft, quadTree2.topLeft);\n    Node tr = intersect(quadTree1.topRight, quadTree2.topRight);\n    Node bl = intersect(quadTree1.bottomLeft, quadTree2.bottomLeft);\n    Node br = intersect(quadTree1.bottomRight, quadTree2.bottomRight);\n    if (tl.isLeaf\n        && tr.isLeaf\n        && bl.isLeaf\n        && br.isLeaf\n        && tl.val == tr.val\n        && tr.val == bl.val\n        && bl.val == br.val) return new Node(tl.val, true);\n    return new Node(false, false, tl, tr, bl, br);\n  }\n}\n"
+}

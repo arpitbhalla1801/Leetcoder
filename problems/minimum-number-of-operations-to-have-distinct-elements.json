@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-number-of-operations-to-have-distinct-elements",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(int[] nums) {\n    boolean[] seen = new boolean[100_001];\n    int start = nums.length;\n    while (start > 0 && !seen[nums[start - 1]]) {\n      seen[nums[start - 1]] = true;\n      start--;\n    }\n    return (start + 2) / 3;\n  }\n}"
+}

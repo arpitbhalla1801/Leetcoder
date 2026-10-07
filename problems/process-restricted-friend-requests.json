@@ -1,0 +1,5 @@
+{
+    "problemName": "process-restricted-friend-requests",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public boolean[] friendRequests(int n, int[][] restrictions, int[][] requests) {\n    int[] p = new int[n];\n    for (int i = 0; i < n; i++) p[i] = i;\n    boolean[] ans = new boolean[requests.length];\n    for (int q = 0; q < requests.length; q++) {\n      int a = find(p, requests[q][0]), b = find(p, requests[q][1]);\n      if (a == b) {\n        ans[q] = true;\n        continue;\n      }\n      boolean ok = true;\n      for (int[] r : restrictions) {\n        int x = find(p, r[0]), y = find(p, r[1]);\n        if ((x == a && y == b) || (x == b && y == a)) {\n          ok = false;\n          break;\n        }\n      }\n      if (ok) {\n        p[a] = b;\n        ans[q] = true;\n      }\n    }\n    return ans;\n  }\n\n  private int find(int[] p, int x) {\n    while (p[x] != x) {\n      p[x] = p[p[x]];\n      x = p[x];\n    }\n    return x;\n  }\n}\n"
+}

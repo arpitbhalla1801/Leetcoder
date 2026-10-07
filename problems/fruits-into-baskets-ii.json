@@ -1,0 +1,5 @@
+{
+    "problemName": "fruits-into-baskets-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int numOfUnplacedFruits(int[] fruits, int[] baskets) {\n    int unplaced = 0;\n    for (int fruit : fruits) {\n      boolean placed = false;\n      for (int j = 0; j < baskets.length && !placed; j++) {\n        if (baskets[j] >= fruit) {\n          baskets[j] = 0;\n          placed = true;\n        }\n      }\n      if (!placed) unplaced++;\n    }\n    return unplaced;\n  }\n}"
+}

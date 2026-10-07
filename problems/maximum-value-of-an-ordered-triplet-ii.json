@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-value-of-an-ordered-triplet-ii",
+    "language": "java",
+    "code": "class Solution {\n  public long maximumTripletValue(int[] nums) {\n    long answer = 0, bestLeft = nums[0], bestDiff = Long.MIN_VALUE;\n    for (int j = 1; j < nums.length; j++) {\n      bestDiff = Math.max(bestDiff, bestLeft - nums[j]);\n      if (j + 1 < nums.length) answer = Math.max(answer, bestDiff * nums[j + 1]);\n      bestLeft = Math.max(bestLeft, nums[j]);\n    }\n    return answer;\n  }\n}\n"
+}

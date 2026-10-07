@@ -1,0 +1,5 @@
+{
+    "problemName": "watering-plants",
+    "language": "java",
+    "code": "class Solution {\n  public int wateringPlants(int[] plants, int capacity) {\n    int steps = 0, water = capacity;\n    for (int i = 0; i < plants.length; i++) {\n      if (water < plants[i]) {\n        steps += 2 * i; // walk back to the river and return to the same spot\n        water = capacity;\n      }\n      water -= plants[i];\n      steps++;\n    }\n    return steps;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-deletions-to-make-alternating-substring",
+    "language": "java",
+    "code": "class Solution {\n  private int[] bit;\n  private int n;\n\n  private void add(int i, int d) {\n    for (i++; i <= n; i += i & -i) bit[i] += d;\n  }\n\n  private int prefix(int i) {\n    int s = 0;\n    for (i++; i > 0; i -= i & -i) s += bit[i];\n    return s;\n  }\n\n  public int[] minDeletions(String s, int[][] queries) {\n    n = s.length();\n    bit = new int[n + 2];\n    char[] c = s.toCharArray();\n    for (int i = 1; i < n; i++) if (c[i] == c[i - 1]) add(i, 1);\n    int cnt = 0;\n    for (int[] q : queries) if (q[0] == 2) cnt++;\n    int[] ans = new int[cnt];\n    int idx = 0;\n    for (int[] q : queries) {\n      if (q[0] == 1) {\n        int j = q[1];\n        if (j > 0 && c[j] == c[j - 1]) add(j, -1);\n        if (j + 1 < n && c[j] == c[j + 1]) add(j + 1, -1);\n        c[j] = c[j] == 'A' ? 'B' : 'A';\n        if (j > 0 && c[j] == c[j - 1]) add(j, 1);\n        if (j + 1 < n && c[j] == c[j + 1]) add(j + 1, 1);\n      } else {\n        ans[idx++] = prefix(q[2]) - prefix(q[1]);\n      }\n    }\n    return ans;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "reverse-letters-then-special-characters-in-a-string",
+    "language": "java",
+    "code": "class Solution {\n  public String reverseByType(String s) {\n    char[] c = s.toCharArray();\n    reverseWhere(c, true);\n    reverseWhere(c, false);\n    return new String(c);\n  }\n\n  // reverses, in place, the characters that are letters (or non-letters)\n  private void reverseWhere(char[] c, boolean letters) {\n    int i = 0, j = c.length - 1;\n    while (i < j) {\n      if (Character.isLetter(c[i]) != letters) i++;\n      else if (Character.isLetter(c[j]) != letters) j--;\n      else {\n        char t = c[i];\n        c[i++] = c[j];\n        c[j--] = t;\n      }\n    }\n  }\n}"
+}

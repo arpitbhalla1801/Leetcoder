@@ -1,0 +1,5 @@
+{
+    "problemName": "palindromic-subarray-sum",
+    "language": "java",
+    "code": "class Solution {\n  public long getSum(int[] nums) {\n    int n = nums.length;\n    long[] pre = new long[n + 1];\n    for (int i = 0; i < n; i++) pre[i + 1] = pre[i] + nums[i];\n    int[] d1 = new int[n], d2 = new int[n];\n    for (int i = 0, l = 0, r = -1; i < n; i++) {\n      int k = i > r ? 1 : Math.min(d1[l + r - i], r - i + 1);\n      while (i - k >= 0 && i + k < n && nums[i - k] == nums[i + k]) k++;\n      d1[i] = k--;\n      if (i + k > r) {\n        l = i - k;\n        r = i + k;\n      }\n    }\n    for (int i = 0, l = 0, r = -1; i < n; i++) {\n      int k = i > r ? 0 : Math.min(d2[l + r - i + 1], r - i + 1);\n      while (i - k - 1 >= 0 && i + k < n && nums[i - k - 1] == nums[i + k]) k++;\n      d2[i] = k--;\n      if (i + k > r) {\n        l = i - k - 1;\n        r = i + k;\n      }\n    }\n    long best = 0;\n    for (int i = 0; i < n; i++) {\n      best = Math.max(best, pre[i + d1[i]] - pre[i - d1[i] + 1]);\n      if (d2[i] > 0) best = Math.max(best, pre[i + d2[i]] - pre[i - d2[i]]);\n    }\n    return best;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "count-distinct-subarrays-divisible-by-k-in-sorted-array",
+    "language": "java",
+    "code": "class Solution {\n  private static long gcd(long a, long b) {\n    while (b != 0) {\n      long t = a % b;\n      a = b;\n      b = t;\n    }\n    return a;\n  }\n\n  public long numGoodSubarrays(int[] nums, int k) {\n    int n = nums.length;\n    java.util.HashMap<Long, Integer> count = new java.util.HashMap<>();\n    long prefix = 0, total = 0;\n    count.put(0L, 1);\n    for (int x : nums) {\n      prefix = (prefix + x) % k;\n      int c = count.getOrDefault(prefix, 0);\n      total += c;\n      count.put(prefix, c + 1);\n    }\n    for (int i = 0; i < n; ) {\n      int j = i;\n      while (j < n && nums[j] == nums[i]) j++;\n      long len = j - i;\n      long m = k / gcd(k, nums[i]);\n      long c = len / m;\n      long within = c * (len + 1) - m * c * (c + 1) / 2;\n      total += c - within;\n      i = j;\n    }\n    return total;\n  }\n}"
+}

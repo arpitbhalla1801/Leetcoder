@@ -1,0 +1,5 @@
+{
+    "problemName": "coupon-code-validator",
+    "language": "java",
+    "code": "class Solution {\n  public List<String> validateCoupons(String[] code, String[] businessLine, boolean[] isActive) {\n    List<String> lines = Arrays.asList(\"electronics\", \"grocery\", \"pharmacy\", \"restaurant\");\n    List<int[]> valid = new ArrayList<>();\n    for (int i = 0; i < code.length; i++) {\n      if (isActive[i] && lines.contains(businessLine[i]) && wellFormed(code[i])) {\n        valid.add(new int[] {lines.indexOf(businessLine[i]), i});\n      }\n    }\n    valid.sort((a, b) -> a[0] != b[0] ? a[0] - b[0] : code[a[1]].compareTo(code[b[1]]));\n    List<String> ans = new ArrayList<>();\n    for (int[] v : valid) ans.add(code[v[1]]);\n    return ans;\n  }\n\n  private boolean wellFormed(String s) {\n    if (s.isEmpty()) return false;\n    for (char c : s.toCharArray()) {\n      if (!Character.isLetterOrDigit(c) && c != '_') return false;\n    }\n    return true;\n  }\n}"
+}

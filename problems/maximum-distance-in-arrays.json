@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-distance-in-arrays",
+    "language": "java",
+    "code": "class Solution {\n  public int maxDistance(java.util.List<java.util.List<Integer>> arrays) {\n    int answer = 0, min = arrays.get(0).get(0), max = arrays.get(0).get(arrays.get(0).size() - 1);\n    for (int i = 1; i < arrays.size(); i++) {\n      java.util.List<Integer> a = arrays.get(i);\n      int first = a.get(0), last = a.get(a.size() - 1);\n      answer = Math.max(answer, Math.max(last - min, max - first));\n      min = Math.min(min, first);\n      max = Math.max(max, last);\n    }\n    return answer;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-number-of-groups-getting-fresh-donuts",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private int b;\n  private Map<Long, Integer> memo;\n\n  public int maxHappyGroups(int batchSize, int[] groups) {\n    b = batchSize;\n    int[] cnt = new int[b];\n    for (int g : groups) cnt[g % b]++;\n    int answer = cnt[0];\n    cnt[0] = 0;\n    long state = 0;\n    for (int i = 1; i < b; i++) state |= (long) cnt[i] << (5 * (i - 1));\n    memo = new HashMap<>();\n    return answer + dfs(state, 0);\n  }\n\n  private int dfs(long state, int remainder) {\n    if (state == 0) return 0;\n    long key = (state << 4) | remainder;\n    Integer cached = memo.get(key);\n    if (cached != null) return cached;\n    int best = 0;\n    for (int r = 1; r < b; r++) {\n      int count = (int) ((state >> (5 * (r - 1))) & 31);\n      if (count == 0) continue;\n      long next = state - (1L << (5 * (r - 1)));\n      best = Math.max(best, (remainder == 0 ? 1 : 0) + dfs(next, (remainder + r) % b));\n    }\n    memo.put(key, best);\n    return best;\n  }\n}\n"
+}

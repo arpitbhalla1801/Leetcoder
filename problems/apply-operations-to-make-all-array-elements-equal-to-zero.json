@@ -1,1 +1,5 @@
-{"problemName":"apply-operations-to-make-all-array-elements-equal-to-zero","language":"java","code":"class Solution {\n    public boolean checkArray(int[] arr, int k) {\n        int n = arr.length;\n        for (int i = 0; i < n - k + 1; i++)\n        {\n            if(arr[i] <= 0)continue;\n            int a = arr[i];\n            for (int j = i; j < i + k; j++)\n            {\n                arr[j] -= a;\n                if (arr[j] < 0)\n                    return false;\n            }\n        }\n        boolean b1 = true;\n        for (int i = n - k + 1; i < n; i++)\n            if (arr[i] != 0)\n                b1 = false;\n        return b1;\n    }\n}"}
+{
+    "problemName": "apply-operations-to-make-all-array-elements-equal-to-zero",
+    "language": "java",
+    "code": "class Solution {\n  public boolean checkArray(int[] nums, int k) {\n    int n = nums.length, applied = 0;\n    int[] expire = new int[n + 1]; // how much each window stops contributing at index i\n    for (int i = 0; i < n; i++) {\n      applied -= expire[i];\n      int left = nums[i] - applied;\n      if (left < 0) return false;\n      if (left > 0) {\n        if (i + k > n) return false;\n        applied += left;\n        expire[i + k] += left;\n      }\n    }\n    return true;\n  }\n}"
+}

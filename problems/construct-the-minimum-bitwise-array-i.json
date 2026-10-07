@@ -1,0 +1,5 @@
+{
+    "problemName": "construct-the-minimum-bitwise-array-i",
+    "language": "java",
+    "code": "class Solution {\n  public int[] minBitwiseArray(List<Integer> nums) {\n    int[] ans = new int[nums.size()];\n    for (int i = 0; i < ans.length; i++) {\n      int target = nums.get(i);\n      ans[i] = -1;\n      for (int a = 0; a < target; a++) {\n        if ((a | (a + 1)) == target) {\n          ans[i] = a;\n          break;\n        }\n      }\n    }\n    return ans;\n  }\n}"
+}

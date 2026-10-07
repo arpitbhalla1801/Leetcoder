@@ -1,0 +1,5 @@
+{
+    "problemName": "transform-array-by-parity",
+    "language": "java",
+    "code": "class Solution {\n  public int[] transformArray(int[] nums) {\n    int evens = 0;\n    for (int x : nums) if (x % 2 == 0) evens++;\n    int[] ans = new int[nums.length];\n    for (int i = evens; i < ans.length; i++) ans[i] = 1;\n    return ans;\n  }\n}"
+}

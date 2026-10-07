@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-total-cost-of-alternating-subarrays",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long maximumTotalCost(int[] nums) {\n    long positive = nums[0], negative = Long.MIN_VALUE / 4;\n    for (int i = 1; i < nums.length; i++) {\n      long nextPositive = Math.max(positive, negative) + nums[i];\n      long nextNegative = positive - nums[i];\n      positive = nextPositive;\n      negative = nextNegative;\n    }\n    return Math.max(positive, negative);\n  }\n}"
+}

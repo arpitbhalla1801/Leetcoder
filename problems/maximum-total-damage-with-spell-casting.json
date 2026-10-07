@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-total-damage-with-spell-casting",
+    "language": "java",
+    "code": "class Solution {\n  public long maximumTotalDamage(int[] power) {\n    int[] sorted = power.clone();\n    Arrays.sort(sorted);\n    int n = sorted.length, m = 0;\n    int[] values = new int[n];\n    long[] counts = new long[n];\n    for (int x : sorted) {\n      if (m > 0 && values[m - 1] == x) counts[m - 1]++;\n      else {\n        values[m] = x;\n        counts[m++] = 1;\n      }\n    }\n    long[] dp = new long[m]; // best total using the first i + 1 distinct values\n    int compatible = -1; // last value at least 3 below values[i]\n    for (int i = 0; i < m; i++) {\n      while (compatible + 1 < i && values[compatible + 1] <= values[i] - 3) compatible++;\n      long take = values[i] * counts[i] + (compatible >= 0 ? dp[compatible] : 0);\n      dp[i] = Math.max(i > 0 ? dp[i - 1] : 0, take);\n    }\n    return dp[m - 1];\n  }\n}"
+}

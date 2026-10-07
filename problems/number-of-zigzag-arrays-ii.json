@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-zigzag-arrays-ii",
+    "language": "java",
+    "code": "class Solution {\n  private static final long MOD = 1_000_000_007L;\n\n  private static long[][] mul(long[][] a, long[][] b, int K) {\n    long[][] c = new long[K][K];\n    for (int i = 0; i < K; i++) {\n      for (int k = 0; k < K; k++) {\n        long x = a[i][k];\n        if (x == 0) continue;\n        for (int j = 0; j < K; j++) c[i][j] = (c[i][j] + x * b[k][j]) % MOD;\n      }\n    }\n    return c;\n  }\n\n  public int zigZagArrays(int n, int l, int r) {\n    int K = r - l + 1;\n    long[][] m = new long[K][K];\n    // newUp[v] = sum of up[w] for w > K - 1 - v\n    for (int v = 0; v < K; v++) for (int w = K - v; w < K; w++) m[v][w] = 1;\n    long[][] res = new long[K][K];\n    for (int i = 0; i < K; i++) res[i][i] = 1;\n    for (long e = n - 2; e > 0; e >>= 1) {\n      if ((e & 1) == 1) res = mul(res, m, K);\n      m = mul(m, m, K);\n    }\n    long sum = 0;\n    for (int v = 0; v < K; v++) {\n      for (int w = 0; w < K; w++) sum = (sum + res[v][w] * w) % MOD;\n    }\n    return (int) (sum * 2 % MOD);\n  }\n}"
+}

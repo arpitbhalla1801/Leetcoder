@@ -1,0 +1,5 @@
+{
+    "problemName": "find-x-sum-of-all-k-long-subarrays-i",
+    "language": "java",
+    "code": "class Solution {\n  public int[] findXSum(int[] nums, int k, int x) {\n    int[] ans = new int[nums.length - k + 1];\n    for (int i = 0; i < ans.length; i++) {\n      int[] freq = new int[51];\n      for (int j = i; j < i + k; j++) freq[nums[j]]++;\n      List<Integer> values = new ArrayList<>();\n      for (int v = 1; v <= 50; v++) if (freq[v] > 0) values.add(v);\n      values.sort((a, b) -> freq[a] != freq[b] ? freq[b] - freq[a] : b - a);\n      int sum = 0;\n      for (int t = 0; t < Math.min(x, values.size()); t++) {\n        sum += values.get(t) * freq[values.get(t)];\n      }\n      ans[i] = sum;\n    }\n    return ans;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-balanced-substring-i",
+    "language": "java",
+    "code": "class Solution {\n  public int longestBalanced(String s) {\n    int best = 0;\n    for (int i = 0; i < s.length(); i++) {\n      int[] freq = new int[26];\n      int distinct = 0, maxFreq = 0;\n      for (int j = i; j < s.length(); j++) {\n        int c = s.charAt(j) - 'a';\n        if (freq[c]++ == 0) distinct++;\n        maxFreq = Math.max(maxFreq, freq[c]);\n        // every distinct letter has the same count iff the length equals distinct * maxFreq\n        if (distinct * maxFreq == j - i + 1) best = Math.max(best, j - i + 1);\n      }\n    }\n    return best;\n  }\n}"
+}

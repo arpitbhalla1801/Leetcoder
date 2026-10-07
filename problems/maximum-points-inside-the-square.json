@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-points-inside-the-square",
+    "language": "java",
+    "code": "class Solution {\n  public int maxPointsInsideSquare(int[][] points, String s) {\n    int[] smallest = new int[26], second = new int[26];\n    Arrays.fill(smallest, Integer.MAX_VALUE);\n    Arrays.fill(second, Integer.MAX_VALUE);\n    int[] dist = new int[points.length];\n    for (int i = 0; i < points.length; i++) {\n      int d = Math.max(Math.abs(points[i][0]), Math.abs(points[i][1])), c = s.charAt(i) - 'a';\n      dist[i] = d;\n      if (d < smallest[c]) {\n        second[c] = smallest[c];\n        smallest[c] = d;\n      } else if (d < second[c]) {\n        second[c] = d;\n      }\n    }\n    // the square must stop before the second occurrence of any tag\n    int limit = Integer.MAX_VALUE;\n    for (int c = 0; c < 26; c++) limit = Math.min(limit, second[c]);\n    int count = 0;\n    for (int d : dist) if (d < limit) count++;\n    return count;\n  }\n}"
+}

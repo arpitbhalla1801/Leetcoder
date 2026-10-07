@@ -1,0 +1,5 @@
+{
+    "problemName": "find-closest-person",
+    "language": "java",
+    "code": "class Solution {\n  public int findClosest(int x, int y, int z) {\n    int a = Math.abs(x - z), b = Math.abs(y - z);\n    return a == b ? 0 : (a < b ? 1 : 2);\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-impossible-or",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minImpossibleOR(int[] nums) {\n    boolean[] present = new boolean[31];\n    for (int value : nums)\n      if (value > 0 && (value & (value - 1)) == 0) {\n        present[Integer.numberOfTrailingZeros(value)] = true;\n      }\n    for (int bit = 0; bit < present.length; bit++) if (!present[bit]) return 1 << bit;\n    return 1 << 30;\n  }\n}\n"
+}

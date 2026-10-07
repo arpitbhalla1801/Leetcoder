@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-sum-of-edge-values-in-a-graph",
+    "language": "java",
+    "code": "class Solution {\n  public long maxScore(int n, int[][] edges) {\n    long[] arr = new long[n];\n    int rightCount = n / 2, leftCount = (n - 1) / 2;\n    // sequence: left values (n-2, n-4, ...) reversed, then n, then right values (n-1, n-3, ...)\n    int pos = leftCount;\n    arr[pos] = n;\n    for (int i = 1, v = n - 1; i <= rightCount; i++, v -= 2) arr[pos + i] = v;\n    for (int i = 1, v = n - 2; i <= leftCount; i++, v -= 2) arr[pos - i] = v;\n    long sum = 0;\n    for (int i = 0; i + 1 < n; i++) sum += arr[i] * arr[i + 1];\n    if (edges.length == n && n > 2) sum += arr[0] * arr[n - 1];\n    return sum;\n  }\n}"
+}

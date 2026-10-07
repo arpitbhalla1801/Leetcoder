@@ -1,0 +1,5 @@
+{
+    "problemName": "count-special-subsequences",
+    "language": "java",
+    "code": "class Solution {\n  private static int gcd(int a, int b) {\n    while (b != 0) {\n      int t = a % b;\n      a = b;\n      b = t;\n    }\n    return a;\n  }\n\n  private static int key(int a, int b) {\n    int g = gcd(a, b);\n    return (a / g) << 10 | (b / g);\n  }\n\n  public long numberOfSubsequences(int[] nums) {\n    int n = nums.length;\n    int[] cnt = new int[1 << 20];\n    long ans = 0;\n    for (int r = 4; r < n - 2; r++) {\n      int q = r - 2;\n      for (int p = 0; p <= q - 2; p++) cnt[key(nums[p], nums[q])]++;\n      for (int s = r + 2; s < n; s++) ans += cnt[key(nums[s], nums[r])];\n    }\n    return ans;\n  }\n}"
+}

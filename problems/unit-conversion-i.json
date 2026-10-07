@@ -1,0 +1,5 @@
+{
+    "problemName": "unit-conversion-i",
+    "language": "java",
+    "code": "class Solution {\n  public int[] baseUnitConversions(int[][] conversions) {\n    final long MOD = 1_000_000_007L;\n    int n = conversions.length + 1;\n    int[] head = new int[n], next = new int[n - 1];\n    java.util.Arrays.fill(head, -1);\n    for (int i = 0; i < n - 1; i++) {\n      next[i] = head[conversions[i][0]];\n      head[conversions[i][0]] = i;\n    }\n    long[] val = new long[n];\n    val[0] = 1;\n    int[] queue = new int[n];\n    int qh = 0, qt = 0;\n    queue[qt++] = 0;\n    while (qh < qt) {\n      int u = queue[qh++];\n      for (int e = head[u]; e >= 0; e = next[e]) {\n        int v = conversions[e][1];\n        val[v] = val[u] * conversions[e][2] % MOD;\n        queue[qt++] = v;\n      }\n    }\n    int[] ans = new int[n];\n    for (int i = 0; i < n; i++) ans[i] = (int) val[i];\n    return ans;\n  }\n}"
+}

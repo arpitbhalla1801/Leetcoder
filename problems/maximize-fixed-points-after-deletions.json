@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-fixed-points-after-deletions",
+    "language": "java",
+    "code": "class Solution {\n  public int maxFixedPoints(int[] nums) {\n    int n = nums.length, m = 0;\n    long[] keyed = new long[n];\n    for (int i = 0; i < n; i++) {\n      int v = nums[i], w = i - v;\n      if (w >= 0) keyed[m++] = ((long) w << 20) | v;\n    }\n    java.util.Arrays.sort(keyed, 0, m);\n    int[] tails = new int[m];\n    int len = 0;\n    for (int i = 0; i < m; i++) {\n      int v = (int) (keyed[i] & ((1 << 20) - 1));\n      int lo = 0, hi = len;\n      while (lo < hi) {\n        int mid = (lo + hi) >>> 1;\n        if (tails[mid] < v) lo = mid + 1;\n        else hi = mid;\n      }\n      tails[lo] = v;\n      if (lo == len) len++;\n    }\n    return len;\n  }\n}"
+}

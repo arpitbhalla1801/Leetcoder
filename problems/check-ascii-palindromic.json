@@ -1,0 +1,5 @@
+{
+    "problemName": "check-ascii-palindromic",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isPalindromic(String s) {\n    StringBuilder bits = new StringBuilder();\n    for (char c : s.toCharArray()) {\n      String b = Integer.toBinaryString(c);\n      bits.append(\"0\".repeat(8 - b.length())).append(b);\n    }\n    return bits.toString().equals(bits.reverse().toString());\n  }\n}"
+}

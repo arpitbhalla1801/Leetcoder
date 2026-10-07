@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-number-of-seconds-to-make-mountain-height-zero",
+    "language": "java",
+    "code": "class Solution {\n  public long minNumberOfSeconds(int mountainHeight, int[] workerTimes) {\n    long lo = 1, hi = 0;\n    for (int t : workerTimes)\n      hi = Math.max(hi, (long) t * mountainHeight * (mountainHeight + 1L) / 2);\n    while (lo < hi) {\n      long mid = (lo + hi) >>> 1;\n      if (reduced(workerTimes, mid) >= mountainHeight) hi = mid;\n      else lo = mid + 1;\n    }\n    return lo;\n  }\n\n  // total height removed if every worker may work for `time` seconds\n  private long reduced(int[] workerTimes, long time) {\n    long total = 0;\n    for (int t : workerTimes) {\n      long q = time / t; // largest x with x * (x + 1) / 2 <= q\n      long x = (long) ((Math.sqrt(1 + 8.0 * q) - 1) / 2);\n      while ((x + 1) * (x + 2) / 2 <= q) x++;\n      while (x > 0 && x * (x + 1) / 2 > q) x--;\n      total += x;\n    }\n    return total;\n  }\n}"
+}

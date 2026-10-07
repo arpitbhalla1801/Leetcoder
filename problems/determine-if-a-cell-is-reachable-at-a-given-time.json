@@ -1,0 +1,5 @@
+{
+    "problemName": "determine-if-a-cell-is-reachable-at-a-given-time",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isReachableAtTime(int sx, int sy, int fx, int fy, int t) {\n    int distance = Math.max(Math.abs(fx - sx), Math.abs(fy - sy));\n    return distance <= t && (distance != 0 || t != 1);\n  }\n}\n"
+}

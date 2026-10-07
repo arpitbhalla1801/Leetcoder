@@ -1,0 +1,5 @@
+{
+    "problemName": "remove-k-balanced-substrings",
+    "language": "java",
+    "code": "class Solution {\n  public String removeSubstring(String s, int k) {\n    int n = s.length();\n    char[] type = new char[n + 1];\n    int[] count = new int[n + 1];\n    int top = 0;\n    for (int i = 0; i < n; i++) {\n      char c = s.charAt(i);\n      if (top > 0 && type[top - 1] == c) {\n        count[top - 1]++;\n      } else {\n        type[top] = c;\n        count[top++] = 1;\n      }\n      if (c == ')' && top >= 2 && count[top - 1] >= k && count[top - 2] >= k) {\n        count[top - 1] -= k;\n        count[top - 2] -= k;\n        if (count[top - 1] == 0) top--;\n        if (top > 0 && count[top - 1] == 0) top--;\n      }\n    }\n    StringBuilder sb = new StringBuilder();\n    for (int i = 0; i < top; i++) for (int t = 0; t < count[i]; t++) sb.append(type[i]);\n    return sb.toString();\n  }\n}"
+}

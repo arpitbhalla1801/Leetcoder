@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-ways-where-square-of-number-is-equal-to-product-of-two-numbers",
+    "language": "java",
+    "code": "class Solution {\n  public int numTriplets(int[] nums1, int[] nums2) {\n    return count(nums1, nums2) + count(nums2, nums1);\n  }\n\n  // triplets (i, j, k) with source[i]^2 == other[j] * other[k] and j < k\n  private int count(int[] source, int[] other) {\n    Map<Long, Integer> freq = new HashMap<>();\n    for (int x : other) freq.merge((long) x, 1, Integer::sum);\n    int total = 0;\n    for (int s : source) {\n      long square = (long) s * s;\n      for (Map.Entry<Long, Integer> e : freq.entrySet()) {\n        long a = e.getKey();\n        if (square % a != 0) continue;\n        long b = square / a;\n        if (a < b) {\n          Integer other2 = freq.get(b);\n          if (other2 != null) total += e.getValue() * other2;\n        } else if (a == b) {\n          total += e.getValue() * (e.getValue() - 1) / 2;\n        }\n      }\n    }\n    return total;\n  }\n}"
+}

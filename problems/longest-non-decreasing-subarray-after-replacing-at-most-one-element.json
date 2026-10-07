@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-non-decreasing-subarray-after-replacing-at-most-one-element",
+    "language": "java",
+    "code": "class Solution {\n  public int longestSubarray(int[] nums) {\n    int n = nums.length;\n    int[] left = new int[n], right = new int[n];\n    for (int i = 0; i < n; i++) left[i] = i > 0 && nums[i] >= nums[i - 1] ? left[i - 1] + 1 : 1;\n    for (int i = n - 1; i >= 0; i--)\n      right[i] = i + 1 < n && nums[i] <= nums[i + 1] ? right[i + 1] + 1 : 1;\n    int best = 1;\n    for (int i = 0; i < n; i++) {\n      best = Math.max(best, left[i]);\n      if (i > 0) best = Math.max(best, left[i - 1] + 1);\n      if (i + 1 < n) best = Math.max(best, right[i + 1] + 1);\n      if (i > 0 && i + 1 < n && nums[i - 1] <= nums[i + 1])\n        best = Math.max(best, left[i - 1] + right[i + 1] + 1);\n    }\n    return best;\n  }\n}"
+}

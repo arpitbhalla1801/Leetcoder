@@ -1,0 +1,5 @@
+{
+    "problemName": "final-array-state-after-k-multiplication-operations-i",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] getFinalState(int[] nums, int k, int multiplier) {\n    PriorityQueue<int[]> pq =\n        new PriorityQueue<>(\n            (a, b) -> a[0] != b[0] ? Integer.compare(a[0], b[0]) : Integer.compare(a[1], b[1]));\n    for (int i = 0; i < nums.length; i++) pq.offer(new int[] {nums[i], i});\n    while (k-- > 0) {\n      int[] cur = pq.poll();\n      cur[0] = (int) ((long) cur[0] * multiplier);\n      pq.offer(cur);\n    }\n    int[] ans = new int[nums.length];\n    while (!pq.isEmpty()) {\n      int[] cur = pq.poll();\n      ans[cur[1]] = cur[0];\n    }\n    return ans;\n  }\n}"
+}

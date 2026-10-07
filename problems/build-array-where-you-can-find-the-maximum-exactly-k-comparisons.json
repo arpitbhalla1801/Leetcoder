@@ -1,0 +1,5 @@
+{
+    "problemName": "build-array-where-you-can-find-the-maximum-exactly-k-comparisons",
+    "language": "java",
+    "code": "class Solution {\n  public int numOfArrays(int n, int m, int k) {\n    final int MOD = 1_000_000_007;\n    long[][] dp = new long[m + 1][k + 1];\n    for (int maximum = 1; maximum <= m; maximum++) dp[maximum][1] = 1;\n    for (int length = 2; length <= n; length++) {\n      long[][] next = new long[m + 1][k + 1];\n      long[][] prefix = new long[m + 1][k + 1];\n      for (int maximum = 1; maximum <= m; maximum++) {\n        for (int cost = 1; cost <= k; cost++) {\n          prefix[maximum][cost] = (prefix[maximum - 1][cost] + dp[maximum][cost]) % MOD;\n          next[maximum][cost] = dp[maximum][cost] * maximum % MOD;\n          if (cost > 1)\n            next[maximum][cost] = (next[maximum][cost] + prefix[maximum - 1][cost - 1]) % MOD;\n        }\n      }\n      dp = next;\n    }\n    long result = 0;\n    for (int maximum = 1; maximum <= m; maximum++) result = (result + dp[maximum][k]) % MOD;\n    return (int) result;\n  }\n}\n"
+}

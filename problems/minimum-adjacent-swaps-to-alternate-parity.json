@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-adjacent-swaps-to-alternate-parity",
+    "language": "java",
+    "code": "class Solution {\n  public int minSwaps(int[] nums) {\n    int n = nums.length, evens = 0;\n    int[] pos = new int[n];\n    for (int i = 0; i < n; i++) if (nums[i] % 2 == 0) pos[evens++] = i;\n    int odds = n - evens;\n    if (Math.abs(evens - odds) > 1) return -1;\n    long best = Long.MAX_VALUE;\n    for (int startSlot = 0; startSlot < 2; startSlot++) {\n      // evens occupy slots startSlot, startSlot + 2, ...\n      int slots = (n - startSlot + 1) / 2;\n      if (slots != evens) continue;\n      long cost = 0;\n      for (int k = 0; k < evens; k++) cost += Math.abs(pos[k] - (startSlot + 2 * k));\n      best = Math.min(best, cost);\n    }\n    return (int) best;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "allocate-mailboxes",
+    "language": "java",
+    "code": "class Solution {\n  public int minDistance(int[] houses, int k) {\n    Arrays.sort(houses);\n    int n = houses.length, inf = 1_000_000_000;\n    // cost[i][j]: one mailbox at the median of houses i..j (peel the outer pair off each time)\n    int[][] cost = new int[n][n];\n    for (int len = 2; len <= n; len++) {\n      for (int i = 0; i + len <= n; i++) {\n        int j = i + len - 1;\n        cost[i][j] = cost[i + 1][j - 1] + houses[j] - houses[i];\n      }\n    }\n    int[][] dp = new int[k + 1][n + 1];\n    for (int[] row : dp) Arrays.fill(row, inf);\n    dp[0][0] = 0;\n    for (int boxes = 1; boxes <= k; boxes++) {\n      for (int used = boxes; used <= n; used++) {\n        for (int previous = boxes - 1; previous < used; previous++) {\n          if (dp[boxes - 1][previous] != inf) {\n            dp[boxes][used] =\n                Math.min(dp[boxes][used], dp[boxes - 1][previous] + cost[previous][used - 1]);\n          }\n        }\n      }\n    }\n    return dp[k][n];\n  }\n}"
+}

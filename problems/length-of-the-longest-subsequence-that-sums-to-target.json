@@ -1,0 +1,5 @@
+{
+    "problemName": "Length of the Longest Subsequence That Sums to Target",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int lengthOfLongestSubsequence(List<Integer> nums, int target) {\n    int[] dp = new int[target + 1];\n    Arrays.fill(dp, -1000000);\n    dp[0] = 0;\n    for (int x : nums) for (int t = target; t >= x; t--) dp[t] = Math.max(dp[t], dp[t - x] + 1);\n    return dp[target] < 0 ? -1 : dp[target];\n  }\n}\n"
+}

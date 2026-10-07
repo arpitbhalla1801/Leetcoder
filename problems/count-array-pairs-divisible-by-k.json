@@ -1,0 +1,5 @@
+{
+    "problemName": "count-array-pairs-divisible-by-k",
+    "language": "java",
+    "code": "class Solution {\n  public long countPairs(int[] nums, int k) {\n    Map<Integer, Long> byGcd = new HashMap<>();\n    for (int x : nums) byGcd.merge(gcd(x, k), 1L, Long::sum);\n    List<Integer> keys = new ArrayList<>(byGcd.keySet());\n    long pairs = 0;\n    for (int i = 0; i < keys.size(); i++) {\n      for (int j = i; j < keys.size(); j++) {\n        int a = keys.get(i), b = keys.get(j);\n        // x * y is divisible by k exactly when gcd(x, k) * gcd(y, k) is\n        if ((long) a * b % k != 0) continue;\n        long ca = byGcd.get(a), cb = byGcd.get(b);\n        pairs += i == j ? ca * (ca - 1) / 2 : ca * cb;\n      }\n    }\n    return pairs;\n  }\n\n  private int gcd(int a, int b) {\n    return b == 0 ? a : gcd(b, a % b);\n  }\n}"
+}

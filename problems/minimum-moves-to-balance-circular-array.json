@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-moves-to-balance-circular-array",
+    "language": "java",
+    "code": "class Solution {\n  public long minMoves(int[] balance) {\n    int n = balance.length, neg = -1;\n    for (int i = 0; i < n; i++) if (balance[i] < 0) neg = i;\n    if (neg < 0) return 0;\n    long need = -(long) balance[neg], moves = 0;\n    for (int t = 1; t <= n / 2 && need > 0; t++) {\n      int a = (neg + t) % n, b = (neg - t + n) % n;\n      long take = Math.min(need, Math.max(0, balance[a]));\n      moves += take * t;\n      need -= take;\n      if (b != a && need > 0) {\n        take = Math.min(need, Math.max(0, balance[b]));\n        moves += take * t;\n        need -= take;\n      }\n    }\n    return need > 0 ? -1 : moves;\n  }\n}"
+}

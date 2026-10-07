@@ -1,0 +1,5 @@
+{
+    "problemName": "unique-middle-element",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isMiddleElementUnique(int[] nums) {\n    int mid = nums[nums.length / 2], count = 0;\n    for (int x : nums) if (x == mid) count++;\n    return count == 1;\n  }\n}"
+}

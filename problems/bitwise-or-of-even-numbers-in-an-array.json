@@ -1,0 +1,5 @@
+{
+    "problemName": "bitwise-or-of-even-numbers-in-an-array",
+    "language": "java",
+    "code": "class Solution {\n  public int evenNumberBitwiseORs(int[] nums) {\n    int or = 0;\n    for (int x : nums) if (x % 2 == 0) or |= x;\n    return or;\n  }\n}"
+}

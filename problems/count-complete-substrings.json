@@ -1,0 +1,5 @@
+{
+    "problemName": "count-complete-substrings",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int countCompleteSubstrings(String word, int k) {\n    int n = word.length(), answer = 0;\n    for (int left = 0; left < n; ) {\n      int right = left + 1;\n      while (right < n && Math.abs(word.charAt(right) - word.charAt(right - 1)) <= 2) right++;\n      for (int distinct = 1; distinct <= 26; distinct++) {\n        int len = distinct * k;\n        if (len > right - left) break;\n        int[] count = new int[26];\n        int complete = 0;\n        for (int i = left; i < right; i++) {\n          int c = word.charAt(i) - 'a';\n          if (count[c]++ == k) complete--;\n          if (count[c] == k) complete++;\n          if (i >= left + len) {\n            int old = word.charAt(i - len) - 'a';\n            if (count[old]-- == k) complete--;\n            if (count[old] == k) complete++;\n          }\n          if (i >= left + len - 1 && complete == distinct) answer++;\n        }\n      }\n      left = right;\n    }\n    return answer;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "rabbits-in-forest",
+    "language": "java",
+    "code": "class Solution {\n  public int numRabbits(int[] answers) {\n    java.util.Map<Integer, Integer> remaining = new java.util.HashMap<>();\n    int result = 0;\n    for (int answer : answers) {\n      int count = remaining.getOrDefault(answer, 0);\n      if (count == 0) {\n        result += answer + 1;\n        remaining.put(answer, answer);\n      } else remaining.put(answer, count - 1);\n    }\n    return result;\n  }\n}\n"
+}

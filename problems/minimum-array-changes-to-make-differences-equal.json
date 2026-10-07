@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-array-changes-to-make-differences-equal",
+    "language": "java",
+    "code": "class Solution {\n  public int minChanges(int[] nums, int k) {\n    int n = nums.length, pairs = n / 2;\n    int[] exact = new int[k + 2]; // pairs whose difference is exactly d\n    int[] reach = new int[k + 2]; // pairs whose largest reachable difference is d\n    for (int i = 0; i < pairs; i++) {\n      int a = nums[i], b = nums[n - 1 - i];\n      exact[Math.abs(a - b)]++;\n      reach[Math.max(Math.max(a, b), k - Math.min(a, b))]++;\n    }\n    for (int d = k - 1; d >= 0; d--)\n      reach[d] += reach[d + 1]; // pairs that can reach difference >= d\n    int best = Integer.MAX_VALUE;\n    for (int target = 0; target <= k; target++) {\n      // 0 changes if it already has the target difference, 1 if it can reach it, otherwise 2\n      int cost = (pairs - exact[target]) + (pairs - reach[target]);\n      best = Math.min(best, cost);\n    }\n    return best;\n  }\n}"
+}

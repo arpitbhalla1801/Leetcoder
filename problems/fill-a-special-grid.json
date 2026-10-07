@@ -1,0 +1,5 @@
+{
+    "problemName": "fill-a-special-grid",
+    "language": "java",
+    "code": "class Solution {\n  private int[][] grid;\n\n  private void fill(int r, int c, int size, int start) {\n    if (size == 1) {\n      grid[r][c] = start;\n      return;\n    }\n    int half = size / 2, quad = half * half;\n    fill(r, c + half, half, start);\n    fill(r + half, c + half, half, start + quad);\n    fill(r + half, c, half, start + 2 * quad);\n    fill(r, c, half, start + 3 * quad);\n  }\n\n  public int[][] specialGrid(int n) {\n    int size = 1 << n;\n    grid = new int[size][size];\n    fill(0, 0, size, 0);\n    return grid;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "design-event-manager",
+    "language": "java",
+    "code": "class EventManager {\n  private final java.util.TreeSet<Long> ordered = new java.util.TreeSet<>();\n  private final java.util.HashMap<Integer, Integer> priority = new java.util.HashMap<>();\n  private static final long BASE = 1_000_000_001L;\n\n  private static long key(int id, int p) {\n    return ((BASE - p) << 30) | id;\n  }\n\n  public EventManager(int[][] events) {\n    for (int[] e : events) {\n      priority.put(e[0], e[1]);\n      ordered.add(key(e[0], e[1]));\n    }\n  }\n\n  public void updatePriority(int eventId, int newPriority) {\n    ordered.remove(key(eventId, priority.get(eventId)));\n    priority.put(eventId, newPriority);\n    ordered.add(key(eventId, newPriority));\n  }\n\n  public int pollHighest() {\n    if (ordered.isEmpty()) return -1;\n    long k = ordered.pollFirst();\n    int id = (int) (k & ((1L << 30) - 1));\n    priority.remove(id);\n    return id;\n  }\n}"
+}

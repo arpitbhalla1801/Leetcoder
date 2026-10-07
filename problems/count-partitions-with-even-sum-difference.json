@@ -1,0 +1,5 @@
+{
+    "problemName": "count-partitions-with-even-sum-difference",
+    "language": "java",
+    "code": "class Solution {\n  public int countPartitions(int[] nums) {\n    int total = 0;\n    for (int x : nums) total += x;\n    // left - right = 2 * left - total, so parity depends only on the total\n    return total % 2 == 0 ? nums.length - 1 : 0;\n  }\n}"
+}

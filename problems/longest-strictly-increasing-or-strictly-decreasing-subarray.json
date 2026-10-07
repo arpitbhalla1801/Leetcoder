@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-strictly-increasing-or-strictly-decreasing-subarray",
+    "language": "java",
+    "code": "class Solution {\n  public int longestMonotonicSubarray(int[] nums) {\n    int increasing = 1, decreasing = 1, answer = 1;\n    for (int i = 1; i < nums.length; i++) {\n      if (nums[i] > nums[i - 1]) {\n        increasing++;\n        decreasing = 1;\n      } else if (nums[i] < nums[i - 1]) {\n        decreasing++;\n        increasing = 1;\n      } else {\n        increasing = 1;\n        decreasing = 1;\n      }\n      answer = Math.max(answer, Math.max(increasing, decreasing));\n    }\n    return answer;\n  }\n}"
+}

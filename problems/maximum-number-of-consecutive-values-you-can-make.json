@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-number-of-consecutive-values-you-can-make",
+    "language": "java",
+    "code": "class Solution {\n  public int getMaximumConsecutive(int[] coins) {\n    java.util.Arrays.sort(coins);\n    long reach = 0;\n    for (int c : coins) {\n      if (c > reach + 1) break;\n      reach += c;\n    }\n    return (int) (reach + 1);\n  }\n}\n"
+}

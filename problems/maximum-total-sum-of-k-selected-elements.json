@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-total-sum-of-k-selected-elements",
+    "language": "java",
+    "code": "class Solution {\n  public long maxSum(int[] nums, int k, int mul) {\n    int[] count = new int[100001];\n    for (int x : nums) count[x]++;\n    long sum = 0;\n    int taken = 0;\n    // the k largest values, biggest first, so they meet the biggest multipliers\n    for (int v = 100000; v >= 1 && taken < k; v--) {\n      for (int c = count[v]; c > 0 && taken < k; c--, taken++) {\n        sum += (long) v * Math.max(1, mul - taken);\n      }\n    }\n    return sum;\n  }\n}"
+}

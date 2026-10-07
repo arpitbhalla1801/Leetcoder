@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-adjacent-swaps-to-partition-array",
+    "language": "java",
+    "code": "class Solution {\n  public int minAdjacentSwaps(int[] nums, int a, int b) {\n    long[] seen = new long[3];\n    long inversions = 0;\n    for (int v : nums) {\n      int type = v < a ? 0 : v <= b ? 1 : 2;\n      for (int t = type + 1; t < 3; t++) inversions += seen[t];\n      seen[type]++;\n    }\n    return (int) (inversions % 1_000_000_007L);\n  }\n}"
+}

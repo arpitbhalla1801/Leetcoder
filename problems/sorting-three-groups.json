@@ -1,0 +1,5 @@
+{
+    "problemName": "sorting-three-groups",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minimumOperations(List<Integer> nums) {\n    int[] dp = {0, 0, 0};\n    for (int value : nums) {\n      int[] next = {Integer.MAX_VALUE / 2, Integer.MAX_VALUE / 2, Integer.MAX_VALUE / 2};\n      for (int group = 0; group < 3; group++) {\n        int cost = value == group + 1 ? 0 : 1;\n        for (int previous = 0; previous <= group; previous++)\n          next[group] = Math.min(next[group], dp[previous] + cost);\n      }\n      dp = next;\n    }\n    return Math.min(dp[0], Math.min(dp[1], dp[2]));\n  }\n}\n"
+}

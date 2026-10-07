@@ -1,0 +1,5 @@
+{
+    "problemName": "properties-graph",
+    "language": "java",
+    "code": "class Solution {\n  private int[] parent;\n\n  private int find(int x) {\n    return parent[x] == x ? x : (parent[x] = find(parent[x]));\n  }\n\n  public int numberOfComponents(int[][] properties, int k) {\n    int n = properties.length;\n    boolean[][] has = new boolean[n][101];\n    for (int i = 0; i < n; i++) for (int v : properties[i]) has[i][v] = true;\n    parent = new int[n];\n    for (int i = 0; i < n; i++) parent[i] = i;\n    int comps = n;\n    for (int i = 0; i < n; i++) {\n      for (int j = i + 1; j < n; j++) {\n        int common = 0;\n        for (int v = 1; v <= 100; v++) if (has[i][v] && has[j][v]) common++;\n        if (common >= k && find(i) != find(j)) {\n          parent[find(i)] = find(j);\n          comps--;\n        }\n      }\n    }\n    return comps;\n  }\n}"
+}

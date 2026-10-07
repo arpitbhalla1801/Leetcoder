@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-points-tourist-can-earn",
+    "language": "java",
+    "code": "class Solution {\n  public int maxScore(int n, int k, int[][] stayScore, int[][] travelScore) {\n    int[] dp = new int[n];\n    for (int d = 0; d < k; d++) {\n      int[] nd = new int[n];\n      for (int c = 0; c < n; c++) {\n        int best = dp[c] + stayScore[d][c];\n        for (int p = 0; p < n; p++) {\n          int v = dp[p] + travelScore[p][c];\n          if (p != c && v > best) best = v;\n        }\n        nd[c] = best;\n      }\n      dp = nd;\n    }\n    int ans = 0;\n    for (int v : dp) ans = Math.max(ans, v);\n    return ans;\n  }\n}"
+}

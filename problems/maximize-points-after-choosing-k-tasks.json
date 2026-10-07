@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-points-after-choosing-k-tasks",
+    "language": "java",
+    "code": "class Solution {\n  public long maxPoints(int[] technique1, int[] technique2, int k) {\n    int n = technique1.length;\n    long total = 0;\n    int[] gain = new int[n];\n    for (int i = 0; i < n; i++) {\n      total += technique2[i];\n      gain[i] = technique1[i] - technique2[i];\n    }\n    java.util.Arrays.sort(gain);\n    for (int i = n - 1; i >= 0; i--) {\n      if (n - 1 - i < k || gain[i] > 0) total += gain[i];\n    }\n    return total;\n  }\n}"
+}

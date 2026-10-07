@@ -1,0 +1,5 @@
+{
+    "problemName": "vowel-spellchecker",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public String[] spellchecker(String[] wordlist, String[] queries) {\n    Set<String> exact = new HashSet<>();\n    Map<String, String> lower = new HashMap<>(), vowel = new HashMap<>();\n    for (String w : wordlist) {\n      exact.add(w);\n      lower.putIfAbsent(w.toLowerCase(), w);\n      vowel.putIfAbsent(norm(w), w);\n    }\n    String[] out = new String[queries.length];\n    for (int i = 0; i < queries.length; i++) {\n      String q = queries[i];\n      if (exact.contains(q)) out[i] = q;\n      else if (lower.containsKey(q.toLowerCase())) out[i] = lower.get(q.toLowerCase());\n      else out[i] = vowel.getOrDefault(norm(q), \"\");\n    }\n    return out;\n  }\n\n  private String norm(String s) {\n    s = s.toLowerCase();\n    StringBuilder b = new StringBuilder();\n    for (char c : s.toCharArray()) b.append(\"aeiou\".indexOf(c) >= 0 ? '*' : c);\n    return b.toString();\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "nth-magical-number",
+    "language": "java",
+    "code": "class Solution {\n  public int nthMagicalNumber(int n, int a, int b) {\n    long mod = 1_000_000_007L, l = 1, r = (long) n * Math.min(a, b), lcm = (long) a / gcd(a, b) * b;\n    while (l < r) {\n      long m = (l + r) >>> 1;\n      if (m / a + m / b - m / lcm >= n) r = m;\n      else l = m + 1;\n    }\n    return (int) (l % mod);\n  }\n\n  private long gcd(long a, long b) {\n    while (b != 0) {\n      long t = a % b;\n      a = b;\n      b = t;\n    }\n    return a;\n  }\n}\n"
+}

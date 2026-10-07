@@ -1,0 +1,5 @@
+{
+    "problemName": "make-array-non-decreasing",
+    "language": "java",
+    "code": "class Solution {\n  public int maximumPossibleSize(int[] nums) {\n    int mx = 0, count = 0;\n    for (int v : nums) {\n      if (v >= mx) {\n        count++;\n        mx = v;\n      }\n    }\n    return count;\n  }\n}"
+}

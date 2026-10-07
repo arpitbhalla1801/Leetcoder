@@ -1,0 +1,5 @@
+{
+    "problemName": "count-subarrays-with-median-k",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int countSubarrays(int[] nums, int k) {\n    Map<Integer, Integer> right = new HashMap<>();\n    right.put(0, 1);\n    int balance = 0, pivot = -1;\n    for (int i = 0; i < nums.length; i++) {\n      if (nums[i] == k) pivot = i;\n      else balance += nums[i] < k ? -1 : 1;\n      if (pivot < 0) right.merge(balance, 1, Integer::sum);\n    }\n    long answer = 0;\n    balance = 0;\n    for (int i = pivot; i < nums.length; i++) {\n      if (nums[i] != k) balance += nums[i] < k ? -1 : 1;\n      answer += right.getOrDefault(-balance, 0);\n      answer += right.getOrDefault(1 - balance, 0);\n    }\n    return (int) answer;\n  }\n}\n"
+}

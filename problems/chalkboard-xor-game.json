@@ -1,0 +1,5 @@
+{
+    "problemName": "chalkboard-xor-game",
+    "language": "java",
+    "code": "class Solution {\n  public boolean xorGame(int[] nums) {\n    int xor = 0;\n    for (int value : nums) xor ^= value;\n    return xor == 0 || (nums.length & 1) == 0;\n  }\n}\n"
+}

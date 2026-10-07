@@ -1,0 +1,5 @@
+{
+    "problemName": "find-maximum-number-of-non-intersecting-substrings",
+    "language": "java",
+    "code": "class Solution {\n  public int maxSubstrings(String word) {\n    int[] first = new int[26];\n    java.util.Arrays.fill(first, -1);\n    int count = 0;\n    for (int i = 0; i < word.length(); i++) {\n      int c = word.charAt(i) - 'a';\n      if (first[c] >= 0 && i - first[c] >= 3) {\n        count++;\n        java.util.Arrays.fill(first, -1);\n      } else if (first[c] < 0) {\n        first[c] = i;\n      }\n    }\n    return count;\n  }\n}"
+}

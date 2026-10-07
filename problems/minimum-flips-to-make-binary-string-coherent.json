@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-flips-to-make-binary-string-coherent",
+    "language": "java",
+    "code": "class Solution {\n  public int minFlips(String s) {\n    int n = s.length(), ones = 0;\n    for (int i = 0; i < n; i++) if (s.charAt(i) == '1') ones++;\n    if (n == 1) return 0;\n    int best = Math.max(0, ones - 1);\n    best = Math.min(best, n - ones);\n    int middleOnes = ones - (s.charAt(0) == '1' ? 1 : 0) - (s.charAt(n - 1) == '1' ? 1 : 0);\n    best =\n        Math.min(\n            best, (s.charAt(0) == '0' ? 1 : 0) + (s.charAt(n - 1) == '0' ? 1 : 0) + middleOnes);\n    return best;\n  }\n}"
+}

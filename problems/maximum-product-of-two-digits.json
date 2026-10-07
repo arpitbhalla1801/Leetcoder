@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-product-of-two-digits",
+    "language": "java",
+    "code": "class Solution {\n  public int maxProduct(int n) {\n    int first = 0, second = 0;\n    for (; n > 0; n /= 10) {\n      int d = n % 10;\n      if (d > first) {\n        second = first;\n        first = d;\n      } else if (d > second) {\n        second = d;\n      }\n    }\n    return first * second;\n  }\n}"
+}

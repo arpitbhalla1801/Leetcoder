@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-generations-to-target-point",
+    "language": "java",
+    "code": "class Solution {\n  public int minGenerations(int[][] points, int[] target) {\n    boolean[] have = new boolean[343];\n    List<Integer> all = new ArrayList<>();\n    for (int[] p : points) {\n      int id = p[0] * 49 + p[1] * 7 + p[2];\n      if (!have[id]) {\n        have[id] = true;\n        all.add(id);\n      }\n    }\n    int goal = target[0] * 49 + target[1] * 7 + target[2];\n    if (have[goal]) return 0;\n    for (int gen = 1; ; gen++) {\n      List<Integer> fresh = new ArrayList<>();\n      for (int i = 0; i < all.size(); i++) {\n        for (int j = i + 1; j < all.size(); j++) {\n          int a = all.get(i), b = all.get(j);\n          int x = (a / 49 + b / 49) / 2, y = (a / 7 % 7 + b / 7 % 7) / 2, z = (a % 7 + b % 7) / 2;\n          int id = x * 49 + y * 7 + z;\n          if (!have[id]) {\n            have[id] = true;\n            fresh.add(id);\n          }\n        }\n      }\n      if (fresh.isEmpty()) return -1;\n      all.addAll(fresh);\n      if (have[goal]) return gen;\n    }\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "check-if-any-element-has-prime-frequency",
+    "language": "java",
+    "code": "class Solution {\n  public boolean checkPrimeFrequency(int[] nums) {\n    int[] freq = new int[101];\n    for (int x : nums) freq[x]++;\n    for (int f : freq) {\n      if (isPrime(f)) return true;\n    }\n    return false;\n  }\n\n  private boolean isPrime(int n) {\n    if (n < 2) return false;\n    for (int d = 2; d * d <= n; d++) {\n      if (n % d == 0) return false;\n    }\n    return true;\n  }\n}"
+}

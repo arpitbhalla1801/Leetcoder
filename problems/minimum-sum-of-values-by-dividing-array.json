@@ -1,0 +1,5 @@
+{
+    "problemName": "Minimum Sum of Values by Dividing Array",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private int[] nums, target;\n  private int n, k;\n  private int[][] memo;\n  private static final int INF = 1_000_000_000;\n\n  public int minimumValueSum(int[] nums, int[] andValues) {\n    this.nums = nums;\n    this.target = andValues;\n    n = nums.length;\n    k = andValues.length;\n    memo = new int[n + 1][k + 1];\n    for (int[] row : memo) Arrays.fill(row, -1);\n    int ans = dfs(0, 0);\n    return ans >= INF ? -1 : ans;\n  }\n\n  private int dfs(int start, int group) {\n    if (group == k) return start == n ? 0 : INF;\n    if (n - start < k - group) return INF;\n    if (memo[start][group] != -1) return memo[start][group];\n    int value = -1, best = INF;\n    int lastEnd = n - (k - group - 1);\n    for (int end = start; end < lastEnd; end++) {\n      value &= nums[end];\n      if (value == target[group]) {\n        int next = dfs(end + 1, group + 1);\n        if (next < INF) best = Math.min(best, nums[end] + next);\n      }\n    }\n    return memo[start][group] = best;\n  }\n}"
+}

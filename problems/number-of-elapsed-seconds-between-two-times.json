@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-elapsed-seconds-between-two-times",
+    "language": "java",
+    "code": "class Solution {\n  public int secondsBetweenTimes(String startTime, String endTime) {\n    return toSeconds(endTime) - toSeconds(startTime);\n  }\n\n  private int toSeconds(String t) {\n    return Integer.parseInt(t.substring(0, 2)) * 3600\n        + Integer.parseInt(t.substring(3, 5)) * 60\n        + Integer.parseInt(t.substring(6, 8));\n  }\n}"
+}

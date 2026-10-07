@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-decoded-numbers",
+    "language": "java",
+    "code": "class Solution {\n  private static final long MOD = 1_000_000_007L;\n\n  private static long pow(long b, long e) {\n    long r = 1;\n    for (b %= MOD; e > 0; e >>= 1) {\n      if ((e & 1) == 1) r = r * b % MOD;\n      b = b * b % MOD;\n    }\n    return r;\n  }\n\n  public int sumDecoded(long[] nums) {\n    long total = 0;\n    for (long v : nums) {\n      int width = (int) (v % 10);\n      String d = Long.toString(v / 10);\n      long x = Long.parseLong(d.substring(0, width)), y = Long.parseLong(d.substring(width));\n      total = (total + pow(x, y)) % MOD;\n    }\n    return (int) total;\n  }\n}"
+}

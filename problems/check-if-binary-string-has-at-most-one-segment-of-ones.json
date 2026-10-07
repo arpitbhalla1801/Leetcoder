@@ -1,0 +1,5 @@
+{
+    "problemName": "check-if-binary-string-has-at-most-one-segment-of-ones",
+    "language": "java",
+    "code": "class Solution {\n  public boolean checkOnesSegment(String s) {\n    return !s.contains(\"01\");\n  }\n}\n"
+}

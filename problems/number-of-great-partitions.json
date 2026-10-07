@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-great-partitions",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private static final long MOD = 1_000_000_007L;\n\n  public int countPartitions(int[] nums, int k) {\n    long total = 0;\n    for (int value : nums) total += value;\n    if (total < 2L * k) return 0;\n    long[] dp = new long[k];\n    dp[0] = 1;\n    for (int value : nums) {\n      for (int sum = k - 1; sum >= value; sum--) {\n        dp[sum] = (dp[sum] + dp[sum - value]) % MOD;\n      }\n    }\n    long invalid = 0;\n    for (long ways : dp) invalid = (invalid + ways) % MOD;\n    long all = power(2, nums.length);\n    return (int) ((all - 2 * invalid % MOD + MOD) % MOD);\n  }\n\n  private long power(long base, int exponent) {\n    long result = 1;\n    while (exponent > 0) {\n      if ((exponent & 1) != 0) result = result * base % MOD;\n      base = base * base % MOD;\n      exponent >>= 1;\n    }\n    return result;\n  }\n}\n"
+}

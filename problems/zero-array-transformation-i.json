@@ -1,0 +1,5 @@
+{
+    "problemName": "zero-array-transformation-i",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isZeroArray(int[] nums, int[][] queries) {\n    int n = nums.length;\n    int[] diff = new int[n + 1];\n    for (int[] q : queries) {\n      diff[q[0]]++;\n      diff[q[1] + 1]--;\n    }\n    int cover = 0;\n    for (int i = 0; i < n; i++) {\n      cover += diff[i];\n      if (cover < nums[i]) return false;\n    }\n    return true;\n  }\n}"
+}

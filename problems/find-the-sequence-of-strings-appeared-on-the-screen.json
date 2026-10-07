@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-sequence-of-strings-appeared-on-the-screen",
+    "language": "java",
+    "code": "class Solution {\n  public List<String> stringSequence(String target) {\n    List<String> res = new ArrayList<>();\n    StringBuilder sb = new StringBuilder();\n    for (int i = 0; i < target.length(); i++) {\n      sb.append('a');\n      int last = sb.length() - 1;\n      for (char c = 'a'; c <= target.charAt(i); c++) {\n        sb.setCharAt(last, c);\n        res.add(sb.toString());\n      }\n    }\n    return res;\n  }\n}"
+}

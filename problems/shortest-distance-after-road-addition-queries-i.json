@@ -1,0 +1,5 @@
+{
+    "problemName": "shortest-distance-after-road-addition-queries-i",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] shortestDistanceAfterQueries(int n, int[][] queries) {\n    List<Integer>[] g = new ArrayList[n];\n    for (int i = 0; i < n; i++) {\n      g[i] = new ArrayList<>();\n      if (i + 1 < n) g[i].add(i + 1);\n    }\n    int[] answer = new int[queries.length];\n    for (int qi = 0; qi < queries.length; qi++) {\n      g[queries[qi][0]].add(queries[qi][1]);\n      answer[qi] = bfs(g, n);\n    }\n    return answer;\n  }\n\n  private int bfs(List<Integer>[] g, int n) {\n    int[] d = new int[n];\n    Arrays.fill(d, -1);\n    d[0] = 0;\n    int[] q = new int[n];\n    int head = 0, tail = 1;\n    q[0] = 0;\n    while (head < tail) {\n      int u = q[head++];\n      for (int v : g[u])\n        if (d[v] < 0) {\n          d[v] = d[u] + 1;\n          q[tail++] = v;\n        }\n    }\n    return d[n - 1];\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-absolute-differences-in-a-sorted-array",
+    "language": "java",
+    "code": "class Solution {\n  public int[] getSumAbsoluteDifferences(int[] nums) {\n    int n = nums.length;\n    long total = 0;\n    for (int x : nums) total += x;\n    long left = 0;\n    int[] ans = new int[n];\n    for (int i = 0; i < n; i++) {\n      long right = total - left - nums[i];\n      ans[i] = (int) (nums[i] * (long) i - left + right - nums[i] * (long) (n - i - 1));\n      left += nums[i];\n    }\n    return ans;\n  }\n}\n"
+}

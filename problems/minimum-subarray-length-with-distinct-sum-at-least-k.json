@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-subarray-length-with-distinct-sum-at-least-k",
+    "language": "java",
+    "code": "class Solution {\n  public int minLength(int[] nums, int k) {\n    int[] count = new int[100_001];\n    long distinctSum = 0;\n    int best = Integer.MAX_VALUE, left = 0;\n    for (int r = 0; r < nums.length; r++) {\n      if (count[nums[r]]++ == 0) distinctSum += nums[r];\n      while (distinctSum >= k) {\n        best = Math.min(best, r - left + 1);\n        if (--count[nums[left]] == 0) distinctSum -= nums[left];\n        left++;\n      }\n    }\n    return best == Integer.MAX_VALUE ? -1 : best;\n  }\n}"
+}

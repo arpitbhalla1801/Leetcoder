@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-elegance-of-a-k-length-subsequence",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long findMaximumElegance(int[][] items, int k) {\n    Arrays.sort(items, (a, b) -> Integer.compare(b[0], a[0]));\n    long sum = 0, ans = 0;\n    Set<Integer> categories = new HashSet<>();\n    PriorityQueue<Integer> duplicates = new PriorityQueue<>();\n    for (int i = 0; i < k; i++) {\n      sum += items[i][0];\n      if (!categories.add(items[i][1])) duplicates.add(items[i][0]);\n    }\n    ans = sum + (long) categories.size() * categories.size();\n    for (int i = k; i < items.length && !duplicates.isEmpty(); i++)\n      if (categories.add(items[i][1])) {\n        sum += items[i][0] - duplicates.remove();\n        ans = Math.max(ans, sum + (long) categories.size() * categories.size());\n      }\n    return ans;\n  }\n}\n"
+}

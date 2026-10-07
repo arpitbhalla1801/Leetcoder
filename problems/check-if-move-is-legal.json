@@ -1,0 +1,5 @@
+{
+    "problemName": "check-if-move-is-legal",
+    "language": "java",
+    "code": "class Solution {\n  public boolean checkMove(char[][] board, int rMove, int cMove, char color) {\n    int opponent = color == 'B' ? 'W' : 'B';\n    int[][] dirs = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};\n    for (int[] d : dirs) {\n      int r = rMove + d[0], c = cMove + d[1], seen = 0;\n      while (r >= 0 && r < 8 && c >= 0 && c < 8 && board[r][c] == opponent) {\n        seen++;\n        r += d[0];\n        c += d[1];\n      }\n      if (seen > 0 && r >= 0 && r < 8 && c >= 0 && c < 8 && board[r][c] == color) return true;\n    }\n    return false;\n  }\n}\n"
+}

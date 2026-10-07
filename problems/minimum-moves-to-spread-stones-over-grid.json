@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-moves-to-spread-stones-over-grid",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private final List<Integer> extra = new ArrayList<>();\n  private final List<Integer> empty = new ArrayList<>();\n  private int best = Integer.MAX_VALUE;\n\n  public int minimumMoves(int[][] grid) {\n    for (int r = 0; r < 3; r++)\n      for (int c = 0; c < 3; c++) {\n        if (grid[r][c] > 1) for (int t = 1; t < grid[r][c]; t++) extra.add(r * 3 + c);\n        else if (grid[r][c] == 0) empty.add(r * 3 + c);\n      }\n    dfs(0, 0, new boolean[empty.size()]);\n    return best;\n  }\n\n  private void dfs(int i, int cost, boolean[] used) {\n    if (cost >= best) return;\n    if (i == extra.size()) {\n      best = cost;\n      return;\n    }\n    for (int j = 0; j < empty.size(); j++)\n      if (!used[j]) {\n        used[j] = true;\n        int a = extra.get(i), b = empty.get(j);\n        dfs(i + 1, cost + Math.abs(a / 3 - b / 3) + Math.abs(a % 3 - b % 3), used);\n        used[j] = false;\n      }\n  }\n}\n"
+}

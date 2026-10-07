@@ -1,0 +1,5 @@
+{
+    "problemName": "count-covered-buildings",
+    "language": "java",
+    "code": "class Solution {\n  public int countCoveredBuildings(int n, int[][] buildings) {\n    int[] rowMin = new int[n + 1],\n        rowMax = new int[n + 1],\n        colMin = new int[n + 1],\n        colMax = new int[n + 1];\n    Arrays.fill(rowMin, Integer.MAX_VALUE);\n    Arrays.fill(colMin, Integer.MAX_VALUE);\n    for (int[] b : buildings) {\n      int x = b[0], y = b[1];\n      rowMin[x] = Math.min(rowMin[x], y);\n      rowMax[x] = Math.max(rowMax[x], y);\n      colMin[y] = Math.min(colMin[y], x);\n      colMax[y] = Math.max(colMax[y], x);\n    }\n    int covered = 0;\n    for (int[] b : buildings) {\n      int x = b[0], y = b[1];\n      if (rowMin[x] < y && y < rowMax[x] && colMin[y] < x && x < colMax[y]) covered++;\n    }\n    return covered;\n  }\n}"
+}

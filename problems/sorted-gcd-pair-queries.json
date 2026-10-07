@@ -1,0 +1,5 @@
+{
+    "problemName": "sorted-gcd-pair-queries",
+    "language": "java",
+    "code": "class Solution {\n  public int[] gcdValues(int[] nums, long[] queries) {\n    int max = 0;\n    for (int x : nums) max = Math.max(max, x);\n    long[] cnt = new long[max + 1];\n    for (int x : nums) cnt[x]++;\n    long[] exact = new long[max + 1];\n    for (int g = max; g >= 1; g--) {\n      long c = 0;\n      for (int m = g; m <= max; m += g) c += cnt[m];\n      long pairs = c * (c - 1) / 2;\n      for (int m = 2 * g; m <= max; m += g) pairs -= exact[m];\n      exact[g] = pairs;\n    }\n    for (int g = 2; g <= max; g++) exact[g] += exact[g - 1];\n    int[] ans = new int[queries.length];\n    for (int i = 0; i < queries.length; i++) {\n      int lo = 1, hi = max;\n      while (lo < hi) {\n        int mid = (lo + hi) >>> 1;\n        if (exact[mid] > queries[i]) hi = mid;\n        else lo = mid + 1;\n      }\n      ans[i] = lo;\n    }\n    return ans;\n  }\n}"
+}

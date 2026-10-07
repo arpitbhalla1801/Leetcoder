@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-balanced-subarray-i",
+    "language": "java",
+    "code": "class Solution {\n  public int longestBalanced(int[] nums) {\n    int best = 0;\n    for (int i = 0; i < nums.length; i++) {\n      Set<Integer> evens = new HashSet<>(), odds = new HashSet<>();\n      for (int j = i; j < nums.length; j++) {\n        if (nums[j] % 2 == 0) evens.add(nums[j]);\n        else odds.add(nums[j]);\n        if (evens.size() == odds.size()) best = Math.max(best, j - i + 1);\n      }\n    }\n    return best;\n  }\n}"
+}

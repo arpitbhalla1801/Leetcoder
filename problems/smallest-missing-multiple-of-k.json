@@ -1,0 +1,5 @@
+{
+    "problemName": "smallest-missing-multiple-of-k",
+    "language": "java",
+    "code": "class Solution {\n  public int missingMultiple(int[] nums, int k) {\n    Set<Integer> present = new HashSet<>();\n    for (int x : nums) present.add(x);\n    int m = k;\n    while (present.contains(m)) m += k;\n    return m;\n  }\n}"
+}

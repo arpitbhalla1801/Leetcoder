@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-bitwise-and-after-increment-operations",
+    "language": "java",
+    "code": "class Solution {\n  private static long cost(long x, long mask) {\n    if ((x & mask) == mask) return 0;\n    long best = Long.MAX_VALUE;\n    for (int p = 0; p < 40; p++) {\n      if ((x >> p & 1) != 0) continue;\n      long upperX = x >> (p + 1), upperMask = mask >> (p + 1);\n      if ((upperX & upperMask) != upperMask) continue;\n      long y = (upperX << (p + 1)) | (1L << p) | (mask & ((1L << p) - 1));\n      if (y >= x) best = Math.min(best, y);\n    }\n    return best - x;\n  }\n\n  public int maximumAND(int[] nums, int k, int m) {\n    int n = nums.length;\n    long ans = 0;\n    long[] costs = new long[n];\n    for (int bit = 31; bit >= 0; bit--) {\n      long cand = ans | (1L << bit);\n      for (int i = 0; i < n; i++) costs[i] = cost(nums[i], cand);\n      long[] copy = costs.clone();\n      java.util.Arrays.sort(copy);\n      long total = 0;\n      for (int i = 0; i < m; i++) {\n        total += copy[i];\n        if (total > k) break;\n      }\n      if (total <= k) ans = cand;\n    }\n    return (int) ans;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "finding-pairs-with-a-certain-sum",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass FindSumPairs {\n  private final int[] nums1, nums2;\n  private final Map<Integer, Integer> counts = new HashMap<>();\n\n  public FindSumPairs(int[] nums1, int[] nums2) {\n    this.nums1 = nums1;\n    this.nums2 = nums2;\n    for (int x : nums2) counts.merge(x, 1, Integer::sum);\n  }\n\n  public void add(int index, int val) {\n    int old = nums2[index];\n    counts.put(old, counts.get(old) - 1);\n    counts.merge(old + val, 1, Integer::sum);\n    nums2[index] = old + val;\n  }\n\n  public int count(int tot) {\n    int ans = 0;\n    for (int x : nums1) ans += counts.getOrDefault(tot - x, 0);\n    return ans;\n  }\n}\n"
+}

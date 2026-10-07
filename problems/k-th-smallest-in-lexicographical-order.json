@@ -1,0 +1,5 @@
+{
+    "problemName": "k-th-smallest-in-lexicographical-order",
+    "language": "java",
+    "code": "class Solution {\n  public int findKthNumber(int n, int k) {\n    long prefix = 1;\n    k--;\n    while (k > 0) {\n      long count = count(prefix, n);\n      if (count <= k) {\n        prefix++;\n        k -= count;\n      } else {\n        prefix *= 10;\n        k--;\n      }\n    }\n    return (int) prefix;\n  }\n\n  private long count(long prefix, int n) {\n    long next = prefix + 1, total = 0;\n    while (prefix <= n) {\n      total += Math.min((long) n + 1, next) - prefix;\n      prefix *= 10;\n      next *= 10;\n    }\n    return total;\n  }\n}\n"
+}

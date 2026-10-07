@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-total-reward-using-operations-i",
+    "language": "java",
+    "code": "class Solution {\n  public int maxTotalReward(int[] rewardValues) {\n    java.util.Arrays.sort(rewardValues);\n    int limit = 0;\n    for (int x : rewardValues) limit = Math.max(limit, x);\n    boolean[] can = new boolean[2 * limit + 1];\n    can[0] = true;\n    int best = 0;\n    for (int x : rewardValues) {\n      for (int s = Math.min(best, x - 1); s >= 0; s--) {\n        if (can[s]) can[s + x] = true;\n      }\n      best = Math.max(best, 2 * x - 1);\n      while (best >= 0 && !can[best]) best--;\n    }\n    for (int s = can.length - 1; s >= 0; s--) if (can[s]) return s;\n    return 0;\n  }\n}"
+}

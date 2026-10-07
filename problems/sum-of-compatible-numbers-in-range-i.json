@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-compatible-numbers-in-range-i",
+    "language": "java",
+    "code": "class Solution {\n  public int sumOfGoodIntegers(int n, int k) {\n    int sum = 0;\n    for (int x = Math.max(1, n - k); x <= n + k; x++) {\n      if ((n & x) == 0) sum += x;\n    }\n    return sum;\n  }\n}"
+}

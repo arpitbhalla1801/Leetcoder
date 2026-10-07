@@ -1,0 +1,5 @@
+{
+    "problemName": "weighted-sum-of-a-tree",
+    "language": "java",
+    "code": "class Solution {\n  public long weightedSum(int[] parent, int[] nums) {\n    int n = parent.length;\n    int[] head = new int[n], next = new int[n];\n    java.util.Arrays.fill(head, -1);\n    for (int i = 1; i < n; i++) {\n      next[i] = head[parent[i]];\n      head[parent[i]] = i;\n    }\n    int[] depth = new int[n], queue = new int[n];\n    int qh = 0, qt = 0, height = 1;\n    queue[qt++] = 0;\n    depth[0] = 1;\n    while (qh < qt) {\n      int u = queue[qh++];\n      height = Math.max(height, depth[u]);\n      for (int c = head[u]; c >= 0; c = next[c]) {\n        depth[c] = depth[u] + 1;\n        queue[qt++] = c;\n      }\n    }\n    long total = 0;\n    for (int i = 0; i < n; i++) total += (long) nums[i] * (height - depth[i] + 1);\n    return total;\n  }\n}"
+}

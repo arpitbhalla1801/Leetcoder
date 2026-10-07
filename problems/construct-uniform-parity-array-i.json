@@ -1,0 +1,5 @@
+{
+    "problemName": "construct-uniform-parity-array-i",
+    "language": "java",
+    "code": "class Solution {\n  public boolean uniformArray(int[] nums1) {\n    // Zero odds: already all even. Otherwise every even value can subtract an odd one to become\n    // odd,\n    // so the all-odd target is always reachable.\n    return true;\n  }\n}"
+}

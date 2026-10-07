@@ -1,0 +1,5 @@
+{
+    "problemName": "find-valid-matrix-given-row-and-column-sums",
+    "code": "class Solution {\n  public int[][] restoreMatrix(int[] rowSum, int[] colSum) {\n    int[][] matrix = new int[rowSum.length][colSum.length];\n    for (int i = 0; i < rowSum.length; i++) {\n      for (int j = 0; j < colSum.length; j++) {\n        int value = Math.min(rowSum[i], colSum[j]);\n        matrix[i][j] = value;\n        rowSum[i] -= value;\n        colSum[j] -= value;\n      }\n    }\n    return matrix;\n  }\n}\n",
+    "language": "java"
+}

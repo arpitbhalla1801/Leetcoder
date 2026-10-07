@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-k-to-sort-a-permutation",
+    "language": "java",
+    "code": "class Solution {\n  public int sortPermutation(int[] nums) {\n    int and = -1;\n    for (int i = 0; i < nums.length; i++) if (nums[i] != i) and &= nums[i];\n    return and == -1 ? 0 : and;\n  }\n}"
+}

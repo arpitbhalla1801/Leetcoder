@@ -1,0 +1,5 @@
+{
+    "problemName": "count-subarrays-with-majority-element-i",
+    "language": "java",
+    "code": "class Solution {\n  public int countMajoritySubarrays(int[] nums, int target) {\n    int count = 0;\n    for (int i = 0; i < nums.length; i++) {\n      int hits = 0;\n      for (int j = i; j < nums.length; j++) {\n        if (nums[j] == target) hits++;\n        if (hits * 2 > j - i + 1) count++;\n      }\n    }\n    return count;\n  }\n}"
+}

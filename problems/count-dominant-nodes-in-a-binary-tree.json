@@ -1,0 +1,5 @@
+{
+    "problemName": "count-dominant-nodes-in-a-binary-tree",
+    "language": "java",
+    "code": "class Solution {\n  private int count;\n\n  private int dfs(TreeNode node) {\n    if (node == null) return 0;\n    int best = Math.max(dfs(node.left), dfs(node.right));\n    if (node.val >= best) count++;\n    return Math.max(best, node.val);\n  }\n\n  public int countDominantNodes(TreeNode root) {\n    count = 0;\n    dfs(root);\n    return count;\n  }\n}"
+}

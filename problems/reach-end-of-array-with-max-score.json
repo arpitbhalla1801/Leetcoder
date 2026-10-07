@@ -1,0 +1,5 @@
+{
+    "problemName": "reach-end-of-array-with-max-score",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public long findMaximumScore(List<Integer> nums) {\n    long answer = 0;\n    int last = 0;\n    for (int i = 1; i < nums.size(); i++) {\n      if (nums.get(i) > nums.get(last)) {\n        answer += (long) (i - last) * nums.get(last);\n        last = i;\n      }\n    }\n    return answer + (long) (nums.size() - 1 - last) * nums.get(last);\n  }\n}"
+}

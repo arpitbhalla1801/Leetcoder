@@ -1,0 +1,5 @@
+{
+    "problemName": "largest-palindrome-product",
+    "language": "java",
+    "code": "class Solution {\n  public int largestPalindrome(int n) {\n    if (n == 1) return 9;\n    long upper = (long) Math.pow(10, n) - 1;\n    long lower = (long) Math.pow(10, n - 1);\n    for (long left = upper; left >= lower; left--) {\n      String s = Long.toString(left);\n      long palindrome = Long.parseLong(s + new StringBuilder(s).reverse());\n      for (long factor = upper; factor * factor >= palindrome; factor--) {\n        if (palindrome % factor == 0) return (int) (palindrome % 1337);\n      }\n    }\n    return 0;\n  }\n}\n"
+}

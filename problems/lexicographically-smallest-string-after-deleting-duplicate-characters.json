@@ -1,0 +1,5 @@
+{
+    "problemName": "lexicographically-smallest-string-after-deleting-duplicate-characters",
+    "language": "java",
+    "code": "class Solution {\n  public String lexSmallestAfterDeletion(String s) {\n    int n = s.length();\n    int[] later = new int[26], inStack = new int[26];\n    for (int i = 0; i < n; i++) later[s.charAt(i) - 'a']++;\n    char[] stack = new char[n];\n    int sp = 0;\n    for (int i = 0; i < n; i++) {\n      char c = s.charAt(i);\n      later[c - 'a']--;\n      while (sp > 0 && stack[sp - 1] > c) {\n        int t = stack[sp - 1] - 'a';\n        if (inStack[t] > 1 || later[t] > 0) {\n          inStack[t]--;\n          sp--;\n        } else break;\n      }\n      stack[sp++] = c;\n      inStack[c - 'a']++;\n    }\n    while (sp > 0 && inStack[stack[sp - 1] - 'a'] > 1) {\n      inStack[stack[sp - 1] - 'a']--;\n      sp--;\n    }\n    return new String(stack, 0, sp);\n  }\n}"
+}

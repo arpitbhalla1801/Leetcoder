@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-cost-to-connect-two-groups-of-points",
+    "language": "java",
+    "code": "class Solution {\n  public int connectTwoGroups(List<List<Integer>> cost) {\n    int n = cost.size(), m = cost.get(0).size(), full = (1 << m) - 1;\n    final int INF = Integer.MAX_VALUE / 4;\n    int[] dp =\n        new int[1 << m]; // dp[mask]: cheapest way where the right points in mask are connected\n    Arrays.fill(dp, INF);\n    dp[0] = 0;\n    for (int i = 0; i < n; i++) {\n      int[] next = new int[1 << m];\n      Arrays.fill(next, INF);\n      for (int mask = 0; mask <= full; mask++) {\n        if (dp[mask] == INF && next[mask] == INF) continue;\n        for (int j = 0; j < m; j++) {\n          int updated = mask | (1 << j), c = cost.get(i).get(j);\n          // first edge of this left point, or one more edge for it\n          if (dp[mask] != INF) next[updated] = Math.min(next[updated], dp[mask] + c);\n          if (next[mask] != INF) next[updated] = Math.min(next[updated], next[mask] + c);\n        }\n      }\n      dp = next;\n    }\n    return dp[full];\n  }\n}"
+}

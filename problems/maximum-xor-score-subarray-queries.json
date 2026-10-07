@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-xor-score-subarray-queries",
+    "language": "java",
+    "code": "class Solution {\n  public int[] maximumSubarrayXor(int[] nums, int[][] queries) {\n    int n = nums.length;\n    int[][] score = new int[n][n];\n    for (int i = 0; i < n; i++) score[i][i] = nums[i];\n    for (int len = 2; len <= n; len++)\n      for (int i = 0; i + len <= n; i++) {\n        int j = i + len - 1;\n        score[i][j] = score[i][j - 1] ^ score[i + 1][j];\n      }\n    int[][] best = new int[n][n];\n    for (int i = 0; i < n; i++) best[i][i] = score[i][i];\n    for (int len = 2; len <= n; len++)\n      for (int i = 0; i + len <= n; i++) {\n        int j = i + len - 1;\n        best[i][j] = Math.max(score[i][j], Math.max(best[i + 1][j], best[i][j - 1]));\n      }\n    int[] ans = new int[queries.length];\n    for (int q = 0; q < queries.length; q++) ans[q] = best[queries[q][0]][queries[q][1]];\n    return ans;\n  }\n}"
+}

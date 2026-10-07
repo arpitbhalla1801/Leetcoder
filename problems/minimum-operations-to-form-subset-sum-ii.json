@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-form-subset-sum-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(int[] nums, int sum) {\n    int INF = Integer.MAX_VALUE / 2, CAP = 2 * Math.max(sum, 500) + 5;\n    int[] dp = new int[sum + 1];\n    java.util.Arrays.fill(dp, INF);\n    dp[0] = 0;\n    for (int x : nums) {\n      int[] dist = new int[CAP + 1];\n      java.util.Arrays.fill(dist, INF);\n      java.util.ArrayDeque<Integer> queue = new java.util.ArrayDeque<>();\n      dist[x] = 0;\n      queue.add(x);\n      while (!queue.isEmpty()) {\n        int u = queue.poll();\n        int[] nexts = {u * 2, u / 2};\n        for (int v : nexts) {\n          if (v >= 1 && v <= CAP && dist[v] == INF) {\n            dist[v] = dist[u] + 1;\n            queue.add(v);\n          }\n        }\n      }\n      int[] nd = dp.clone();\n      for (int val = 1; val <= sum; val++) {\n        if (dist[val] >= INF) continue;\n        for (int s = sum; s >= val; s--) {\n          if (dp[s - val] < INF) nd[s] = Math.min(nd[s], dp[s - val] + dist[val]);\n        }\n      }\n      dp = nd;\n    }\n    return dp[sum] >= INF ? -1 : dp[sum];\n  }\n}"
+}

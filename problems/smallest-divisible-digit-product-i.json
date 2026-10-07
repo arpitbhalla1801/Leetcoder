@@ -1,0 +1,5 @@
+{
+    "problemName": "smallest-divisible-digit-product-i",
+    "language": "java",
+    "code": "class Solution {\n  public int smallestNumber(int n, int t) {\n    for (int x = n; ; x++) {\n      int product = 1;\n      for (int y = x; y > 0; y /= 10) product *= y % 10;\n      if (product % t == 0) return x;\n    }\n  }\n}"
+}

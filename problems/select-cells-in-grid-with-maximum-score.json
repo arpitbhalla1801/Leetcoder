@@ -1,0 +1,5 @@
+{
+    "problemName": "select-cells-in-grid-with-maximum-score",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int maxScore(List<List<Integer>> grid) {\n    int n = grid.size();\n    List<Integer>[] rows = new List[101];\n    for (int v = 1; v <= 100; v++) rows[v] = new ArrayList<>();\n    for (int r = 0; r < n; r++) for (int v : grid.get(r)) if (!rows[v].contains(r)) rows[v].add(r);\n    int[] dp = new int[1 << n];\n    for (int v = 1; v <= 100; v++) {\n      int[] next = dp.clone();\n      for (int mask = 0; mask < (1 << n); mask++) {\n        for (int r : rows[v])\n          if ((mask & (1 << r)) == 0)\n            next[mask | (1 << r)] = Math.max(next[mask | (1 << r)], dp[mask] + v);\n      }\n      dp = next;\n    }\n    int ans = 0;\n    for (int x : dp) ans = Math.max(ans, x);\n    return ans;\n  }\n}"
+}

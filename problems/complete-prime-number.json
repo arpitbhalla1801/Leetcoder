@@ -1,0 +1,5 @@
+{
+    "problemName": "complete-prime-number",
+    "language": "java",
+    "code": "class Solution {\n  private static boolean isPrime(long x) {\n    if (x < 2) return false;\n    for (long d = 2; d * d <= x; d++) if (x % d == 0) return false;\n    return true;\n  }\n\n  public boolean completePrime(int num) {\n    String s = Integer.toString(num);\n    for (int i = 1; i <= s.length(); i++) {\n      if (!isPrime(Long.parseLong(s.substring(0, i)))) return false;\n      if (!isPrime(Long.parseLong(s.substring(s.length() - i)))) return false;\n    }\n    return true;\n  }\n}"
+}

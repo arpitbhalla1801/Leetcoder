@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-deletions-for-at-most-k-distinct-characters",
+    "language": "java",
+    "code": "class Solution {\n  public int minDeletion(String s, int k) {\n    int[] freq = new int[26];\n    for (char c : s.toCharArray()) freq[c - 'a']++;\n    Arrays.sort(freq);\n    int deletions = 0;\n    for (int i = 0; i < 26 - k; i++) deletions += freq[i];\n    return deletions;\n  }\n}"
+}

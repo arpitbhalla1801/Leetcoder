@@ -1,0 +1,5 @@
+{
+    "problemName": "count-of-substrings-containing-every-vowel-and-k-consonants-ii",
+    "language": "java",
+    "code": "class Solution {\n  public long countOfSubstrings(String word, int k) {\n    return atLeast(word, k) - atLeast(word, k + 1);\n  }\n\n  // substrings that contain all five vowels and at least m consonants\n  private long atLeast(String word, int m) {\n    int n = word.length(), right = 0, consonants = 0, distinctVowels = 0;\n    int[] vowels = new int[26];\n    long result = 0;\n    for (int left = 0; left < n; left++) {\n      while (right < n && !(distinctVowels == 5 && consonants >= m)) {\n        char c = word.charAt(right++);\n        if (\"aeiou\".indexOf(c) >= 0) {\n          if (vowels[c - 'a']++ == 0) distinctVowels++;\n        } else {\n          consonants++;\n        }\n      }\n      if (distinctVowels == 5 && consonants >= m) result += n - right + 1;\n      char c = word.charAt(left);\n      if (\"aeiou\".indexOf(c) >= 0) {\n        if (--vowels[c - 'a'] == 0) distinctVowels--;\n      } else {\n        consonants--;\n      }\n    }\n    return result;\n  }\n}"
+}

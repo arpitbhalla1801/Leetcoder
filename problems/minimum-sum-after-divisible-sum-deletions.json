@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-sum-after-divisible-sum-deletions",
+    "language": "java",
+    "code": "class Solution {\n  public long minArraySum(int[] nums, int k) {\n    long INF = Long.MAX_VALUE / 4;\n    long[] best = new long[k];\n    java.util.Arrays.fill(best, INF);\n    best[0] = 0;\n    long dp = 0;\n    int mod = 0;\n    for (int x : nums) {\n      mod = (mod + x) % k;\n      dp = Math.min(dp + x, best[mod]);\n      best[mod] = Math.min(best[mod], dp);\n    }\n    return dp;\n  }\n}"
+}

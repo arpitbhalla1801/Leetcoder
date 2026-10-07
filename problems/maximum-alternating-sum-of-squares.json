@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-alternating-sum-of-squares",
+    "language": "java",
+    "code": "class Solution {\n  public long maxAlternatingSum(int[] nums) {\n    int n = nums.length;\n    long[] sq = new long[n];\n    for (int i = 0; i < n; i++) sq[i] = (long) nums[i] * nums[i];\n    java.util.Arrays.sort(sq);\n    long total = 0;\n    int positives = (n + 1) / 2;\n    for (int i = 0; i < n; i++) total += i >= n - positives ? sq[i] : -sq[i];\n    return total;\n  }\n}"
+}

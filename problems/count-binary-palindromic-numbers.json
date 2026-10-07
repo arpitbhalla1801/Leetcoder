@@ -1,0 +1,5 @@
+{
+    "problemName": "count-binary-palindromic-numbers",
+    "language": "java",
+    "code": "class Solution {\n  public int countBinaryPalindromes(long n) {\n    if (n == 0) return 1;\n    int L = 64 - Long.numberOfLeadingZeros(n);\n    long total = 1;\n    for (int len = 1; len < L; len++) total += 1L << ((len + 1) / 2 - 1);\n    int half = (L + 1) / 2;\n    long prefix = n >> (L - half);\n    total += prefix - (1L << (half - 1));\n    long tail = prefix >> (L % 2);\n    long rev = 0;\n    for (int i = 0; i < L - half; i++) {\n      rev = (rev << 1) | (tail & 1);\n      tail >>= 1;\n    }\n    long pal = (prefix << (L - half)) | rev;\n    if (pal <= n) total++;\n    return (int) total;\n  }\n}"
+}

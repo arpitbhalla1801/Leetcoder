@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-subarray-with-restricted-pair-sums",
+    "language": "java",
+    "code": "class Solution {\n  private static boolean violates(int[] cnt, int v) {\n    for (int a = 1; a < v; a++) {\n      int b = v - a;\n      if (a < b && cnt[a] > 0 && cnt[b] > 0) return true;\n      if (a == b && cnt[a] >= 2) return true;\n    }\n    for (int a = 1; a + v <= 500; a++) if (cnt[a] > 0 && cnt[a + v] > 0) return true;\n    return false;\n  }\n\n  public int maxSubarray(int[] nums) {\n    int[] cnt = new int[501];\n    int left = 0, best = 0;\n    for (int r = 0; r < nums.length; r++) {\n      while (violates(cnt, nums[r])) cnt[nums[left++]]--;\n      cnt[nums[r]]++;\n      best = Math.max(best, r - left + 1);\n    }\n    return best;\n  }\n}"
+}

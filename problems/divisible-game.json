@@ -1,0 +1,5 @@
+{
+    "problemName": "divisible-game",
+    "language": "java",
+    "code": "class Solution {\n  public int divisibleGame(int[] nums) {\n    final long MOD = 1_000_000_007L;\n    int n = nums.length, MAX = 1_000_001;\n    int[] spf = new int[MAX];\n    for (int i = 2; i < MAX; i++) {\n      if (spf[i] != 0) continue;\n      for (int j = i; j < MAX; j += i) if (spf[j] == 0) spf[j] = i;\n    }\n    java.util.TreeSet<Integer> primes = new java.util.TreeSet<>();\n    primes.add(2);\n    for (int v : nums)\n      for (int x = v; x > 1; ) {\n        int p = spf[x];\n        primes.add(p);\n        while (x % p == 0) x /= p;\n      }\n    long bestDiff = Long.MIN_VALUE;\n    int bestK = 2;\n    for (int k : primes) {\n      long cur = Long.MIN_VALUE / 4, best = Long.MIN_VALUE;\n      for (int v : nums) {\n        long val = v % k == 0 ? v : -v;\n        cur = Math.max(cur, 0) + val;\n        best = Math.max(best, cur);\n      }\n      if (best > bestDiff) {\n        bestDiff = best;\n        bestK = k;\n      }\n    }\n    long diff = ((bestDiff % MOD) + MOD) % MOD;\n    return (int) (diff * bestK % MOD);\n  }\n}"
+}

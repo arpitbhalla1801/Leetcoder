@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-common-prefix-between-adjacent-strings-after-removals",
+    "language": "java",
+    "code": "class Solution {\n  private static int lcp(String a, String b) {\n    int k = 0, m = Math.min(a.length(), b.length());\n    while (k < m && a.charAt(k) == b.charAt(k)) k++;\n    return k;\n  }\n\n  public int[] longestCommonPrefix(String[] words) {\n    int n = words.length;\n    int[] ans = new int[n];\n    if (n <= 2) return ans;\n    int[] pair = new int[n - 1];\n    for (int i = 0; i + 1 < n; i++) pair[i] = lcp(words[i], words[i + 1]);\n    int[] pre = new int[n], suf = new int[n + 1];\n    for (int i = 0; i < n - 1; i++) pre[i + 1] = Math.max(pre[i], pair[i]);\n    for (int i = n - 2; i >= 0; i--) suf[i] = Math.max(suf[i + 1], pair[i]);\n    for (int i = 0; i < n; i++) {\n      int best = 0;\n      if (i - 1 >= 0) best = Math.max(best, pre[i - 1]);\n      if (i + 1 <= n - 2) best = Math.max(best, suf[i + 1]);\n      if (i - 1 >= 0 && i + 1 < n) best = Math.max(best, lcp(words[i - 1], words[i + 1]));\n      ans[i] = best;\n    }\n    return ans;\n  }\n}"
+}

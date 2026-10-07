@@ -1,0 +1,5 @@
+{
+    "problemName": "count-bowl-subarrays",
+    "language": "java",
+    "code": "class Solution {\n  public long bowlSubarrays(int[] nums) {\n    int n = nums.length;\n    int[] stack = new int[n];\n    int sp = 0;\n    long pairs = 0;\n    for (int j = 0; j < n; j++) {\n      while (sp > 0 && nums[stack[sp - 1]] < nums[j]) {\n        sp--;\n        pairs++;\n      }\n      if (sp > 0) pairs++;\n      stack[sp++] = j;\n    }\n    return pairs - (n - 1);\n  }\n}"
+}

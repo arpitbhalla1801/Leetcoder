@@ -1,0 +1,5 @@
+{
+    "problemName": "subsequence-after-one-replacement",
+    "language": "java",
+    "code": "class Solution {\n  public boolean canMakeSubsequence(String s, String t) {\n    int n = s.length(), m = t.length();\n    int[] pre = new int[n + 1], suf = new int[n + 2];\n    pre[0] = 0;\n    int p = 0;\n    for (int i = 0; i < n; i++) {\n      while (p < m && t.charAt(p) != s.charAt(i)) p++;\n      if (p >= m) {\n        for (int j = i + 1; j <= n; j++) pre[j] = m + 1;\n        break;\n      }\n      p++;\n      pre[i + 1] = p;\n    }\n    if (pre[n] <= m) return true;\n    int q = m;\n    suf[n] = m;\n    boolean broken = false;\n    for (int i = n - 1; i >= 0; i--) {\n      if (broken) {\n        suf[i] = -1;\n        continue;\n      }\n      q--;\n      while (q >= 0 && t.charAt(q) != s.charAt(i)) q--;\n      if (q < 0) {\n        broken = true;\n        suf[i] = -1;\n      } else suf[i] = q;\n    }\n    for (int i = 0; i < n; i++) {\n      if (pre[i] > m || suf[i + 1] < 0) continue;\n      if (pre[i] < suf[i + 1]) return true;\n    }\n    return false;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "collecting-chocolates",
+    "language": "java",
+    "code": "class Solution {\n  public long minCost(int[] nums, int x) {\n    int n = nums.length;\n    long[] best = new long[n];\n    for (int i = 0; i < n; i++) best[i] = nums[i];\n    long ans = Long.MAX_VALUE;\n    for (int rotations = 0; rotations < n; rotations++) {\n      long cost = (long) rotations * x;\n      for (int i = 0; i < n; i++) {\n        best[i] = Math.min(best[i], nums[(i + rotations) % n]);\n        cost += best[i];\n      }\n      ans = Math.min(ans, cost);\n    }\n    return ans;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "earliest-finish-time-for-land-and-water-rides-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int earliestFinishTime(\n      int[] landStartTime, int[] landDuration, int[] waterStartTime, int[] waterDuration) {\n    return Math.min(\n        finish(landStartTime, landDuration, waterStartTime, waterDuration),\n        finish(waterStartTime, waterDuration, landStartTime, landDuration));\n  }\n\n  // earliest finish when the first ride comes from (s1, d1) and the second from (s2, d2)\n  private int finish(int[] s1, int[] d1, int[] s2, int[] d2) {\n    int firstDone = Integer.MAX_VALUE;\n    for (int i = 0; i < s1.length; i++) firstDone = Math.min(firstDone, s1[i] + d1[i]);\n    int best = Integer.MAX_VALUE;\n    for (int j = 0; j < s2.length; j++) best = Math.min(best, Math.max(firstDone, s2[j]) + d2[j]);\n    return best;\n  }\n}"
+}

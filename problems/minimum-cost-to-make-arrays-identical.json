@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-cost-to-make-arrays-identical",
+    "language": "java",
+    "code": "class Solution {\n  public long minCost(int[] arr, int[] brr, long k) {\n    int n = arr.length;\n    long direct = 0;\n    for (int i = 0; i < n; i++) direct += Math.abs(arr[i] - brr[i]);\n    int[] a = arr.clone(), b = brr.clone();\n    java.util.Arrays.sort(a);\n    java.util.Arrays.sort(b);\n    long sorted = k;\n    for (int i = 0; i < n; i++) sorted += Math.abs(a[i] - b[i]);\n    return Math.min(direct, sorted);\n  }\n}"
+}

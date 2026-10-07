@@ -1,0 +1,5 @@
+{
+    "problemName": "car-fleet-ii",
+    "language": "java",
+    "code": "class Solution {\n  public double[] getCollisionTimes(int[][] cars) {\n    int n = cars.length;\n    double[] ans = new double[n];\n    java.util.Arrays.fill(ans, -1.0);\n    int[] stack = new int[n];\n    int top = 0;\n    for (int i = n - 1; i >= 0; i--) {\n      while (top > 0) {\n        int j = stack[top - 1];\n        if (cars[i][1] <= cars[j][1]) {\n          top--;\n          continue;\n        }\n        double t = (double) (cars[j][0] - cars[i][0]) / (cars[i][1] - cars[j][1]);\n        if (ans[j] < 0 || t <= ans[j]) {\n          ans[i] = t;\n          break;\n        }\n        top--;\n      }\n      stack[top++] = i;\n    }\n    return ans;\n  }\n}\n"
+}

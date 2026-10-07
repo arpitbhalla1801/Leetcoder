@@ -1,0 +1,5 @@
+{
+    "problemName": "minimize-array-sum-using-divisible-replacements",
+    "language": "java",
+    "code": "class Solution {\n  public long minArraySum(int[] nums) {\n    int MAX = 100_001;\n    boolean[] present = new boolean[MAX];\n    for (int v : nums) present[v] = true;\n    int[] best = new int[MAX];\n    for (int d = 1; d < MAX; d++) {\n      if (!present[d]) continue;\n      for (int m = d; m < MAX; m += d) if (best[m] == 0) best[m] = d;\n    }\n    long sum = 0;\n    for (int v : nums) sum += best[v];\n    return sum;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-rotations-to-dial-a-number-ii",
+    "language": "java",
+    "code": "class Solution {\n  private static int dist(int a, int b) {\n    int d = Math.abs(a - b);\n    return Math.min(d, 10 - d);\n  }\n\n  public int minRotations(int n, String s) {\n    int[] d = new int[n];\n    for (int i = 0; i < n; i++) d[i] = s.charAt(i) - '0';\n    long[] prefix = new long[n + 1];\n    int pointer = 0;\n    for (int i = 0; i < n; i++) {\n      prefix[i + 1] = prefix[i] + dist(pointer, d[i]);\n      pointer = d[i];\n    }\n    long[] suffixAdj = new long[n + 1];\n    for (int i = n - 2; i >= 0; i--) suffixAdj[i] = suffixAdj[i + 1] + dist(d[i], d[i + 1]);\n    long best = prefix[n];\n    for (int k = 0; k < n; k++) {\n      int p = k > 0 ? d[k - 1] : 0;\n      long cost = prefix[k] + dist(p, d[n - 1]) + suffixAdj[k];\n      best = Math.min(best, cost);\n    }\n    return (int) best;\n  }\n}"
+}

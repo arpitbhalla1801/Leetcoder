@@ -1,0 +1,5 @@
+{
+    "problemName": "compare-sums-of-bitonic-parts",
+    "language": "java",
+    "code": "class Solution {\n  public int compareBitonicSums(int[] nums) {\n    int n = nums.length, peak = 0;\n    while (peak + 1 < n && nums[peak + 1] > nums[peak]) peak++;\n    long asc = 0, desc = 0;\n    for (int i = 0; i <= peak; i++) asc += nums[i];\n    for (int i = peak; i < n; i++) desc += nums[i];\n    return asc > desc ? 0 : asc < desc ? 1 : -1;\n  }\n}"
+}

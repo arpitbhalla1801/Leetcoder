@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-total-reward-using-operations-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int maxTotalReward(int[] rewardValues) {\n    java.util.Arrays.sort(rewardValues);\n    java.math.BigInteger reachable = java.math.BigInteger.ONE;\n    int previous = -1;\n    for (int x : rewardValues) {\n      if (x == previous) continue;\n      java.math.BigInteger below =\n          java.math.BigInteger.ONE.shiftLeft(x).subtract(java.math.BigInteger.ONE);\n      reachable = reachable.or(reachable.and(below).shiftLeft(x));\n      previous = x;\n    }\n    return reachable.bitLength() - 1;\n  }\n}"
+}

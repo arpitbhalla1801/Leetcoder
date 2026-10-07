@@ -1,0 +1,5 @@
+{
+    "problemName": "zero-array-transformation-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int minZeroArray(int[] nums, int[][] queries) {\n    if (!canZero(nums, queries, queries.length)) return -1;\n    int lo = 0, hi = queries.length;\n    while (lo < hi) {\n      int mid = (lo + hi) >>> 1;\n      if (canZero(nums, queries, mid)) hi = mid;\n      else lo = mid + 1;\n    }\n    return lo;\n  }\n\n  // can the first k queries zero the array? (each index can absorb the sum of vals covering it)\n  private boolean canZero(int[] nums, int[][] queries, int k) {\n    int n = nums.length;\n    long[] diff = new long[n + 1];\n    for (int i = 0; i < k; i++) {\n      diff[queries[i][0]] += queries[i][2];\n      diff[queries[i][1] + 1] -= queries[i][2];\n    }\n    long cover = 0;\n    for (int i = 0; i < n; i++) {\n      cover += diff[i];\n      if (cover < nums[i]) return false;\n    }\n    return true;\n  }\n}"
+}

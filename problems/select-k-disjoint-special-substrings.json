@@ -1,0 +1,5 @@
+{
+    "problemName": "select-k-disjoint-special-substrings",
+    "language": "java",
+    "code": "class Solution {\n  public boolean maxSubstringLength(String s, int k) {\n    int n = s.length();\n    int[] first = new int[26], last = new int[26];\n    java.util.Arrays.fill(first, -1);\n    for (int i = 0; i < n; i++) {\n      int c = s.charAt(i) - 'a';\n      if (first[c] < 0) first[c] = i;\n      last[c] = i;\n    }\n    int[] endAt = new int[n];\n    java.util.Arrays.fill(endAt, -1);\n    List<int[]> intervals = new ArrayList<>();\n    for (int c = 0; c < 26; c++) {\n      if (first[c] < 0) continue;\n      int l = first[c], r = last[c];\n      boolean valid = true;\n      for (int i = l; i <= r && valid; i++) {\n        int ch = s.charAt(i) - 'a';\n        if (first[ch] < l) valid = false;\n        r = Math.max(r, last[ch]);\n      }\n      if (valid && r - l + 1 < n) intervals.add(new int[] {l, r});\n    }\n    intervals.sort((x, y) -> Integer.compare(x[1], y[1]));\n    int count = 0, end = -1;\n    for (int[] iv : intervals) {\n      if (iv[0] > end) {\n        count++;\n        end = iv[1];\n      }\n    }\n    return count >= k;\n  }\n}"
+}

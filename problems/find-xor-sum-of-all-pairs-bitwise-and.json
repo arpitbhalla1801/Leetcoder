@@ -1,0 +1,5 @@
+{
+    "problemName": "find-xor-sum-of-all-pairs-bitwise-and",
+    "language": "java",
+    "code": "class Solution {\n  public int getXORSum(int[] arr1, int[] arr2) {\n    int a = 0, b = 0;\n    for (int x : arr1) a ^= x;\n    for (int x : arr2) b ^= x;\n    return a & b;\n  }\n}\n"
+}

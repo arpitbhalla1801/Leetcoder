@@ -1,0 +1,5 @@
+{
+    "problemName": "sort-integers-by-binary-reflection",
+    "language": "java",
+    "code": "class Solution {\n  public int[] sortByReflection(int[] nums) {\n    Integer[] boxed = new Integer[nums.length];\n    for (int i = 0; i < nums.length; i++) boxed[i] = nums[i];\n    Arrays.sort(\n        boxed,\n        (a, b) -> {\n          int ra = reflect(a), rb = reflect(b);\n          return ra != rb ? Integer.compare(ra, rb) : Integer.compare(a, b);\n        });\n    for (int i = 0; i < nums.length; i++) nums[i] = boxed[i];\n    return nums;\n  }\n\n  private int reflect(int x) {\n    return Integer.parseInt(new StringBuilder(Integer.toBinaryString(x)).reverse().toString(), 2);\n  }\n}"
+}

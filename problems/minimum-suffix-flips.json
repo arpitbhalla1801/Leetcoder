@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-suffix-flips",
+    "language": "java",
+    "code": "class Solution {\n  public int minFlips(String target) {\n    int flips = 0;\n    char state = '0';\n    for (int i = 0; i < target.length(); i++)\n      if (target.charAt(i) != state) {\n        flips++;\n        state = state == '0' ? '1' : '0';\n      }\n    return flips;\n  }\n}\n"
+}

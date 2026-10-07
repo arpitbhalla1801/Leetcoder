@@ -1,0 +1,5 @@
+{
+    "problemName": "reverse-subarray-to-maximize-array-value",
+    "language": "java",
+    "code": "class Solution {\n  public int maxValueAfterReverse(int[] nums) {\n    int base = 0, gain = 0;\n    for (int i = 0; i + 1 < nums.length; i++) {\n      int a = nums[i], b = nums[i + 1];\n      base += Math.abs(a - b);\n      gain = Math.max(gain, Math.abs(nums[0] - b) - Math.abs(a - b));\n      gain = Math.max(gain, Math.abs(nums[nums.length - 1] - a) - Math.abs(a - b));\n    }\n    int innerLow = Integer.MAX_VALUE, innerHigh = Integer.MIN_VALUE;\n    for (int i = 0; i + 1 < nums.length; i++) {\n      int lo = Math.min(nums[i], nums[i + 1]), hi = Math.max(nums[i], nums[i + 1]);\n      innerLow = Math.min(innerLow, hi);\n      innerHigh = Math.max(innerHigh, lo);\n    }\n    if (innerLow != Integer.MAX_VALUE) gain = Math.max(gain, 2 * (innerHigh - innerLow));\n    return base + gain;\n  }\n}\n"
+}

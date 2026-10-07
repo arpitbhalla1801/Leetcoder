@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-moves-to-make-array-complementary",
+    "language": "java",
+    "code": "class Solution {\n  public int minMoves(int[] nums, int limit) {\n    int n = nums.length; // placeholder\n    int[] diff = new int[2 * limit + 2];\n    for (int i = 0; i < n / 2; i++) {\n      int a = Math.min(nums[i], nums[n - 1 - i]), b = Math.max(nums[i], nums[n - 1 - i]);\n      diff[2] += 2;\n      diff[a + 1]--;\n      diff[a + b]--;\n      diff[a + b + 1]++;\n      diff[b + limit + 1]++;\n    }\n    int best = n, moves = 0;\n    for (int sum = 2; sum <= 2 * limit; sum++) {\n      moves += diff[sum];\n      best = Math.min(best, moves);\n    }\n    return best;\n  }\n}\n"
+}

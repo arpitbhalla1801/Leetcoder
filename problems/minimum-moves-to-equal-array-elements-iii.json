@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-moves-to-equal-array-elements-iii",
+    "language": "java",
+    "code": "class Solution {\n  public int minMoves(int[] nums) {\n    int max = 0, sum = 0;\n    for (int x : nums) {\n      max = Math.max(max, x);\n      sum += x;\n    }\n    return max * nums.length - sum;\n  }\n}"
+}

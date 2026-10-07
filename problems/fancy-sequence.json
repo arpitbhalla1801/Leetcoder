@@ -1,0 +1,5 @@
+{
+    "problemName": "fancy-sequence",
+    "language": "java",
+    "code": "class Fancy {\n  private static final long MOD = 1_000_000_007L;\n  private final java.util.List<Long> values = new java.util.ArrayList<>();\n  private long mul = 1, add = 0;\n\n  public void append(int val) {\n    values.add((val - add + MOD) % MOD * inv(mul) % MOD);\n  }\n\n  public void addAll(int inc) {\n    add = (add + inc) % MOD;\n  }\n\n  public void multAll(int m) {\n    mul = mul * m % MOD;\n    add = add * m % MOD;\n  }\n\n  public int getIndex(int idx) {\n    if (idx < 0 || idx >= values.size()) return -1;\n    return (int) ((values.get(idx) * mul + add) % MOD);\n  }\n\n  private long inv(long x) {\n    return pow(x, MOD - 2);\n  }\n\n  private long pow(long x, long e) {\n    long result = 1;\n    while (e > 0) {\n      if ((e & 1) != 0) result = result * x % MOD;\n      x = x * x % MOD;\n      e >>= 1;\n    }\n    return result;\n  }\n}\n"
+}

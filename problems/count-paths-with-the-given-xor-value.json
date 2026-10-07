@@ -1,0 +1,5 @@
+{
+    "problemName": "count-paths-with-the-given-xor-value",
+    "language": "java",
+    "code": "class Solution {\n  public int countPathsWithXorValue(int[][] grid, int k) {\n    final int MOD = 1_000_000_007;\n    int m = grid.length, n = grid[0].length;\n    int[][] dp = new int[n][16];\n    for (int i = 0; i < m; i++) {\n      for (int j = 0; j < n; j++) {\n        int[] cur = new int[16];\n        int g = grid[i][j];\n        if (i == 0 && j == 0) {\n          cur[g] = 1;\n        } else {\n          for (int x = 0; x < 16; x++) {\n            int ways = 0;\n            if (i > 0) ways += dp[j][x];\n            if (ways >= MOD) ways -= MOD;\n            if (j > 0) ways += dp[j - 1][x];\n            if (ways >= MOD) ways -= MOD;\n            cur[x ^ g] = ways;\n          }\n        }\n        dp[j] = cur;\n      }\n    }\n    return dp[n - 1][k];\n  }\n}"
+}

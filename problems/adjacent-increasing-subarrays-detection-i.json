@@ -1,0 +1,5 @@
+{
+    "problemName": "adjacent-increasing-subarrays-detection-i",
+    "language": "java",
+    "code": "class Solution {\n  public boolean hasIncreasingSubarrays(List<Integer> nums, int k) {\n    int n = nums.size();\n    int[] run = new int[n]; // length of strictly increasing run ending at i\n    for (int i = 0; i < n; i++) {\n      run[i] = i > 0 && nums.get(i) > nums.get(i - 1) ? run[i - 1] + 1 : 1;\n    }\n    for (int end = k - 1; end + k < n; end++) {\n      if (run[end] >= k && run[end + k] >= k) return true;\n    }\n    return false;\n  }\n}"
+}

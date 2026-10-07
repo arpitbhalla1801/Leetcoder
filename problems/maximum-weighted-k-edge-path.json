@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-weighted-k-edge-path",
+    "language": "java",
+    "code": "class Solution {\n  public int maxWeight(int n, int[][] edges, int k, int t) {\n    int W = (t + 63) / 64;\n    long[][] cur = new long[n][W];\n    for (int v = 0; v < n; v++) cur[v][0] = 1;\n    for (int step = 0; step < k; step++) {\n      long[][] nxt = new long[n][W];\n      for (int[] e : edges) {\n        int u = e[0], v = e[1], w = e[2];\n        int words = w / 64, bits = w % 64;\n        for (int i = W - 1; i >= words; i--) {\n          long x = cur[u][i - words] << bits;\n          if (bits != 0 && i - words - 1 >= 0) x |= cur[u][i - words - 1] >>> (64 - bits);\n          nxt[v][i] |= x;\n        }\n      }\n      cur = nxt;\n    }\n    for (int w = t - 1; w >= 0; w--) {\n      for (int v = 0; v < n; v++) if ((cur[v][w / 64] >>> (w % 64) & 1L) != 0) return w;\n    }\n    return -1;\n  }\n}"
+}

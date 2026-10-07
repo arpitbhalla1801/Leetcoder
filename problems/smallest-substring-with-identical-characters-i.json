@@ -1,0 +1,5 @@
+{
+    "problemName": "smallest-substring-with-identical-characters-i",
+    "language": "java",
+    "code": "class Solution {\n  public int minLength(String s, int numOps) {\n    int n = s.length(), lo = 1, hi = n;\n    while (lo < hi) {\n      int mid = (lo + hi) >>> 1;\n      if (flips(s, mid) <= numOps) hi = mid;\n      else lo = mid + 1;\n    }\n    return lo;\n  }\n\n  private static int flips(String s, int limit) {\n    int n = s.length();\n    if (limit == 1) {\n      int diff = 0;\n      for (int i = 0; i < n; i++) if (s.charAt(i) - '0' != (i & 1)) diff++;\n      return Math.min(diff, n - diff);\n    }\n    int ops = 0;\n    for (int i = 0; i < n; ) {\n      int j = i;\n      while (j < n && s.charAt(j) == s.charAt(i)) j++;\n      ops += (j - i) / (limit + 1);\n      i = j;\n    }\n    return ops;\n  }\n}"
+}

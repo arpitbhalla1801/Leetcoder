@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-number-of-items-from-sale-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int maximumSaleItems(int[][] items, int budget) {\n    int n = items.length;\n    int[] cnt = new int[n + 1];\n    long minPrice = Long.MAX_VALUE;\n    for (int[] it : items) {\n      cnt[it[0]]++;\n      minPrice = Math.min(minPrice, it[1]);\n    }\n    long[] free = new long[n + 1];\n    for (int f = 1; f <= n; f++) {\n      long c = 0;\n      for (int m = f; m <= n; m += f) c += cnt[m];\n      free[f] = c - 1;\n    }\n    Integer[] order = new Integer[n];\n    for (int i = 0; i < n; i++) order[i] = i;\n    java.util.Arrays.sort(order, (a, b) -> Integer.compare(items[a][1], items[b][1]));\n    long remaining = budget, total = 0;\n    for (int idx : order) {\n      long price = items[idx][1], slots = free[items[idx][0]];\n      if (slots <= 0 || price >= 2 * minPrice) continue;\n      long take = Math.min(slots, remaining / price);\n      remaining -= take * price;\n      total += 2 * take;\n    }\n    return (int) (total + remaining / minPrice);\n  }\n}"
+}

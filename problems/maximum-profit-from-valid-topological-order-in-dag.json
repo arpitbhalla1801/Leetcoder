@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-profit-from-valid-topological-order-in-dag",
+    "language": "java",
+    "code": "class Solution {\n  public int maxProfit(int n, int[][] edges, int[] score) {\n    int[] pre = new int[n];\n    for (int[] e : edges) pre[e[1]] |= 1 << e[0];\n    int full = (1 << n) - 1;\n    int[] dp = new int[full + 1];\n    java.util.Arrays.fill(dp, -1);\n    dp[0] = 0;\n    for (int mask = 0; mask < full; mask++) {\n      if (dp[mask] < 0) continue;\n      int pos = Integer.bitCount(mask) + 1;\n      for (int u = 0; u < n; u++) {\n        if ((mask >> u & 1) != 0 || (pre[u] & mask) != pre[u]) continue;\n        int nm = mask | 1 << u, v = dp[mask] + score[u] * pos;\n        if (v > dp[nm]) dp[nm] = v;\n      }\n    }\n    return dp[full];\n  }\n}"
+}

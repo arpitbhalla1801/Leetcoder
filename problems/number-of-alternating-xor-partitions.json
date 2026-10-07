@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-alternating-xor-partitions",
+    "language": "java",
+    "code": "class Solution {\n  public int alternatingXOR(int[] nums, int target1, int target2) {\n    final long MOD = 1_000_000_007L;\n    int size = 1 << 17;\n    long[] sumB = new long[size], sumA = new long[size];\n    sumB[0] = 1;\n    int prefix = 0;\n    long dpA = 0, dpB = 0;\n    for (int x : nums) {\n      prefix ^= x;\n      dpA = sumB[prefix ^ target1];\n      dpB = sumA[prefix ^ target2];\n      sumA[prefix] = (sumA[prefix] + dpA) % MOD;\n      sumB[prefix] = (sumB[prefix] + dpB) % MOD;\n    }\n    return (int) ((dpA + dpB) % MOD);\n  }\n}"
+}

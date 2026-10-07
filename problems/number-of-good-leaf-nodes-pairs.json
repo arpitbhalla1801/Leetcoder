@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-good-leaf-nodes-pairs",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private int answer;\n\n  public int countPairs(TreeNode root, int distance) {\n    answer = 0;\n    dfs(root, distance);\n    return answer;\n  }\n\n  private int[] dfs(TreeNode node, int d) {\n    int[] count = new int[d + 1];\n    if (node == null) return count;\n    if (node.left == null && node.right == null) {\n      count[1] = 1;\n      return count;\n    }\n    int[] a = dfs(node.left, d), b = dfs(node.right, d);\n    for (int i = 1; i <= d; i++) for (int j = 1; j + i <= d; j++) answer += a[i] * b[j];\n    for (int i = 2; i <= d; i++) count[i] = a[i - 1] + b[i - 1];\n    return count;\n  }\n}\n"
+}

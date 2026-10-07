@@ -1,0 +1,5 @@
+{
+    "problemName": "generate-binary-strings-without-adjacent-zeros",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<String> validStrings(int n) {\n    List<String> result = new ArrayList<>();\n    char[] current = new char[n];\n    build(0, true, current, result);\n    return result;\n  }\n\n  private void build(int index, boolean canUseZero, char[] current, List<String> result) {\n    if (index == current.length) {\n      result.add(new String(current));\n      return;\n    }\n    current[index] = '1';\n    build(index + 1, true, current, result);\n    if (canUseZero) {\n      current[index] = '0';\n      build(index + 1, false, current, result);\n    }\n  }\n}"
+}

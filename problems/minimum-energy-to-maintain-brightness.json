@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-energy-to-maintain-brightness",
+    "language": "java",
+    "code": "class Solution {\n  public long minEnergy(int n, int brightness, int[][] intervals) {\n    int[][] sorted = intervals.clone();\n    java.util.Arrays.sort(sorted, (a, b) -> Integer.compare(a[0], b[0]));\n    long covered = 0, curStart = sorted[0][0], curEnd = sorted[0][1];\n    for (int i = 1; i < sorted.length; i++) {\n      if (sorted[i][0] <= curEnd + 1L) {\n        curEnd = Math.max(curEnd, sorted[i][1]);\n      } else {\n        covered += curEnd - curStart + 1;\n        curStart = sorted[i][0];\n        curEnd = sorted[i][1];\n      }\n    }\n    covered += curEnd - curStart + 1;\n    return covered * ((brightness + 2) / 3);\n  }\n}"
+}

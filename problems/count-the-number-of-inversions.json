@@ -1,0 +1,5 @@
+{
+    "problemName": "count-the-number-of-inversions",
+    "language": "java",
+    "code": "class Solution {\n  public int numberOfPermutations(int n, int[][] requirements) {\n    final int MOD = 1_000_000_007;\n    int[] required = new int[n];\n    java.util.Arrays.fill(required, -1);\n    int max = 0;\n    for (int[] r : requirements) {\n      required[r[0]] = r[1];\n      max = Math.max(max, r[1]);\n    }\n    int[][] dp = new int[n + 1][max + 1];\n    dp[0][0] = 1;\n    for (int length = 1; length <= n; length++) {\n      int end = length - 1;\n      long window = 0;\n      for (int inv = 0; inv <= max; inv++) {\n        window += dp[length - 1][inv];\n        if (inv >= length) window -= dp[length - 1][inv - length];\n        dp[length][inv] = (int) (window % MOD);\n      }\n      if (required[end] >= 0)\n        for (int inv = 0; inv <= max; inv++) if (inv != required[end]) dp[length][inv] = 0;\n    }\n    return required[n - 1] >= 0 ? dp[n][required[n - 1]] : 0;\n  }\n}"
+}

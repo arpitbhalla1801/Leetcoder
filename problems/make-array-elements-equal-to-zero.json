@@ -1,0 +1,5 @@
+{
+    "problemName": "make-array-elements-equal-to-zero",
+    "language": "java",
+    "code": "class Solution {\n  public int countValidSelections(int[] nums) {\n    int count = 0;\n    for (int start = 0; start < nums.length; start++) {\n      if (nums[start] != 0) continue;\n      for (int dir = -1; dir <= 1; dir += 2) {\n        if (simulate(nums.clone(), start, dir)) count++;\n      }\n    }\n    return count;\n  }\n\n  private boolean simulate(int[] a, int curr, int dir) {\n    while (curr >= 0 && curr < a.length) {\n      if (a[curr] == 0) {\n        curr += dir;\n      } else {\n        a[curr]--;\n        dir = -dir;\n        curr += dir;\n      }\n    }\n    for (int v : a) if (v != 0) return false;\n    return true;\n  }\n}"
+}

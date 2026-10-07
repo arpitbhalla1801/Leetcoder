@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-subarray-gcd-score",
+    "language": "java",
+    "code": "class Solution {\n  private static int gcd(int a, int b) {\n    while (b != 0) {\n      int t = a % b;\n      a = b;\n      b = t;\n    }\n    return a;\n  }\n\n  public long maxGCDScore(int[] nums, int k) {\n    int n = nums.length;\n    int[] tz = new int[n];\n    for (int i = 0; i < n; i++) tz[i] = Integer.numberOfTrailingZeros(nums[i]);\n    long best = 0;\n    for (int l = 0; l < n; l++) {\n      int g = 0, minTz = Integer.MAX_VALUE, cnt = 0;\n      for (int r = l; r < n; r++) {\n        g = gcd(g, nums[r]);\n        if (tz[r] < minTz) {\n          minTz = tz[r];\n          cnt = 1;\n        } else if (tz[r] == minTz) cnt++;\n        long score = (long) (r - l + 1) * g * (cnt <= k ? 2 : 1);\n        if (score > best) best = score;\n      }\n    }\n    return best;\n  }\n}"
+}

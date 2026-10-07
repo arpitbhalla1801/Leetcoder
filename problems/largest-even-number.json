@@ -1,0 +1,5 @@
+{
+    "problemName": "largest-even-number",
+    "language": "java",
+    "code": "class Solution {\n  public String largestEven(String s) {\n    int end = s.length();\n    while (end > 0 && s.charAt(end - 1) != '2') end--;\n    return s.substring(0, end);\n  }\n}"
+}

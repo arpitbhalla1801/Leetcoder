@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-operations-to-maximize-last-elements-in-arrays",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(int[] nums1, int[] nums2) {\n    int noSwap = operations(nums1, nums2, false);\n    int swap = operations(nums1, nums2, true);\n    if (noSwap < 0 && swap < 0) return -1;\n    if (noSwap < 0) return swap;\n    if (swap < 0) return noSwap;\n    return Math.min(noSwap, swap);\n  }\n\n  private int operations(int[] a, int[] b, boolean swapLast) {\n    int n = a.length, lastA = a[n - 1], lastB = b[n - 1], count = swapLast ? 1 : 0;\n    if (swapLast) {\n      int temp = lastA;\n      lastA = lastB;\n      lastB = temp;\n    }\n    for (int i = 0; i < n - 1; i++) {\n      if (a[i] <= lastA && b[i] <= lastB) continue;\n      if (b[i] <= lastA && a[i] <= lastB) count++;\n      else return -1;\n    }\n    return count;\n  }\n}"
+}

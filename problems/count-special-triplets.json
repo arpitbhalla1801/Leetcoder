@@ -1,0 +1,5 @@
+{
+    "problemName": "count-special-triplets",
+    "language": "java",
+    "code": "class Solution {\n  public int specialTriplets(int[] nums) {\n    final long MOD = 1_000_000_007L;\n    int[] left = new int[200001], right = new int[200001];\n    for (int x : nums) right[x]++;\n    long ans = 0;\n    for (int x : nums) {\n      right[x]--;\n      if (2 * x <= 200000) ans = (ans + (long) left[2 * x] * right[2 * x]) % MOD;\n      left[x]++;\n    }\n    return (int) ans;\n  }\n}"
+}

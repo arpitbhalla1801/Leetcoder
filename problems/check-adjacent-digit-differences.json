@@ -1,0 +1,5 @@
+{
+    "problemName": "check-adjacent-digit-differences",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isAdjacentDiffAtMostTwo(String s) {\n    for (int i = 1; i < s.length(); i++) {\n      if (Math.abs(s.charAt(i) - s.charAt(i - 1)) > 2) return false;\n    }\n    return true;\n  }\n}"
+}

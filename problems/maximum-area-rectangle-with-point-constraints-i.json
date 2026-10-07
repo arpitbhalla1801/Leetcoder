@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-area-rectangle-with-point-constraints-i",
+    "language": "java",
+    "code": "class Solution {\n  public int maxRectangleArea(int[][] points) {\n    int n = points.length, best = -1;\n    for (int i = 0; i < n; i++) {\n      for (int j = 0; j < n; j++) {\n        int x1 = points[i][0], y1 = points[i][1], x2 = points[j][0], y2 = points[j][1];\n        if (x1 >= x2 || y1 >= y2) continue;\n        boolean c3 = false, c4 = false, bad = false;\n        for (int[] p : points) {\n          if (p[0] == x1 && p[1] == y2) c3 = true;\n          else if (p[0] == x2 && p[1] == y1) c4 = true;\n          else if (p[0] >= x1\n              && p[0] <= x2\n              && p[1] >= y1\n              && p[1] <= y2\n              && !(p[0] == x1 && p[1] == y1)\n              && !(p[0] == x2 && p[1] == y2)) bad = true;\n        }\n        if (c3 && c4 && !bad) best = Math.max(best, (x2 - x1) * (y2 - y1));\n      }\n    }\n    return best;\n  }\n}"
+}

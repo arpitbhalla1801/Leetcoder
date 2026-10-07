@@ -1,0 +1,5 @@
+{
+    "problemName": "k-th-digit-in-infinite-string",
+    "language": "java",
+    "code": "class Solution {\n  public int kthDigit(long k) {\n    if (k <= 9) return (int) k;\n    k -= 9;\n    long first = 1;\n    for (int d = 1; ; d++) {\n      long blocks = 9 * first, blockDigits = 10L * (d + 1);\n      long groupDigits = blocks * blockDigits;\n      if (k > groupDigits) {\n        k -= groupDigits;\n        first *= 10;\n        continue;\n      }\n      long b = first + (k - 1) / blockDigits, offset = (k - 1) % blockDigits;\n      int j = (int) (offset / (d + 1)), pos = (int) (offset % (d + 1));\n      long number = b % 2 == 0 ? 10 * b + j : 10 * b + 9 - j;\n      return Long.toString(number).charAt(pos) - '0';\n    }\n  }\n}"
+}

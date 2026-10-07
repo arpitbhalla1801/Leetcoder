@@ -1,0 +1,5 @@
+{
+    "problemName": "generate-random-point-in-a-circle",
+    "language": "java",
+    "code": "class Solution {\n  private final double radius, xCenter, yCenter;\n\n  public Solution(double radius, double x_center, double y_center) {\n    this.radius = radius;\n    this.xCenter = x_center;\n    this.yCenter = y_center;\n  }\n\n  public double[] randPoint() {\n    double r = radius * Math.sqrt(Math.random());\n    double theta = 2.0 * Math.PI * Math.random();\n    return new double[] {xCenter + r * Math.cos(theta), yCenter + r * Math.sin(theta)};\n  }\n}\n"
+}

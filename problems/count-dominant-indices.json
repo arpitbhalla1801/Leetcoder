@@ -1,0 +1,5 @@
+{
+    "problemName": "count-dominant-indices",
+    "language": "java",
+    "code": "class Solution {\n  public int dominantIndices(int[] nums) {\n    int n = nums.length, count = 0, suffix = 0;\n    for (int i = n - 2; i >= 0; i--) {\n      suffix += nums[i + 1];\n      if (nums[i] * (n - 1 - i) > suffix) count++;\n    }\n    return count;\n  }\n}"
+}

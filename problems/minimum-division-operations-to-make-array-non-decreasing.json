@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-division-operations-to-make-array-non-decreasing",
+    "language": "java",
+    "code": "class Solution {\n  public int minOperations(int[] nums) {\n    int max = 0;\n    for (int v : nums) max = Math.max(max, v);\n    int[] spf = new int[max + 1];\n    for (int i = 2; i <= max; i++) {\n      if (spf[i] != 0) continue;\n      for (int j = i; j <= max; j += i) if (spf[j] == 0) spf[j] = i;\n    }\n    int ops = 0, prev = nums[nums.length - 1];\n    for (int i = nums.length - 2; i >= 0; i--) {\n      int v = nums[i];\n      if (v > prev) {\n        v = spf[v];\n        ops++;\n        if (v > prev) return -1;\n      }\n      prev = v;\n    }\n    return ops;\n  }\n}"
+}

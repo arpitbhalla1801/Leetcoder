@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-lights-to-illuminate-a-road",
+    "language": "java",
+    "code": "class Solution {\n  public int minLights(int[] lights) {\n    int n = lights.length;\n    int[] diff = new int[n + 1];\n    for (int i = 0; i < n; i++) {\n      if (lights[i] > 0) {\n        diff[Math.max(0, i - lights[i])]++;\n        diff[Math.min(n - 1, i + lights[i]) + 1]--;\n      }\n    }\n    int added = 0, cover = 0;\n    boolean[] lit = new boolean[n];\n    for (int i = 0; i < n; i++) {\n      cover += diff[i];\n      lit[i] = cover > 0;\n    }\n    for (int i = 0; i < n; ) {\n      if (lit[i]) {\n        i++;\n        continue;\n      }\n      added++;\n      i += 3;\n    }\n    return added;\n  }\n}"
+}

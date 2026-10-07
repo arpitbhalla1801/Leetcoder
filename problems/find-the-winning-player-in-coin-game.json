@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-winning-player-in-coin-game",
+    "language": "java",
+    "code": "class Solution {\n  public String winningPlayer(int x, int y) {\n    // each turn takes one 75 coin and four 10 coins; Alice wins when the number of turns is odd\n    int turns = Math.min(x, y / 4);\n    return turns % 2 == 1 ? \"Alice\" : \"Bob\";\n  }\n}"
+}

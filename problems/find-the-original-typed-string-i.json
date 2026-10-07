@@ -1,0 +1,5 @@
+{
+    "problemName": "find-the-original-typed-string-i",
+    "language": "java",
+    "code": "class Solution {\n  public int possibleStringCount(String word) {\n    int count = 1;\n    for (int i = 1; i < word.length(); i++) {\n      if (word.charAt(i) == word.charAt(i - 1)) count++;\n    }\n    return count;\n  }\n}"
+}

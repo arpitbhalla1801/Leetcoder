@@ -1,0 +1,5 @@
+{
+    "problemName": "identify-the-largest-outlier-in-an-array",
+    "language": "java",
+    "code": "class Solution {\n  public int getLargestOutlier(int[] nums) {\n    final int OFFSET = 1000;\n    int[] count = new int[2 * OFFSET + 1];\n    int total = 0;\n    for (int x : nums) {\n      count[x + OFFSET]++;\n      total += x;\n    }\n    // total = special + sum + outlier, and sum = special, so sum = (total - outlier) / 2\n    for (int outlier = OFFSET; outlier >= -OFFSET; outlier--) {\n      if (count[outlier + OFFSET] == 0 || (total - outlier) % 2 != 0) continue;\n      int sum = (total - outlier) / 2;\n      if (sum < -OFFSET || sum > OFFSET) continue;\n      int available = count[sum + OFFSET] - (sum == outlier ? 1 : 0);\n      if (available > 0) return outlier;\n    }\n    return -1;\n  }\n}"
+}

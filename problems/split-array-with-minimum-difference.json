@@ -1,0 +1,5 @@
+{
+    "problemName": "split-array-with-minimum-difference",
+    "language": "java",
+    "code": "class Solution {\n  public long splitArray(int[] nums) {\n    int n = nums.length;\n    int incLen = 1;\n    while (incLen < n && nums[incLen] > nums[incLen - 1]) incLen++;\n    int decStart = n - 1;\n    while (decStart > 0 && nums[decStart - 1] > nums[decStart]) decStart--;\n    long[] pre = new long[n + 1];\n    for (int i = 0; i < n; i++) pre[i + 1] = pre[i] + nums[i];\n    long best = -1;\n    for (int i = Math.max(1, decStart); i <= Math.min(incLen, n - 1); i++) {\n      long diff = Math.abs(pre[i] - (pre[n] - pre[i]));\n      if (best < 0 || diff < best) best = diff;\n    }\n    return best;\n  }\n}"
+}

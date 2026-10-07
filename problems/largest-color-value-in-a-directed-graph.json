@@ -1,0 +1,5 @@
+{
+    "problemName": "largest-color-value-in-a-directed-graph",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int largestPathValue(String colors, int[][] edges) {\n    int n = colors.length();\n    List<Integer>[] g = new List[n];\n    int[] indeg = new int[n];\n    for (int i = 0; i < n; i++) g[i] = new ArrayList<>();\n    for (int[] e : edges) {\n      g[e[0]].add(e[1]);\n      indeg[e[1]]++;\n    }\n    int[][] dp = new int[n][26];\n    ArrayDeque<Integer> q = new ArrayDeque<>();\n    for (int i = 0; i < n; i++) if (indeg[i] == 0) q.add(i);\n    int seen = 0, answer = 0;\n    while (!q.isEmpty()) {\n      int u = q.remove();\n      seen++;\n      int c = colors.charAt(u) - 'a';\n      dp[u][c]++;\n      for (int v : g[u]) {\n        for (int j = 0; j < 26; j++) dp[v][j] = Math.max(dp[v][j], dp[u][j]);\n        if (--indeg[v] == 0) q.add(v);\n      }\n    }\n    if (seen < n) return -1;\n    for (int[] row : dp) for (int x : row) answer = Math.max(answer, x);\n    return answer;\n  }\n}\n"
+}

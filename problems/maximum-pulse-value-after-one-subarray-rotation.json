@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-pulse-value-after-one-subarray-rotation",
+    "language": "java",
+    "code": "class Solution {\n  public long maxValue(int[] nums) {\n    int n = nums.length;\n    long base = 0;\n    long[] w = new long[n + 1];\n    for (int i = 0; i < n; i++) {\n      int sign = i % 2 == 0 ? 1 : -1;\n      base += (long) sign * nums[i];\n      w[i + 1] = w[i] - 2L * sign * nums[i];\n    }\n    long NEG = Long.MIN_VALUE / 4;\n    long[] bestSame = {NEG, NEG}, bestDiff = {NEG, NEG};\n    long bestDelta = 0;\n    for (int r = 0; r < n; r++) {\n      int q = r % 2;\n      long cand = NEG;\n      if (bestSame[q] > NEG) cand = Math.max(cand, w[r + 1] + bestSame[q]);\n      if (bestDiff[1 - q] > NEG) cand = Math.max(cand, w[r + 1] + bestDiff[1 - q]);\n      if (cand > NEG) bestDelta = Math.max(bestDelta, cand);\n      int sign = r % 2 == 0 ? 1 : -1;\n      // r becomes a candidate left end l for later right ends\n      int p = r % 2;\n      bestSame[p] = Math.max(bestSame[p], -w[r + 1]);\n      bestDiff[p] = Math.max(bestDiff[p], -w[r + 1] - 2L * sign * nums[r]);\n    }\n    return base + bestDelta;\n  }\n}"
+}

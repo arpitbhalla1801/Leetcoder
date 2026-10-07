@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-array-length-after-pair-removals",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minLengthAfterRemovals(List<Integer> nums) {\n    int n = nums.size(), i = 0, j = (n + 1) / 2, pairs = 0;\n    while (i < n / 2 && j < n) {\n      if (nums.get(i) < nums.get(j)) {\n        pairs++;\n        i++;\n        j++;\n      } else j++;\n    }\n    return n - 2 * pairs;\n  }\n}\n"
+}

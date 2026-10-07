@@ -1,0 +1,5 @@
+{
+    "problemName": "count-residue-prefixes",
+    "language": "java",
+    "code": "class Solution {\n  public int residuePrefixes(String s) {\n    boolean[] seen = new boolean[26];\n    int distinct = 0, count = 0;\n    for (int i = 0; i < s.length(); i++) {\n      if (!seen[s.charAt(i) - 'a']) {\n        seen[s.charAt(i) - 'a'] = true;\n        distinct++;\n      }\n      if (distinct == (i + 1) % 3) count++;\n    }\n    return count;\n  }\n}"
+}

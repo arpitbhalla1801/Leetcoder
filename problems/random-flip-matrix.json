@@ -1,0 +1,5 @@
+{
+    "problemName": "random-flip-matrix",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private final int rows, cols;\n  private int remaining;\n  private final Map<Integer, Integer> swaps = new HashMap<>();\n  private final Random random = new Random();\n\n  public Solution(int m, int n) {\n    rows = m;\n    cols = n;\n    remaining = m * n;\n  }\n\n  public int[] flip() {\n    int index = random.nextInt(remaining--);\n    int chosen = swaps.getOrDefault(index, index);\n    swaps.put(index, swaps.getOrDefault(remaining, remaining));\n    return new int[] {chosen / cols, chosen % cols};\n  }\n\n  public void reset() {\n    swaps.clear();\n    remaining = rows * cols;\n  }\n}\n"
+}

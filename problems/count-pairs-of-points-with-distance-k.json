@@ -1,0 +1,5 @@
+{
+    "problemName": "count-pairs-of-points-with-distance-k",
+    "language": "java",
+    "code": "class Solution {\n  public int countPairs(List<List<Integer>> coordinates, int k) {\n    Map<Long, Integer> seen = new HashMap<>();\n    int pairs = 0;\n    for (List<Integer> p : coordinates) {\n      int x = p.get(0), y = p.get(1);\n      // distance is (x1 ^ x2) + (y1 ^ y2): split k between the two xors\n      for (int part = 0; part <= k; part++) {\n        long key = ((long) (x ^ part) << 32) | (y ^ (k - part));\n        pairs += seen.getOrDefault(key, 0);\n      }\n      seen.merge(((long) x << 32) | y, 1, Integer::sum);\n    }\n    return pairs;\n  }\n}"
+}

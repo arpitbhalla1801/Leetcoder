@@ -1,0 +1,5 @@
+{
+    "problemName": "masking-personal-information",
+    "language": "java",
+    "code": "class Solution {\n  public String maskPII(String s) {\n    if (s.indexOf('@') >= 0) {\n      String t = s.toLowerCase();\n      int at = t.indexOf('@');\n      return t.charAt(0) + \"*****\" + t.substring(at - 1);\n    }\n    StringBuilder d = new StringBuilder();\n    for (char c : s.toCharArray()) if (Character.isDigit(c)) d.append(c);\n    int n = d.length();\n    String local = \"***-***-\" + d.substring(n - 4);\n    if (n == 10) return local;\n    return \"+\" + \"*\".repeat(n - 10) + \"-\" + local;\n  }\n}\n"
+}

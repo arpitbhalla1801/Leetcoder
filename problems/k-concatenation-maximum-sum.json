@@ -1,0 +1,5 @@
+{
+    "problemName": "k-concatenation-maximum-sum",
+    "language": "java",
+    "code": "class Solution {\n  private static final long MOD = 1_000_000_007L;\n\n  public int kConcatenationMaxSum(int[] arr, int k) {\n    long total = 0, bestPrefix = 0, bestSuffix = 0, current = 0, best = 0;\n    for (int value : arr) {\n      total += value;\n      current = Math.max(0, current + value);\n      bestPrefix = Math.max(bestPrefix, current);\n    }\n    current = 0;\n    for (int i = arr.length - 1; i >= 0; i--) {\n      current = Math.max(0, current + arr[i]);\n      bestSuffix = Math.max(bestSuffix, current);\n    }\n    best = k == 1 ? maxSubarray(arr) : bestSuffix + bestPrefix + Math.max(0, total) * (k - 2L);\n    return (int) (best % MOD);\n  }\n\n  private long maxSubarray(int[] a) {\n    long cur = 0, best = 0;\n    for (int x : a) {\n      cur = Math.max(0, cur + x);\n      best = Math.max(best, cur);\n    }\n    return best;\n  }\n}\n"
+}

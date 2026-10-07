@@ -1,0 +1,5 @@
+{
+    "problemName": "traffic-signal-color",
+    "language": "java",
+    "code": "class Solution {\n  public String trafficSignal(int timer) {\n    if (timer == 0) return \"Green\";\n    if (timer == 30) return \"Orange\";\n    if (timer > 30 && timer <= 90) return \"Red\";\n    return \"Invalid\";\n  }\n}"
+}

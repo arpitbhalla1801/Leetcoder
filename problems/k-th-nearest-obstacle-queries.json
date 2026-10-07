@@ -1,0 +1,5 @@
+{
+    "problemName": "k-th-nearest-obstacle-queries",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] resultsArray(int[][] queries, int k) {\n    PriorityQueue<Integer> farthest = new PriorityQueue<>(Collections.reverseOrder());\n    int[] answer = new int[queries.length];\n    for (int i = 0; i < queries.length; i++) {\n      int distance = Math.abs(queries[i][0]) + Math.abs(queries[i][1]);\n      farthest.offer(distance);\n      if (farthest.size() > k) farthest.poll();\n      answer[i] = farthest.size() == k ? farthest.peek() : -1;\n    }\n    return answer;\n  }\n}"
+}

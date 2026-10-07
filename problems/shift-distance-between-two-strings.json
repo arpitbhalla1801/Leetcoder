@@ -1,0 +1,5 @@
+{
+    "problemName": "shift-distance-between-two-strings",
+    "language": "java",
+    "code": "class Solution {\n  public long shiftDistance(String s, String t, int[] nextCost, int[] previousCost) {\n    long INF = Long.MAX_VALUE / 4;\n    long[][] d = new long[26][26];\n    for (long[] row : d) java.util.Arrays.fill(row, INF);\n    for (int i = 0; i < 26; i++) {\n      d[i][i] = 0;\n      d[i][(i + 1) % 26] = Math.min(d[i][(i + 1) % 26], nextCost[i]);\n      d[i][(i + 25) % 26] = Math.min(d[i][(i + 25) % 26], previousCost[i]);\n    }\n    for (int k = 0; k < 26; k++)\n      for (int i = 0; i < 26; i++)\n        for (int j = 0; j < 26; j++) d[i][j] = Math.min(d[i][j], d[i][k] + d[k][j]);\n    long ans = 0;\n    for (int i = 0; i < s.length(); i++) ans += d[s.charAt(i) - 'a'][t.charAt(i) - 'a'];\n    return ans;\n  }\n}"
+}

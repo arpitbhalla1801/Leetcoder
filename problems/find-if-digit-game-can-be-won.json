@@ -1,0 +1,5 @@
+{
+    "problemName": "find-if-digit-game-can-be-won",
+    "language": "java",
+    "code": "class Solution {\n  public boolean canAliceWin(int[] nums) {\n    int singleDigitSum = 0;\n    int doubleDigitSum = 0;\n    for (int num : nums) {\n      if (num < 10) singleDigitSum += num;\n      else doubleDigitSum += num;\n    }\n    return singleDigitSum != doubleDigitSum;\n  }\n}"
+}

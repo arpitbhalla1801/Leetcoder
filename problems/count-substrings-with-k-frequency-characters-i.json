@@ -1,0 +1,5 @@
+{
+    "problemName": "count-substrings-with-k-frequency-characters-i",
+    "language": "java",
+    "code": "class Solution {\n  public int numberOfSubstrings(String s, int k) {\n    int[] cnt = new int[26];\n    int left = 0, res = 0;\n    for (int r = 0; r < s.length(); r++) {\n      int c = s.charAt(r) - 'a';\n      cnt[c]++;\n      while (cnt[c] >= k) cnt[s.charAt(left++) - 'a']--;\n      res += left;\n    }\n    return res;\n  }\n}"
+}

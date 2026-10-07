@@ -1,0 +1,5 @@
+{
+    "problemName": "count-islands-with-total-value-divisible-by-k",
+    "language": "java",
+    "code": "class Solution {\n  public int countIslands(int[][] grid, int k) {\n    int m = grid.length, n = grid[0].length, count = 0;\n    boolean[][] seen = new boolean[m][n];\n    int[] stack = new int[m * n];\n    int[] dx = {1, -1, 0, 0}, dy = {0, 0, 1, -1};\n    for (int i = 0; i < m; i++) {\n      for (int j = 0; j < n; j++) {\n        if (grid[i][j] == 0 || seen[i][j]) continue;\n        long sum = 0;\n        int sp = 0;\n        stack[sp++] = i * n + j;\n        seen[i][j] = true;\n        while (sp > 0) {\n          int u = stack[--sp], x = u / n, y = u % n;\n          sum += grid[x][y];\n          for (int d = 0; d < 4; d++) {\n            int nx = x + dx[d], ny = y + dy[d];\n            if (nx >= 0 && ny >= 0 && nx < m && ny < n && grid[nx][ny] > 0 && !seen[nx][ny]) {\n              seen[nx][ny] = true;\n              stack[sp++] = nx * n + ny;\n            }\n          }\n        }\n        if (sum % k == 0) count++;\n      }\n    }\n    return count;\n  }\n}"
+}

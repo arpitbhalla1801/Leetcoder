@@ -1,0 +1,5 @@
+{
+    "problemName": "find-a-safe-walk-through-a-grid",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public boolean findSafeWalk(List<List<Integer>> grid, int health) {\n    int m = grid.size(), n = grid.get(0).size();\n    int[][] cost = new int[m][n];\n    for (int[] row : cost) Arrays.fill(row, Integer.MAX_VALUE);\n    ArrayDeque<int[]> deque = new ArrayDeque<>();\n    cost[0][0] = grid.get(0).get(0);\n    deque.offerFirst(new int[] {0, 0});\n    int[] dr = {1, -1, 0, 0}, dc = {0, 0, 1, -1};\n    while (!deque.isEmpty()) {\n      int[] cell = deque.pollFirst();\n      int r = cell[0], c = cell[1];\n      for (int z = 0; z < 4; z++) {\n        int nr = r + dr[z], nc = c + dc[z];\n        if (nr < 0 || nr >= m || nc < 0 || nc >= n) continue;\n        int next = cost[r][c] + grid.get(nr).get(nc);\n        if (next < cost[nr][nc] && next < health) {\n          cost[nr][nc] = next;\n          if (grid.get(nr).get(nc) == 0) deque.offerFirst(new int[] {nr, nc});\n          else deque.offerLast(new int[] {nr, nc});\n        }\n      }\n    }\n    return cost[m - 1][n - 1] < health;\n  }\n}"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "complex-number-multiplication",
+    "language": "java",
+    "code": "class Solution {\n  public String complexNumberMultiply(String num1, String num2) {\n    int split1 = num1.indexOf('+'), split2 = num2.indexOf('+');\n    int a = Integer.parseInt(num1.substring(0, split1));\n    int b = Integer.parseInt(num1.substring(split1 + 1, num1.length() - 1));\n    int c = Integer.parseInt(num2.substring(0, split2));\n    int d = Integer.parseInt(num2.substring(split2 + 1, num2.length() - 1));\n    return (a * c - b * d) + \"+\" + (a * d + b * c) + \"i\";\n  }\n}\n"
+}

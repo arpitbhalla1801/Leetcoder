@@ -1,0 +1,5 @@
+{
+    "problemName": "score-of-a-string",
+    "language": "java",
+    "code": "class Solution {\n  public int scoreOfString(String s) {\n    int score = 0;\n    for (int i = 1; i < s.length(); i++) {\n      score += Math.abs(s.charAt(i) - s.charAt(i - 1));\n    }\n    return score;\n  }\n}"
+}

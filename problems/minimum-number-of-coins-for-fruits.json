@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-number-of-coins-for-fruits",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minimumCoins(int[] prices) {\n    int n = prices.length;\n    int[] dp = new int[n + 2];\n    for (int i = n; i >= 1; i--) {\n      int end = Math.min(n + 1, 2 * i + 1);\n      int best = Integer.MAX_VALUE;\n      for (int j = i + 1; j <= end; j++) best = Math.min(best, dp[j]);\n      dp[i] = prices[i - 1] + best;\n    }\n    return dp[1];\n  }\n}\n"
+}

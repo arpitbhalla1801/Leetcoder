@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-matrix-sum",
+    "language": "java",
+    "code": "class Solution {\n  public long maxMatrixSum(int[][] matrix) {\n    long sum = 0, minimum = Long.MAX_VALUE;\n    int negatives = 0;\n    for (int[] row : matrix)\n      for (int value : row) {\n        if (value < 0) negatives++;\n        long absolute = Math.abs((long) value);\n        sum += absolute;\n        minimum = Math.min(minimum, absolute);\n      }\n    return (negatives % 2 == 0) ? sum : sum - 2 * minimum;\n  }\n}\n"
+}

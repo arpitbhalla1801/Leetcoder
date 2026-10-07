@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-garden-perimeter-to-collect-enough-apples",
+    "language": "java",
+    "code": "class Solution {\n  public long minimumPerimeter(long neededApples) {\n    long lo = 0, hi = 1;\n    while (apples(hi) < neededApples) hi <<= 1;\n    while (lo < hi) {\n      long mid = lo + (hi - lo) / 2;\n      if (apples(mid) >= neededApples) hi = mid;\n      else lo = mid + 1;\n    }\n    return 8 * lo;\n  }\n\n  private long apples(long side) {\n    return 2 * side * (side + 1) * (2 * side + 1);\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "walking-robot-simulation",
+    "language": "java",
+    "code": "class Solution {\n  public int robotSim(int[] commands, int[][] obstacles) {\n    java.util.Set<Long> blocked = new java.util.HashSet<>();\n    for (int[] o : obstacles) blocked.add((((long) o[0]) << 32) ^ (o[1] & 0xffffffffL));\n    int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};\n    int d = 0, x = 0, y = 0, ans = 0;\n    for (int c : commands) {\n      if (c == -1) d = (d + 1) % 4;\n      else if (c == -2) d = (d + 3) % 4;\n      else\n        for (int k = 0; k < c; k++) {\n          int nx = x + dirs[d][0], ny = y + dirs[d][1];\n          if (blocked.contains((((long) nx) << 32) ^ (ny & 0xffffffffL))) break;\n          x = nx;\n          y = ny;\n          ans = Math.max(ans, x * x + y * y);\n        }\n    }\n    return ans;\n  }\n}\n"
+}

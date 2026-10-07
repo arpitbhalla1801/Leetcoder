@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-total-value-of-covered-indices",
+    "language": "java",
+    "code": "class Solution {\n  public long maxTotal(int[] nums, String s) {\n    int n = nums.length;\n    long NEG = Long.MIN_VALUE / 4;\n    long[] dp = {\n      0, NEG\n    }; // dp[u]: the token at the current index has (1) or has not (0) been used for index - 1\n    for (int i = 0; i < n; i++) {\n      long[] nd = {NEG, NEG};\n      for (int u = 0; u < 2; u++) {\n        if (dp[u] == NEG) continue;\n        // leave index i uncovered\n        nd[0] = Math.max(nd[0], dp[u]);\n        // cover index i with the token sitting there (it stays)\n        if (s.charAt(i) == '1' && u == 0) nd[0] = Math.max(nd[0], dp[u] + nums[i]);\n        // cover index i with the token from i + 1\n        if (i + 1 < n && s.charAt(i + 1) == '1') nd[1] = Math.max(nd[1], dp[u] + nums[i]);\n      }\n      dp = nd;\n    }\n    return Math.max(dp[0], dp[1]);\n  }\n}"
+}

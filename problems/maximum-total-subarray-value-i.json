@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-total-subarray-value-i",
+    "language": "java",
+    "code": "class Solution {\n  public long maxTotalValue(int[] nums, int k) {\n    int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;\n    for (int x : nums) {\n      min = Math.min(min, x);\n      max = Math.max(max, x);\n    }\n    // the whole array has the widest range; pick it k times\n    return (long) k * (max - min);\n  }\n}"
+}

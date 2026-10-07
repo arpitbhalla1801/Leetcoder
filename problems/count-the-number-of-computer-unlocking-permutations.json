@@ -1,0 +1,5 @@
+{
+    "problemName": "count-the-number-of-computer-unlocking-permutations",
+    "language": "java",
+    "code": "class Solution {\n  public int countPermutations(int[] complexity) {\n    final long MOD = 1_000_000_007L;\n    // computer 0 is the only root, so it must be strictly the easiest one\n    for (int i = 1; i < complexity.length; i++) {\n      if (complexity[i] <= complexity[0]) return 0;\n    }\n    long ways = 1;\n    for (int i = 2; i < complexity.length; i++) ways = ways * i % MOD; // (n - 1)!\n    return (int) ways;\n  }\n}"
+}

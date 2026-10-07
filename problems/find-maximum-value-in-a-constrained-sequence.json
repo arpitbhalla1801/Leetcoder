@@ -1,0 +1,5 @@
+{
+    "problemName": "find-maximum-value-in-a-constrained-sequence",
+    "language": "java",
+    "code": "class Solution {\n  public int findMaxVal(int n, int[][] restrictions, int[] diff) {\n    int INF = Integer.MAX_VALUE / 2;\n    int[] ub = new int[n];\n    java.util.Arrays.fill(ub, INF);\n    for (int[] r : restrictions) ub[r[0]] = Math.min(ub[r[0]], r[1]);\n    ub[0] = 0;\n    for (int i = 1; i < n; i++) ub[i] = Math.min(ub[i], ub[i - 1] + diff[i - 1]);\n    for (int i = n - 2; i >= 0; i--) ub[i] = Math.min(ub[i], ub[i + 1] + diff[i]);\n    int best = 0;\n    for (int v : ub) best = Math.max(best, v);\n    return best;\n  }\n}"
+}

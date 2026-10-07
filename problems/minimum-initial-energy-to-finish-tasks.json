@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-initial-energy-to-finish-tasks",
+    "language": "java",
+    "code": "class Solution {\n  public int minimumEffort(int[][] tasks) {\n    java.util.Arrays.sort(tasks, (a, b) -> Integer.compare((b[1] - b[0]), (a[1] - a[0])));\n    int energy = 0, current = 0;\n    for (int[] t : tasks) {\n      if (current < t[1]) {\n        energy += t[1] - current;\n        current = t[1];\n      }\n      current -= t[0];\n    }\n    return energy;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "balanced-k-factor-decomposition",
+    "language": "java",
+    "code": "class Solution {\n  private int bestDiff;\n  private int[] best, path;\n  private int k;\n\n  private void dfs(int pos, int remaining, int minFactor) {\n    if (pos == k - 1) {\n      if (remaining >= minFactor) {\n        path[pos] = remaining;\n        int diff = path[k - 1] - path[0];\n        if (diff < bestDiff) {\n          bestDiff = diff;\n          best = path.clone();\n        }\n      }\n      return;\n    }\n    for (int f = minFactor; ; f++) {\n      long power = 1;\n      for (int t = 0; t < k - pos && power <= remaining; t++) power *= f;\n      if (power > remaining) break;\n      if (remaining % f != 0) continue;\n      path[pos] = f;\n      dfs(pos + 1, remaining / f, f);\n    }\n  }\n\n  public int[] minDifference(int n, int k) {\n    this.k = k;\n    bestDiff = Integer.MAX_VALUE;\n    path = new int[k];\n    dfs(0, n, 1);\n    return best;\n  }\n}"
+}

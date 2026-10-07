@@ -1,0 +1,5 @@
+{
+    "problemName": "arithmetic-slices-ii-subsequence",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int numberOfArithmeticSlices(int[] nums) {\n    int n = nums.length;\n    Map<Long, Integer>[] dp = new HashMap[n];\n    for (int i = 0; i < n; i++) dp[i] = new HashMap<>();\n    long answer = 0;\n    for (int i = 0; i < n; i++)\n      for (int j = 0; j < i; j++) {\n        long diff = (long) nums[i] - nums[j];\n        int previous = dp[j].getOrDefault(diff, 0);\n        dp[i].put(diff, dp[i].getOrDefault(diff, 0) + previous + 1);\n        answer += previous;\n      }\n    return (int) answer;\n  }\n}\n"
+}

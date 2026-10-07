@@ -1,0 +1,5 @@
+{
+    "problemName": "substring-matching-pattern",
+    "language": "java",
+    "code": "class Solution {\n  public boolean hasMatch(String s, String p) {\n    int star = p.indexOf('*');\n    String prefix = p.substring(0, star), suffix = p.substring(star + 1);\n    int start = s.indexOf(prefix); // earliest prefix leaves the most room for the suffix\n    return start >= 0 && s.indexOf(suffix, start + prefix.length()) >= 0;\n  }\n}"
+}

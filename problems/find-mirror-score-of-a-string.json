@@ -1,0 +1,5 @@
+{
+    "problemName": "find-mirror-score-of-a-string",
+    "language": "java",
+    "code": "class Solution {\n  public long calculateScore(String s) {\n    int n = s.length();\n    int[] head = new int[26], prev = new int[n];\n    java.util.Arrays.fill(head, -1);\n    long score = 0;\n    for (int i = 0; i < n; i++) {\n      int c = s.charAt(i) - 'a', m = 25 - c;\n      if (head[m] >= 0) {\n        score += i - head[m];\n        head[m] = prev[head[m]];\n      } else {\n        prev[i] = head[c];\n        head[c] = i;\n      }\n    }\n    return score;\n  }\n}"
+}

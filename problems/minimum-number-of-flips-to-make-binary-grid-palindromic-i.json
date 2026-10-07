@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-number-of-flips-to-make-binary-grid-palindromic-i",
+    "language": "java",
+    "code": "class Solution {\n  public int minFlips(int[][] grid) {\n    int m = grid.length, n = grid[0].length, rows = 0, cols = 0;\n    for (int i = 0; i < m; i++) {\n      for (int j = 0; j < n / 2; j++) if (grid[i][j] != grid[i][n - 1 - j]) rows++;\n    }\n    for (int j = 0; j < n; j++) {\n      for (int i = 0; i < m / 2; i++) if (grid[i][j] != grid[m - 1 - i][j]) cols++;\n    }\n    return Math.min(rows, cols);\n  }\n}"
+}

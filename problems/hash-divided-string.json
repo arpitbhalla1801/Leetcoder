@@ -1,0 +1,5 @@
+{
+    "problemName": "hash-divided-string",
+    "language": "java",
+    "code": "class Solution {\n  public String stringHash(String s, int k) {\n    StringBuilder answer = new StringBuilder();\n    for (int start = 0; start < s.length(); start += k) {\n      int sum = 0;\n      for (int i = start; i < start + k; i++) sum += s.charAt(i) - 'a';\n      answer.append((char) ('a' + sum % 26));\n    }\n    return answer.toString();\n  }\n}"
+}

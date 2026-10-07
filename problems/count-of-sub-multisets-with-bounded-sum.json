@@ -1,0 +1,5 @@
+{
+    "problemName": "count-of-sub-multisets-with-bounded-sum",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int countSubMultisets(List<Integer> nums, int l, int r) {\n    final int MOD = 1_000_000_007;\n    int[] freq = new int[r + 1];\n    for (int x : nums) if (x <= r) freq[x]++;\n    long[] dp = new long[r + 1];\n    dp[0] = 1;\n    for (int value = 1; value <= r; value++)\n      if (freq[value] > 0) {\n        long[] next = new long[r + 1];\n        for (int rem = 0; rem < value; rem++) {\n          long window = 0;\n          for (int sum = rem; sum <= r; sum += value) {\n            window = (window + dp[sum]) % MOD;\n            int old = sum - (freq[value] + 1) * value;\n            if (old >= 0) window = (window - dp[old] + MOD) % MOD;\n            next[sum] = window;\n          }\n        }\n        dp = next;\n      }\n    long answer = 0;\n    for (int sum = l; sum <= r; sum++) answer = (answer + dp[sum]) % MOD;\n    return (int) (answer * (freq[0] + 1L) % MOD);\n  }\n}\n"
+}

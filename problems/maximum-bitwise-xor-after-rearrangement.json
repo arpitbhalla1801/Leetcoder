@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-bitwise-xor-after-rearrangement",
+    "language": "java",
+    "code": "class Solution {\n  public String maximumXor(String s, String t) {\n    int ones = 0, zeros = 0;\n    for (int i = 0; i < t.length(); i++) if (t.charAt(i) == '1') ones++;\n    zeros = t.length() - ones;\n    StringBuilder sb = new StringBuilder();\n    for (int i = 0; i < s.length(); i++) {\n      boolean wantOne = s.charAt(i) == '0';\n      if (wantOne ? ones > 0 : zeros > 0) {\n        sb.append('1');\n        if (wantOne) ones--;\n        else zeros--;\n      } else {\n        sb.append('0');\n        if (wantOne) zeros--;\n        else ones--;\n      }\n    }\n    return sb.toString();\n  }\n}"
+}
