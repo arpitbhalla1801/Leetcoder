@@ -1,5 +1,5 @@
 {
     "problemName": "coordinate-with-maximum-network-quality",
     "language": "java",
-    "code": "class Solution {\n  public int[] bestCoordinate(int[][] towers, int radius) {\n    int[] best = {0, 0};\n    double bestQuality = -1;\n    for (int x = 0; x <= 50; x++)\n      for (int y = 0; y <= 50; y++) {\n        double quality = 0;\n        for (int[] tower : towers) {\n          double distance = Math.hypot(x - tower[0], y - tower[1]);\n          if (distance <= radius) quality += tower[2] / (1 + distance);\n        }\n        if (quality > bestQuality + 1e-9) {\n          bestQuality = quality;\n          best[0] = x;\n          best[1] = y;\n        }\n      }\n    return best;\n  }\n}\n"
+    "code": "class Solution {\n  public int[] bestCoordinate(int[][] towers, int radius) {\n    int[] best = {0, 0};\n    int bestQuality = -1;\n    for (int x = 0; x <= 50; x++)\n      for (int y = 0; y <= 50; y++) {\n        int quality = 0;\n        for (int[] t : towers) {\n          int dx = x - t[0], dy = y - t[1], d2 = dx * dx + dy * dy;\n          if (d2 <= radius * radius) quality += (int) (t[2] / (1 + Math.sqrt(d2)));\n        }\n        if (quality > bestQuality) {\n          bestQuality = quality;\n          best[0] = x;\n          best[1] = y;\n        }\n      }\n    return best;\n  }\n}"
 }
