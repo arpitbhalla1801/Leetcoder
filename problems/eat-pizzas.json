@@ -1,5 +1,5 @@
 {
     "problemName": "eat-pizzas",
     "language": "java",
-    "code": "class Solution {\n  public long maxWeight(int[] pizzas) {\n    java.util.Arrays.sort(pizzas);\n    int days = pizzas.length / 4, hi = pizzas.length - 1;\n    long total = 0;\n    for (int d = 1; d <= days; d++) {\n      if ((d & 1) == 1) {\n        total += pizzas[hi];\n        hi--;\n      } else {\n        total += pizzas[hi - 1];\n        hi -= 2;\n      }\n    }\n    return total;\n  }\n}"
+    "code": "class Solution {\n  public long maxWeight(int[] pizzas) {\n    java.util.Arrays.sort(pizzas);\n    int n = pizzas.length, days = n / 4, odd = (days + 1) / 2, even = days / 2;\n    long total = 0;\n    // odd days eat the largest pizza of their group: give them the overall largest ones\n    for (int i = n - odd; i < n; i++) total += pizzas[i];\n    // even days eat the second largest: each one spends a big pizza to gain the next one down\n    for (int d = 0, idx = n - 1 - odd; d < even; d++, idx -= 2) total += pizzas[idx - 1];\n    return total;\n  }\n}\n"
 }
