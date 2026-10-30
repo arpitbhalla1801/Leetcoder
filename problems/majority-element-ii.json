@@ -1,1 +1,5 @@
-{"problemName":"majority-element-ii","language":"cpp","code":"class Solution {\npublic:\n    vector<int> majorityElement(vector<int>& nums) {\n        unordered_map<int, int> umap;\n        for(auto i : nums){\n            umap[i]++; \n        }\n        vector<int>  ans;\n        for(auto i : umap){\n            if(i.second > nums.size()/3){\n                ans.push_back(i.first);\n            }\n        }\n        return ans;\n    }\n};"}
+{
+    "problemName": "majority-element-ii",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<Integer> majorityElement(int[] nums) {\n    Map<Integer, Integer> count = new HashMap<>();\n    for (int x : nums) count.merge(x, 1, Integer::sum);\n    List<Integer> ans = new ArrayList<>();\n    for (Map.Entry<Integer, Integer> e : count.entrySet()) if (e.getValue() > nums.length / 3) ans.add(e.getKey());\n    return ans;\n  }\n}\n"
+}

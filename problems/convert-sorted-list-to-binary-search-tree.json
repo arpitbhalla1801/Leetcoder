@@ -1,1 +1,5 @@
-{"problemName":"convert-sorted-list-to-binary-search-tree","language":"cpp","code":"class Solution {\npublic:\n    TreeNode* helper(vector<int> &arr, int start, int end){\n        if(start > end){\n            return NULL;\n        }\n        int mid = start + (end - start)/2;\n        TreeNode *temp = new TreeNode(arr[mid]);\n        temp->left = helper(arr, start, mid - 1);\n        temp->right = helper(arr, mid + 1, end);\n        return temp;\n    }\n    TreeNode* sortedListToBST(ListNode* head) {\n        ListNode *temp = head;\n        vector<int> arr;\n        while(temp != NULL){\n            arr.push_back(temp->val);\n            temp = temp->next;\n        }\n        return helper(arr, 0, arr.size() - 1);        \n    }\n};"}
+{
+    "problemName": "convert-sorted-list-to-binary-search-tree",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public TreeNode sortedListToBST(ListNode head) {\n    List<Integer> values = new ArrayList<>();\n    for (ListNode cur = head; cur != null; cur = cur.next) values.add(cur.val);\n    return build(values, 0, values.size() - 1);\n  }\n\n  private TreeNode build(List<Integer> a, int lo, int hi) {\n    if (lo > hi) return null;\n    int mid = (lo + hi) >>> 1;\n    return new TreeNode(a.get(mid), build(a, lo, mid - 1), build(a, mid + 1, hi));\n  }\n}\n"
+}

@@ -1,1 +1,5 @@
-{"problemName":"contains-duplicate-ii","language":"cpp","code":"class Solution {\npublic:\n    bool containsNearbyDuplicate(vector<int>& nums, int k) {\n        unordered_map<int,vector<int>> umap;\n        for(int i=0;i<nums.size();i++){\n            umap[nums[i]].push_back(i);\n        }\n        for(auto i : umap){\n            if(i.second.size() <= 1) continue;\n            for(int j=0;j<i.second.size() - 1;j++){\n                int diff = i.second[j + 1] - i.second[j];\n                if(diff <= k){\n                    return true;\n                }\n            }\n        }\n        return false;\n    }\n};"}
+{
+    "problemName": "contains-duplicate-ii",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public boolean containsNearbyDuplicate(int[] nums, int k) {\n    Map<Integer, Integer> last = new HashMap<>();\n    for (int i = 0; i < nums.length; i++) {\n      Integer prev = last.put(nums[i], i);\n      if (prev != null && i - prev <= k) return true;\n    }\n    return false;\n  }\n}\n"
+}

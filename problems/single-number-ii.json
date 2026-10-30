@@ -1,1 +1,5 @@
-{"problemName":"single-number-ii","language":"cpp","code":"class Solution {\npublic:\n    int singleNumber(vector<int>& nums) {\n        int ans = 0;\n        for(int i = 0; i < 32; i ++){\n            int t = 0;\n            for(auto j : nums){\n                if((j & (1<<i)))t++;\n            }\n            if(t%3)ans |= (1<<i);\n        }\n        return ans;\n    }\n};"}
+{
+    "problemName": "single-number-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int singleNumber(int[] nums) {\n    int ones = 0, twos = 0;\n    for (int x : nums) {\n      ones = (ones ^ x) & ~twos;\n      twos = (twos ^ x) & ~ones;\n    }\n    return ones;\n  }\n}\n"
+}

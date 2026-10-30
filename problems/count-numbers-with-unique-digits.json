@@ -1,1 +1,5 @@
-{"problemName":"count-numbers-with-unique-digits","language":"cpp","code":"class Solution {\npublic:\n    \n    \n    int countNumbersWithUniqueDigits(int n) {\n        int dp[10];\n        dp[0] = 1;\n        \n        for(int i=1;i<=8;i++) {\n            int x = 9;\n            int ans = 9;\n            int temp = i-1;\n            while(temp--) {\n                ans *= x;\n                x--;\n            }\n            dp[i] = dp[i-1] + ans;\n        }\n        return dp[n];\n    }\n};"}
+{
+    "problemName": "count-numbers-with-unique-digits",
+    "language": "java",
+    "code": "class Solution {\n  public int countNumbersWithUniqueDigits(int n) {\n    int total = 1, choices = 9;\n    for (int len = 1; len <= n; len++) {\n      total += choices;\n      choices *= 10 - len; // next digit has one fewer option\n    }\n    return total;\n  }\n}\n"
+}

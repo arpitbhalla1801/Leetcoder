@@ -1,1 +1,5 @@
-{"problemName":"assign-cookies","language":"cpp","code":"class Solution {\npublic:\n    int findContentChildren(vector<int>& g, vector<int>& s) {\n        sort(g.begin(), g.end());\n        sort(s.begin(), s.end());\n        int i = 0, j = 0, ans = 0;\n        while(i < g.size() && j < s.size()){\n            if(g[i]  <= s[j]){\n                ans++,i++,j++;\n            }else{\n                j++;\n            }\n        }\n        return ans;\n    }\n};"}
+{
+    "problemName": "assign-cookies",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int findContentChildren(int[] g, int[] s) {\n    Arrays.sort(g);\n    Arrays.sort(s);\n    int child = 0;\n    for (int cookie = 0; cookie < s.length && child < g.length; cookie++) if (s[cookie] >= g[child]) child++;\n    return child;\n  }\n}\n"
+}

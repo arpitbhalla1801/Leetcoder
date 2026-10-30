@@ -1,1 +1,5 @@
-{"problemName":"find-minimum-in-rotated-sorted-array-ii","language":"cpp","code":"class Solution {\npublic:\n    int findMin(vector<int>& nums) {\n        return *min_element(nums.begin(), nums.end());   \n    }\n};"}
+{
+    "problemName": "find-minimum-in-rotated-sorted-array-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int findMin(int[] nums) {\n    int lo = 0, hi = nums.length - 1;\n    while (lo < hi) {\n      int mid = (lo + hi) >>> 1;\n      if (nums[mid] > nums[hi]) lo = mid + 1;\n      else if (nums[mid] < nums[hi]) hi = mid;\n      else hi--; // duplicates: nums[hi] is not the only minimum candidate\n    }\n    return nums[lo];\n  }\n}\n"
+}

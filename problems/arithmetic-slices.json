@@ -1,1 +1,5 @@
-{"problemName":"arithmetic-slices","language":"cpp","code":"class Solution {\npublic:\n    int numberOfArithmeticSlices(vector<int>& nums) {\n        int n = nums.size();\n        vector<int> dp(n, 0);\n        int i = 2;\n        int cnt  = 1;\n        while(i < n) {\n            if(nums[i] - nums[i-1] == nums[i-1] - nums[i-2]) {\n                dp[i] = cnt + dp[i-1];\n                cnt++;\n            }\n            else {\n                dp[i] = dp[i-1];\n                cnt = 1;\n            }\n            i++;\n        }\n        return dp[n-1];\n        \n    }\n};"}
+{
+    "problemName": "arithmetic-slices",
+    "language": "java",
+    "code": "class Solution {\n  public int numberOfArithmeticSlices(int[] nums) {\n    int total = 0, run = 0;\n    for (int i = 2; i < nums.length; i++) {\n      if (nums[i] - nums[i - 1] == nums[i - 1] - nums[i - 2]) total += ++run;\n      else run = 0;\n    }\n    return total;\n  }\n}\n"
+}

@@ -1,1 +1,5 @@
-{"problemName":"poor-pigs","language":"cpp","code":"class Solution {\npublic:\n    int poorPigs(int buckets, int minutesToDie, int minutesToTest) {\n        int T = minutesToTest/minutesToDie;   //Trial count          \n        return (int)ceil(log2(buckets)/log2(T+1));\n    }\n};"}
+{
+    "problemName": "poor-pigs",
+    "language": "java",
+    "code": "class Solution {\n  public int poorPigs(int buckets, int minutesToDie, int minutesToTest) {\n    int states = minutesToTest / minutesToDie + 1, pigs = 0;\n    for (long reach = 1; reach < buckets; reach *= states) pigs++;\n    return pigs;\n  }\n}\n"
+}

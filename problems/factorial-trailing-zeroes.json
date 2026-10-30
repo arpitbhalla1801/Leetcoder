@@ -1,1 +1,5 @@
-{"problemName":"factorial-trailing-zeroes","language":"cpp","code":"class Solution {\npublic:\n    int trailingZeroes(int n) {\n        int cnt = 0;\n        while(n>0){\n            cnt += n/5;\n            n/=5;\n        }\n        return cnt;\n    }\n};"}
+{
+    "problemName": "factorial-trailing-zeroes",
+    "language": "java",
+    "code": "class Solution {\n  public int trailingZeroes(int n) {\n    int count = 0;\n    for (; n > 0; n /= 5) count += n / 5;\n    return count;\n  }\n}\n"
+}

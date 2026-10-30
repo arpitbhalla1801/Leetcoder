@@ -1,1 +1,5 @@
-{"problemName":"search-in-rotated-sorted-array-ii","language":"cpp","code":"class Solution {\npublic:\n    bool search(vector<int>& nums, int target) {\n        for(auto i :nums)if(i==target)return true;\n        return false;\n    }\n};"}
+{
+    "problemName": "search-in-rotated-sorted-array-ii",
+    "language": "java",
+    "code": "class Solution {\n  public boolean search(int[] nums, int target) {\n    for (int x : nums) if (x == target) return true;\n    return false;\n  }\n}\n"
+}

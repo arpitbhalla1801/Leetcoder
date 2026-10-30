@@ -1,1 +1,5 @@
-{"problemName":"flatten-binary-tree-to-linked-list","language":"cpp","code":"/**\n * Definition for a binary tree node.\n * struct TreeNode {\n *     int val;\n *     TreeNode *left;\n *     TreeNode *right;\n *     TreeNode() : val(0), left(nullptr), right(nullptr) {}\n *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}\n *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}\n * };\n */\nclass Solution {\npublic:\n    TreeNode *previous = NULL;\n    void helper(TreeNode *root)\n    {\n        if (root == NULL)\n        {\n            return;\n        }\n        helper(root->right);\n        helper(root->left);\n        root->right = previous;\n        root->left = NULL;\n        previous = root;\n    }\n    void flatten(TreeNode *root)\n    {\n        helper(root);\n    }\n};"}
+{
+    "problemName": "flatten-binary-tree-to-linked-list",
+    "language": "java",
+    "code": "class Solution {\n  private TreeNode previous;\n\n  public void flatten(TreeNode root) {\n    // reverse preorder (right, left, node) links each node to the one that follows it in preorder\n    if (root == null) return;\n    flatten(root.right);\n    flatten(root.left);\n    root.right = previous;\n    root.left = null;\n    previous = root;\n  }\n}\n"
+}

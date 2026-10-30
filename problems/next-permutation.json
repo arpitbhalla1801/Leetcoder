@@ -1,1 +1,5 @@
-{"problemName":"next-permutation","language":"cpp","code":"class Solution {\npublic:\n    void nextPermutation(vector<int>& nums) {\n        int ind1 = -1;\n        int n = nums.size();\n        for(int i = n - 2; i >=0;i--){\n            if(nums[i] < nums[i + 1]){\n                ind1 = i;\n                break;\n            }\n        }\n        for(int i = n - 1; i >=0 && ind1 != -1;i--){\n            if(nums[i] > nums[ind1]){\n                swap(nums[ind1], nums[i]);\n                break;\n            }\n        }\n        reverse(nums.begin() + ind1 + 1, nums.end());\n    }\n};"}
+{
+    "problemName": "next-permutation",
+    "language": "java",
+    "code": "class Solution {\n  public void nextPermutation(int[] nums) {\n    int n = nums.length, i = n - 2;\n    while (i >= 0 && nums[i] >= nums[i + 1]) i--;\n    if (i >= 0) {\n      int j = n - 1;\n      while (nums[j] <= nums[i]) j--;\n      swap(nums, i, j);\n    }\n    for (int l = i + 1, r = n - 1; l < r; l++, r--) swap(nums, l, r);\n  }\n\n  private void swap(int[] a, int i, int j) {\n    int t = a[i];\n    a[i] = a[j];\n    a[j] = t;\n  }\n}\n"
+}

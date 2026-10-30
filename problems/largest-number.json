@@ -1,1 +1,5 @@
-{"problemName":"largest-number","language":"cpp","code":"class Solution {\npublic:\n    string largestNumber(vector<int>& nums) {\n        for(int i = 0; i < nums.size(); i ++){\n            for(int j = 0; j < nums.size() - i - 1 ;j ++){\n                string a = to_string(nums[j]);\n                string b = to_string(nums[j + 1]);\n                if(a + b < b + a){\n                    swap(nums[j], nums[j + 1]);\n                }\n            }\n        }\n        string ans = \"\";\n        for(auto i : nums){\n            ans.append(to_string(i));\n        }\n        while(!ans.empty() && ans[0] == '0'){\n            ans.erase(ans.begin());\n        }\n        if(ans == \"\")return \"0\";\n        else return ans;       \n    }\n};"}
+{
+    "problemName": "largest-number",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public String largestNumber(int[] nums) {\n    String[] parts = new String[nums.length];\n    for (int i = 0; i < nums.length; i++) parts[i] = String.valueOf(nums[i]);\n    Arrays.sort(parts, (a, b) -> (b + a).compareTo(a + b));\n    if (parts[0].equals(\"0\")) return \"0\";\n    return String.join(\"\", parts);\n  }\n}\n"
+}

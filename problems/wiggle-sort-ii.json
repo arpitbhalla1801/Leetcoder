@@ -1,1 +1,5 @@
-{"problemName":"wiggle-sort-ii","language":"cpp","code":"class Solution {\npublic:\n    void wiggleSort(vector<int>& nums) {\n        int n = nums.size();\n        sort(nums.begin(), nums.end());\n        vector<int> ans(n, 0);\n        int i = (n - 1)/2, j = n - 1;\n        for(int k = 0; k < n; k++){\n            if(k%2 == 0){\n                ans[k] = nums[i--];\n            }else{\n                ans[k] = nums[j--];\n            }\n        }\n        nums = ans;\n    }\n};"}
+{
+    "problemName": "wiggle-sort-ii",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public void wiggleSort(int[] nums) {\n    int n = nums.length;\n    int[] sorted = nums.clone();\n    Arrays.sort(sorted);\n    // fill even slots from the middle down and odd slots from the top down, so equal values never touch\n    int small = (n - 1) / 2, large = n - 1;\n    for (int k = 0; k < n; k++) nums[k] = k % 2 == 0 ? sorted[small--] : sorted[large--];\n  }\n}\n"
+}

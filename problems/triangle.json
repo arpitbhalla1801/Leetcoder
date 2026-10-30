@@ -1,1 +1,5 @@
-{"problemName":"triangle","language":"cpp","code":"class Solution {\npublic:\n    int dp[205][205];\n    int helper(vector<vector<int>>& triangle, int row, int ind){\n        if(row == triangle.size())return 0;\n        if(dp[row][ind] != -1)return dp[row][ind];\n        return dp[row][ind] = min(helper(triangle, row + 1, ind), helper(triangle, row + 1, ind + 1)) + triangle[row][ind];\n    }\n    int minimumTotal(vector<vector<int>>& triangle) {\n        memset(dp, -1, sizeof dp);\n        return helper(triangle, 0, 0);\n    }\n};"}
+{
+    "problemName": "triangle",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minimumTotal(List<List<Integer>> triangle) {\n    int n = triangle.size();\n    int[] dp = new int[n + 1];\n    for (int row = n - 1; row >= 0; row--)\n      for (int i = 0; i <= row; i++) dp[i] = Math.min(dp[i], dp[i + 1]) + triangle.get(row).get(i);\n    return dp[0];\n  }\n}\n"
+}

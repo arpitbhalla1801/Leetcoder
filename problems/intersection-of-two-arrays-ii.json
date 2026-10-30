@@ -1,1 +1,5 @@
-{"problemName":"intersection-of-two-arrays-ii","language":"cpp","code":"class Solution {\npublic:\n    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {\n        sort(nums1.begin(), nums1.end());\n        sort(nums2.begin(), nums2.end());\n        int i = 0, j = 0, k = 0;\n        vector<int> arr;\n        while(i < nums1.size()&& j <nums2.size()){\n            if(nums1[i] == nums2[j]){\n                arr.push_back(nums1[i]);\n                i++, j++;\n            }else if(nums1[i] > nums2[j]){\n                j++;\n            }else{\n                i++;\n            }\n        }\n        return arr;\n    }\n};"}
+{
+    "problemName": "intersection-of-two-arrays-ii",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] intersect(int[] nums1, int[] nums2) {\n    Map<Integer, Integer> count = new HashMap<>();\n    for (int x : nums1) count.merge(x, 1, Integer::sum);\n    List<Integer> res = new ArrayList<>();\n    for (int x : nums2) {\n      Integer c = count.get(x);\n      if (c != null && c > 0) {\n        res.add(x);\n        count.put(x, c - 1);\n      }\n    }\n    return res.stream().mapToInt(Integer::intValue).toArray();\n  }\n}\n"
+}

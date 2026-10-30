@@ -1,1 +1,5 @@
-{"problemName":"h-index","language":"cpp","code":"class Solution {\npublic:\n    int hIndex(vector<int>& citations) {\n        sort(begin(citations), end(citations));\n        int ans = 0;\n        for(int i = 0; i <= 1000;i++){\n            int index = lower_bound(begin(citations), end(citations), i) - citations.begin();\n            if(i <= citations.size() - index){\n                ans = max(ans, i);\n            }\n        }\n        return ans;\n    }\n};"}
+{
+    "problemName": "h-index",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int hIndex(int[] citations) {\n    Arrays.sort(citations);\n    int n = citations.length;\n    for (int i = 0; i < n; i++) if (citations[i] >= n - i) return n - i;\n    return 0;\n  }\n}\n"
+}

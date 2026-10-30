@@ -1,1 +1,5 @@
-{"problemName":"ugly-number","language":"cpp","code":"class Solution {\npublic:\n    bool prime(int n){\n        for(int i = 2;i<= sqrt(n);i++)\n            if(n % i == 0)return false;\n        \n        return true;\n    }\n    bool isUgly(int num) {\n        for (int i=2; i<6 && num; i++)\n            while (num % i == 0)\n                num /= i;\n        return num == 1;\n    }\n};"}
+{
+    "problemName": "ugly-number",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isUgly(int n) {\n    if (n <= 0) return false;\n    for (int p : new int[] {2, 3, 5}) while (n % p == 0) n /= p;\n    return n == 1;\n  }\n}\n"
+}

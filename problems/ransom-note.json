@@ -1,1 +1,5 @@
-{"problemName":"ransom-note","language":"cpp","code":"class Solution {\npublic:\n    bool canConstruct(string ransomNote, string magazine) {\n        unordered_map<char, int> m1;\n        for(auto i : magazine){\n            m1[i]++;\n        }\n        unordered_map<char, int> m2;\n        for(auto i : ransomNote){\n            m2[i]++;\n        }\n        for(auto i : m2){\n            if(i.second > m1[i.first])return false;\n        }\n        return true;        \n    }\n};"}
+{
+    "problemName": "ransom-note",
+    "language": "java",
+    "code": "class Solution {\n  public boolean canConstruct(String ransomNote, String magazine) {\n    int[] count = new int[26];\n    for (char c : magazine.toCharArray()) count[c - 'a']++;\n    for (char c : ransomNote.toCharArray()) if (--count[c - 'a'] < 0) return false;\n    return true;\n  }\n}\n"
+}

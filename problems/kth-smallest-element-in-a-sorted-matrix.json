@@ -1,1 +1,5 @@
-{"problemName":"kth-smallest-element-in-a-sorted-matrix","language":"cpp","code":"class Solution {\npublic:\n    int kthSmallest(vector<vector<int>>& matrix, int k){\n        vector<int> ans;\n        \n        for(auto i : matrix){\n            for(auto j : i){\n                ans.push_back(j);\n            }\n        }\n        \n        sort(ans.begin(), ans.end());\n        return ans[k-1];\n    }\n};"}
+{
+    "problemName": "kth-smallest-element-in-a-sorted-matrix",
+    "language": "java",
+    "code": "class Solution {\n  public int kthSmallest(int[][] matrix, int k) {\n    int n = matrix.length, lo = matrix[0][0], hi = matrix[n - 1][n - 1];\n    // smallest value v with at least k entries <= v\n    while (lo < hi) {\n      int mid = lo + (hi - lo) / 2, count = 0;\n      for (int r = n - 1, c = 0; r >= 0 && c < n; ) {\n        if (matrix[r][c] <= mid) {\n          count += r + 1;\n          c++;\n        } else r--;\n      }\n      if (count < k) lo = mid + 1;\n      else hi = mid;\n    }\n    return lo;\n  }\n}\n"
+}

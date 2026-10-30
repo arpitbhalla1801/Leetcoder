@@ -1,1 +1,5 @@
-{"problemName":"bulls-and-cows","language":"cpp","code":"class Solution {\npublic:\n    string getHint(string secret, string guess) {\n        unordered_map<int, int> umap1, umap2;\n        for(auto i : secret){\n            umap1[i]++;\n        }\n        for(auto i : guess){\n            umap2[i]++;\n        }\n        int a = 0, b = 0;\n        for(auto i : umap1){\n            b += min(i.second, umap2[i.first]);\n        }\n        \n        for(int i = 0; i < secret.size(); i++){\n            if(secret[i] == guess[i]){\n                a++;\n                b--;\n            }\n        }\n        string s = to_string(a) + \"A\" + to_string(b) + \"B\";\n        return s;        \n    }\n};"}
+{
+    "problemName": "bulls-and-cows",
+    "language": "java",
+    "code": "class Solution {\n  public String getHint(String secret, String guess) {\n    int bulls = 0, cows = 0;\n    int[] count = new int[10];\n    for (int i = 0; i < secret.length(); i++) {\n      int s = secret.charAt(i) - '0', g = guess.charAt(i) - '0';\n      if (s == g) bulls++;\n      else {\n        if (count[s]++ < 0) cows++;\n        if (count[g]-- > 0) cows++;\n      }\n    }\n    return bulls + \"A\" + cows + \"B\";\n  }\n}\n"
+}

@@ -1,1 +1,5 @@
-{"problemName":"find-all-numbers-disappeared-in-an-array","language":"cpp","code":"class Solution {\npublic:\n    vector<int> findDisappearedNumbers(vector<int>& nums) {\n        map<int, int> m;\n        for(auto i : nums)m[i]++;\n        vector<int> ans;\n        for(int i = 1 ; i <= nums.size();i++){\n            if(m[i] == 0)ans.push_back(i);\n        }\n        return ans;\n    }\n};"}
+{
+    "problemName": "find-all-numbers-disappeared-in-an-array",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<Integer> findDisappearedNumbers(int[] nums) {\n    // mark value v as seen by negating nums[v - 1]\n    for (int x : nums) {\n      int i = Math.abs(x) - 1;\n      if (nums[i] > 0) nums[i] = -nums[i];\n    }\n    List<Integer> ans = new ArrayList<>();\n    for (int i = 0; i < nums.length; i++) if (nums[i] > 0) ans.add(i + 1);\n    return ans;\n  }\n}\n"
+}

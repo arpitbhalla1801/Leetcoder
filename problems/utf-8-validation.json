@@ -1,1 +1,5 @@
-{"problemName":"utf-8-validation","language":"cpp","code":"class Solution {\npublic:\n    bool validUtf8(vector<int>& data) {\n        int count = 0;\n        for (auto c : data) {\n            if (count == 0) {\n                if ((c >> 5) == 0b110) count = 1;\n                else if ((c >> 4) == 0b1110) count = 2;\n                else if ((c >> 3) == 0b11110) count = 3;\n                else if ((c >> 7)) return false;\n            } else {\n                if ((c >> 6) != 0b10) return false;\n                count--;\n            }\n        }\n        return count == 0;\n    }\n};"}
+{
+    "problemName": "utf-8-validation",
+    "language": "java",
+    "code": "class Solution {\n  public boolean validUtf8(int[] data) {\n    int remaining = 0;\n    for (int b : data) {\n      b &= 0xFF;\n      if (remaining == 0) {\n        if ((b >> 5) == 0b110) remaining = 1;\n        else if ((b >> 4) == 0b1110) remaining = 2;\n        else if ((b >> 3) == 0b11110) remaining = 3;\n        else if ((b >> 7) != 0) return false;\n      } else {\n        if ((b >> 6) != 0b10) return false;\n        remaining--;\n      }\n    }\n    return remaining == 0;\n  }\n}\n"
+}

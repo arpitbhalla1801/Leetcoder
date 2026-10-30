@@ -1,1 +1,5 @@
-{"problemName":"arranging-coins","language":"cpp","code":"class Solution {\npublic:\n    int arrangeCoins(int n) {\n        long long int lo = 0, hi = 1e9;\n        long long int ans = 0;\n        while(lo<=hi){\n            long long int mid = (lo + hi)/2;\n            long long int t = (mid * (mid + 1))/2;\n            if(t == n)return mid;\n            else if(t > n)hi = mid - 1;\n            else lo = mid + 1;\n        }\n        return hi;\n    }\n};"}
+{
+    "problemName": "arranging-coins",
+    "language": "java",
+    "code": "class Solution {\n  public int arrangeCoins(int n) {\n    long lo = 0, hi = n;\n    while (lo < hi) {\n      long mid = (lo + hi + 1) / 2;\n      if (mid * (mid + 1) / 2 <= n) lo = mid;\n      else hi = mid - 1;\n    }\n    return (int) lo;\n  }\n}\n"
+}

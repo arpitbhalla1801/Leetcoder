@@ -1,5 +1,5 @@
 {
     "problemName": "super-pow",
-    "language": "python3",
-    "code": "class Solution:\n    def superPow(self, a: int, b: List[int]) -> int:\n        res = a**b[-1]\n        tag = a**10 % 1337\n        for i in range(len(b)-2,-1,-1):\n            res = res*tag**b[i] % 1337\n            tag = tag**10 % 1337\n        return res"
+    "language": "java",
+    "code": "class Solution {\n  private static final int MOD = 1337;\n\n  public int superPow(int a, int[] b) {\n    // a^(10x + d) = (a^x)^10 * a^d\n    int result = 1;\n    for (int d : b) result = pow(result, 10) * pow(a, d) % MOD;\n    return result;\n  }\n\n  private int pow(int base, int exp) {\n    base %= MOD;\n    int r = 1;\n    for (int i = 0; i < exp; i++) r = r * base % MOD;\n    return r;\n  }\n}\n"
 }

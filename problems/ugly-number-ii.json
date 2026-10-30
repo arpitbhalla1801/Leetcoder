@@ -1,1 +1,5 @@
-{"problemName":"ugly-number-ii","language":"cpp","code":"class Solution {\npublic:\n    int nthUglyNumber(int n) {\n        set<long> set;\n        long nthNumber = 1;\n        set.insert(nthNumber);\n        for(int i=0; i<n; i++){\n            nthNumber = *set.begin();\n            set.erase(nthNumber);\n            set.insert(nthNumber*2);\n            set.insert(nthNumber*3);\n            set.insert(nthNumber*5);\n        }\n        return nthNumber;\n    }\n};"}
+{
+    "problemName": "ugly-number-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int nthUglyNumber(int n) {\n    int[] ugly = new int[n];\n    ugly[0] = 1;\n    int i2 = 0, i3 = 0, i5 = 0;\n    for (int k = 1; k < n; k++) {\n      int next = Math.min(ugly[i2] * 2, Math.min(ugly[i3] * 3, ugly[i5] * 5));\n      ugly[k] = next;\n      if (next == ugly[i2] * 2) i2++;\n      if (next == ugly[i3] * 3) i3++;\n      if (next == ugly[i5] * 5) i5++;\n    }\n    return ugly[n - 1];\n  }\n}\n"
+}

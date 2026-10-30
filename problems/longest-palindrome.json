@@ -1,1 +1,5 @@
-{"problemName":"longest-palindrome","language":"cpp","code":"class Solution {\npublic:\n    int longestPalindrome(string s) {\n        unordered_map<char, int> m;\n        for(auto i : s){\n            m[i]++;\n        }\n        int ans = 0, o  = 0;\n        for(auto i : m){\n            ans += i.second;\n            if(i.second%2 == 1)\n                o++;\n        }\n        if(o == 0){\n            return ans;\n        }\n        return ans - (o - 1);\n    }\n};"}
+{
+    "problemName": "longest-palindrome",
+    "language": "java",
+    "code": "class Solution {\n  public int longestPalindrome(String s) {\n    int[] count = new int[128];\n    for (char c : s.toCharArray()) count[c]++;\n    int len = 0;\n    boolean odd = false;\n    for (int c : count) {\n      len += c / 2 * 2;\n      if (c % 2 == 1) odd = true;\n    }\n    return odd ? len + 1 : len;\n  }\n}\n"
+}

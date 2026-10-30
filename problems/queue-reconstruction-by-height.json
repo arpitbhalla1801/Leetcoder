@@ -1,1 +1,5 @@
-{"problemName":"queue-reconstruction-by-height","language":"cpp","code":"class Solution {\npublic:\n    static bool comp(vector<int> &p1, vector<int> &p2) {\n        // return (a[1] == b[1]) ? a[0] > b[0] : a[1] < b[1];\n        return p1[0] > p2[0] || (p1[0] == p2[0] && p1[1] < p2[1]);\n\n    }\n    \n    vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {\n       sort(people.begin(), people.end(), comp);\n       vector<vector<int> > res;\n       for(int i = 0; i < people.size(); i++) {\n           res.insert(res.begin() + people[i][1], people[i]);\n       }\n       return res;\n    }\n};"}
+{
+    "problemName": "queue-reconstruction-by-height",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[][] reconstructQueue(int[][] people) {\n    // tallest first; inserting at index k keeps exactly k taller-or-equal people in front\n    Arrays.sort(people, (a, b) -> a[0] != b[0] ? Integer.compare(b[0], a[0]) : Integer.compare(a[1], b[1]));\n    List<int[]> queue = new ArrayList<>();\n    for (int[] p : people) queue.add(p[1], p);\n    return queue.toArray(new int[0][]);\n  }\n}\n"
+}

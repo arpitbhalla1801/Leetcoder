@@ -1,1 +1,5 @@
-{"problemName":"linked-list-cycle-ii","language":"cpp","code":"/**\n * Definition for singly-linked list.\n * struct ListNode {\n *     int val;\n *     ListNode *next;\n *     ListNode(int x) : val(x), next(NULL) {}\n * };\n */\nclass Solution {\npublic:\n    ListNode *detectCycle(ListNode *head) {\n        unordered_map<ListNode *, int> umap;\n        ListNode *temp = head;\n        \n        while(temp != NULL){\n            umap[temp]++;\n            if(umap[temp] == 2){\n                return temp;\n            }\n            temp = temp->next;\n        }\n        return NULL;\n    }\n};"}
+{
+    "problemName": "linked-list-cycle-ii",
+    "language": "java",
+    "code": "public class Solution {\n  public ListNode detectCycle(ListNode head) {\n    ListNode slow = head, fast = head;\n    while (fast != null && fast.next != null) {\n      slow = slow.next;\n      fast = fast.next.next;\n      if (slow == fast) {\n        // the cycle start is as far from head as from the meeting point\n        for (ListNode p = head; p != slow; p = p.next) slow = slow.next;\n        return slow;\n      }\n    }\n    return null;\n  }\n}\n"
+}

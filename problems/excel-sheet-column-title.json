@@ -1,1 +1,5 @@
-{"problemName":"excel-sheet-column-title","language":"cpp","code":"class Solution {\npublic:\n    string convertToTitle(int columnNumber) {\n        string s = \"\";\n        int n = columnNumber;\n        int d = log2(n)/log2(26) + 1;\n        while(n > 0 && d--){\n            int temp = n%26;\n            char c;\n            if(temp == 0){\n                c = 'Z';\n                n-=26;\n            }else{\n                c = 'A' + temp - 1;\n                n -= temp;\n            }\n            n/=26;\n            s.push_back(c);\n        }\n        reverse(s.begin(), s.end());\n        return s;\n    }\n};"}
+{
+    "problemName": "excel-sheet-column-title",
+    "language": "java",
+    "code": "class Solution {\n  public String convertToTitle(int columnNumber) {\n    StringBuilder sb = new StringBuilder();\n    for (int n = columnNumber; n > 0; n = (n - 1) / 26) sb.append((char) ('A' + (n - 1) % 26));\n    return sb.reverse().toString();\n  }\n}\n"
+}

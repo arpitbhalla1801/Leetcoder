@@ -1,1 +1,5 @@
-{"problemName":"minimum-moves-to-equal-array-elements","language":"cpp","code":"class Solution {\npublic:\n    int minMoves(vector<int>& nums) {\n       int sum = 0;\n        for(auto i : nums) {\n            sum += i;\n        }\n        \n        int min_element = INT_MAX;\n        for(auto i : nums) {\n            min_element = min(min_element, i);\n        }\n        \n        return sum - min_element*nums.size();\n    }\n};"}
+{
+    "problemName": "minimum-moves-to-equal-array-elements",
+    "language": "java",
+    "code": "class Solution {\n  public int minMoves(int[] nums) {\n    // adding 1 to n-1 elements is the same as subtracting 1 from one element\n    int min = Integer.MAX_VALUE, moves = 0;\n    for (int x : nums) min = Math.min(min, x);\n    for (int x : nums) moves += x - min;\n    return moves;\n  }\n}\n"
+}

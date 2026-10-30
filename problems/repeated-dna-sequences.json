@@ -1,1 +1,5 @@
-{"problemName":"repeated-dna-sequences","language":"cpp","code":"class Solution {\npublic:\n    vector<string> findRepeatedDnaSequences(string s) {\n        int i = 0, j = 10;\n        string temp = \"\";\n        for(int i = 0; i < 10; i++){\n            temp.push_back(s[i]);\n        }\n        unordered_map<string, int> umap;\n        umap[temp]++;\n        while(j < s.length()){\n            temp.push_back(s[j]);\n            temp.erase(temp.begin());\n            umap[temp]++;\n            j++;\n            i++;\n        }\n        vector<string> ans;\n        for(auto i : umap){\n            if(i.second > 1){\n                ans.push_back(i.first);\n            }\n        }\n        return ans;\n    }\n};"}
+{
+    "problemName": "repeated-dna-sequences",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<String> findRepeatedDnaSequences(String s) {\n    Set<String> seen = new HashSet<>(), repeated = new LinkedHashSet<>();\n    for (int i = 0; i + 10 <= s.length(); i++) {\n      String sub = s.substring(i, i + 10);\n      if (!seen.add(sub)) repeated.add(sub);\n    }\n    return new ArrayList<>(repeated);\n  }\n}\n"
+}

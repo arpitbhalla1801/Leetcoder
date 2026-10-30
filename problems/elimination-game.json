@@ -1,1 +1,5 @@
-{"problemName":"elimination-game","language":"cpp","code":"class Solution {\npublic:\n    int lastRemaining(int n) {\n        int step = 1;\n        int head = 1;\n        int left = true;\n        while(n > 1) {\n\n            if(left || n % 2 == 1) {\n                head += step;\n            }\n            step *= 2;\n            n /= 2;\n            left = !left;\n        }\n        return head;\n    }\n};"}
+{
+    "problemName": "elimination-game",
+    "language": "java",
+    "code": "class Solution {\n  public int lastRemaining(int n) {\n    int head = 1, step = 1;\n    boolean left = true;\n    while (n > 1) {\n      // the head moves when eliminating from the left, or from the right with an odd count\n      if (left || n % 2 == 1) head += step;\n      step *= 2;\n      n /= 2;\n      left = !left;\n    }\n    return head;\n  }\n}\n"
+}

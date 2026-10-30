@@ -1,1 +1,5 @@
-{"problemName":"unique-binary-search-trees","language":"cpp","code":"int dp[20][20];\nclass Solution {\npublic:\n    int trees(int i, int j){\n        if(i >= j)\n            return 1;\n        if(dp[i][j] != 0)return dp[i][j];\n        int ans = 0;\n        for(int k = i;k<=j;k++){\n            ans += trees(i,k - 1) * trees(k + 1,j);\n        }\n        return dp[i][j] = ans;\n    }\n    int numTrees(int n) {\n        return trees(1,n);\n    }\n};"}
+{
+    "problemName": "unique-binary-search-trees",
+    "language": "java",
+    "code": "class Solution {\n  public int numTrees(int n) {\n    int[] dp = new int[n + 1];\n    dp[0] = 1;\n    for (int nodes = 1; nodes <= n; nodes++)\n      for (int root = 1; root <= nodes; root++) dp[nodes] += dp[root - 1] * dp[nodes - root];\n    return dp[n];\n  }\n}\n"
+}

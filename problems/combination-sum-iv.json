@@ -1,1 +1,5 @@
-{"problemName":"combination-sum-iv","language":"cpp","code":"class Solution {\npublic:\n    int helper(vector<int>& nums, int target, vector<int>& dp){\n        if(target == 0) return 1;\n        if(dp[target] != -1) return dp[target];\n        dp[target] = 0;\n        for(auto& num : nums) \n            if(num <= target) dp[target] += helper(nums, target - num, dp);\n        return dp[target];\n    }\n    int combinationSum4(vector<int>& nums, int target) {\n        vector<int> dp(target + 1, -1);\n        return helper(nums, target, dp);\n    }\n};"}
+{
+    "problemName": "combination-sum-iv",
+    "language": "java",
+    "code": "class Solution {\n  public int combinationSum4(int[] nums, int target) {\n    int[] dp = new int[target + 1];\n    dp[0] = 1;\n    for (int t = 1; t <= target; t++) for (int x : nums) if (x <= t) dp[t] += dp[t - x];\n    return dp[target];\n  }\n}\n"
+}
