@@ -1,5 +1,5 @@
 {
     "problemName": "minimum-moves-to-capture-the-queen",
     "language": "java",
-    "code": "class Solution {\n  public int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {\n    if (a == e && !(a == c && (b < d && d < f || b > d && d > f))) return 1;\n    if (b == f && !(b == d && (a < c && c < e || a > c && c > e))) return 1;\n    if (Math.abs(c - e) == Math.abs(d - f)\n        && !(Math.abs(a - e) == Math.abs(b - f)\n            && Math.abs(a - c) == Math.abs(b - d)\n            && ((a < c && c < e) || (a > c && c > e)))) return 1;\n    return 2;\n  }\n}"
+    "code": "class Solution {\n  public int minMovesToCaptureTheQueen(int a, int b, int c, int d, int e, int f) {\n    // the rook attacks along its row or column unless the bishop sits between them\n    if (a == e && !(c == a && between(b, d, f))) return 1;\n    if (b == f && !(d == b && between(a, c, e))) return 1;\n    // the bishop attacks along its diagonal unless the rook sits between them on it\n    if (Math.abs(c - e) == Math.abs(d - f)\n        && !(Math.abs(a - c) == Math.abs(b - d)\n            && Math.abs(a - e) == Math.abs(b - f)\n            && between(c, a, e)\n            && between(d, b, f))) return 1;\n    return 2;\n  }\n\n  private boolean between(int from, int x, int to) {\n    return Math.min(from, to) < x && x < Math.max(from, to);\n  }\n}\n"
 }
