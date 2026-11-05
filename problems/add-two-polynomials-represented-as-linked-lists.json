@@ -1,0 +1,5 @@
+{
+    "problemName": "add-two-polynomials-represented-as-linked-lists",
+    "language": "java",
+    "code": "class Solution {\n  public PolyNode addPoly(PolyNode poly1, PolyNode poly2) {\n    PolyNode dummy = new PolyNode(), tail = dummy;\n    while (poly1 != null || poly2 != null) {\n      int coef, power;\n      if (poly2 == null || (poly1 != null && poly1.power > poly2.power)) {\n        coef = poly1.coefficient;\n        power = poly1.power;\n        poly1 = poly1.next;\n      } else if (poly1 == null || poly2.power > poly1.power) {\n        coef = poly2.coefficient;\n        power = poly2.power;\n        poly2 = poly2.next;\n      } else {\n        coef = poly1.coefficient + poly2.coefficient;\n        power = poly1.power;\n        poly1 = poly1.next;\n        poly2 = poly2.next;\n      }\n      if (coef != 0) tail = tail.next = new PolyNode(coef, power);\n    }\n    return dummy.next;\n  }\n}\n"
+}

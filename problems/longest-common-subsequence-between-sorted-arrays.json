@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-common-subsequence-between-sorted-arrays",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<Integer> longestCommonSubsequence(int[][] arrays) {\n    // each array is strictly increasing, so the answer is the values present in every array, in order\n    int[] count = new int[101];\n    for (int[] a : arrays) for (int x : a) count[x]++;\n    List<Integer> res = new ArrayList<>();\n    for (int v = 1; v <= 100; v++) if (count[v] == arrays.length) res.add(v);\n    return res;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "check-if-string-is-decomposable-into-value-equal-substrings",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isDecomposable(String s) {\n    // every run of equal digits splits into 3s, plus at most one 2 overall\n    boolean usedTwo = false;\n    for (int i = 0; i < s.length(); ) {\n      int j = i;\n      while (j < s.length() && s.charAt(j) == s.charAt(i)) j++;\n      int rem = (j - i) % 3;\n      if (rem == 1) return false;\n      if (rem == 2) {\n        if (usedTwo) return false;\n        usedTwo = true;\n      }\n      i = j;\n    }\n    return usedTwo;\n  }\n}\n"
+}

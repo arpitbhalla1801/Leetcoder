@@ -1,5 +1,5 @@
 {
     "problemName": "sort-transformed-array",
-    "language": "python3",
-    "code": "# *** RICHARD ***\n\nclass Solution:\n    def sortTransformedArray(self, nums: List[int], a: int, b: int, c: int) -> List[int]:\n        \n        \n        \n        res = []\n        for num in nums:\n            res.append(a * num * num + b * num + c)\n            \n        res.sort()\n        return res\n        "
+    "language": "java",
+    "code": "class Solution {\n  public int[] sortTransformedArray(int[] nums, int a, int b, int c) {\n    int n = nums.length;\n    int[] res = new int[n];\n    // the parabola is largest at the ends when a >= 0, smallest at the ends when a < 0\n    int lo = 0, hi = n - 1, k = a >= 0 ? n - 1 : 0;\n    while (lo <= hi) {\n      int fl = f(nums[lo], a, b, c), fh = f(nums[hi], a, b, c);\n      if (a >= 0) {\n        if (fl >= fh) {\n          res[k--] = fl;\n          lo++;\n        } else {\n          res[k--] = fh;\n          hi--;\n        }\n      } else {\n        if (fl <= fh) {\n          res[k++] = fl;\n          lo++;\n        } else {\n          res[k++] = fh;\n          hi--;\n        }\n      }\n    }\n    return res;\n  }\n\n  private int f(int x, int a, int b, int c) {\n    return a * x * x + b * x + c;\n  }\n}\n"
 }

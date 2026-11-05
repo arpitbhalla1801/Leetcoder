@@ -1,5 +1,5 @@
 {
     "problemName": "two-sum-less-than-k",
-    "language": "python3",
-    "code": "class Solution:\n    def twoSumLessThanK(self, nums: List[int], k: int) -> int:\n        nums.sort()\n        ans = -1\n\n        left = 0\n        right = len(nums) - 1\n\n        while left < right:\n            Sum = nums[left] + nums[right]\n            if Sum < k:\n                ans = max(ans, Sum)\n                left += 1\n            else:\n                right -= 1\n\n        return ans"
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int twoSumLessThanK(int[] nums, int k) {\n    Arrays.sort(nums);\n    int best = -1;\n    for (int l = 0, r = nums.length - 1; l < r; ) {\n      int sum = nums[l] + nums[r];\n      if (sum < k) {\n        best = Math.max(best, sum);\n        l++;\n      } else r--;\n    }\n    return best;\n  }\n}\n"
 }

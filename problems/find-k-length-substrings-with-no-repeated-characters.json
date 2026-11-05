@@ -1,0 +1,5 @@
+{
+    "problemName": "find-k-length-substrings-with-no-repeated-characters",
+    "language": "java",
+    "code": "class Solution {\n  public int numKLenSubstrNoRepeats(String s, int k) {\n    if (k > 26) return 0;\n    int[] count = new int[26];\n    int total = 0;\n    for (int left = 0, right = 0; right < s.length(); right++) {\n      char c = s.charAt(right);\n      count[c - 'a']++;\n      while (count[c - 'a'] > 1 || right - left + 1 > k) count[s.charAt(left++) - 'a']--;\n      if (right - left + 1 == k) total++;\n    }\n    return total;\n  }\n}\n"
+}

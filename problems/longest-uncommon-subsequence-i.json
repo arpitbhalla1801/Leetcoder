@@ -1,1 +1,5 @@
-{"problemName":"longest-uncommon-subsequence-i","language":"cpp","code":"class Solution {\npublic:\n    int findLUSlength(string a, string b) {\n        if(a == b)return -1;\n        return max(a.length(), b.length());\n    }\n};"}
+{
+    "problemName": "longest-uncommon-subsequence-i",
+    "language": "java",
+    "code": "class Solution {\n  public int findLUSlength(String a, String b) {\n    return a.equals(b) ? -1 : Math.max(a.length(), b.length());\n  }\n}\n"
+}

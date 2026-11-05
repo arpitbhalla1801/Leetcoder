@@ -1,5 +1,5 @@
 {
     "problemName": "amount-of-new-area-painted-each-day",
-    "language": "python3",
-    "code": "\nclass Solution:\n    def amountPainted(self, paint: List[List[int]]) -> List[int]:\n        painted = [0] * 50000\n        paintedAmountEachDay = []\n        for start, end in paint:\n            notPaintedYet = 0            \n            # Paint\n            while start < end:\n                if painted[start] == 0:\n                    notPaintedYet += 1\n                    painted[start] = end\n                    start += 1\n                else:\n                    start = painted[start]\n            paintedAmountEachDay.append(notPaintedYet)\n        return paintedAmountEachDay"
+    "language": "java",
+    "code": "class Solution {\n    public int[] amountPainted(int[][] paint) {\n        int[] painted = new int[50001];\n        int[] res = new int[paint.length];\n        for (int d = 0; d < paint.length; d++) {\n            int start = paint[d][0], end = paint[d][1], fresh = 0;\n            while (start < end) {\n                if (painted[start] == 0) {\n                    fresh++;\n                    painted[start] = end;\n                    start++;\n                } else {\n                    start = painted[start];\n                }\n            }\n            res[d] = fresh;\n        }\n        return res;\n    }\n}\n"
 }

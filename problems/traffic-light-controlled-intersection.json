@@ -1,0 +1,5 @@
+{
+    "problemName": "traffic-light-controlled-intersection",
+    "language": "java",
+    "code": "class TrafficLight {\n  private int green = 1; // road A starts green\n\n  public TrafficLight() {}\n\n  // one car at a time: switch the light only when this car's road is red, then cross\n  public synchronized void carArrived(int carId, int roadId, int direction, Runnable turnGreen, Runnable crossCar) {\n    if (roadId != green) {\n      turnGreen.run();\n      green = roadId;\n    }\n    crossCar.run();\n  }\n}\n"
+}

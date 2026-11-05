@@ -1,5 +1,5 @@
 {
     "problemName": "minimize-product-sum-of-two-arrays",
-    "language": "python3",
-    "code": "class Solution:\n    def minProductSum(self, nums1: List[int], nums2: List[int]) -> int:\n        \n        nums1.sort()\n        nums2_sort = sorted(nums2, reverse=True)\n        sum_val = 0\n        for i in range(0,len(nums1)):\n            sum_val = sum_val + nums1[i]*nums2_sort[i]\n            \n        return sum_val\n            \n            \n        \n         "
+    "language": "java",
+    "code": "class Solution {\n  public int minProductSum(int[] nums1, int[] nums2) {\n    // pair the largest with the smallest; values are small, so counting sort both\n    int[] c1 = new int[101], c2 = new int[101];\n    for (int x : nums1) c1[x]++;\n    for (int x : nums2) c2[x]++;\n    int sum = 0;\n    for (int a = 0, b = 100; a <= 100 && b >= 0; ) {\n      if (c1[a] == 0) a++;\n      else if (c2[b] == 0) b--;\n      else {\n        int k = Math.min(c1[a], c2[b]);\n        sum += k * a * b;\n        c1[a] -= k;\n        c2[b] -= k;\n      }\n    }\n    return sum;\n  }\n}\n"
 }

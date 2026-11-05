@@ -1,0 +1,5 @@
+{
+    "problemName": "jump-game-viii",
+    "language": "java",
+    "code": "class Solution {\n    public long minCost(int[] nums, int[] costs) {\n        int n = nums.length;\n        int[] nextGE = new int[n], nextLess = new int[n];\n        int[] st = new int[n];\n        int sp = 0;\n        for (int i = n - 1; i >= 0; i--) {\n            while (sp > 0 && nums[st[sp - 1]] < nums[i]) sp--;\n            nextGE[i] = sp > 0 ? st[sp - 1] : -1;\n            st[sp++] = i;\n        }\n        sp = 0;\n        for (int i = n - 1; i >= 0; i--) {\n            while (sp > 0 && nums[st[sp - 1]] >= nums[i]) sp--;\n            nextLess[i] = sp > 0 ? st[sp - 1] : -1;\n            st[sp++] = i;\n        }\n        long[] dp = new long[n];\n        Arrays.fill(dp, Long.MAX_VALUE);\n        dp[0] = 0;\n        for (int i = 0; i < n; i++) {\n            if (dp[i] == Long.MAX_VALUE) continue;\n            for (int j : new int[]{nextGE[i], nextLess[i]})\n                if (j >= 0) dp[j] = Math.min(dp[j], dp[i] + costs[j]);\n        }\n        return dp[n - 1];\n    }\n}\n"
+}

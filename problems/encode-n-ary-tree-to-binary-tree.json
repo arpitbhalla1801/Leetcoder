@@ -1,0 +1,5 @@
+{
+    "problemName": "encode-n-ary-tree-to-binary-tree",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Codec {\n  // left child = first child, right child = next sibling\n  public TreeNode encode(Node root) {\n    if (root == null) return null;\n    TreeNode node = new TreeNode(root.val);\n    if (root.children != null && !root.children.isEmpty()) {\n      node.left = encode(root.children.get(0));\n      TreeNode cur = node.left;\n      for (int i = 1; i < root.children.size(); i++) {\n        cur.right = encode(root.children.get(i));\n        cur = cur.right;\n      }\n    }\n    return node;\n  }\n\n  public Node decode(TreeNode root) {\n    if (root == null) return null;\n    Node node = new Node(root.val, new ArrayList<>());\n    for (TreeNode child = root.left; child != null; child = child.right) node.children.add(decode(child));\n    return node;\n  }\n}\n"
+}

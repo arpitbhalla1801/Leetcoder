@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-font-to-fit-a-sentence-in-a-screen",
+    "language": "java",
+    "code": "class Solution {\n  public int maxFont(String text, int w, int h, int[] fonts, FontInfo fontInfo) {\n    int[] freq = new int[26];\n    for (char c : text.toCharArray()) freq[c - 'a']++;\n    // fitting is monotone in the font size: binary search the largest that fits\n    int lo = 0, hi = fonts.length - 1, best = -1;\n    while (lo <= hi) {\n      int mid = (lo + hi) >>> 1, size = fonts[mid];\n      long width = 0;\n      for (int c = 0; c < 26; c++) if (freq[c] > 0) width += (long) freq[c] * fontInfo.getWidth(size, (char) ('a' + c));\n      if (width <= w && fontInfo.getHeight(size) <= h) {\n        best = size;\n        lo = mid + 1;\n      } else hi = mid - 1;\n    }\n    return best;\n  }\n}\n"
+}

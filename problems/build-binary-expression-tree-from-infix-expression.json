@@ -1,0 +1,5 @@
+{
+    "problemName": "build-binary-expression-tree-from-infix-expression",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public Node expTree(String s) {\n    Deque<Node> operands = new ArrayDeque<>();\n    Deque<Character> ops = new ArrayDeque<>();\n    for (char c : s.toCharArray()) {\n      if (Character.isDigit(c)) operands.push(new Node(c));\n      else if (c == '(') ops.push(c);\n      else if (c == ')') {\n        while (ops.peek() != '(') combine(operands, ops);\n        ops.pop();\n      } else {\n        // left-associative: apply waiting operators of equal or higher precedence first\n        while (!ops.isEmpty() && ops.peek() != '(' && prec(ops.peek()) >= prec(c)) combine(operands, ops);\n        ops.push(c);\n      }\n    }\n    while (!ops.isEmpty()) combine(operands, ops);\n    return operands.pop();\n  }\n\n  private void combine(Deque<Node> operands, Deque<Character> ops) {\n    Node right = operands.pop(), left = operands.pop();\n    operands.push(new Node(ops.pop(), left, right));\n  }\n\n  private int prec(char op) {\n    return op == '*' || op == '/' ? 2 : 1;\n  }\n}\n"
+}

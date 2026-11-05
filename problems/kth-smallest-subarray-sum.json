@@ -1,0 +1,5 @@
+{
+    "problemName": "kth-smallest-subarray-sum",
+    "language": "java",
+    "code": "class Solution {\n  public int kthSmallestSubarraySum(int[] nums, int k) {\n    int lo = Integer.MAX_VALUE, hi = 0;\n    for (int x : nums) {\n      lo = Math.min(lo, x);\n      hi += x;\n    }\n    // smallest s with at least k subarrays summing to <= s (all values positive: sliding window count)\n    while (lo < hi) {\n      int mid = lo + (hi - lo) / 2;\n      if (countAtMost(nums, mid) >= k) hi = mid;\n      else lo = mid + 1;\n    }\n    return lo;\n  }\n\n  private long countAtMost(int[] nums, int s) {\n    long count = 0;\n    int sum = 0;\n    for (int l = 0, r = 0; r < nums.length; r++) {\n      sum += nums[r];\n      while (sum > s) sum -= nums[l++];\n      count += r - l + 1;\n    }\n    return count;\n  }\n}\n"
+}

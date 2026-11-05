@@ -1,0 +1,5 @@
+{
+    "problemName": "choose-numbers-from-two-arrays-in-range",
+    "language": "java",
+    "code": "class Solution {\n    public int countSubranges(int[] nums1, int[] nums2) {\n        final int MOD = 1_000_000_007, OFF = 10000, SZ = 2 * OFF + 1;\n        int[] dp = new int[SZ];\n        long ans = 0;\n        for (int i = 0; i < nums1.length; i++) {\n            int a = nums1[i], b = nums2[i];\n            int[] nd = new int[SZ];\n            for (int d = 0; d < SZ; d++) {\n                if (dp[d] == 0) continue;\n                if (d + a < SZ) nd[d + a] = (nd[d + a] + dp[d]) % MOD;\n                if (d - b >= 0) nd[d - b] = (nd[d - b] + dp[d]) % MOD;\n            }\n            nd[OFF + a] = (nd[OFF + a] + 1) % MOD;\n            nd[OFF - b] = (nd[OFF - b] + 1) % MOD;\n            dp = nd;\n            ans = (ans + dp[OFF]) % MOD;\n        }\n        return (int) ans;\n    }\n}\n"
+}

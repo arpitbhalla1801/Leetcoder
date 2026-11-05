@@ -1,0 +1,5 @@
+{
+    "problemName": "split-bst",
+    "language": "java",
+    "code": "class Solution {\n  public TreeNode[] splitBST(TreeNode root, int target) {\n    if (root == null) return new TreeNode[] {null, null};\n    if (root.val <= target) {\n      TreeNode[] parts = splitBST(root.right, target);\n      root.right = parts[0];\n      return new TreeNode[] {root, parts[1]};\n    }\n    TreeNode[] parts = splitBST(root.left, target);\n    root.left = parts[1];\n    return new TreeNode[] {parts[0], root};\n  }\n}\n"
+}

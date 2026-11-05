@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-number-of-ones",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int maximumNumberOfOnes(int width, int height, int sideLength, int maxOnes) {\n    // a one at offset (i, j) inside the tile repeats across the whole matrix; take the offsets that repeat most\n    List<Integer> counts = new ArrayList<>();\n    for (int i = 0; i < sideLength; i++)\n      for (int j = 0; j < sideLength; j++)\n        counts.add(((width - i - 1) / sideLength + 1) * ((height - j - 1) / sideLength + 1));\n    counts.sort(Collections.reverseOrder());\n    int total = 0;\n    for (int k = 0; k < maxOnes; k++) total += counts.get(k);\n    return total;\n  }\n}\n"
+}

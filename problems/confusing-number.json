@@ -1,5 +1,5 @@
 {
     "problemName": "confusing-number",
-    "language": "python3",
-    "code": "class Solution:\n    def confusingNumber(self, n: int) -> bool:\n        rot = {'0':'0','1':'1','6':'9','8':'8','9':'6'}\n        try:\n            m = int(''.join(rot[d] for d in str(n)[::-1]))\n            return m != n\n        except:\n            return False"
+    "language": "java",
+    "code": "class Solution {\n  public boolean confusingNumber(int n) {\n    int[] rot = {0, 1, -1, -1, -1, -1, 9, -1, 8, 6};\n    long rotated = 0;\n    for (int x = n; x > 0; x /= 10) {\n      int d = rot[x % 10];\n      if (d < 0) return false;\n      rotated = rotated * 10 + d;\n    }\n    return rotated != n;\n  }\n}\n"
 }

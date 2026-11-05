@@ -1,0 +1,5 @@
+{
+    "problemName": "bold-words-in-string",
+    "language": "java",
+    "code": "class Solution {\n  public String boldWords(String[] words, String s) {\n    int n = s.length();\n    boolean[] bold = new boolean[n];\n    for (String w : words)\n      for (int i = s.indexOf(w); i >= 0; i = s.indexOf(w, i + 1))\n        for (int j = i; j < i + w.length(); j++) bold[j] = true;\n    StringBuilder sb = new StringBuilder();\n    for (int i = 0; i < n; i++) {\n      if (bold[i] && (i == 0 || !bold[i - 1])) sb.append(\"<b>\");\n      sb.append(s.charAt(i));\n      if (bold[i] && (i == n - 1 || !bold[i + 1])) sb.append(\"</b>\");\n    }\n    return sb.toString();\n  }\n}\n"
+}

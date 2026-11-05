@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-nodes-with-value-one",
+    "language": "java",
+    "code": "class Solution {\n    public int numberOfNodes(int n, int[] queries) {\n        int[] flip = new int[n + 1];\n        for (int q : queries) flip[q] ^= 1;\n        int ans = 0;\n        for (int v = 1; v <= n; v++) {\n            if (v > 1) flip[v] ^= flip[v / 2];\n            ans += flip[v];\n        }\n        return ans;\n    }\n}\n"
+}

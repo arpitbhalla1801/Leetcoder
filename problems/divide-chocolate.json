@@ -1,5 +1,5 @@
 {
     "problemName": "divide-chocolate",
-    "language": "python3",
-    "code": "class Solution:\n    def maximizeSweetness(self, sweetness: List[int], k: int) -> int:\n        left = min(sweetness)\n        right = sum(sweetness) // (k+1) + 1\n        while left < right:\n            mid = (left + right) // 2\n            num = 0\n            temp = 0\n            for s in sweetness:\n                if temp + s >= mid:\n                    temp = 0\n                    num += 1\n                    continue\n                temp += s \n            #print(mid, num, left, right)\n            if num >= k+1:\n                left = mid + 1\n            else:\n                right = mid\n        return left - 1\n        "
+    "language": "java",
+    "code": "class Solution {\n  public int maximizeSweetness(int[] sweetness, int k) {\n    int lo = 1, hi = 0;\n    for (int s : sweetness) hi += s;\n    hi /= k + 1;\n    // largest minimum piece that still allows k + 1 pieces\n    while (lo < hi) {\n      int mid = lo + (hi - lo + 1) / 2, pieces = 0, cur = 0;\n      for (int s : sweetness) {\n        cur += s;\n        if (cur >= mid) {\n          pieces++;\n          cur = 0;\n        }\n      }\n      if (pieces >= k + 1) lo = mid;\n      else hi = mid - 1;\n    }\n    return lo;\n  }\n}\n"
 }

@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-equal-count-substrings",
+    "language": "java",
+    "code": "class Solution {\n    public int equalCountSubstrings(String s, int count) {\n        int n = s.length(), ans = 0;\n        for (int u = 1; u <= 26 && (long) u * count <= n; u++) {\n            int len = u * count;\n            int[] cnt = new int[26];\n            int exact = 0;\n            for (int i = 0; i < n; i++) {\n                int c = s.charAt(i) - 'a';\n                if (cnt[c] == count) exact--;\n                if (++cnt[c] == count) exact++;\n                if (i >= len) {\n                    int d = s.charAt(i - len) - 'a';\n                    if (cnt[d] == count) exact--;\n                    if (--cnt[d] == count) exact++;\n                }\n                if (i >= len - 1 && exact == u) ans++;\n            }\n        }\n        return ans;\n    }\n}\n"
+}

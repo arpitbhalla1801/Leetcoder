@@ -1,5 +1,5 @@
 {
     "problemName": "count-univalue-subtrees",
-    "language": "python3",
-    "code": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def countUnivalSubtrees(self, root: Optional[TreeNode]) -> int:\n        self.count = 0\n        self.is_valid_subtree(root, 0)\n        return self.count\n    \n    def is_valid_subtree(self, node, val):\n        if node is None:\n            return True\n        if not all ([self.is_valid_subtree(node.left, node.val), self.is_valid_subtree(node.right, node.val)]):\n            return False\n        self.count += 1\n        return node.val == val"
+    "language": "java",
+    "code": "class Solution {\n  private int count;\n\n  public int countUnivalSubtrees(TreeNode root) {\n    uni(root);\n    return count;\n  }\n\n  private boolean uni(TreeNode node) {\n    if (node == null) return true;\n    boolean left = uni(node.left), right = uni(node.right);\n    if (!left || !right) return false;\n    if (node.left != null && node.left.val != node.val) return false;\n    if (node.right != null && node.right.val != node.val) return false;\n    count++;\n    return true;\n  }\n}\n"
 }

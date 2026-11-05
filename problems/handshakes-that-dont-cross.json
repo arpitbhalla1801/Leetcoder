@@ -1,0 +1,5 @@
+{
+    "problemName": "handshakes-that-dont-cross",
+    "language": "java",
+    "code": "class Solution {\n  public int numberOfWays(int numPeople) {\n    final long MOD = 1_000_000_007L;\n    int pairs = numPeople / 2;\n    long[] dp = new long[pairs + 1]; // Catalan numbers: person 1 pairs with someone, splitting the circle\n    dp[0] = 1;\n    for (int p = 1; p <= pairs; p++)\n      for (int left = 0; left < p; left++) dp[p] = (dp[p] + dp[left] * dp[p - 1 - left]) % MOD;\n    return (int) dp[pairs];\n  }\n}\n"
+}

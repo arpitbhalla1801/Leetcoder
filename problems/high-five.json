@@ -1,5 +1,5 @@
 {
     "problemName": "high-five",
-    "language": "python3",
-    "code": "from bisect import insort\nclass Solution:\n    def highFive(self, items: List[List[int]]) -> List[List[int]]:\n        d=defaultdict(list)\n        for id,score in items:\n            d[id].append(score)\n    \n        for i in d:\n            scores=d[i]\n            scores.sort(reverse=True)\n            newScore=sum(scores[:5])//5\n            d[i]=newScore\n        return sorted(d.items())"
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[][] highFive(int[][] items) {\n    TreeMap<Integer, PriorityQueue<Integer>> top = new TreeMap<>(); // id -> its 5 best scores (min-heap)\n    for (int[] it : items) {\n      PriorityQueue<Integer> pq = top.computeIfAbsent(it[0], k -> new PriorityQueue<>());\n      pq.add(it[1]);\n      if (pq.size() > 5) pq.poll();\n    }\n    int[][] res = new int[top.size()][];\n    int i = 0;\n    for (Map.Entry<Integer, PriorityQueue<Integer>> e : top.entrySet()) {\n      int sum = 0;\n      for (int s : e.getValue()) sum += s;\n      res[i++] = new int[] {e.getKey(), sum / 5};\n    }\n    return res;\n  }\n}\n"
 }

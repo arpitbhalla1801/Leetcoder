@@ -1,5 +1,5 @@
 {
     "problemName": "correct-a-binary-tree",
-    "language": "python3",
-    "code": "# Definition for a binary tree node.\n# class TreeNode:\n#     def __init__(self, val=0, left=None, right=None):\n#         self.val = val\n#         self.left = left\n#         self.right = right\nclass Solution:\n    def correctBinaryTree(self, root: TreeNode) -> TreeNode:\n        seen = set()\n        def dfs(node):\n            if not node:\n                return False\n            \n            if node.right and node.right.val in seen:\n                return True\n            \n            seen.add(node.val)\n            if dfs(node.right):\n                node.right = None\n                return False\n                \n            if dfs(node.left):\n                node.left = None\n                return False\n        \n        dfs(root)\n        return root"
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private final Set<TreeNode> seen = new HashSet<>();\n\n  public TreeNode correctBinaryTree(TreeNode root) {\n    // visiting right before left, the bad node's right pointer reaches an already-visited node\n    if (root == null) return null;\n    if (root.right != null && seen.contains(root.right)) return null;\n    seen.add(root);\n    root.right = correctBinaryTree(root.right);\n    root.left = correctBinaryTree(root.left);\n    return root;\n  }\n}\n"
 }

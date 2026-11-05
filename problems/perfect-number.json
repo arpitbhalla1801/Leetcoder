@@ -1,1 +1,5 @@
-{"problemName":"perfect-number","language":"cpp","code":"class Solution {\npublic:\n    bool checkPerfectNumber(int num) {\n        int ans =0;\n        for(int i = 1; i <= sqrt(num);i++){\n            if(num%i == 0){\n                int x = i;\n                int y = num/i;\n                if(x == y)ans+= x;\n                else ans += x+y;\n            }\n        }\n        return num == ans - num;\n    }\n};"}
+{
+    "problemName": "perfect-number",
+    "language": "java",
+    "code": "class Solution {\n  public boolean checkPerfectNumber(int num) {\n    if (num <= 1) return false;\n    int sum = 1;\n    for (int i = 2; i * i <= num; i++) {\n      if (num % i == 0) {\n        sum += i;\n        if (i * i != num) sum += num / i;\n      }\n    }\n    return sum == num;\n  }\n}\n"
+}

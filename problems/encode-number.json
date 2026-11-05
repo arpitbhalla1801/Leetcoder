@@ -1,0 +1,5 @@
+{
+    "problemName": "encode-number",
+    "language": "java",
+    "code": "class Solution {\n  public String encode(int num) {\n    // the encoding is num + 1 in binary without its leading 1\n    return Long.toBinaryString(num + 1L).substring(1);\n  }\n}\n"
+}

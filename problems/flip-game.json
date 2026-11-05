@@ -1,5 +1,5 @@
 {
     "problemName": "flip-game",
-    "language": "python3",
-    "code": "class Solution:\n    def generatePossibleNextMoves(self, s: str) -> List[str]:\n        n = len(s)\n        s = list(s)\n        moves = []\n\n        for i in range(n-1):\n            if s[i] == \"+\" and s[i+1] == \"+\":\n                s[i] = \"-\"\n                s[i+1] = \"-\"\n                moves.append(\"\".join(s))\n                ##Recovery\n                s[i] = \"+\"\n                s[i+1] = \"+\"\n        return moves"
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<String> generatePossibleNextMoves(String currentState) {\n    List<String> res = new ArrayList<>();\n    for (int i = 0; i + 1 < currentState.length(); i++)\n      if (currentState.charAt(i) == '+' && currentState.charAt(i + 1) == '+')\n        res.add(currentState.substring(0, i) + \"--\" + currentState.substring(i + 2));\n    return res;\n  }\n}\n"
 }

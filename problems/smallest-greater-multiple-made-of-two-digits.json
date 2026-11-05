@@ -1,0 +1,5 @@
+{
+    "problemName": "smallest-greater-multiple-made-of-two-digits",
+    "language": "java",
+    "code": "class Solution {\n    private long best = Long.MAX_VALUE;\n\n    public int findInteger(int k, int digit1, int digit2) {\n        dfs(0, k, new int[]{digit1, digit2});\n        return best == Long.MAX_VALUE ? -1 : (int) best;\n    }\n\n    private void dfs(long cur, int k, int[] ds) {\n        for (int d : ds) {\n            long nxt = cur * 10 + d;\n            if (nxt == 0 || nxt > Integer.MAX_VALUE) continue;\n            if (nxt > k && nxt % k == 0) best = Math.min(best, nxt);\n            dfs(nxt, k, ds);\n        }\n    }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "sort-linked-list-already-sorted-using-absolute-values",
+    "language": "java",
+    "code": "/**\n * Definition for singly-linked list.\n * public class ListNode {\n *     int val;\n *     ListNode next;\n *     ListNode() {}\n *     ListNode(int val) { this.val = val; }\n *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }\n * }\n */\nclass Solution {\n    public ListNode sortLinkedList(ListNode head) {\n        ListNode prev = head, cur = head.next;\n        while (cur != null) {\n            if (cur.val < 0) {\n                prev.next = cur.next;\n                cur.next = head;\n                head = cur;\n                cur = prev.next;\n            } else {\n                prev = cur;\n                cur = cur.next;\n            }\n        }\n        return head;\n    }\n}\n"
+}

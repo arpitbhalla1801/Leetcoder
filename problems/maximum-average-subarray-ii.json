@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-average-subarray-ii",
+    "language": "java",
+    "code": "class Solution {\n  public double findMaxAverage(int[] nums, int k) {\n    double lo = -1e4, hi = 1e4;\n    // binary search the average: is there a subarray of length >= k with average >= mid?\n    while (hi - lo > 1e-6) {\n      double mid = (lo + hi) / 2;\n      if (possible(nums, k, mid)) lo = mid;\n      else hi = mid;\n    }\n    return lo;\n  }\n\n  private boolean possible(int[] nums, int k, double avg) {\n    double sum = 0, prev = 0, minPrev = 0;\n    for (int i = 0; i < k; i++) sum += nums[i] - avg;\n    if (sum >= 0) return true;\n    for (int i = k; i < nums.length; i++) {\n      sum += nums[i] - avg;\n      prev += nums[i - k] - avg;\n      minPrev = Math.min(minPrev, prev);\n      if (sum - minPrev >= 0) return true;\n    }\n    return false;\n  }\n}\n"
+}

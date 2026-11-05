@@ -1,0 +1,5 @@
+{
+    "problemName": "pour-water-between-buckets-to-make-water-levels-equal",
+    "language": "java",
+    "code": "class Solution {\n    public double equalizeWater(int[] buckets, int loss) {\n        double lo = 0, hi = 100000, keep = (100 - loss) / 100.0;\n        for (int iter = 0; iter < 100; iter++) {\n            double mid = (lo + hi) / 2, give = 0, need = 0;\n            for (int b : buckets) {\n                if (b > mid) give += b - mid;\n                else need += mid - b;\n            }\n            if (give * keep >= need) lo = mid;\n            else hi = mid;\n        }\n        return lo;\n    }\n}\n"
+}

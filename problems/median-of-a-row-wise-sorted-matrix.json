@@ -1,5 +1,5 @@
 {
     "problemName": "median-of-a-row-wise-sorted-matrix",
-    "language": "golang",
-    "code": "func matrixMedian(grid [][]int) int {\n    m, n := len(grid), len(grid[0])\n\tleft, right := 0, math.MaxInt32\n\n\tfor left < right {\n\t\tmid := right - (right-left)/2\n\t\tcnt := 0\n\t\tfor _, row := range grid {\n\t\t\tidx := sort.Search(n, func(i int) bool {\n\t\t\t\treturn row[i] >= mid\n\t\t\t})\n\t\t\tcnt += n - idx\n\t\t}\n\t\tif cnt >= n*m/2+1 {\n\t\t\tleft = mid\n\t\t} else {\n\t\t\tright = mid - 1\n\t\t}\n\t}\n\treturn left\n}"
+    "language": "java",
+    "code": "class Solution {\n    public int matrixMedian(int[][] grid) {\n        int m = grid.length, n = grid[0].length;\n        int left = 0, right = 1_000_000;\n        while (left < right) {\n            int mid = right - (right - left) / 2;\n            int cnt = 0;\n            for (int[] row : grid) {\n                int lo = 0, hi = n;\n                while (lo < hi) {\n                    int md = (lo + hi) >>> 1;\n                    if (row[md] >= mid) hi = md;\n                    else lo = md + 1;\n                }\n                cnt += n - lo;\n            }\n            if (cnt >= m * n / 2 + 1) left = mid;\n            else right = mid - 1;\n        }\n        return left;\n    }\n}\n"
 }

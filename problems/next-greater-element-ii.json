@@ -1,1 +1,5 @@
-{"problemName":"next-greater-element-ii","language":"cpp","code":"class Solution {\npublic:\n    vector<int> nextGreaterElements(vector<int>& nums) {\n        int n = nums.size();\n        vector<int> arr(n, -1);\n        stack<int>st;\n        for(int i = 0; i < 2 * n;i++){\n            while(!st.empty() && nums[st.top()] < nums[i%n]){\n                arr[st.top()] = nums[i%n];\n                st.pop();\n            }\n            st.push(i%n);\n        }\n        return arr;\n    }\n};"}
+{
+    "problemName": "next-greater-element-ii",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] nextGreaterElements(int[] nums) {\n    int n = nums.length;\n    int[] res = new int[n];\n    Arrays.fill(res, -1);\n    Deque<Integer> stack = new ArrayDeque<>();\n    for (int i = 0; i < 2 * n; i++) {\n      int x = nums[i % n];\n      while (!stack.isEmpty() && nums[stack.peek()] < x) res[stack.pop()] = x;\n      if (i < n) stack.push(i);\n    }\n    return res;\n  }\n}\n"
+}

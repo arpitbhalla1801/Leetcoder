@@ -1,0 +1,5 @@
+{
+    "problemName": "subsequence-of-size-k-with-the-largest-even-sum",
+    "language": "java",
+    "code": "class Solution {\n    public long largestEvenSum(int[] nums, int k) {\n        int n = nums.length;\n        Arrays.sort(nums);\n        long sum = 0;\n        int minOddIn = -1, minEvenIn = -1;\n        for (int i = n - 1; i >= n - k; i--) {\n            sum += nums[i];\n            if (nums[i] % 2 == 1) minOddIn = nums[i];\n            else minEvenIn = nums[i];\n        }\n        if (sum % 2 == 0) return sum;\n        int maxOddOut = -1, maxEvenOut = -1;\n        for (int i = n - k - 1; i >= 0; i--) {\n            if (nums[i] % 2 == 1) { if (maxOddOut < 0) maxOddOut = nums[i]; }\n            else if (maxEvenOut < 0) maxEvenOut = nums[i];\n        }\n        long ans = -1;\n        if (minOddIn >= 0 && maxEvenOut >= 0) ans = Math.max(ans, sum - minOddIn + maxEvenOut);\n        if (minEvenIn >= 0 && maxOddOut >= 0) ans = Math.max(ans, sum - minEvenIn + maxOddOut);\n        return ans;\n    }\n}\n"
+}

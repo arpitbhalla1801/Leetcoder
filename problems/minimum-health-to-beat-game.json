@@ -1,5 +1,5 @@
 {
     "problemName": "minimum-health-to-beat-game",
-    "language": "scala",
-    "code": "object Solution {\n    def minimumHealth(damage: Array[Int], armor: Int): Long = {\n        val totalSum = damage.map(_.toLong).sum + 1\n        val max = damage.max \n        val maxArmor = if(max>armor) armor else max\n        println(totalSum)\n        totalSum - maxArmor\n    }\n}"
+    "language": "java",
+    "code": "class Solution {\n    public long minimumHealth(int[] damage, int armor) {\n        long sum = 1;\n        int max = 0;\n        for (int d : damage) {\n            sum += d;\n            max = Math.max(max, d);\n        }\n        return sum - Math.min(max, armor);\n    }\n}\n"
 }

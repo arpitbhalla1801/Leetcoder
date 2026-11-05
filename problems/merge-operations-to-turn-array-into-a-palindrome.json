@@ -1,0 +1,5 @@
+{
+    "problemName": "merge-operations-to-turn-array-into-a-palindrome",
+    "language": "java",
+    "code": "class Solution {\n    public int minimumOperations(int[] nums) {\n        int i = 0, j = nums.length - 1, ops = 0;\n        long a = nums[i], b = nums[j];\n        while (i < j) {\n            if (a == b) {\n                a = nums[++i];\n                b = nums[--j];\n            } else if (a < b) {\n                a += nums[++i];\n                ops++;\n            } else {\n                b += nums[--j];\n                ops++;\n            }\n        }\n        return ops;\n    }\n}\n"
+}

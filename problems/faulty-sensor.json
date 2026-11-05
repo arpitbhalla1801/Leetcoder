@@ -1,0 +1,5 @@
+{
+    "problemName": "faulty-sensor",
+    "language": "java",
+    "code": "class Solution {\n  public int badSensor(int[] sensor1, int[] sensor2) {\n    int n = sensor1.length, i = 0;\n    while (i < n && sensor1[i] == sensor2[i]) i++;\n    if (i >= n - 1) return -1; // identical, or only the last value differs: undecidable\n    // if sensor 2 dropped data[i], then sensor2[k] == sensor1[k + 1] from i on (and vice versa)\n    boolean twoDropped = true, oneDropped = true;\n    for (int k = i; k < n - 1; k++) {\n      if (sensor2[k] != sensor1[k + 1]) twoDropped = false;\n      if (sensor1[k] != sensor2[k + 1]) oneDropped = false;\n    }\n    if (twoDropped == oneDropped) return -1;\n    return twoDropped ? 2 : 1;\n  }\n}\n"
+}

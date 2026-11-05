@@ -1,5 +1,5 @@
 {
     "problemName": "largest-subarray-length-k",
-    "language": "python3",
-    "code": "class Solution:\n    def largestSubarray(self, nums: List[int], k: int) -> List[int]:\n        \n        left=0\n        right=1\n        while(right+k<=len(nums)):\n            if nums[left]<nums[right]:   \n                left=right  \n            right+=1        \n        return nums[left:left+k]\n            \n        "
+    "language": "java",
+    "code": "class Solution {\n  public int[] largestSubarray(int[] nums, int k) {\n    // elements are distinct, so the largest subarray starts at the largest possible first element\n    int best = 0;\n    for (int i = 1; i + k <= nums.length; i++) if (nums[i] > nums[best]) best = i;\n    return java.util.Arrays.copyOfRange(nums, best, best + k);\n  }\n}\n"
 }

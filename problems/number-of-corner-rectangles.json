@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-corner-rectangles",
+    "language": "java",
+    "code": "class Solution {\n  public int countCornerRectangles(int[][] grid) {\n    int m = grid.length, n = grid[0].length, total = 0;\n    // for each pair of rows, any two shared 1-columns form a rectangle\n    for (int a = 0; a < m; a++)\n      for (int b = a + 1; b < m; b++) {\n        int shared = 0;\n        for (int c = 0; c < n; c++) if (grid[a][c] == 1 && grid[b][c] == 1) shared++;\n        total += shared * (shared - 1) / 2;\n      }\n    return total;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "subtree-removal-game-with-fibonacci-tree",
+    "language": "java",
+    "code": "class Solution {\n    public boolean findGameWinner(int n) {\n        if (n == 1) return false;\n        int a = 0, b = 1; // grundy of order(1), order(2)\n        for (int i = 3; i <= n; i++) {\n            int c = (a + 1) ^ (b + 1);\n            a = b;\n            b = c;\n        }\n        return b != 0;\n    }\n}\n"
+}

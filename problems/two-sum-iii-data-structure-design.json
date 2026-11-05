@@ -1,5 +1,5 @@
 {
     "problemName": "two-sum-iii-data-structure-design",
-    "language": "python3",
-    "code": "class TwoSum:\n\n    def __init__(self):\n        self.nums = []\n\n    def add(self, number: int) -> None:\n        self.nums.append(number)\n\n    def find(self, value: int) -> bool:\n        d = set()\n        for num in self.nums:\n            if num in d:\n                return True\n            else:\n                d.add(value - num)\n        return False\n        \n        \n        \n\n\n# Your TwoSum object will be instantiated and called as such:\n# obj = TwoSum()\n# obj.add(number)\n# param_2 = obj.find(value)"
+    "language": "java",
+    "code": "import java.util.*;\n\nclass TwoSum {\n  private final Map<Long, Integer> count = new HashMap<>();\n\n  public TwoSum() {}\n\n  public void add(int number) {\n    count.merge((long) number, 1, Integer::sum);\n  }\n\n  public boolean find(int value) {\n    for (Map.Entry<Long, Integer> e : count.entrySet()) {\n      long other = value - e.getKey();\n      if (other == e.getKey() ? e.getValue() > 1 : count.containsKey(other)) return true;\n    }\n    return false;\n  }\n}\n"
 }

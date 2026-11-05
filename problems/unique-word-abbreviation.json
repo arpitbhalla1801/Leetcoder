@@ -1,0 +1,5 @@
+{
+    "problemName": "unique-word-abbreviation",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass ValidWordAbbr {\n  private final Map<String, String> owner = new HashMap<>(); // abbreviation -> its word, or \"\" if shared\n\n  public ValidWordAbbr(String[] dictionary) {\n    for (String w : dictionary) {\n      String a = abbr(w);\n      String prev = owner.get(a);\n      owner.put(a, prev == null || prev.equals(w) ? w : \"\");\n    }\n  }\n\n  public boolean isUnique(String word) {\n    String o = owner.get(abbr(word));\n    return o == null || o.equals(word);\n  }\n\n  private String abbr(String w) {\n    return w.length() <= 2 ? w : w.charAt(0) + String.valueOf(w.length() - 2) + w.charAt(w.length() - 1);\n  }\n}\n"
+}

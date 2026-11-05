@@ -1,0 +1,5 @@
+{
+    "problemName": "path-sum-iv",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private final Map<Integer, Integer> tree = new HashMap<>(); // depth * 10 + position -> value\n\n  public int pathSum(int[] nums) {\n    for (int x : nums) tree.put(x / 10, x % 10);\n    return walk(11, 0);\n  }\n\n  private int walk(int key, int sum) {\n    Integer v = tree.get(key);\n    if (v == null) return 0;\n    sum += v;\n    int d = key / 10, p = key % 10;\n    int left = (d + 1) * 10 + 2 * p - 1, right = left + 1;\n    if (!tree.containsKey(left) && !tree.containsKey(right)) return sum;\n    return walk(left, sum) + walk(right, sum);\n  }\n}\n"
+}

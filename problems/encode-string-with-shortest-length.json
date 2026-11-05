@@ -1,0 +1,5 @@
+{
+    "problemName": "encode-string-with-shortest-length",
+    "language": "java",
+    "code": "class Solution {\n  public String encode(String s) {\n    int n = s.length();\n    String[][] dp = new String[n][n]; // dp[i][j]: shortest encoding of s[i..j]\n    for (int len = 1; len <= n; len++) {\n      for (int i = 0; i + len <= n; i++) {\n        int j = i + len - 1;\n        String sub = s.substring(i, j + 1);\n        dp[i][j] = sub;\n        if (len < 5) continue; // encoding can only help from length 5 on\n        for (int k = i; k < j; k++)\n          if (dp[i][k].length() + dp[k + 1][j].length() < dp[i][j].length()) dp[i][j] = dp[i][k] + dp[k + 1][j];\n        // smallest repeating unit: first reappearance of sub inside sub + sub\n        int p = (sub + sub).indexOf(sub, 1);\n        if (p < sub.length()) {\n          String enc = (sub.length() / p) + \"[\" + dp[i][i + p - 1] + \"]\";\n          if (enc.length() < dp[i][j].length()) dp[i][j] = enc;\n        }\n      }\n    }\n    return dp[0][n - 1];\n  }\n}\n"
+}

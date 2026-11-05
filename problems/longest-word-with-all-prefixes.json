@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-word-with-all-prefixes",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public String longestWord(String[] words) {\n    Arrays.sort(words, (a, b) -> a.length() != b.length() ? a.length() - b.length() : a.compareTo(b));\n    Set<String> good = new HashSet<>(); // words whose every prefix is a word\n    String best = \"\";\n    for (String w : words) {\n      if (w.length() == 1 || good.contains(w.substring(0, w.length() - 1))) {\n        good.add(w);\n        if (w.length() > best.length()) best = w; // shorter-first, then lexicographic, so the first longest wins\n      }\n    }\n    return best;\n  }\n}\n"
+}

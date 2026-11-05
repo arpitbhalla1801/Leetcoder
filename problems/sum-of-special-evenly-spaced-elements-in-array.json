@@ -1,0 +1,5 @@
+{
+    "problemName": "sum-of-special-evenly-spaced-elements-in-array",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] solve(int[] nums, int[][] queries) {\n    final long MOD = 1_000_000_007L;\n    int n = nums.length, limit = (int) Math.sqrt(n) + 1;\n    int[] ans = new int[queries.length];\n    // small steps: answer offline with one suffix-sum pass per distinct step; large steps: walk directly\n    Map<Integer, List<Integer>> byStep = new HashMap<>();\n    for (int i = 0; i < queries.length; i++) {\n      int x = queries[i][0], y = queries[i][1];\n      if (y < limit) byStep.computeIfAbsent(y, k -> new ArrayList<>()).add(i);\n      else {\n        long sum = 0;\n        for (int j = x; j < n; j += y) sum += nums[j];\n        ans[i] = (int) (sum % MOD);\n      }\n    }\n    long[] suffix = new long[n];\n    for (Map.Entry<Integer, List<Integer>> e : byStep.entrySet()) {\n      int y = e.getKey();\n      for (int j = n - 1; j >= 0; j--) suffix[j] = (nums[j] + (j + y < n ? suffix[j + y] : 0)) % MOD;\n      for (int qi : e.getValue()) ans[qi] = (int) suffix[queries[qi][0]];\n    }\n    return ans;\n  }\n}\n"
+}

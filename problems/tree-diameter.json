@@ -1,0 +1,5 @@
+{
+    "problemName": "tree-diameter",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int treeDiameter(int[][] edges) {\n    int n = edges.length + 1;\n    List<List<Integer>> adj = new ArrayList<>();\n    for (int i = 0; i < n; i++) adj.add(new ArrayList<>());\n    for (int[] e : edges) {\n      adj.get(e[0]).add(e[1]);\n      adj.get(e[1]).add(e[0]);\n    }\n    // the farthest node from anywhere is one end of a diameter\n    int[] first = farthest(adj, 0);\n    return farthest(adj, first[0])[1];\n  }\n\n  // {farthest node, its distance}\n  private int[] farthest(List<List<Integer>> adj, int start) {\n    int[] dist = new int[adj.size()];\n    Arrays.fill(dist, -1);\n    dist[start] = 0;\n    Deque<Integer> q = new ArrayDeque<>();\n    q.add(start);\n    int last = start;\n    while (!q.isEmpty()) {\n      last = q.poll();\n      for (int nb : adj.get(last))\n        if (dist[nb] < 0) {\n          dist[nb] = dist[last] + 1;\n          q.add(nb);\n        }\n    }\n    return new int[] {last, dist[last]};\n  }\n}\n"
+}

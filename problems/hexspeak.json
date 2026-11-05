@@ -1,0 +1,5 @@
+{
+    "problemName": "hexspeak",
+    "language": "java",
+    "code": "class Solution {\n  public String toHexspeak(String num) {\n    String hex = Long.toHexString(Long.parseLong(num)).toUpperCase().replace('0', 'O').replace('1', 'I');\n    for (char c : hex.toCharArray()) if (Character.isDigit(c)) return \"ERROR\";\n    return hex;\n  }\n}\n"
+}

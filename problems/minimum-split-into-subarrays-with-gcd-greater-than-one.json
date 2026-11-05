@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-split-into-subarrays-with-gcd-greater-than-one",
+    "language": "java",
+    "code": "class Solution {\n    public int minimumSplits(int[] nums) {\n        int parts = 1, g = 0;\n        for (int x : nums) {\n            int ng = gcd(g, x);\n            if (ng == 1) {\n                parts++;\n                g = x;\n            } else {\n                g = ng;\n            }\n        }\n        return parts;\n    }\n\n    private int gcd(int a, int b) {\n        return b == 0 ? a : gcd(b, a % b);\n    }\n}\n"
+}

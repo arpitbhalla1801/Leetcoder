@@ -1,1 +1,5 @@
-{"problemName":"heaters","language":"cpp","code":"class Solution {\npublic:\n    int findRadius(vector<int>& houses, vector<int>& heaters) {\n        sort(houses.begin(), houses.end());\n        sort(heaters.begin(), heaters.end());\n        int ans = -1e9;\n        for(auto i : houses){\n            auto it = lower_bound(heaters.begin(), heaters.end(), i);\n            int mn = 1e9;\n            if(it != heaters.end()){\n                mn = min(mn,abs(*it - i));\n            }\n            if(it != heaters.begin()){\n                mn = min(mn, abs(i - *(--it)));\n            }\n            ans = max(ans, mn);\n        }\n        return ans;\n    }\n};"}
+{
+    "problemName": "heaters",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int findRadius(int[] houses, int[] heaters) {\n    Arrays.sort(heaters);\n    int radius = 0;\n    for (int h : houses) {\n      int i = Arrays.binarySearch(heaters, h);\n      if (i >= 0) continue;\n      i = -i - 1; // first heater to the right\n      int dist = Integer.MAX_VALUE;\n      if (i < heaters.length) dist = heaters[i] - h;\n      if (i > 0) dist = Math.min(dist, h - heaters[i - 1]);\n      radius = Math.max(radius, dist);\n    }\n    return radius;\n  }\n}\n"
+}

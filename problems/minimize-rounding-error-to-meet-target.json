@@ -1,0 +1,5 @@
+{
+    "problemName": "minimize-rounding-error-to-meet-target",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public String minimizeError(String[] prices, int target) {\n    // work in thousandths to avoid floating-point error\n    long floorSum = 0, error = 0;\n    List<Integer> fracs = new ArrayList<>();\n    for (String p : prices) {\n      long milli = Math.round(Double.parseDouble(p) * 1000);\n      floorSum += milli / 1000;\n      int frac = (int) (milli % 1000);\n      if (frac > 0) fracs.add(frac);\n      error += frac; // everything floored to start\n    }\n    long ups = target - floorSum; // how many prices must be rounded up instead\n    if (ups < 0 || ups > fracs.size()) return \"-1\";\n    fracs.sort(Collections.reverseOrder()); // rounding up the largest fractions costs least\n    for (int i = 0; i < ups; i++) error += 1000 - 2L * fracs.get(i);\n    return String.format(\"%d.%03d\", error / 1000, error % 1000);\n  }\n}\n"
+}

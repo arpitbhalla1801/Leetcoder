@@ -1,5 +1,5 @@
 {
     "problemName": "minimum-cost-to-connect-sticks",
-    "language": "python3",
-    "code": "class Solution:\n    def connectSticks(self, sticks: List[int]) -> int:\n        ans = 0\n        heapq.heapify(sticks)\n        \n        while len(sticks) > 1:\n            stickOne = heapq.heappop(sticks)\n            stickTwo = heapq.heappop(sticks)\n            combo = stickOne + stickTwo\n            ans += combo\n            heapq.heappush(sticks, combo)\n        \n        return ans"
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int connectSticks(int[] sticks) {\n    PriorityQueue<Integer> pq = new PriorityQueue<>();\n    for (int s : sticks) pq.add(s);\n    int cost = 0;\n    while (pq.size() > 1) {\n      int joined = pq.poll() + pq.poll();\n      cost += joined;\n      pq.add(joined);\n    }\n    return cost;\n  }\n}\n"
 }

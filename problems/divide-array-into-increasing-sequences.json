@@ -1,5 +1,5 @@
 {
     "problemName": "divide-array-into-increasing-sequences",
-    "language": "python3",
-    "code": "class Solution:\n    def canDivideIntoSubsequences(self, nums: List[int], k: int) -> bool:\n        N = len(nums)\n        maxDup = 0\n        for i in range(1, N):\n            if nums[i-1] == nums[i]:\n                maxDup += 1\n                if (maxDup + 1) * k > N:\n                    return False\n            else:\n                maxDup = 0\n        return True"
+    "language": "java",
+    "code": "class Solution {\n  public boolean canDivideIntoSubsequences(int[] nums, int k) {\n    // the most frequent value needs its own sequence per copy; each needs k elements\n    int run = 1, maxRun = 1;\n    for (int i = 1; i < nums.length; i++) {\n      run = nums[i] == nums[i - 1] ? run + 1 : 1;\n      maxRun = Math.max(maxRun, run);\n    }\n    return (long) maxRun * k <= nums.length;\n  }\n}\n"
 }

@@ -1,1 +1,5 @@
-{"problemName":"longest-palindromic-subsequence","language":"cpp","code":"class Solution {\npublic:\n    int lcs(string &s1, string &s2, int ind1, int ind2, vector<vector<int>> &dp){\n        if(ind1 == s1.length() || ind2 == s2.length())return 0;\n        if(dp[ind1][ind2] != -1)return dp[ind1][ind2];\n        int notTake = max(lcs(s1, s2, ind1 + 1, ind2, dp),\n                            lcs(s1, s2, ind1, ind2 + 1, dp));\n        int take = 0;\n        if(s1[ind1] == s2[ind2])take = 1 + lcs(s1, s2, ind1 + 1, ind2 + 1, dp);\n        return dp[ind1][ind2] = max(take, notTake);\n    }\n    int longestPalindromeSubseq(string s) {\n        string r = s;\n        reverse(r.begin(), r.end());\n        vector<vector<int>> dp(s.length() + 1, vector<int> (s.length() + 1, -1));\n        return lcs(s, r, 0, 0, dp);\n    }\n};"}
+{
+    "problemName": "longest-palindromic-subsequence",
+    "language": "java",
+    "code": "class Solution {\n  public int longestPalindromeSubseq(String s) {\n    int n = s.length();\n    int[][] dp = new int[n][n];\n    for (int i = n - 1; i >= 0; i--) {\n      dp[i][i] = 1;\n      for (int j = i + 1; j < n; j++)\n        dp[i][j] = s.charAt(i) == s.charAt(j) ? dp[i + 1][j - 1] + 2 : Math.max(dp[i + 1][j], dp[i][j - 1]);\n    }\n    return dp[0][n - 1];\n  }\n}\n"
+}

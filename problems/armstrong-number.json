@@ -1,0 +1,5 @@
+{
+    "problemName": "armstrong-number",
+    "language": "java",
+    "code": "class Solution {\n  public boolean isArmstrong(int n) {\n    int k = String.valueOf(n).length();\n    long sum = 0;\n    for (int x = n; x > 0; x /= 10) sum += (long) Math.pow(x % 10, k);\n    return sum == n;\n  }\n}\n"
+}

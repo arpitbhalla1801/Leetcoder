@@ -1,5 +1,5 @@
 {
     "problemName": "line-reflection",
-    "language": "cpp",
-    "code": "class Solution {\npublic:\n    bool isReflected(vector<vector<int>>& points) {\n        set<pair<double, double>> unique_points;\n        int x_max = points[0][0], x_min = points[0][0];\n\n        for (const auto& point : points)\n        {\n            x_max = max(point[0], x_max);\n            x_min = min(point[0], x_min);\n            unique_points.insert({point[0], point[1]});\n        }\n\n        double x_line = (x_min + x_max) / 2.0;\n\n        for (const auto& point : points) {\n            auto reflected_point = pair<double, double>(2 * x_line - point[0], point[1]);\n            if (!unique_points.count(reflected_point))\n                return false;\n        }\n\n        return true;\n    }\n};"
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public boolean isReflected(int[][] points) {\n    int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;\n    Set<Long> set = new HashSet<>();\n    for (int[] p : points) {\n      min = Math.min(min, p[0]);\n      max = Math.max(max, p[0]);\n      set.add(key(p[0], p[1]));\n    }\n    long sum = (long) min + max; // reflection of x is sum - x\n    for (int[] p : points) if (!set.contains(key(sum - p[0], p[1]))) return false;\n    return true;\n  }\n\n  private long key(long x, long y) {\n    return x * 1_000_000_007L + y;\n  }\n}\n"
 }

@@ -1,0 +1,5 @@
+{
+    "problemName": "campus-bikes",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[] assignBikes(int[][] workers, int[][] bikes) {\n    // bucket every pair by distance; within a bucket pairs are added in (worker, bike) order\n    List<List<int[]>> buckets = new ArrayList<>();\n    for (int d = 0; d <= 2000; d++) buckets.add(new ArrayList<>());\n    for (int w = 0; w < workers.length; w++)\n      for (int b = 0; b < bikes.length; b++) {\n        int d = Math.abs(workers[w][0] - bikes[b][0]) + Math.abs(workers[w][1] - bikes[b][1]);\n        buckets.get(d).add(new int[] {w, b});\n      }\n    int[] ans = new int[workers.length];\n    Arrays.fill(ans, -1);\n    boolean[] taken = new boolean[bikes.length];\n    int assigned = 0;\n    for (List<int[]> bucket : buckets) {\n      for (int[] p : bucket) {\n        if (ans[p[0]] != -1 || taken[p[1]]) continue;\n        ans[p[0]] = p[1];\n        taken[p[1]] = true;\n        if (++assigned == workers.length) return ans;\n      }\n    }\n    return ans;\n  }\n}\n"
+}

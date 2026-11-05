@@ -1,5 +1,5 @@
 {
     "problemName": "meeting-rooms-ii",
-    "language": "cpp",
-    "code": "class Solution {\npublic:\n    int minMeetingRooms(vector<vector<int>>& intervals) {\n        int n= intervals.size();\n        if(n<=1) return n;\n        \n        priority_queue<int, vector<int>, greater<int> > pq;\n        \n        sort(intervals.begin(), intervals.end());\n        int maxSize=0;\n        \n        for(int i=0;i<n;i++)\n        {\n            while(!pq.empty() && pq.top()<= intervals[i][0])\n                pq.pop();\n            pq.push(intervals[i][1]);\n            int pqSize= pq.size();\n            maxSize=std::max(maxSize, pqSize);\n        }\n        return maxSize;\n        \n    }\n};"
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minMeetingRooms(int[][] intervals) {\n    Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));\n    PriorityQueue<Integer> ends = new PriorityQueue<>();\n    int best = 0;\n    for (int[] m : intervals) {\n      while (!ends.isEmpty() && ends.peek() <= m[0]) ends.poll();\n      ends.add(m[1]);\n      best = Math.max(best, ends.size());\n    }\n    return best;\n  }\n}\n"
 }

@@ -1,0 +1,5 @@
+{
+    "problemName": "depth-of-bst-given-insertion-order",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int maxDepthBST(int[] order) {\n    // a new value hangs under the deeper of its inserted predecessor and successor\n    TreeMap<Integer, Integer> depth = new TreeMap<>();\n    int best = 0;\n    for (int v : order) {\n      Map.Entry<Integer, Integer> lo = depth.lowerEntry(v), hi = depth.higherEntry(v);\n      int d = 1 + Math.max(lo == null ? 0 : lo.getValue(), hi == null ? 0 : hi.getValue());\n      depth.put(v, d);\n      best = Math.max(best, d);\n    }\n    return best;\n  }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "brace-expansion",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public String[] expand(String s) {\n    List<List<Character>> groups = new ArrayList<>();\n    for (int i = 0; i < s.length(); i++) {\n      List<Character> g = new ArrayList<>();\n      if (s.charAt(i) == '{') {\n        for (i++; s.charAt(i) != '}'; i++) if (s.charAt(i) != ',') g.add(s.charAt(i));\n      } else g.add(s.charAt(i));\n      Collections.sort(g);\n      groups.add(g);\n    }\n    List<String> res = new ArrayList<>();\n    build(groups, 0, new StringBuilder(), res);\n    return res.toArray(new String[0]);\n  }\n\n  private void build(List<List<Character>> groups, int i, StringBuilder sb, List<String> res) {\n    if (i == groups.size()) {\n      res.add(sb.toString());\n      return;\n    }\n    for (char c : groups.get(i)) {\n      sb.append(c);\n      build(groups, i + 1, sb, res);\n      sb.setLength(sb.length() - 1);\n    }\n  }\n}\n"
+}

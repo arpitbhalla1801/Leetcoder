@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-average-subtree",
+    "language": "java",
+    "code": "class Solution {\n  private double best;\n\n  public double maximumAverageSubtree(TreeNode root) {\n    walk(root);\n    return best;\n  }\n\n  // {sum, count} of the subtree\n  private long[] walk(TreeNode node) {\n    if (node == null) return new long[2];\n    long[] l = walk(node.left), r = walk(node.right);\n    long sum = l[0] + r[0] + node.val, count = l[1] + r[1] + 1;\n    best = Math.max(best, (double) sum / count);\n    return new long[] {sum, count};\n  }\n}\n"
+}

@@ -1,5 +1,5 @@
 {
     "problemName": "palindrome-removal",
-    "language": "python3",
-    "code": "class Solution:\n    def minimumMoves(self, arr: List[int]) -> int:\n        N=len(arr)\n        @cache\n        def dfs(lf=0,rt=N-1):\n            # print(lf,rt)\n            if lf>rt:return 1\n            if lf==rt:\n                return 1\n            N=len(arr)\n            ret=1<<31\n            for i in range(lf,rt):\n                ret=min(ret,dfs(lf,i)+dfs(i+1,rt))\n            while lf<rt and arr[lf]==arr[rt]:\n                ret=min(ret,dfs(lf+1,rt-1)) # merge\n                lf+=1\n                rt-=1\n            return ret\n        return dfs(0,N-1)\n                "
+    "language": "java",
+    "code": "class Solution {\n  public int minimumMoves(int[] arr) {\n    int n = arr.length;\n    int[][] dp = new int[n + 1][n + 1]; // dp[i][j]: fewest moves to clear arr[i..j]\n    for (int i = n - 1; i >= 0; i--) {\n      for (int j = i; j < n; j++) {\n        dp[i][j] = 1 + (i + 1 <= j ? dp[i + 1][j] : 0); // remove arr[i] on its own\n        // or remove arr[i] together with a matching arr[k], as the outer ends of a palindrome\n        for (int k = i + 1; k <= j; k++) {\n          if (arr[i] != arr[k]) continue;\n          int inner = k == i + 1 ? 1 : dp[i + 1][k - 1];\n          int rest = k + 1 <= j ? dp[k + 1][j] : 0;\n          dp[i][j] = Math.min(dp[i][j], inner + rest);\n        }\n      }\n    }\n    return dp[0][n - 1];\n  }\n}\n"
 }

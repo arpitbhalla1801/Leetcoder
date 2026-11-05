@@ -1,0 +1,5 @@
+{
+    "problemName": "longest-palindromic-subsequence-ii",
+    "language": "java",
+    "code": "class Solution {\n  public int longestPalindromeSubseq(String s) {\n    int n = s.length();\n    // dp[i][j][p]: longest good palindrome in s[i..j] whose outer letter differs from p (26 = no restriction)\n    int[][][] dp = new int[n + 1][n + 1][27];\n    for (int i = n - 1; i >= 0; i--)\n      for (int j = i + 1; j < n; j++)\n        for (int p = 0; p < 27; p++) {\n          int c = s.charAt(i) - 'a';\n          if (s.charAt(i) == s.charAt(j) && c != p) dp[i][j][p] = 2 + dp[i + 1][j - 1][c];\n          else dp[i][j][p] = Math.max(dp[i + 1][j][p], dp[i][j - 1][p]);\n        }\n    return n == 0 ? 0 : dp[0][n - 1][26];\n  }\n}\n"
+}

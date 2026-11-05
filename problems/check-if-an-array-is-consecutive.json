@@ -1,0 +1,5 @@
+{
+    "problemName": "check-if-an-array-is-consecutive",
+    "language": "java",
+    "code": "class Solution {\n    public boolean isConsecutive(int[] nums) {\n        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;\n        Set<Integer> seen = new HashSet<>();\n        for (int x : nums) {\n            if (!seen.add(x)) return false;\n            min = Math.min(min, x);\n            max = Math.max(max, x);\n        }\n        return max - min == nums.length - 1;\n    }\n}\n"
+}

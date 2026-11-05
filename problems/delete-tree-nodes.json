@@ -1,0 +1,5 @@
+{
+    "problemName": "delete-tree-nodes",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int deleteTreeNodes(int nodes, int[] parent, int[] value) {\n    List<List<Integer>> children = new ArrayList<>();\n    for (int i = 0; i < nodes; i++) children.add(new ArrayList<>());\n    for (int i = 1; i < nodes; i++) children.get(parent[i]).add(i);\n    return walk(0, children, value)[1];\n  }\n\n  // {subtree sum, nodes kept}; a zero-sum subtree keeps nothing\n  private int[] walk(int node, List<List<Integer>> children, int[] value) {\n    int sum = value[node], kept = 1;\n    for (int c : children.get(node)) {\n      int[] r = walk(c, children, value);\n      sum += r[0];\n      kept += r[1];\n    }\n    return new int[] {sum, sum == 0 ? 0 : kept};\n  }\n}\n"
+}

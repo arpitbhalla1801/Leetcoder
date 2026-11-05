@@ -1,0 +1,5 @@
+{
+    "problemName": "put-boxes-into-the-warehouse-i",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int maxBoxesInWarehouse(int[] boxes, int[] warehouse) {\n    int n = warehouse.length;\n    int[] limit = new int[n]; // a room only admits what fits through every room before it\n    for (int i = 0; i < n; i++) limit[i] = i == 0 ? warehouse[0] : Math.min(limit[i - 1], warehouse[i]);\n    Arrays.sort(boxes);\n    int count = 0;\n    for (int room = n - 1; room >= 0 && count < boxes.length; room--) if (boxes[count] <= limit[room]) count++;\n    return count;\n  }\n}\n"
+}

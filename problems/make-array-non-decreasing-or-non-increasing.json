@@ -1,0 +1,5 @@
+{
+    "problemName": "make-array-non-decreasing-or-non-increasing",
+    "language": "java",
+    "code": "class Solution {\n    public int convertArray(int[] nums) {\n        int n = nums.length;\n        int[] rev = new int[n];\n        for (int i = 0; i < n; i++) rev[i] = nums[n - 1 - i];\n        return Math.min(cost(nums), cost(rev));\n    }\n\n    // slope trick: min ops to make non-decreasing\n    private int cost(int[] a) {\n        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());\n        int ops = 0;\n        for (int x : a) {\n            pq.add(x);\n            if (pq.peek() > x) {\n                ops += pq.poll() - x;\n                pq.add(x);\n            }\n        }\n        return ops;\n    }\n}\n"
+}

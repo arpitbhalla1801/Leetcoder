@@ -1,0 +1,5 @@
+{
+    "problemName": "paths-in-maze-that-lead-to-same-room",
+    "language": "java",
+    "code": "class Solution {\n    public int numberOfPaths(int n, int[][] corridors) {\n        boolean[][] adj = new boolean[n + 1][n + 1];\n        List<Integer>[] g = new List[n + 1];\n        for (int i = 0; i <= n; i++) g[i] = new ArrayList<>();\n        for (int[] c : corridors) {\n            adj[c[0]][c[1]] = adj[c[1]][c[0]] = true;\n            g[c[0]].add(c[1]);\n            g[c[1]].add(c[0]);\n        }\n        int ans = 0;\n        for (int u = 1; u <= n; u++)\n            for (int v : g[u]) {\n                if (v <= u) continue;\n                for (int w : g[v])\n                    if (w > v && adj[u][w]) ans++;\n            }\n        return ans;\n    }\n}\n"
+}

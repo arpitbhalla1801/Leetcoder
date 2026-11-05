@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-time-for-k-virus-variants-to-spread",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minDayskVariants(int[][] points, int k) {\n    // the best meeting cell lies inside the points' bounding box: try every cell there\n    int best = Integer.MAX_VALUE;\n    int[] dist = new int[points.length];\n    for (int x = 1; x <= 100; x++)\n      for (int y = 1; y <= 100; y++) {\n        for (int i = 0; i < points.length; i++) dist[i] = Math.abs(points[i][0] - x) + Math.abs(points[i][1] - y);\n        Arrays.sort(dist);\n        best = Math.min(best, dist[k - 1]);\n      }\n    return best;\n  }\n}\n"
+}

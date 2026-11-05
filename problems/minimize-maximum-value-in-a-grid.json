@@ -1,0 +1,5 @@
+{
+    "problemName": "minimize-maximum-value-in-a-grid",
+    "language": "java",
+    "code": "class Solution {\n    public int[][] minScore(int[][] grid) {\n        int m = grid.length, n = grid[0].length;\n        Integer[] cells = new Integer[m * n];\n        for (int i = 0; i < m * n; i++) cells[i] = i;\n        Arrays.sort(cells, (a, b) -> Integer.compare(grid[a / n][a % n], grid[b / n][b % n]));\n        int[] rowMax = new int[m], colMax = new int[n];\n        int[][] res = new int[m][n];\n        for (int id : cells) {\n            int r = id / n, c = id % n;\n            int v = Math.max(rowMax[r], colMax[c]) + 1;\n            res[r][c] = v;\n            rowMax[r] = colMax[c] = v;\n        }\n        return res;\n    }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "digit-count-in-range",
+    "language": "java",
+    "code": "class Solution {\n  public int digitsCount(int d, int low, int high) {\n    return (int) (count(d, high) - count(d, low - 1));\n  }\n\n  // occurrences of digit d in 1..n, position by position\n  private long count(int d, long n) {\n    long total = 0;\n    for (long place = 1; place <= n; place *= 10) {\n      long high = n / (place * 10), cur = n / place % 10, low = n % place;\n      if (d == 0) high--; // zero cannot lead, so the highest block has no zero here\n      if (cur > d) total += (high + 1) * place;\n      else if (cur == d) total += high * place + low + 1;\n      else total += high * place;\n    }\n    return total;\n  }\n}\n"
+}

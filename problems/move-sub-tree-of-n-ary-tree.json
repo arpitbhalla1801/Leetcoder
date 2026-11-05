@@ -1,0 +1,5 @@
+{
+    "problemName": "move-sub-tree-of-n-ary-tree",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public Node moveSubTree(Node root, Node p, Node q) {\n    Map<Node, Node> parent = new HashMap<>();\n    fillParents(root, null, parent);\n    if (parent.get(p) == q) return root; // already a direct child\n    Node pParent = parent.get(p);\n    if (inSubtree(p, q)) {\n      // q lives under p: detach q, put it where p was, then hang p under q\n      Node qParent = parent.get(q);\n      qParent.children.remove(q);\n      if (pParent == null) root = q;\n      else pParent.children.set(pParent.children.indexOf(p), q);\n    } else {\n      pParent.children.remove(p);\n    }\n    q.children.add(p);\n    return root;\n  }\n\n  private void fillParents(Node node, Node par, Map<Node, Node> parent) {\n    parent.put(node, par);\n    for (Node c : node.children) fillParents(c, node, parent);\n  }\n\n  private boolean inSubtree(Node top, Node target) {\n    if (top == target) return true;\n    for (Node c : top.children) if (inSubtree(c, target)) return true;\n    return false;\n  }\n}\n"
+}

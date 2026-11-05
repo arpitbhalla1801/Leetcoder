@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-cost-to-separate-sentence-into-rows",
+    "language": "java",
+    "code": "class Solution {\n    public int minimumCost(String sentence, int k) {\n        String[] w = sentence.split(\" \");\n        int n = w.length;\n        long[] dp = new long[n + 1];\n        for (int i = n - 1; i >= 0; i--) {\n            int len = -1;\n            int j = i;\n            for (; j < n; j++) {\n                len += w[j].length() + 1;\n                if (len > k) break;\n            }\n            if (j == n) { dp[i] = 0; continue; }\n            dp[i] = Long.MAX_VALUE;\n            len = -1;\n            for (j = i; j < n; j++) {\n                len += w[j].length() + 1;\n                if (len > k) break;\n                dp[i] = Math.min(dp[i], (long) (k - len) * (k - len) + dp[j + 1]);\n            }\n        }\n        return (int) dp[0];\n    }\n}\n"
+}

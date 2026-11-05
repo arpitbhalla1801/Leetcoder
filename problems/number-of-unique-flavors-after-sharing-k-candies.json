@@ -1,0 +1,5 @@
+{
+    "problemName": "number-of-unique-flavors-after-sharing-k-candies",
+    "language": "java",
+    "code": "class Solution {\n    public int shareCandies(int[] candies, int k) {\n        Map<Integer, Integer> cnt = new HashMap<>();\n        for (int c : candies) cnt.merge(c, 1, Integer::sum);\n        if (k == 0) return cnt.size();\n        int best = 0;\n        for (int i = 0; i < candies.length; i++) {\n            if (cnt.merge(candies[i], -1, Integer::sum) == 0) cnt.remove(candies[i]);\n            if (i >= k) cnt.merge(candies[i - k], 1, Integer::sum);\n            if (i >= k - 1) best = Math.max(best, cnt.size());\n        }\n        return best;\n    }\n}\n"
+}

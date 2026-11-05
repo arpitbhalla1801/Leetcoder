@@ -1,0 +1,5 @@
+{
+    "problemName": "index-pairs-of-a-string",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int[][] indexPairs(String text, String[] words) {\n    List<int[]> res = new ArrayList<>();\n    for (int i = 0; i < text.length(); i++)\n      for (String w : words) if (text.startsWith(w, i)) res.add(new int[] {i, i + w.length() - 1});\n    res.sort((a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] - b[1]);\n    return res.toArray(new int[0][]);\n  }\n}\n"
+}

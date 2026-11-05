@@ -1,0 +1,5 @@
+{
+    "problemName": "before-and-after-puzzle",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<String> beforeAndAfterPuzzles(String[] phrases) {\n    TreeSet<String> res = new TreeSet<>();\n    for (int i = 0; i < phrases.length; i++)\n      for (int j = 0; j < phrases.length; j++) {\n        if (i == j) continue;\n        String a = phrases[i], b = phrases[j];\n        String last = a.substring(a.lastIndexOf(' ') + 1);\n        int sp = b.indexOf(' ');\n        String first = sp < 0 ? b : b.substring(0, sp);\n        if (last.equals(first)) res.add(a + b.substring(first.length()));\n      }\n    return new ArrayList<>(res);\n  }\n}\n"
+}

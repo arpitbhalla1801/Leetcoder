@@ -1,0 +1,5 @@
+{
+    "problemName": "count-pairs-of-equal-substrings-with-minimum-difference",
+    "language": "java",
+    "code": "class Solution {\n  public int countQuadruples(String firstString, String secondString) {\n    // a single character minimizes j - a: its first spot in one string and last spot in the other\n    int[] first = new int[26], last = new int[26];\n    java.util.Arrays.fill(first, -1);\n    java.util.Arrays.fill(last, -1);\n    for (int i = firstString.length() - 1; i >= 0; i--) first[firstString.charAt(i) - 'a'] = i;\n    for (int i = 0; i < secondString.length(); i++) last[secondString.charAt(i) - 'a'] = i;\n    int best = Integer.MAX_VALUE, count = 0;\n    for (int c = 0; c < 26; c++) {\n      if (first[c] < 0 || last[c] < 0) continue;\n      int d = first[c] - last[c];\n      if (d < best) {\n        best = d;\n        count = 1;\n      } else if (d == best) count++;\n    }\n    return count;\n  }\n}\n"
+}

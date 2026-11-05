@@ -1,0 +1,5 @@
+{
+    "problemName": "toss-strange-coins",
+    "language": "java",
+    "code": "class Solution {\n  public double probabilityOfHeads(double[] prob, int target) {\n    double[] dp = new double[target + 1]; // dp[h]: probability of exactly h heads so far\n    dp[0] = 1;\n    for (double p : prob)\n      for (int h = target; h >= 0; h--) dp[h] = dp[h] * (1 - p) + (h > 0 ? dp[h - 1] * p : 0);\n    return dp[target];\n  }\n}\n"
+}

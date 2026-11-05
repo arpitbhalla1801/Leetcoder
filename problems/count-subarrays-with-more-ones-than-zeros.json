@@ -1,0 +1,5 @@
+{
+    "problemName": "count-subarrays-with-more-ones-than-zeros",
+    "language": "java",
+    "code": "class Solution {\n    public int subarraysWithMoreOnesThanZeroes(int[] nums) {\n        int n = nums.length, off = n + 1;\n        int[] bit = new int[2 * n + 3];\n        long ans = 0;\n        int pre = 0;\n        add(bit, pre + off);\n        for (int x : nums) {\n            pre += x == 1 ? 1 : -1;\n            ans += query(bit, pre + off - 1);\n            add(bit, pre + off);\n        }\n        return (int) (ans % 1_000_000_007);\n    }\n\n    private void add(int[] bit, int i) {\n        for (; i < bit.length; i += i & -i) bit[i]++;\n    }\n\n    private long query(int[] bit, int i) {\n        long s = 0;\n        for (; i > 0; i -= i & -i) s += bit[i];\n        return s;\n    }\n}\n"
+}

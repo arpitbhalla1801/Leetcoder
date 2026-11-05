@@ -1,0 +1,5 @@
+{
+    "problemName": "unique-substrings-with-equal-digit-frequency",
+    "language": "java",
+    "code": "class Solution {\n    public int equalDigitFrequency(String s) {\n        final long M1 = 1_000_000_007L, M2 = 998_244_353L;\n        int n = s.length();\n        Set<Long> seen = new HashSet<>();\n        for (int i = 0; i < n; i++) {\n            int[] cnt = new int[10];\n            int distinct = 0, max = 0;\n            long h1 = 0, h2 = 0;\n            for (int j = i; j < n; j++) {\n                int d = s.charAt(j) - '0';\n                if (cnt[d]++ == 0) distinct++;\n                max = Math.max(max, cnt[d]);\n                h1 = (h1 * 11 + d + 1) % M1;\n                h2 = (h2 * 13 + d + 1) % M2;\n                if (max * distinct == j - i + 1) seen.add(h1 * 1_000_000_009L + h2);\n            }\n        }\n        return seen.size();\n    }\n}\n"
+}

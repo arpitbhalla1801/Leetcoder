@@ -1,5 +1,5 @@
 {
     "problemName": "paint-house",
-    "language": "python3",
-    "code": "class Solution:\n    def minCost(self, costs: List[List[int]]) -> int:\n        if len(costs) == 0 or len(costs[0]) == 0:\n            return 0\n        if len(costs) == 1:\n            return min(costs[0])\n\n        for i in range(1, len(costs)):\n            costs[i][0] += min(costs[i-1][1], costs[i-1][2])\n            costs[i][1] += min(costs[i-1][0], costs[i-1][2])\n            costs[i][2] += min(costs[i-1][0], costs[i-1][1])\n\n        return min(costs[-1])"
+    "language": "java",
+    "code": "class Solution {\n  public int minCost(int[][] costs) {\n    int r = 0, g = 0, b = 0;\n    for (int[] c : costs) {\n      int nr = c[0] + Math.min(g, b), ng = c[1] + Math.min(r, b), nb = c[2] + Math.min(r, g);\n      r = nr;\n      g = ng;\n      b = nb;\n    }\n    return Math.min(r, Math.min(g, b));\n  }\n}\n"
 }

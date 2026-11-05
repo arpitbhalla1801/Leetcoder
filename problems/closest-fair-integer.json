@@ -1,0 +1,5 @@
+{
+    "problemName": "closest-fair-integer",
+    "language": "java",
+    "code": "class Solution {\n    public int closestFair(int n) {\n        long k = n;\n        while (true) {\n            int len = Long.toString(k).length();\n            if (len % 2 == 1) {\n                int h = (len + 1) / 2;\n                StringBuilder sb = new StringBuilder(\"1\");\n                for (int i = 0; i < h; i++) sb.append('0');\n                for (int i = 0; i < h - 1; i++) sb.append('1');\n                k = Long.parseLong(sb.toString());\n                continue;\n            }\n            int odd = 0, even = 0;\n            for (long t = k; t > 0; t /= 10) {\n                if ((t % 10) % 2 == 0) even++;\n                else odd++;\n            }\n            if (odd == even) return (int) k;\n            k++;\n        }\n    }\n}\n"
+}

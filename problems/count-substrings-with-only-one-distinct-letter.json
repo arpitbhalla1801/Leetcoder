@@ -1,5 +1,5 @@
 {
     "problemName": "count-substrings-with-only-one-distinct-letter",
-    "language": "cpp",
-    "code": "class Solution {\npublic:\n    int countLetters(string s) {\n        if(s.size() == 1) return 1;\n        int res = 0, back = 0; \n        for(int i=0;i<s.size();++i)\n            if(s[i]!=s[i+1])\n                res += (i - back + 1) * (i - back + 2) / 2 , back = i + 1;\n        return res;\n    }\n};"
+    "language": "java",
+    "code": "class Solution {\n  public int countLetters(String s) {\n    int total = 0;\n    for (int i = 0, run = 0; i < s.length(); i++) {\n      run = i > 0 && s.charAt(i) == s.charAt(i - 1) ? run + 1 : 1;\n      total += run; // substrings of one letter ending here\n    }\n    return total;\n  }\n}\n"
 }

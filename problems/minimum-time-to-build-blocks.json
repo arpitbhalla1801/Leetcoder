@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-time-to-build-blocks",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int minBuildTime(int[] blocks, int split) {\n    // Huffman-like: repeatedly pair the two quickest blocks under one split\n    PriorityQueue<Integer> pq = new PriorityQueue<>();\n    for (int b : blocks) pq.add(b);\n    while (pq.size() > 1) {\n      pq.poll();\n      pq.add(pq.poll() + split);\n    }\n    return pq.peek();\n  }\n}\n"
+}

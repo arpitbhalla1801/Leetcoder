@@ -1,0 +1,5 @@
+{
+    "problemName": "confusing-number-ii",
+    "language": "java",
+    "code": "class Solution {\n  private static final int[] DIGITS = {0, 1, 6, 8, 9}, ROT = {0, 1, 9, 8, 6};\n  private int n, count;\n\n  public int confusingNumberII(int n) {\n    this.n = n;\n    // build every number of rotatable digits, tracking its rotation as we go\n    for (int i = 1; i < 5; i++) build(DIGITS[i], ROT[i], 10);\n    return count;\n  }\n\n  // rotated = rotation of num; mult = 10^(digit count of num)\n  private void build(long num, long rotated, long mult) {\n    if (num > n) return;\n    if (num != rotated) count++;\n    for (int i = 0; i < 5; i++) build(num * 10 + DIGITS[i], ROT[i] * mult + rotated, mult * 10);\n  }\n}\n"
+}

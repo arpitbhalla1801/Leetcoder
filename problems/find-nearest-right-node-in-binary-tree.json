@@ -1,0 +1,5 @@
+{
+    "problemName": "find-nearest-right-node-in-binary-tree",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public TreeNode findNearestRightNode(TreeNode root, TreeNode u) {\n    Deque<TreeNode> q = new ArrayDeque<>();\n    q.add(root);\n    while (!q.isEmpty()) {\n      for (int size = q.size(); size > 0; size--) {\n        TreeNode node = q.poll();\n        if (node == u) return size > 1 ? q.peek() : null;\n        if (node.left != null) q.add(node.left);\n        if (node.right != null) q.add(node.right);\n      }\n    }\n    return null;\n  }\n}\n"
+}

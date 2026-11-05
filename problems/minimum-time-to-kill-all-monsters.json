@@ -1,0 +1,5 @@
+{
+    "problemName": "minimum-time-to-kill-all-monsters",
+    "language": "java",
+    "code": "class Solution {\n    public long minimumTime(int[] power) {\n        int n = power.length;\n        long[] dp = new long[1 << n];\n        Arrays.fill(dp, Long.MAX_VALUE);\n        dp[0] = 0;\n        for (int mask = 0; mask < (1 << n); mask++) {\n            if (dp[mask] == Long.MAX_VALUE) continue;\n            long gain = Integer.bitCount(mask) + 1;\n            for (int i = 0; i < n; i++) {\n                if ((mask >> i & 1) == 1) continue;\n                int nm = mask | (1 << i);\n                dp[nm] = Math.min(dp[nm], dp[mask] + (power[i] + gain - 1) / gain);\n            }\n        }\n        return dp[(1 << n) - 1];\n    }\n}\n"
+}

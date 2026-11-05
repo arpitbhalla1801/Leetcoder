@@ -1,0 +1,5 @@
+{
+    "problemName": "stepping-numbers",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<Integer> countSteppingNumbers(int low, int high) {\n    List<Integer> res = new ArrayList<>();\n    if (low == 0) res.add(0);\n    // BFS by length keeps the numbers in increasing order\n    Deque<Long> q = new ArrayDeque<>();\n    for (long d = 1; d <= 9; d++) q.add(d);\n    while (!q.isEmpty()) {\n      long x = q.poll();\n      if (x > high) continue;\n      if (x >= low) res.add((int) x);\n      long last = x % 10;\n      if (last > 0) q.add(x * 10 + last - 1);\n      if (last < 9) q.add(x * 10 + last + 1);\n    }\n    return res;\n  }\n}\n"
+}

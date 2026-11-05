@@ -1,0 +1,5 @@
+{
+    "problemName": "binary-search-tree-iterator-ii",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass BSTIterator {\n  private final Deque<TreeNode> stack = new ArrayDeque<>();\n  private final List<Integer> seen = new ArrayList<>(); // values visited so far, in order\n  private int pos = -1;\n\n  public BSTIterator(TreeNode root) {\n    pushLeft(root);\n  }\n\n  public boolean hasNext() {\n    return pos + 1 < seen.size() || !stack.isEmpty();\n  }\n\n  public int next() {\n    pos++;\n    if (pos == seen.size()) { // advance the real traversal only when needed\n      TreeNode node = stack.pop();\n      pushLeft(node.right);\n      seen.add(node.val);\n    }\n    return seen.get(pos);\n  }\n\n  public boolean hasPrev() {\n    return pos > 0;\n  }\n\n  public int prev() {\n    return seen.get(--pos);\n  }\n\n  private void pushLeft(TreeNode node) {\n    for (; node != null; node = node.left) stack.push(node);\n  }\n}\n"
+}

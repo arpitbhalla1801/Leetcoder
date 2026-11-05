@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-number-of-people-that-can-be-caught-in-tag",
+    "language": "java",
+    "code": "class Solution {\n  public int catchMaximumAmountofPeople(int[] team, int dist) {\n    // greedy: each \"it\" catches the leftmost catchable runner still free\n    int n = team.length, caught = 0;\n    for (int it = 0, runner = 0; it < n; it++) {\n      if (team[it] != 1) continue;\n      runner = Math.max(runner, it - dist);\n      while (runner < n && runner <= it + dist && team[runner] != 0) runner++;\n      if (runner < n && runner <= it + dist) {\n        caught++;\n        runner++;\n      }\n    }\n    return caught;\n  }\n}\n"
+}

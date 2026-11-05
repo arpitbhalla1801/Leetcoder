@@ -1,0 +1,5 @@
+{
+    "problemName": "zigzag-iterator",
+    "language": "java",
+    "code": "import java.util.*;\n\npublic class ZigzagIterator {\n  private final Deque<Iterator<Integer>> queue = new ArrayDeque<>();\n\n  public ZigzagIterator(List<Integer> v1, List<Integer> v2) {\n    if (!v1.isEmpty()) queue.add(v1.iterator());\n    if (!v2.isEmpty()) queue.add(v2.iterator());\n  }\n\n  public int next() {\n    // take from the front list, then send it to the back if it still has elements (works for k lists too)\n    Iterator<Integer> it = queue.poll();\n    int v = it.next();\n    if (it.hasNext()) queue.add(it);\n    return v;\n  }\n\n  public boolean hasNext() {\n    return !queue.isEmpty();\n  }\n}\n"
+}

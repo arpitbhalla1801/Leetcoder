@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-alternating-subarray-sum",
+    "language": "java",
+    "code": "class Solution {\n    public long maximumAlternatingSubarraySum(int[] nums) {\n        long NEG = Long.MIN_VALUE / 4;\n        long plus = NEG, minus = NEG, ans = NEG;\n        for (int x : nums) {\n            long np = Math.max(x, minus + x);\n            long nm = plus - x;\n            plus = np;\n            minus = nm;\n            ans = Math.max(ans, Math.max(plus, minus));\n        }\n        return ans;\n    }\n}\n"
+}

@@ -1,5 +1,5 @@
 {
     "problemName": "intersection-of-three-sorted-arrays",
-    "language": "python3",
-    "code": "class Solution:\n    def arraysIntersection(self, arr1: List[int], arr2: List[int], arr3: List[int]) -> List[int]:\n        \n        from collections import Counter\n        \n        counter=Counter(arr1+arr2+arr3)\n        \n        res=[]\n        \n        for x in counter:\n            if counter[x]==3:\n                res.append(x)\n                \n        return res"
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<Integer> arraysIntersection(int[] arr1, int[] arr2, int[] arr3) {\n    List<Integer> res = new ArrayList<>();\n    for (int i = 0, j = 0, k = 0; i < arr1.length && j < arr2.length && k < arr3.length; ) {\n      int a = arr1[i], b = arr2[j], c = arr3[k];\n      if (a == b && b == c) {\n        res.add(a);\n        i++;\n        j++;\n        k++;\n      } else {\n        int max = Math.max(a, Math.max(b, c)); // advance everything smaller than the largest head\n        if (a < max) i++;\n        if (b < max) j++;\n        if (c < max) k++;\n      }\n    }\n    return res;\n  }\n}\n"
 }

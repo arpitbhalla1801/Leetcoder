@@ -1,0 +1,5 @@
+{
+    "problemName": "distance-to-a-cycle-in-undirected-graph",
+    "language": "java",
+    "code": "class Solution {\n    public int[] distanceToCycle(int n, int[][] edges) {\n        List<Integer>[] g = new List[n];\n        for (int i = 0; i < n; i++) g[i] = new ArrayList<>();\n        int[] deg = new int[n];\n        for (int[] e : edges) {\n            g[e[0]].add(e[1]);\n            g[e[1]].add(e[0]);\n            deg[e[0]]++;\n            deg[e[1]]++;\n        }\n        boolean[] removed = new boolean[n];\n        ArrayDeque<Integer> q = new ArrayDeque<>();\n        for (int i = 0; i < n; i++) if (deg[i] == 1) q.add(i);\n        while (!q.isEmpty()) {\n            int u = q.poll();\n            removed[u] = true;\n            for (int v : g[u]) if (--deg[v] == 1) q.add(v);\n        }\n        int[] ans = new int[n];\n        Arrays.fill(ans, -1);\n        for (int i = 0; i < n; i++) if (!removed[i]) { ans[i] = 0; q.add(i); }\n        while (!q.isEmpty()) {\n            int u = q.poll();\n            for (int v : g[u]) if (ans[v] == -1) { ans[v] = ans[u] + 1; q.add(v); }\n        }\n        return ans;\n    }\n}\n"
+}

@@ -1,0 +1,5 @@
+{
+    "problemName": "brightest-position-on-street",
+    "language": "java",
+    "code": "class Solution {\n    public int brightestPosition(int[][] lights) {\n        TreeMap<Integer, Integer> diff = new TreeMap<>();\n        for (int[] l : lights) {\n            diff.merge(l[0] - l[1], 1, Integer::sum);\n            diff.merge(l[0] + l[1] + 1, -1, Integer::sum);\n        }\n        int cur = 0, best = 0, ans = 0;\n        for (Map.Entry<Integer, Integer> e : diff.entrySet()) {\n            cur += e.getValue();\n            if (cur > best) {\n                best = cur;\n                ans = e.getKey();\n            }\n        }\n        return ans;\n    }\n}\n"
+}

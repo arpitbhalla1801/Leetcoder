@@ -1,5 +1,5 @@
 {
     "problemName": "minimum-number-of-keypresses",
-    "language": "python3",
-    "code": "from collections import Counter\nclass Solution:\n    def minimumKeypresses(self, s: str) -> int:\n        dic = Counter(s)\n        tup = [(chr(ord_ch),dic[chr(ord_ch)]) for ord_ch in range(ord('a'),ord('z')+1)]\n        tup.sort(key=lambda x:x[1],reverse=True)\n        return sum([tup[i][1] for i in range(9)])+2*sum([tup[i][1] for i in range(9,18)])+3*sum([tup[i][1] for i in range(18,26)])\n        "
+    "language": "java",
+    "code": "class Solution {\n    public int minimumKeypresses(String s) {\n        Integer[] cnt = new Integer[26];\n        Arrays.fill(cnt, 0);\n        for (char c : s.toCharArray()) cnt[c - 'a']++;\n        Arrays.sort(cnt, Collections.reverseOrder());\n        int ans = 0;\n        for (int i = 0; i < 26; i++) ans += cnt[i] * (i / 9 + 1);\n        return ans;\n    }\n}\n"
 }

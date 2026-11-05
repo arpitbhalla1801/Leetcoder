@@ -1,0 +1,5 @@
+{
+    "problemName": "array-transformation",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<Integer> transformArray(int[] arr) {\n    boolean changed = true;\n    while (changed) {\n      changed = false;\n      int[] next = arr.clone();\n      for (int i = 1; i + 1 < arr.length; i++) {\n        if (arr[i] < arr[i - 1] && arr[i] < arr[i + 1]) {\n          next[i]++;\n          changed = true;\n        } else if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1]) {\n          next[i]--;\n          changed = true;\n        }\n      }\n      arr = next;\n    }\n    List<Integer> res = new ArrayList<>();\n    for (int x : arr) res.add(x);\n    return res;\n  }\n}\n"
+}

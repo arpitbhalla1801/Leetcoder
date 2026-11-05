@@ -1,0 +1,5 @@
+{
+    "problemName": "equal-tree-partition",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  private final List<Long> sums = new ArrayList<>();\n\n  public boolean checkEqualTree(TreeNode root) {\n    long total = sum(root);\n    sums.remove(sums.size() - 1); // the whole tree is not a valid half\n    if (total % 2 != 0) return false;\n    return sums.contains(total / 2);\n  }\n\n  private long sum(TreeNode node) {\n    if (node == null) return 0;\n    long s = node.val + sum(node.left) + sum(node.right);\n    sums.add(s);\n    return s;\n  }\n}\n"
+}

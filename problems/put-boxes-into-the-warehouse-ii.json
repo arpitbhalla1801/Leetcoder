@@ -1,0 +1,5 @@
+{
+    "problemName": "put-boxes-into-the-warehouse-ii",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int maxBoxesInWarehouse(int[] boxes, int[] warehouse) {\n    Arrays.sort(boxes);\n    int left = 0, right = warehouse.length - 1, count = 0;\n    // largest box first: put it at whichever open end it fits, otherwise drop it\n    for (int b = boxes.length - 1; b >= 0 && left <= right; b--) {\n      if (boxes[b] <= warehouse[left]) {\n        left++;\n        count++;\n      } else if (boxes[b] <= warehouse[right]) {\n        right--;\n        count++;\n      }\n    }\n    return count;\n  }\n}\n"
+}

@@ -1,5 +1,5 @@
 {
     "problemName": "maximum-vacation-days",
-    "language": "python3",
-    "code": "class Solution:\n    def maxVacationDays(self, flights, days):\n        \"\"\"\n        :type flights: List[List[int]]\n        :type days: List[List[int]]\n        :rtype: int\n        \"\"\"\n        m=len(flights)\n        a,s=[[i] for i in range(m)],[-1000]*m\n        s[0]=0\n        for i in range(m):\n            for j in range(m):\n                if flights[i][j]: \n                    a[j].append(i)\n        for j in range(len(days[0])): \n            s=[max([s[k] for k in a[i]])+days[i][j] for i in range(m)]\n        return max(s)\n        "
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int maxVacationDays(int[][] flights, int[][] days) {\n    int n = flights.length, weeks = days[0].length;\n    int[] best = new int[n]; // best[c]: most vacation days so far ending the week in city c\n    Arrays.fill(best, Integer.MIN_VALUE);\n    best[0] = 0;\n    for (int w = 0; w < weeks; w++) {\n      int[] next = new int[n];\n      Arrays.fill(next, Integer.MIN_VALUE);\n      for (int to = 0; to < n; to++)\n        for (int from = 0; from < n; from++)\n          if (best[from] != Integer.MIN_VALUE && (from == to || flights[from][to] == 1))\n            next[to] = Math.max(next[to], best[from] + days[to][w]);\n      best = next;\n    }\n    int res = 0;\n    for (int b : best) res = Math.max(res, b);\n    return res;\n  }\n}\n"
 }

@@ -1,0 +1,5 @@
+{
+    "problemName": "maximum-subarray-sum-after-one-operation",
+    "language": "java",
+    "code": "class Solution {\n  public int maxSumAfterOperation(int[] nums) {\n    // plain: best subarray ending here without squaring; squared: with exactly one square used\n    long plain = 0, squared = 0, best = Long.MIN_VALUE;\n    for (int x : nums) {\n      long sq = (long) x * x;\n      squared = Math.max(Math.max(plain + sq, squared + x), sq);\n      plain = Math.max(plain + x, x);\n      best = Math.max(best, squared);\n    }\n    return (int) best;\n  }\n}\n"
+}

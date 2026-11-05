@@ -1,5 +1,5 @@
 {
     "problemName": "valid-palindrome-iii",
-    "language": "python3",
-    "code": "class Solution:\n    def __init__(self):\n        self.memo = {}\n        \n    def longestPalindromeSubseq(self, s: str) -> int:\n        if not s:\n            return 0\n        \n        if len(s) == 1:\n            return 1\n\n        if s in self.memo:\n            return self.memo[s]\n\n        if s[0] == s[-1]:\n            self.memo[s] = 2 + self.longestPalindromeSubseq(s[1:len(s)-1])\n        else:\n            self.memo[s] = max(self.longestPalindromeSubseq(s[1:]), self.longestPalindromeSubseq(s[:len(s)-1]))\n\n        return self.memo[s]\n        \n    def isValidPalindrome(self, s: str, k: int) -> bool:\n        print(self.longestPalindromeSubseq(s), k, len(s))\n        return self.longestPalindromeSubseq(s) + k >= len(s)"
+    "language": "java",
+    "code": "class Solution {\n  public boolean isValidPalindrome(String s, int k) {\n    int n = s.length();\n    int[][] dp = new int[n][n]; // longest palindromic subsequence of s[i..j]\n    for (int i = n - 1; i >= 0; i--) {\n      dp[i][i] = 1;\n      for (int j = i + 1; j < n; j++)\n        dp[i][j] = s.charAt(i) == s.charAt(j) ? dp[i + 1][j - 1] + 2 : Math.max(dp[i + 1][j], dp[i][j - 1]);\n    }\n    return n - dp[0][n - 1] <= k;\n  }\n}\n"
 }

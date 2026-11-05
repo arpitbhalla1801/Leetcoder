@@ -1,0 +1,5 @@
+{
+    "problemName": "count-ways-to-distribute-candies",
+    "language": "java",
+    "code": "class Solution {\n  public int waysToDistribute(int n, int k) {\n    final long MOD = 1_000_000_007L;\n    // Stirling numbers of the second kind: candy i opens a new bag or joins one of j bags\n    long[] dp = new long[k + 1];\n    dp[0] = 1;\n    for (int i = 1; i <= n; i++)\n      for (int j = Math.min(i, k); j >= 1; j--) dp[j] = (dp[j - 1] + j * dp[j]) % MOD;\n    return (int) dp[k];\n  }\n}\n"
+}

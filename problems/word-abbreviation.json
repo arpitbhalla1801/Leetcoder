@@ -1,0 +1,5 @@
+{
+    "problemName": "word-abbreviation",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public List<String> wordsAbbreviation(List<String> words) {\n    int n = words.size();\n    String[] abbr = new String[n];\n    int[] prefix = new int[n];\n    for (int i = 0; i < n; i++) {\n      prefix[i] = 1;\n      abbr[i] = abbreviate(words.get(i), 1);\n    }\n    // keep lengthening the prefix of every word whose abbreviation collides\n    for (boolean changed = true; changed; ) {\n      changed = false;\n      Map<String, List<Integer>> groups = new HashMap<>();\n      for (int i = 0; i < n; i++) groups.computeIfAbsent(abbr[i], k -> new ArrayList<>()).add(i);\n      for (List<Integer> g : groups.values()) {\n        if (g.size() < 2) continue;\n        changed = true;\n        for (int i : g) abbr[i] = abbreviate(words.get(i), ++prefix[i]);\n      }\n    }\n    return Arrays.asList(abbr);\n  }\n\n  private String abbreviate(String w, int k) {\n    if (k + 2 >= w.length()) return w; // would not be shorter\n    return w.substring(0, k) + (w.length() - k - 1) + w.charAt(w.length() - 1);\n  }\n}\n"
+}

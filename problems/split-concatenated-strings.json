@@ -1,0 +1,5 @@
+{
+    "problemName": "split-concatenated-strings",
+    "language": "java",
+    "code": "class Solution {\n  public String splitLoopedString(String[] strs) {\n    int n = strs.length;\n    // every string other than the cut one is placed in its larger orientation\n    for (int i = 0; i < n; i++) {\n      String rev = new StringBuilder(strs[i]).reverse().toString();\n      if (rev.compareTo(strs[i]) > 0) strs[i] = rev;\n    }\n    String best = \"\";\n    for (int i = 0; i < n; i++) {\n      StringBuilder rest = new StringBuilder();\n      for (int j = i + 1; j < n; j++) rest.append(strs[j]);\n      for (int j = 0; j < i; j++) rest.append(strs[j]);\n      String others = rest.toString();\n      for (String s : new String[] {strs[i], new StringBuilder(strs[i]).reverse().toString()}) {\n        for (int k = 0; k < s.length(); k++) {\n          String cand = s.substring(k) + others + s.substring(0, k);\n          if (cand.compareTo(best) > 0) best = cand;\n        }\n      }\n    }\n    return best;\n  }\n}\n"
+}

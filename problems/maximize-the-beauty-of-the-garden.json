@@ -1,0 +1,5 @@
+{
+    "problemName": "maximize-the-beauty-of-the-garden",
+    "language": "java",
+    "code": "import java.util.*;\n\nclass Solution {\n  public int maximumBeauty(int[] flowers) {\n    int n = flowers.length;\n    long[] positive = new long[n + 1]; // prefix sums of positive beauties only\n    for (int i = 0; i < n; i++) positive[i + 1] = positive[i] + Math.max(0, flowers[i]);\n    Map<Integer, Integer> first = new HashMap<>();\n    long best = Long.MIN_VALUE;\n    // keep both ends, plus every positive flower between them\n    for (int j = 0; j < n; j++) {\n      Integer i = first.get(flowers[j]);\n      if (i == null) first.put(flowers[j], j);\n      else best = Math.max(best, 2L * flowers[j] + positive[j] - positive[i + 1]);\n    }\n    return (int) best;\n  }\n}\n"
+}

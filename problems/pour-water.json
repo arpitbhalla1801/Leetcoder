@@ -1,0 +1,5 @@
+{
+    "problemName": "pour-water",
+    "language": "java",
+    "code": "class Solution {\n  public int[] pourWater(int[] heights, int volume, int k) {\n    for (int drop = 0; drop < volume; drop++) {\n      int pos = k;\n      // move left while not rising, remembering the lowest point reached\n      for (int i = k - 1; i >= 0 && heights[i] <= heights[i + 1]; i--) if (heights[i] < heights[pos]) pos = i;\n      if (pos == k)\n        for (int i = k + 1; i < heights.length && heights[i] <= heights[i - 1]; i++) if (heights[i] < heights[pos]) pos = i;\n      heights[pos]++;\n    }\n    return heights;\n  }\n}\n"
+}

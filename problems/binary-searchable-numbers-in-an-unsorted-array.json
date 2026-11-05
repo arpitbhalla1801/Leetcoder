@@ -1,0 +1,5 @@
+{
+    "problemName": "binary-searchable-numbers-in-an-unsorted-array",
+    "language": "java",
+    "code": "class Solution {\n  public int binarySearchableNumbers(int[] nums) {\n    // searchable exactly when larger than everything to its left and smaller than everything to its right\n    int n = nums.length;\n    int[] minRight = new int[n + 1];\n    minRight[n] = Integer.MAX_VALUE;\n    for (int i = n - 1; i >= 0; i--) minRight[i] = Math.min(minRight[i + 1], nums[i]);\n    int count = 0, maxLeft = Integer.MIN_VALUE;\n    for (int i = 0; i < n; i++) {\n      if (nums[i] > maxLeft && nums[i] < minRight[i + 1]) count++;\n      maxLeft = Math.max(maxLeft, nums[i]);\n    }\n    return count;\n  }\n}\n"
+}
